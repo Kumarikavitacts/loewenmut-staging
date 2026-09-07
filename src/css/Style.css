@@ -483,7 +483,7 @@ header {
     }
 }
 .th_yellow {
-    background: var(--bs-themecolor);
+    background: #F3DC01;
 }
 .th_blue {
     background: #222D78;
