@@ -360,6 +360,15 @@ header {
         justify-content: center;
     }
 }
+.work-info-card {
+    width: 135px;
+}
+.work-card-1, .work-card-3, .work-card-5 {
+    left: 1.5%;
+}
+.work-card-2, .work-card-4, .work-card-6 {
+    right: 1.5%;
+}
 }
 
 @media (min-width: 700px) and (max-width: 991.98px) {
@@ -603,5 +612,48 @@ footer {
                 top: -2rem;
             }
         }
+    }
+}
+
+
+@media (max-width: 650px) {
+    .work-info-card {
+        width: 115px;
+        min-height: 65px;
+        padding: 10px;
+    }
+    .work-info-card h6 {
+        font-size: 9px;
+    }
+    .work-info-card p {
+        font-size: 7px;
+    }
+    .work-card-1 {
+        top: 5%;
+    }
+    .work-card-2 {
+        top: 13%;
+    }
+    .work-card-3 {
+        top: 30%;
+    }
+    .work-card-4 {
+        top: 31%;
+    }
+    .work-card-5 {
+        bottom: 16%;
+    }
+    .work-card-6 {
+        bottom: 16%;
+    }
+}
+
+@media (max-width: 480px) {
+    .work-info-card {
+        display: none;
+    }
+    .work-phone {
+        width: 280px;
+        height: 610px;
     }
 }

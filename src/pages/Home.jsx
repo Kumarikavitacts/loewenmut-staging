@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import ServiceSlider from '../components/ServiceSlider'
+import WorkSection from '../components/WorkSection';
+import TalkSection from '../components/TalkSection';
 
 const Home = () => {
 const nextSectionRef = useRef(null);
@@ -200,7 +202,8 @@ return (
 </section>
 <section className="pt_3 search_section" style={{ backgroundImage: "url('/images/bg-pattern.png')" }}>
     <div className="container">
-        <img src="/images/Group.png" alt="Löwenmut" className="w-100" />
+        {/* <img src="/images/Group.png" alt="Löwenmut" className="w-100" /> */}
+        <WorkSection />
     </div>
 </section>
 <section className="pt_pb_3 news_section">
@@ -280,23 +283,7 @@ return (
     </div>
 </section>
 <section className="pt_pb_3 talk_section">
-    <div className="container">
-        <div className="row flex-lg-row-reverse">
-            <div className="col-12 col-lg-4 ms-auto img-col">
-                <img src="/images/image-loewenmut.png" alt="Genug geredet" className="img-fluid mx-auto" />
-            </div>
-            <div className="col-12 col-lg-7 content-col mt-4 mt-lg-0">
-                <div className="sec-content">
-                    <div className="sub_title">Aenean sollicitudin</div>
-                    <h2>Genug geredet.<br />Was dürfen <span>wir für Sie bewegen?</span></h2>
-                    <p>Lassen Sie uns über Ihr Projekt sprechen.</p>
-                    <div className="theme_btn_wrap mt-4">
-                        <a href="/projekt-starten" className="button theme_btn">Los geht’s <img src="/images/btn-arrow.svg" alt="Arrow" /></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <TalkSection />
 </section>
 </main>
 );
