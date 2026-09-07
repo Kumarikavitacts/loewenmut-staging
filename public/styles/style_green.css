@@ -1,0 +1,47 @@
+:root {
+    --bs-themecolor: #539A14;
+    --bs-themetext: #fff;
+    --bs-underline: #000000;
+}
+.border_btn:hover {
+    color: var(--bs-themetext) !important;
+    svg {
+        fill: var(--bs-themetext) !important;
+    }
+}
+.bg_theme {
+    color: var(--bs-themetext) !important;
+}
+.theme_btn, .theme_btn:hover {
+    color: var(--bs-themetext) !important;
+    svg path {
+        fill: var(--bs-themetext) !important;
+    }
+}
+.info_sec {
+    h2 a {
+        &:before {
+            background-color: var(--bs-darkgrey);
+        }
+    }
+}
+footer {
+    .ftr_contact {
+        a {
+            &:hover {
+                .icon_style {
+                    svg {
+                        fill: var(--bs-themetext) !important;
+                    }
+                }
+            }
+        }
+    }
+    .scl_links {
+        a:hover {
+            svg {
+                fill: var(--bs-themetext) !important;
+            }
+        }
+    }
+}
