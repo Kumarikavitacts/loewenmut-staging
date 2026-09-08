@@ -6,6 +6,8 @@ import Footer from './components/Footer'
 
 import Home from './pages/Home';
 import Agentur from './pages/Agentur';
+import Insights from './pages/Insights';
+import Leistungen from './pages/Leistungen';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -16,6 +18,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/agentur" element={<Agentur />} />
+        <Route path='/insights' element={<Insights/>}/>
+        <Route path='/leistungen' element={<Leistungen/>}/>
       </Routes>
       <Footer />
     </>
