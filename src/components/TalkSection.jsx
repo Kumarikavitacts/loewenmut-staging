@@ -1,6 +1,6 @@
 import React from "react";
 
-const TalkSection = () => {
+const TalkSection = ({img, title, heading, description}) => {
   return (
     <div className="container">
         <div className="row flex-lg-row-reverse">

@@ -17,6 +17,40 @@
     svg path {
         fill: var(--bs-themetext) !important;
     }
+    img {
+        filter: brightness(0) invert(1);
+    }
+}
+header {
+    .theme_toggle_btn svg path {
+        fill: var(--bs-white) !important;
+    }
+}
+.news_section {
+    .arrow_btn {
+        svg path {
+           fill: var(--bs-white) !important; 
+        }
+    }
+}
+.project_section {
+    ul li {
+        &::before {
+            color: var(--bs-white) !important;
+        }
+    }
+}
+.service-slider-row {
+    .slider-buttons button.btn-next img {
+        filter: brightness(0) invert(1);
+    }
+}
+.service-slider {
+    .item:hover {
+        h3, .item-count, p {
+            color: var(--bs-white) !important;
+        }
+    }
 }
 .info_sec {
     h2 a {

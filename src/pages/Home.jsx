@@ -14,7 +14,7 @@ const nextSectionRef = useRef(null);
 };
 return (
 <main>
-<section className="pt_pb_3 hero_section">
+<section className="pb_3 hero_section">
     <div className="container position-relative">
         <div className="hero_row pb-0">
             <h1 className='text-center'>
@@ -201,7 +201,7 @@ return (
     </div>
 </section>
 <section className="pt_3 search_section" style={{ backgroundImage: "url('/images/bg-pattern.png')" }}>
-    <div className="container">
+    <div className="container small_container">
         {/* <img src="/images/Group.png" alt="Löwenmut" className="w-100" /> */}
         <WorkSection />
     </div>
@@ -283,7 +283,7 @@ return (
     </div>
 </section>
 <section className="pt_pb_3 talk_section">
-    <TalkSection />
+    <TalkSection  />
 </section>
 </main>
 );
