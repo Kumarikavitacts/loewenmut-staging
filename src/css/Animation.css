@@ -1,0 +1,182 @@
+@keyframes circleRotate {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes yellowSweep {
+    from {
+        background-position: 100% 0;
+    }
+    to {
+        background-position: 0% 0;
+    }
+}
+
+@keyframes mouseScroll {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+    50% {
+        opacity: 0.4;
+        transform: translate(-50%, 6px);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+@keyframes hatchAnimation {
+	0%, 100% {
+		transform: translate(0, 0) rotate(-8deg);
+	}
+	50% {
+		transform: translate(5px, 8px) rotate(3deg);
+	}
+}
+@keyframes eyeAnimation {
+	0%, 100% {
+		transform: translate(0, 0) rotate(10deg);
+	}
+	30% {
+		transform: translate(-5px, 5px) rotate(-5deg);
+	}
+	60% {
+		transform: translate(5px, -3px) rotate(15deg);
+	}
+}
+@keyframes smallEyeAnimation {
+	0%, 100% {
+		transform: rotate(-8deg) translate(0);
+	}
+	50% {
+		transform: rotate(8deg) translate(8px, -5px);
+	}
+}
+@keyframes scribbleAnimation {
+	0%, 100% {
+		transform: translate(0, 0) rotate(-18deg);
+	}
+	50% {
+		transform: translate(-8px, 8px) rotate(-8deg);
+	}
+}
+@keyframes curveAnimation {
+	0%, 100% {
+		transform: rotate(-15deg) translateY(0);
+	}
+	50% {
+		transform: rotate(5deg) translateY(-7px);
+	}
+}
+@keyframes smallBlobAnimation {
+	0%, 100% {
+		transform: translate(0, 0) rotate(-25deg);
+	}
+	50% {
+		transform: translate(-8px, -10px) rotate(20deg);
+	}
+}
+@keyframes dotsAnimation {
+	0%, 100% {
+		transform: translate(0, 0) rotate(0);
+	}
+	50% {
+		transform: translate(-8px, 12px) rotate(12deg);
+	}
+}
+@keyframes pinkBlobAnimation {
+	0%, 100% {
+		transform: translate(0, 0) rotate(-30deg);
+	}
+	50% {
+		transform: translate(-12px, 10px) rotate(10deg);
+	}
+}
+@keyframes branchAnimation {
+	0%, 100% {
+		transform: rotate(-20deg) translate(0);
+	}
+	50% {
+		transform: rotate(-12deg) translate(8px, -5px);
+	}
+}
+@keyframes bottomWaveAnimation {
+	0%, 100% {
+		transform: rotate(-10deg) translate(0);
+	}
+	50% {
+		transform: rotate(5deg) translate(-10px, -5px);
+	}
+}
+@keyframes topWaveAnimation {
+	0%, 100% {
+		transform: translate(0, 0) rotate(-5deg);
+	}
+	50% {
+		transform: translate(15px, 10px) rotate(7deg);
+	}
+}
+@keyframes blueBlobAnimation {
+	0%, 100% {
+		transform: translate(0, 0) rotate(20deg);
+	}
+	50% {
+		transform: translate(-12px, 12px) rotate(35deg);
+	}
+}
+@keyframes blueSmallBlobAnimation {
+	0%, 100% {
+		transform: translate(0, 0) rotate(-25deg);
+	}
+	50% {
+		transform: translate(10px, -8px) rotate(20deg);
+	}
+}
+@keyframes starAnimation {
+	0%, 100% {
+		transform: translate(0, 0) rotate(0);
+	}
+	50% {
+		transform: translate(-8px, -10px) rotate(180deg);
+	}
+}
+@keyframes blueCurveAnimation {
+	0%, 100% {
+		transform: rotate(15deg) translate(0);
+	}
+	50% {
+		transform: rotate(-5deg) translate(8px, -5px);
+	}
+}
+@keyframes bottomBlobAnimation {
+	0%, 100% {
+		transform: translate(0, 0) rotate(-20deg);
+	}
+	50% {
+		transform: translate(12px, -10px) rotate(-5deg);
+	}
+}
+@keyframes modalFadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+@keyframes modalSlideIn {
+	from {
+		opacity: 0;
+		transform: translateY(30px) scale(0.97);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}

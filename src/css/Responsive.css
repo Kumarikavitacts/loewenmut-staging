@@ -47,6 +47,16 @@
             display: none;
         }
     }
+    .ld_section_3 {
+        .img-col img {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 38%;
+            object-fit: cover;
+        }
+    }
 }
 
 @media (min-width: 992px) and (max-width: 1199.98px) {
@@ -246,7 +256,7 @@ header {
                 font-weight: 500;
                 font-size: var(--bs-fs40);
                 font-family: var(--bs-urbanist);
-                color: var(--bs-themetext);
+                color: var(--bs-textdarkgrey);
                 line-height: 1;
                 padding: 0.5rem 0 !important;
                 position: relative;
@@ -385,6 +395,10 @@ header {
         }
     }
 }
+.service-grid {
+    grid-template-columns: repeat(2, 1fr);
+}
+
 .talk_section {
     .sec-content {
         text-align: center;
@@ -393,14 +407,37 @@ header {
         justify-content: center;
     }
 }
-.work-info-card {
-    width: 135px;
-}
-.work-card-1, .work-card-3, .work-card-5 {
-    left: 1.5%;
-}
-.work-card-2, .work-card-4, .work-card-6 {
-    right: 1.5%;
+.bg_theme_work_station {
+    .work-info-card {
+        width: 160px;
+        padding: 15px;
+        .work-card-number {
+            width: 22px;
+            height: 22px;
+            font-size: 11px;
+            line-height: 1;
+        }
+        p {
+            font-size: 12px;
+        }
+        h4 {
+            font-size: 15px;
+        }
+    }
+    .work-suggestions {
+        button {
+            font-size: 11px;
+        }
+    }
+    .work-phone {
+        width: 275px;
+    }
+    .work-card-1, .work-card-3, .work-card-5 {
+        left: 1.5%;
+    }
+    .work-card-2, .work-card-4, .work-card-6 {
+        right: 1.5%;
+    }
 }
 }
 
@@ -527,6 +564,33 @@ header {
             height: 250px;
         }
     }
+    .team-modal {
+        padding: 20px;
+        max-height: 95vh;
+    }
+    .bg_theme_work_station {
+        .work-section {
+            flex-wrap: wrap;
+            padding: 0 1rem;
+        }
+        .work-info-card {
+            width: calc(50% - 1rem);
+            min-height: 65px;
+            padding: 10px;
+            position: relative;
+            left: unset;
+            right: unset;
+            top: unset;
+            bottom: unset;
+            transform: none;
+            margin: .5rem;
+            border-radius: 15px 15px 15px 0;
+        }
+        .work-phone {
+            width: 290px;
+            margin-top: 1rem;
+        }
+    }
 }
 
 @media (max-width: 575px) {
@@ -651,6 +715,13 @@ footer {
         align-items: center;
     }
 }
+.service-grid {
+    grid-template-columns: 1fr;
+}
+}
+
+@media (max-width: 480px) {
+
 }
 
 @media (max-width: 370px) {
@@ -667,48 +738,5 @@ footer {
                 top: -2rem;
             }
         }
-    }
-}
-
-
-@media (max-width: 650px) {
-    .work-info-card {
-        width: 115px;
-        min-height: 65px;
-        padding: 10px;
-    }
-    .work-info-card h6 {
-        font-size: 9px;
-    }
-    .work-info-card p {
-        font-size: 7px;
-    }
-    .work-card-1 {
-        top: 5%;
-    }
-    .work-card-2 {
-        top: 13%;
-    }
-    .work-card-3 {
-        top: 30%;
-    }
-    .work-card-4 {
-        top: 31%;
-    }
-    .work-card-5 {
-        bottom: 16%;
-    }
-    .work-card-6 {
-        bottom: 16%;
-    }
-}
-
-@media (max-width: 480px) {
-    .work-info-card {
-        display: none;
-    }
-    .work-phone {
-        width: 280px;
-        height: 610px;
     }
 }

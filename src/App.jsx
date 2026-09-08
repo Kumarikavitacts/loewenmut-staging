@@ -8,6 +8,8 @@ import Home from './pages/Home';
 import Agentur from './pages/Agentur';
 import Insights from './pages/Insights';
 import Leistungen from './pages/Leistungen';
+import LeistungenDetail from './pages/LiestungenDetail';
+import Team from './pages/Team';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -20,6 +22,8 @@ function App() {
         <Route path="/agentur" element={<Agentur />} />
         <Route path='/insights' element={<Insights/>}/>
         <Route path='/leistungen' element={<Leistungen/>}/>
+        <Route path='/leistungen-detail' element={<LeistungenDetail />} />
+        <Route path='/team' element={<Team />} />
       </Routes>
       <Footer />
     </>

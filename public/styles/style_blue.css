@@ -2,6 +2,14 @@
     --bs-themecolor: #222D78;
     --bs-themetext: #fff;
     --bs-underline: #000000;
+    --color_1: #4A56A3;
+    --color_2: #3B4792;
+    --color_3: #323E89;
+    --color_4: #222D78;
+    --color_5: #2B3782;
+    --color_6: #1D2868;
+    --color_7: #151E52;
+    --color_8: #8990C4;
 }
 .border_btn:hover {
     color: var(--bs-themetext) !important;

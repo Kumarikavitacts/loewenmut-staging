@@ -7,6 +7,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 
 import './css/Style.css'
 import './css/Responsive.css'
+import './css/Animation.css'
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

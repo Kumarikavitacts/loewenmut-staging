@@ -16,7 +16,21 @@
     outline-offset: 2px;
   }
 }
+.insight-card {
+  cursor: pointer;
+}
 
+.insight-card-image {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease;
+  object-fit: cover;
+}
+
+.insight-card:hover .insight-card-image {
+  opacity: 1;
+  visibility: visible;
+}
 .hero {
   position: relative;
 

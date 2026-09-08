@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import ServiceSlider from '../components/ServiceSlider'
 import WorkSection from '../components/WorkSection';
 import TalkSection from '../components/TalkSection';
+import AnimatedText from '../components/AnimatedText';
 
 const Home = () => {
 const nextSectionRef = useRef(null);
@@ -128,8 +129,7 @@ return (
                 </div>
             </div>
             <div class="anim_circle">
-                <span></span>
-                <img src='./images/moving-text.svg' />
+                <AnimatedText />
             </div>
         </div>
     </div>
