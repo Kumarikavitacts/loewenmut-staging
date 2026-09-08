@@ -87,3 +87,8 @@ footer {
         }
     }
 }
+.stacking-card-wrapper {
+    .stacking-card {
+        background: linear-gradient(29deg, #F158A7, black, black);
+    }
+}
