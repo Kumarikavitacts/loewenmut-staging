@@ -1349,3 +1349,51 @@ footer {
     bottom: 8%;
     transform: rotate(7deg);
 }
+/* insights cards images */
+.insight-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  .insight-card-image {
+    opacity: 0;
+    visibility: hidden;
+    object-fit: cover;
+    transition: opacity 0.7s ease;
+  }
+  
+  .insight-card.has-image:hover {
+    background-color: transparent !important;
+  }
+  
+  .insight-card.has-image:hover .insight-card-image {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .insight-card-title {
+    z-index: 2;
+  }
+  
+  .insight-card {
+    cursor: pointer;
+  }
+  
+  /* Image hidden initially */
+  .insight-card-image {
+    opacity: 0;
+    visibility: hidden;
+    object-fit: cover;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+  }
+  
+  /* Logo */
+  .insight-card-logo {
+    display: block;
+    width: auto;
+    max-width: 60%;
+    max-height: 100px;
+    height: auto;
+    object-fit: contain;
+  }
