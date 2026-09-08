@@ -4,6 +4,7 @@ import InnerBnanner from "../components/InnerBanner";
 import { InsightCard } from "../components/InsightsCards";
 import { insights, tabs } from "../helper/Utils";
 
+
 const Insights = () => {
   const [activeTab, setActiveTab] = useState("all");
 

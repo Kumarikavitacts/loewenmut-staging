@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import Agentur from './pages/Agentur';
 import Insights from './pages/Insights';
 import Leistungen from './pages/Leistungen';
+import InsightInner from './pages/InsightInner';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -20,6 +21,7 @@ function App() {
         <Route path="/agentur" element={<Agentur />} />
         <Route path='/insights' element={<Insights/>}/>
         <Route path='/leistungen' element={<Leistungen/>}/>
+        <Route path='/insights/inner/:id' element={<InsightInner/>}/>
       </Routes>
       <Footer />
     </>
