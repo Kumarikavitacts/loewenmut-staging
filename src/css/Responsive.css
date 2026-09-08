@@ -23,6 +23,23 @@
                 font-size: var(--bs-fs22);
                 font-family: var(--bs-urbanist);
             }
+            .nav-link {
+                position: relative;
+                &:before {
+                    content: '';
+                    position: absolute;
+                    left: -5px;
+                    top: 45%;
+                    transform: translateY(-50%);
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 50%;
+                    background-color: transparent;
+                }
+                &.active:before {
+                    background-color: var(--bs-themecolor);
+                }
+            }
         }
     }
 }
