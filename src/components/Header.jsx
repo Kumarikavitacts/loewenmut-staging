@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import ThemeSwitcher from "./Themeswitcher";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
