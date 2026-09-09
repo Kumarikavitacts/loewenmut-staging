@@ -44,7 +44,7 @@ return (
                 <text x="180" y="223" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="150" font-weight="700" fill="#2A2A2A">L.</text>
             </svg>
         </span>
-        <img src='./images/moving-text.svg' />
+        <img src='/images/moving-text.svg' />
     </>
 );
 };

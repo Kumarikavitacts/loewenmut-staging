@@ -23,9 +23,10 @@ function App() {
         <Route path="/agentur" element={<Agentur />} />
         <Route path='/insights' element={<Insights/>}/>
         <Route path='/leistungen' element={<Leistungen/>}/>
-        <Route path='/leistungen-detail' element={<LeistungenDetail />} />
+        <Route path='/leistungen/:id' element={<LeistungenDetail />} />
         <Route path='/team' element={<Team />} />
         <Route path='/insights/:id' element={<InsightInner/>}/>
+      
       </Routes>
       <Footer />
     </>

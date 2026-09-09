@@ -6,6 +6,7 @@ import AnimatedText from '../components/AnimatedText';
 import ProjectCarousel from '../components/Carousel/ProjectCarousel';
 import { insights } from '../helper/Utils';
 import StatsCards from '../components/StatsCards';
+import TeamSlider from '../components/TeamSlider';
 
 const Agentur = () => {
 return (
@@ -37,9 +38,9 @@ return (
 </section>
 <section className="uber_unique_section pt_pb_3" style={{ backgroundImage: "url('/images/bg-pattern.png')" }}>
     <div className="container">
-        <div className="row">
+        <div className="row align-items-center">
             <div className="col-12 col-lg-6 content-col mb-4 mb-lg-0">
-                <div className="sec-content">
+                <div className="sec-content pe-lg-4">
                     <div className="sub_title">auctor aliquet </div>
                     <h2>Das macht uns einzigartig</h2>
                     <p>Wir bieten mit unserem grenzenlosen Webdesign nachhaltigen Mehrwert für jedes Unternehmen. Unsere Leidenschaft sind Produkte und Dienstleistungen, welche durch uns auch in der digitalen Welt jeden Tag aufs Neue begeistern. Wir sind ein zuverlässiger und innovativer Partner und arbeiten mit den neuesten Technologien.</p>
@@ -50,6 +51,15 @@ return (
                 <img src="/images/image-unique.png" alt="Aenean sollicitudin" className='rounded' />
             </div>
         </div>
+    </div>
+</section>
+<section className='agentur_team_section pt_3 overflow-hidden'>
+    <div className='container'>
+        <div className='sec-heading mb-4'>
+            <div className='sub_title'>auctor aliquet</div>
+            <h2>Lernen Sie die <br />kreativen Köpfe kennen</h2>
+        </div>
+        <TeamSlider />
     </div>
 </section>
 <section className='project_stats_section pt_pb_3'>

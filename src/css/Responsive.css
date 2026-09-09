@@ -344,6 +344,11 @@ header {
         padding: 3rem 0;
     }
 }
+.inner_hero_section {
+    h1 br, p br {
+        display: none;
+    }
+}
 .feature_section {
     .feature_row {
         margin-top: 0 !important;
@@ -367,20 +372,22 @@ header {
         }
     }
 }
+.anim_circle {
+    width: 150px;
+    height: 150px;
+    outline: 5px solid #fafafa;
+    span {
+        width: 90px;
+        height: 90px;
+    }
+}
 .project_section {
     .border-wrapper {
         padding: 20px;
         border-radius: 20px;
     }
     .anim_circle {
-        width: 150px;
-        height: 150px;
         bottom: -75px;
-        outline: 5px solid #fafafa;
-        span {
-            width: 90px;
-            height: 90px;
-        }
     }
 }
 .insight_section {
@@ -437,6 +444,18 @@ header {
     }
     .work-card-2, .work-card-4, .work-card-6 {
         right: 1.5%;
+    }
+}
+.project-showcase {
+    .project-info-list {
+        .project-info-card {
+            padding: 1.5rem;
+            .project-icon {
+                width: 55px;
+                height: 55px;
+                padding: 14px;
+            }
+        }
     }
 }
 }
@@ -537,6 +556,17 @@ header {
             }
         }
     }
+    .service-slider {
+        .owl-item.active .item {
+            background: var(--bs-themecolor);
+            .item-tags span {
+                background: var(--bs-white);
+            }
+            hr {
+                border-color: var(--bs-white);
+            }
+        }
+    }
     footer {
         .ftr_contact {
             a {
@@ -548,20 +578,24 @@ header {
             } 
         }  
     }
-    .stacking-card {
-        height: auto;
-        min-height: 500px;
-        display: block;
-        margin-bottom: 20px;
-        .stacking-content, .stacking-image {
-            width: 100%;
-        }
-        .stacking-content {
-            min-height: 250px;
-            padding: 30px;
-        }
-        .stacking-image {
-            height: 250px;
+    .stacking-card-wrapper {
+        .stacking-card {
+            height: auto;
+            min-height: 500px;
+            display: block;
+            margin-bottom: 20px;
+            position: unset;
+            .stacking-content, .stacking-image {
+                width: 100%;
+            }
+            .stacking-content {
+                min-height: 250px;
+                padding: 30px;
+            }
+            .stacking-image {
+                height: 250px;
+                padding-top: 0;
+            }
         }
     }
     .team-modal {
@@ -599,11 +633,11 @@ header {
     --bs-fs80: 40px;
     --bs-fs70: 38px;
     --bs-fs60: 35px;
-    --bs-fs50: 32px;
-    --bs-fs40: 28px;
-    --bs-fs35: 24px;
-    --bs-fs30: 21px;
-    --bs-fs24: 17px;
+    --bs-fs50: 28px;
+    --bs-fs40: 24px;
+    --bs-fs35: 22px;
+    --bs-fs30: 20px;
+    --bs-fs24: 16px;
 }
 .container {
     padding-left: 20px;
@@ -737,6 +771,11 @@ footer {
             &:before, &:after {
                 top: -2rem;
             }
+        }
+    }
+    .team-carousel {
+        .team-last-card a {
+            padding: 2rem;
         }
     }
 }

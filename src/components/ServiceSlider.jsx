@@ -3,11 +3,12 @@ import $ from "jquery";
 
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
+import { useNavigate } from "react-router-dom";
 
 // Slider data
 const services = [
   {
-    id: "01/04",
+    id: "01",
     title: "Marke & Kommunikation",
     description: "Marken, die klar positionieren und verbinden",
     tags: [
@@ -20,7 +21,7 @@ const services = [
     ],
   },
   {
-    id: "02/04",
+    id: "02",
     title: "Digitale Produkte",
     description: "Nutzerzentrierte Websites und Plattformen mit Wirkung.",
     tags: [
@@ -33,7 +34,7 @@ const services = [
     ],
   },
   {
-    id: "03/04",
+    id: "03",
     title: "Sichtbarkeit & Wachstum",
     description:
       "Mehr Sichtbarkeit, mehr Relevanz, mehr qualifizierte Anfragen.",
@@ -47,7 +48,7 @@ const services = [
     ],
   },
   {
-    id: "04/04",
+    id: "04",
     title: "Digitale Strategie",
     description: "Strategien für den digitalen Wandel",
     tags: [
@@ -63,7 +64,11 @@ const services = [
 
 const ServiceSlider = () => {
   const sliderRef = useRef(null);
-
+  const navigate = useNavigate()
+  const handleLeistungenClick = (id) => {
+    navigate(`/leistungen/${id}`)
+    console.log(id)
+  }
   useEffect(() => {
     let mounted = true;
     let resizeTimer;
@@ -89,7 +94,8 @@ const ServiceSlider = () => {
       slider.owlCarousel({
         loop: true,
         margin: 30,
-        autoplay: false,
+        autoplay: true,
+        autoplayHoverPause: true,
         autoplayTimeout: 8500,
         smartSpeed: 450,
         dots: false,
@@ -107,10 +113,10 @@ const ServiceSlider = () => {
             items: 1,
           },
           768: {
-            items: 1,
+            items: 2,
           },
           900: {
-            items: 1,
+            items: 2,
           },
           1200: {
             items: 2,
@@ -236,14 +242,16 @@ const ServiceSlider = () => {
           <div ref={sliderRef} className="owl-carousel owl-theme">
             {services.map((service) => (
               <div className="item" key={service.id}>
-                <div className="item-count">{service.id}</div>
-                <h3>{service.title}</h3>
-                <p>{service.description}</p>
-                <hr />
-                <div className="item-tags">
-                  {service.tags.map((tag, index) => (
-                    <span key={index}>{tag}</span>
-                  ))}
+                <div onClick={()=>handleLeistungenClick(service.id)}>
+                  <div className="item-count">{service.id}</div>
+                  <h3>{service.title}</h3>
+                  <p>{service.description}</p>
+                  <hr />
+                  <div className="item-tags">
+                    {service.tags.map((tag, index) => (
+                      <span key={index}>{tag}</span>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}

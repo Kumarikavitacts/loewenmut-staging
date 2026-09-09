@@ -100,7 +100,6 @@ p {
     letter-spacing: 14%;
     text-transform: uppercase;
     display: flex;
-    align-items: center;
     gap: 10px;
     margin-bottom: 1rem;
     &:before {
@@ -110,6 +109,8 @@ p {
         border-radius: 50%;
         display: inline-block;
         background-color: var(--bs-themecolor);
+        position: relative;
+        top: 8px;
     }
 }
 .fs_60 {
@@ -1579,6 +1580,9 @@ footer {
     img.team-person {
         position: relative;
         z-index: 1;
+        height: 100%;
+        object-fit: contain;
+        object-position: bottom;
     }
     .team-info {
         display: flex;
@@ -1985,7 +1989,33 @@ footer {
     }
 }
 
-
+.team-carousel {
+    clip-path: inset(-100vw -100vw -100vw 0);
+    .owl-stage-outer {
+        overflow: unset !important;
+    }
+    .team-info {
+        font-size: var(--bs-fs20);
+    }
+    .team-last-card a {
+        width: 100%;
+        height: 320px;
+        background-color: #F34E9B;
+        color: var(--bs-white);
+        display: inline-flex;
+        justify-content: flex-end;
+        padding: 4rem;
+        font-size: var(--bs-fs50);
+        font-weight: 600;
+        flex-direction: column;
+        line-height: 1;
+        img {
+            width: 60px !important;
+            margin-left: auto;
+            margin-top: -30px;
+        }
+    } 
+}
 
 
 
@@ -2015,15 +2045,9 @@ footer {
     font-size: var(--bs-fs30);
 }
 .intro-text {
-    font-family: var(--bs-roboto);
     font-size: var(--bs-fs40);
     font-weight: 400;
-    font-style: normal;
-    line-height: 62px;
-    letter-spacing: 0;
     text-align: right;
-    padding: 0;
-    margin: 0;
 }
 .theme-text {
     color: var(--bs-themecolor);

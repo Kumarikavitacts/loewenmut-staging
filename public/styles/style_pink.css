@@ -92,3 +92,14 @@ footer {
         background: linear-gradient(29deg, #F158A7, black, black);
     }
 }
+
+
+@media (max-width: 767px) {
+    .service-slider {
+        .owl-item.active .item {
+            h3, .item-count, p {
+                color: var(--bs-white) !important;
+            }
+        }
+    }
+}

@@ -9,7 +9,7 @@ return (
 <section className="inner_hero_section">
     <InnerBnanner  title={"Nibh vel velit Auctor Aliquet"} heading={ <>Unsere massgeschneiderten <br/> Dienstleistungen </> } description={<>Nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor,<br/> nisi elit consequat  </>}/>
 </section>
-<section className="liestungen_section pb_3"  style={{ backgroundImage: "url('/images/bg-pattern.png')" }}>
+<section className="liestungen_section pb_3 overflow-hidden"  style={{ backgroundImage: "url('/images/bg-pattern.png')" }}>
     <div className="container">
       <LiestungenSlider />
     </div>
