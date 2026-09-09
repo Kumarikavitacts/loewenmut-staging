@@ -2,8 +2,8 @@ import React from "react";
 
 const FilterTabs = ({ tabs, activeTab, onTabChange }) => {
   return (
-    <div className="overflow-auto mw-100 ">
-      <div className="d-flex flex-nowrap justify-content-center gap-2 pb-2">
+    <div className="filter-tabs-wrapper">
+      <div className="filter-tabs">
         {tabs.map((tab) => (
           <button
             key={tab.value}
@@ -15,8 +15,7 @@ const FilterTabs = ({ tabs, activeTab, onTabChange }) => {
             }`}
             style={
               activeTab === tab.value
-                ? { backgroundColor: "var(--bs-themecolor)"  
-              }
+                ? { backgroundColor: "var(--bs-themecolor)" }
                 : {}
             }
             onClick={() => onTabChange(tab.value)}

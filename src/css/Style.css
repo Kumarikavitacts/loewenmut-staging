@@ -1635,11 +1635,36 @@ footer {
 
 /* //tabs font family and size / */
 
+
 .tabs-font-family {
     font-family: var(--bs-roboto);
     font-size: var(--bs-fs30);
-}
-
+    flex-shrink: 0;
+  }
+  
+  .filter-tabs-wrapper {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  
+  .filter-tabs-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .filter-tabs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: max-content;
+    min-width: 100%;
+    padding-bottom: 8px;
+  }
+  
 .intro-text {
     font-family: var(--bs-roboto);
     font-size: var(--bs-fs40);

@@ -939,6 +939,24 @@
         }
     }
 }
+/* filter tabs responsives  */
+@media (max-width: 991.98px) {
+    .filter-tabs {
+      justify-content: flex-start;
+    }
+  }
+  
+  /* Mobile */
+  @media (max-width: 575.98px) {
+    .filter-tabs {
+      justify-content: flex-start;
+      gap: 0.5rem;
+    }
+  
+    .tabs-font-family {
+      flex-shrink: 0;
+    }
+  }
 
 .project-carousel-section {
 
