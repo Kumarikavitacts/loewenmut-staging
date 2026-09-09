@@ -1,6 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export const InsightCard = ({ insight }) => {
+  const navigate =useNavigate()
+  const handleinsightClick =(data)=>{
+    console.log(data.id)
+    navigate(`/insights/inner/${data.id}`)
+  }
   return (
     <div className="col-12 col-sm-6 col-lg-3">
       <article
@@ -11,6 +17,7 @@ export const InsightCard = ({ insight }) => {
           aspectRatio: "375 / 345",
           backgroundColor: insight.bgColor || "#000",
         }}
+        onClick={()=>handleinsightClick(insight)}
       >
         {/* IMAGE */}
         {insight.image && (

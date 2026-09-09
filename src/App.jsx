@@ -10,6 +10,7 @@ import Insights from './pages/Insights';
 import Leistungen from './pages/Leistungen';
 import LeistungenDetail from './pages/LiestungenDetail';
 import Team from './pages/Team';
+import InsightInner from './pages/InsightInner';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -24,6 +25,7 @@ function App() {
         <Route path='/leistungen' element={<Leistungen/>}/>
         <Route path='/leistungen-detail' element={<LeistungenDetail />} />
         <Route path='/team' element={<Team />} />
+        <Route path='/insights/inner/:id' element={<InsightInner/>}/>
       </Routes>
       <Footer />
     </>
