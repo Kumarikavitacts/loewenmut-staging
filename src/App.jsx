@@ -11,6 +11,8 @@ import Leistungen from './pages/Leistungen';
 import LeistungenDetail from './pages/LiestungenDetail';
 import Team from './pages/Team';
 import InsightInner from './pages/InsightInner';
+import News from './pages/News';
+import NewsInner from './pages/NewsInner';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -21,12 +23,16 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/agentur" element={<Agentur />} />
-        <Route path='/insights' element={<Insights/>}/>
         <Route path='/leistungen' element={<Leistungen/>}/>
         <Route path='/leistungen/:id' element={<LeistungenDetail />} />
         <Route path='/team' element={<Team />} />
-        <Route path='/insights/:id' element={<InsightInner/>}/>
       
+         {/* insight page  */}
+        <Route path='/insights' element={<Insights/>}/>
+        <Route path='/insights/:id' element={<InsightInner/>}/>
+        {/* news pages  */}
+        <Route path='/news' element={<News/>}/>
+        <Route path='/news/:id' element={<NewsInner/>}/>
       </Routes>
       <Footer />
     </>

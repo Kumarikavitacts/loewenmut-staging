@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
 import InnerBnanner from '../components/InnerBanner';
 import TalkSection from '../components/TalkSection';
 import AnimatedText from '../components/AnimatedText';

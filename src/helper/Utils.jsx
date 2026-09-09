@@ -206,3 +206,111 @@ export const projectInfoData = [
     ],
   },
 ];
+
+
+export const newsTabs = [
+  {
+    label: "Alle",
+    value: "all",
+  },
+  {
+    label: "Digitales Marketing",
+    value: "marketing",
+  },
+  {
+    label: "SEO",
+    value: "seo",
+  },
+  {
+    label: "Website-Entwicklung",
+    value: "entwicklug",
+  },
+  {
+    label: "Unternehmenswachstum",
+    value: "website",
+  },
+  {
+    label: "Print und Werbung",
+    value: "print",
+  }
+];
+
+export const newsData = [
+  {
+    id: 1,
+    category: "Digitales Marketing",
+    categoryValue: "marketing",
+    categoryClass: "purple_badge",
+    image: "/images/news-1.png",
+    date: "25.06.2026",
+    title: "Gebrüder Stocker Tiefbau GmbH",
+    description:
+      "Nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh.",
+    link: "/",
+  },
+
+  {
+    id: 2,
+    category: "SEO",
+    categoryValue: "seo",
+    categoryClass: "blue_badge",
+    image: "/images/news-2.png",
+    date: "25.06.2026",
+    title: "Gebrüder Stocker Tiefbau GmbH",
+    description:
+      "Nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh.",
+    link: "/",
+  },
+
+  {
+    id: 3,
+    category: "Website-Entwicklung",
+    categoryValue: "entwicklug",
+    categoryClass: "red_badge",
+    image: "/images/news-3.png",
+    date: "25.06.2026",
+    title: "Gebrüder Stocker Tiefbau GmbH",
+    description:
+      "Nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh.",
+    link: "/",
+  },
+
+  {
+    id: 4,
+    category: "Digitales Marketing",
+    categoryValue: "marketing",
+    categoryClass: "purple_badge",
+    image: "/images/news-1.png",
+    date: "25.06.2026",
+    title: "Gebrüder Stocker Tiefbau GmbH",
+    description:
+      "Nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh.",
+    link: "/",
+  },
+
+  {
+    id: 5,
+    category: "SEO",
+    categoryValue: "seo",
+    categoryClass: "blue_badge",
+    image: "/images/news-2.png",
+    date: "25.06.2026",
+    title: "Gebrüder Stocker Tiefbau GmbH",
+    description:
+      "Nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh.",
+    link: "/",
+  },
+
+  {
+    id: 6,
+    category: "Website-Entwicklung",
+    categoryValue: "entwicklug",
+    categoryClass: "red_badge",
+    image: "/images/news-3.png",
+    date: "25.06.2026",
+    title: "Gebrüder Stocker Tiefbau GmbH",
+    description:
+      "Nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh.",
+    link: "/",
+  },
+];
