@@ -25,7 +25,7 @@ function App() {
         <Route path='/leistungen' element={<Leistungen/>}/>
         <Route path='/leistungen-detail' element={<LeistungenDetail />} />
         <Route path='/team' element={<Team />} />
-        <Route path='/insights/inner/:id' element={<InsightInner/>}/>
+        <Route path='/insights/:id' element={<InsightInner/>}/>
       </Routes>
       <Footer />
     </>

@@ -59,7 +59,7 @@ return (
                 </div>
                 <div className='col-md-3 col-lg-3 ftr_col mb-4 mb-md-0'>
                     <div className='ftr_scl_links'>
-                        <img src='./images/footer-swiss.svg' alt='#' />
+                        <img src='/images/footer-swiss.svg' alt='#' />
                         {/* <div className='ftr_swiss'>
                             <a className='swiss_item mini_custom_cursor_click' href='https://www.swissmadesoftware.org/' target='_blank' rel='noreferrer'>
                                 <svg width="34" height="28" viewBox="0 0 34 28" fill="none" xmlns="http://www.w3.org/2000/svg">

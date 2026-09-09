@@ -100,7 +100,6 @@ const ProjectCarousel = ({
 
 
     return (
-        <section className="project-carousel-section py-5">
             <div className="container">
 
                 {/* =========================
@@ -109,17 +108,10 @@ const ProjectCarousel = ({
                 <div className="row">
                     <div className="col-12 col-lg-8 mx-auto">
                         <div className="project-carousel-heading">
-
-                            <h2 className="h2 mb-3">
-                                {title}
-                            </h2>
-
+                            <h2 className="mb-3">{title}</h2>
                             {description && (
-                                <p className="text-dark mb-4">
-                                    {description}
-                                </p>
+                                <p className="text-dark mb-4 fw-regular">{description} </p>
                             )}
-
                         </div>
                     </div>
                 </div>
@@ -127,10 +119,7 @@ const ProjectCarousel = ({
                 {/* =========================
             CAROUSEL
         ========================== */}
-                <div
-                    ref={carouselRef}
-                    className="owl-carousel project-carousel"
-                >
+                <div ref={carouselRef} className="owl-carousel project-carousel">
                     {project.map((item) => (
                         <div
                             className="project-carousel-item"
@@ -161,9 +150,7 @@ const ProjectCarousel = ({
                 ========================== */}
                                 {item.logo && (
                                     <div className="project-carousel-logo-wrapper position-relative d-flex align-items-center justify-content-center">
-                                        <img
-                                            src={item.logo}
-                                            alt={item.title || ""}
+                                        <img src={item.logo} alt={item.title || ""}
                                             className="project-carousel-logo img-fluid"
                                         />
                                     </div>
@@ -179,20 +166,13 @@ const ProjectCarousel = ({
         ========================== */}
                 <div className="row mt-4">
                     <div className="col-12 col-lg-8 mx-auto project-carousel-heading">
-
                         {description2 && (
-                            <p className="text-dark mb-3">
-                                {description2}
-                            </p>
+                            <p className="text-dark fw-regular">{description2}</p>
                         )}
-
                         <button  className="button theme_btn">{button} <img src="/images/btn-arrow.svg" alt="" /></button>
-
                     </div>
                 </div>
-
             </div>
-        </section>
     );
 };
 

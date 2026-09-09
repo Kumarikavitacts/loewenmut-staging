@@ -27,6 +27,7 @@
     --bs-black: #000000;
     --bs-darkgrey: #222633;
     --bs-lightgrey: #FBFBFB;
+    --bs-lightgrey2: #f8f8f8;
     --bs-bordergrey: #EFEFEF;
     --bs-textdarkgrey: #373737;
     --bs-textlightgrey: #999999;
@@ -114,6 +115,9 @@ p {
 .fs_50 {
     font-size: var(--bs-fs50);
 }
+.fs_40 {
+    font-size: var(--bs-fs40);
+}
 a {
     text-decoration: none;
     color: inherit;
@@ -191,6 +195,20 @@ span.txt-006::before {
     height: 35px;
     background-image: url(../images/emo-circle.svg);
 }
+span.txt-007::before {
+    top: -13px;
+    right: -10px;
+    width: 200%;
+    height: 35px;
+    background-image: url(../images/emo-crown-purple.svg);
+}
+span.txt-008::before {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 25px;
+    background-image: url(../images/emo-line-blue.svg);
+}
 ul {
     padding-left: 20px;
     li {
@@ -223,6 +241,7 @@ ul {
                 border-radius: 50%;
                 position: relative;
                 top: 2px;
+                flex-shrink: 0;
             }
         }
     }
@@ -1985,20 +2004,6 @@ footer {
         .project-image-info {
             background: rgba(255, 255, 255, 0.88);
             backdrop-filter: blur(8px);
-            h3 {
-                font-family: var(--bs-roboto);
-                font-size: var(--bs-fs30);
-                font-weight: 400;
-                line-height: 38px;
-                color: #373737;
-            }
-            p {
-                font-family: var(--bs-roboto);
-                font-size: var(--bs-fs24);
-                font-weight: 300;
-                line-height: 38px;
-                color: #373737;
-            }
             .project-logo-svg {
                 display: block;
                 width: 78px;
@@ -2008,28 +2013,14 @@ footer {
     }
     .project-info-list {
         .project-info-card {
-            background: #f7f7f7;
-            border: 2px solid transparent;
-            transition: border-color 0.25s ease;
+            background: var(--bs-lightgrey2);
+            padding: 2rem;
+            border-radius: 30px;
+            font-weight: 400;
             .project-icon {
                 width: 74px;
                 height: 74px;
                 background: var(--bs-themecolor);
-                img {
-                    width: 41px;
-                    height: 40px;
-                    object-fit: contain;
-                }
-            }
-            .project-info-content {
-                min-width: 0;
-                h3 {
-                    font-family: var(--bs-roboto);
-                    font-size: var(--bs-fs35);
-                    font-weight: 900;
-                    line-height: 1.2;
-                    color: #373737;
-                }
             }
         }
     }
@@ -2048,51 +2039,16 @@ footer {
 }
 .article_in_detail {
     p {
-        font-family: var(--bs-roboto);
         font-size: var(--bs-fs30);
         font-weight: 400;
-        line-height: 48px;
-    }
-    .article-description {
-        position: relative;
-    }
-    .article-description-icon {
-        position: absolute;
-        width: 46px;
-        height: auto;
-        right: -2px;
-        bottom: 80px;
-        display: block;
-        max-width: 100%;
-    }
-    .article-description-icon2 {
-        position: absolute;
-        width: 105px;
-        height: 15px;
-        right: 45%;
-        bottom: 25%;
-        display: block;
-        max-width: 100%;
     }
 }
 .project-carousel-section {
-    .project-carousel-heading {
-        h2 {
-            font-family: var(--bs-roboto);
-            font-size: var(--bs-fs60);
-            font-weight: 400;
-            line-height: 110px;
-            letter-spacing: 0%;
-        }
-        p {
-            font-family: var(--bs-roboto);
-            font-size: var( --bs-fs24);
-            font-weight: 400;
-            line-height: 38px;
-            letter-spacing: 0%;
-        }
-    }
     .project-carousel {
+        clip-path: inset(-100vw -100vw -100vw 0);
+        .owl-stage-outer {
+            overflow: unset !important;
+        }
         .project-carousel-item {
             width: 100%;
         }
