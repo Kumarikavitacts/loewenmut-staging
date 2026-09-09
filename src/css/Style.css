@@ -9,6 +9,9 @@
 }
 
 :root {
+    --radius-20: 20px;
+    --radius-30: 30px;
+    --radius-50: 50px;
     --color_1: #FFF000;
     --color_2: #FFE000;
     --color_3: #FFD000;
@@ -768,7 +771,7 @@ header {
         }
     }
     .item {
-        border-radius: 30px;
+        border-radius: var(--radius-30);
         overflow: hidden;
         padding: 25px;
         background-color: var(--bs-white);
@@ -793,7 +796,7 @@ header {
             span {
                 display: inline-block;
                 padding: 6px 13px;
-                border-radius: 50px;
+                border-radius: var(--radius-50);
                 background-color: var(--bs-lightgrey);                
                 margin: 5px;
                 margin-left: 0;
@@ -889,7 +892,7 @@ header {
     .border-wrapper {
         padding: 40px;
         border: 1px solid var(--bs-bordergrey);
-        border-radius: 30px;
+        border-radius: var(--radius-30);
     }
     ul {
         display: grid;
@@ -940,7 +943,7 @@ header {
     .insight_img {
         height: 300px;
         overflow: hidden;
-        border-radius: 30px;
+        border-radius: var(--radius-30);
         transition: .4s all;
         img {
             width: 100%;
@@ -986,13 +989,13 @@ header {
 .news_section {
     .news_item {
         display: block;
-        border-radius: 30px;
+        border-radius: var(--radius-30);
         overflow: hidden;
     }
     .news_img {
         height: 250px;
         overflow: hidden;
-        border-radius: 30px;
+        border-radius: var(--radius-30);
         img {
             width: 100%;
             height: 100%;
@@ -1011,7 +1014,7 @@ header {
         font-family: var(--bs-roboto);
         font-weight: 400;
         padding: 4px 15px 1px;
-        border-radius: 50px;
+        border-radius: var(--radius-50);
     }
     .purple_badge {
         background-color: #8D5DF6;
@@ -1254,7 +1257,7 @@ footer {
         background: #fff;
         border: 4px solid #d1d1d1;
         border-bottom: 0;
-        border-radius: 31px 31px 0 0;
+        border-radius: var(--radius-30) var(--radius-30) 0 0;
         position: relative;
         z-index: 10;
         overflow: hidden;
@@ -1320,7 +1323,7 @@ footer {
         display: flex;
         align-items: center;
         background: #e8e8e8;
-        border-radius: 50px;
+        border-radius: var(--radius-50);
     }
     .work-search input {
         width: 100%;
@@ -1364,7 +1367,7 @@ footer {
         padding: 20px;
         background: #fff;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.08);
-        border-radius: 30px 30px 30px 0;
+        border-radius: var(--radius-30) var(--radius-30) var(--radius-30) 0;
         z-index: 5;
         h4 {
             margin: 0 0 7px;
@@ -1435,7 +1438,7 @@ footer {
         margin: 0 auto 2rem;
         display: flex;
         overflow: hidden;
-        border-radius: 30px;
+        border-radius: var(--radius-30);
         background: linear-gradient(29deg, #675e06, black, black);
         z-index: calc(var(--i) + 1);
     }
@@ -1471,7 +1474,7 @@ footer {
             height: 100%;
             display: block;
             object-fit: cover;
-            border-radius: 20px;
+            border-radius: var(--radius-20);
         }
     }
 }
@@ -1528,7 +1531,7 @@ footer {
     width: 100%;
     .service-card {
         padding: 1.75rem;
-        border-radius: 30px;
+        border-radius: var(--radius-30);
         background: #F6F6F6 url(../images/bg-pattern.png) no-repeat center;
         background-size: cover;
         transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
@@ -1944,6 +1947,48 @@ footer {
 }
 
 
+.stat-card {
+    background: var(--bs-lightgrey2);
+    border-radius: var(--radius-30);
+    padding: 1.75rem;
+    min-height: 235px;
+    color: #333;
+}
+.stat-title {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: var(--bs-fs26);
+    font-weight: 400;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    .stat-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+}
+.segment-bar {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    height: 33px;
+    overflow: hidden;
+    max-width: 100%;
+    .segment {
+        flex: 1;
+        min-width: 0;
+        height: 100%;
+        border-radius: 3px;
+        flex-shrink: 0;
+    }
+}
+
+
+
+
+
 /*---- Kumesh CSS ------ */
 .insight-card-title {
     z-index: 2;
@@ -2015,7 +2060,7 @@ footer {
         .project-info-card {
             background: var(--bs-lightgrey2);
             padding: 2rem;
-            border-radius: 30px;
+            border-radius: var(--radius-30);
             font-weight: 400;
             .project-icon {
                 width: 74px;
@@ -2029,7 +2074,7 @@ footer {
     width: 100%;
     max-width: 1600px;
     aspect-ratio: 1600 / 657;
-    border-radius: 40px;
+    border-radius: var(--radius-30);
     overflow: hidden;
     img {
         width: 100%;
@@ -2056,7 +2101,7 @@ footer {
             width: 340px;
             height: 318px;
             max-width: 100%;
-            border-radius: 28px;
+            border-radius: var(--radius-30);
             overflow: hidden;
             position: relative;
         }

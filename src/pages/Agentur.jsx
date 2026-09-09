@@ -3,6 +3,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import InnerBnanner from '../components/InnerBanner';
 import TalkSection from '../components/TalkSection';
 import AnimatedText from '../components/AnimatedText';
+import ProjectCarousel from '../components/Carousel/ProjectCarousel';
+import { insights } from '../helper/Utils';
+import StatsCards from '../components/StatsCards';
 
 const Agentur = () => {
 return (
@@ -48,6 +51,18 @@ return (
             </div>
         </div>
     </div>
+</section>
+<section className='project_stats_section pt_pb_3'>
+    <div className='container'>
+        <div className='sec-heading mb-4'>
+            <div className='sub_title'>auctor aliquet</div>
+            <h2>Nibh vel velit <span>Auctor Aliquet</span></h2>
+        </div>
+        <StatsCards />
+    </div>
+</section>
+<section className='pt_pb_3 project-carousel-section overflow-hidden' style={{ backgroundImage: "url('/images/bg-pattern.png')" }}>
+    <ProjectCarousel title={<>Aenean <span>velit auctor aliquet.</span></>} description={"Proin gravida nibh vel velit auctor aliquet. Aenea sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit."} description2={<> Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit <span class='txt-008'>consequat</span> ipsum, nec sagittis sem nibh id elit.</> } project={insights} button={"Insights ansehen"}/>
 </section>
 <section className="pt_pb_3 talk_section">
     <TalkSection />
