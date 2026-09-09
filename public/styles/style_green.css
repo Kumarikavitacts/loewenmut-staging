@@ -34,6 +34,22 @@ header {
         fill: var(--bs-white) !important;
     }
 }
+.hero_section {
+    .line-2 {
+        &:after {
+            background: url(/public/images/dot_green.png) no-repeat center;
+            background-size: contain;
+        }
+    }
+    .hero_row {
+        &:before {
+            background: url(/public/images/hero-icon-1-green.png) no-repeat left;
+        }
+        &::after {
+            background: url(/public/images/hero-icon-2-green.png) no-repeat left;
+        }
+    }
+}
 .news_section {
     .arrow_btn {
         svg path {

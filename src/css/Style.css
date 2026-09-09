@@ -521,7 +521,7 @@ header {
         width: 100%;
         z-index: 899;
         transition: .4s;
-        position: absolute;
+        position: fixed;
         border-bottom: 1px solid rgba(228, 228, 228, 0);
     }
     .navbar.sticky {
@@ -732,7 +732,15 @@ header {
         animation: mouseScroll 1.5s infinite ease-in-out;
     }
 }
-
+.inner_hero_section {
+    .rolling-eyes {
+        display: inline-block;
+        svg {
+            width: 70px;
+            height: 70px;
+        }
+    }
+}
 .feature_section {
     .feature_row {
         .feature-col {
@@ -865,6 +873,7 @@ header {
         position: absolute;
         top: 50%;
         left: 50%;
+        transform: translate(-50%, -50%);
         white-space: nowrap;
         width: 90%;
         animation: circleRotate 8s linear infinite;

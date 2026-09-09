@@ -1,20 +1,48 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useTheme } from "../context/ThemeContext";
 import ServiceSlider from '../components/ServiceSlider'
 import WorkSection from '../components/WorkSection';
 import TalkSection from '../components/TalkSection';
 import AnimatedText from '../components/AnimatedText';
 
-const Home = () => {
-const nextSectionRef = useRef(null);
-    const scrollToNext = () => {
-    nextSectionRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-    });
+
+const themeAssets = {
+  yellow: {
+    icon1: "/images/hero-icon-3.png",
+    icon2: "/images/hero-icon-4.png",
+  },
+
+  blue: {
+    icon1: "/images/hero-icon-3-blue.png",
+    icon2: "/images/hero-icon-4-blue.png",
+  },
+
+  green: {
+    icon1: "/images/hero-icon-3-green.png",
+    icon2: "/images/hero-icon-4-green.png",
+  },
+
+  pink: {
+    icon1: "/images/hero-icon-3-pink.png",
+    icon2: "/images/hero-icon-4-pink.png",
+  },
 };
+
+const Home = () => {
+  const { theme } = useTheme();
+  const nextSectionRef = useRef(null);
+  // Get images for the currently selected theme
+  const assets = themeAssets[theme] || themeAssets.yellow;
+  const scrollToNext = () => {
+    nextSectionRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
 return (
-<main>
+<main className={`home-page theme-${theme}`}>
 <section className="pb_3 hero_section">
     <div className="container position-relative">
         <div className="hero_row pb-0">
@@ -25,11 +53,11 @@ return (
             </h1>
             <div className='hero_tech_text'>
                 <div className='htt_left'>
-                    <img src='../images/hero-icon-3.png' />
+                    <img src={assets.icon1} />
                     <p>Strategie, Design und Technologie aus einer Hand. Für Marken, Websites und Plattformen, die Unternehmen wirklich weiterbringen.</p>
                 </div>
                 <div className='htt_right'>
-                    <img src='../images/hero-icon-4.png' />
+                    <img src={assets.icon2} />
                     <button type="button" className="scroll-down-btn" onClick={scrollToNext} aria-label="Scroll down">
                         <span className="mouse-icon">
                             <span className="mouse-wheel"></span>
