@@ -2002,8 +2002,6 @@ footer {
             .project-logo-svg {
                 display: block;
                 width: 78px;
-                height: auto;
-                max-width: 100%;
                 flex-shrink: 0;
             }
         }
@@ -2031,20 +2029,6 @@ footer {
                     font-weight: 900;
                     line-height: 1.2;
                     color: #373737;
-                }
-                ul {
-                    li {
-                        position: relative;
-                        padding-left: 18px;
-                        margin-bottom: 6px;
-                        font-family: var(--bs-roboto);
-                        font-size: var(--bs-fs24);
-                        font-weight: 400;
-                        line-height: 38px;
-                        &:last-child {
-                            margin-bottom: 0;
-                        }
-                    }
                 }
             }
         }
