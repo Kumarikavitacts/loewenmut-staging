@@ -27,7 +27,7 @@ const NewsInner = () => {
 
                     {/* Text */}
                     <div className="col-12 col-md-8">
-                        <p className="intro-text mb-0">
+                        <p className="intro-text mb-0"> 
                             Aenean sollicitudin,{" "}
                             {/* <span className="theme-text"> */}
                             lorem quis bibendum auctor, nisi elit consequat
