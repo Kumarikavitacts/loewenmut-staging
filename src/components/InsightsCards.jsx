@@ -5,7 +5,7 @@ export const InsightCard = ({ insight }) => {
   const navigate =useNavigate()
   const handleinsightClick =(data)=>{
     console.log(data.id)
-    navigate(`/insights/inner/${data.id}`)
+    navigate(`/insights/${data.id}`)
   }
   return (
     <div className="col-12 col-sm-6 col-lg-3">

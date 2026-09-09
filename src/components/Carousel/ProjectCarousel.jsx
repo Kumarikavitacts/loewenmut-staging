@@ -16,7 +16,7 @@ const ProjectCarousel = ({
     const navigate =useNavigate()
     const handleInsightClick =(id)=>{
       console.log(id)
-      navigate(`/insights/inner/${id}`)
+      navigate(`/insights/${id}`)
     }
     useEffect(() => {
         window.$ = $;

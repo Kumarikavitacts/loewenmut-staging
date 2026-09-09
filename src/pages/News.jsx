@@ -1,14 +1,68 @@
-import React from 'react'
-import InnerBnanner from '../components/InnerBanner'
+import React, { useState } from "react";
+import FilterTabs from "../components/FilterTabs";
+import InnerBnanner from "../components/InnerBanner";
+import NewsCard from "../components/ResuableComponents/NewsCard";
+
+import { newsTabs, newsData } from "../helper/Utils";
 
 const News = () => {
-  return (
-   <main>
-    <section className="inner_hero_section">
-    <InnerBnanner  title={"Nibh vel velit Auctor Aliquet"} heading={ <> Aenean sollicitudin, lorem <br/>quis bibendum auctor </> } description={<>Nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, <br /> nisi elit consequat</>}/>
-</section>
-   </main>
-  )
-}
+  const [activeTab, setActiveTab] = useState("all");
 
-export default News
+  const filteredNews =
+    activeTab === "all"
+      ? newsData
+      : newsData.filter(
+          (news) => news.categoryValue === activeTab
+        );
+
+  return (
+    <main>
+
+      {/* Hero */}
+      <section className="inner_hero_section">
+        <InnerBnanner
+          title={"Nibh vel velit Auctor Aliquet"}
+          heading={
+            <>
+              Aenean sollicitudin, lorem <br />
+              quis bibendum auctor
+            </>
+          }
+          description={
+            <>
+              Nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis
+              bibendum auctor, <br />
+              nisi elit consequat
+            </>
+          }
+        />
+      </section>
+
+      {/* News Section */}
+      <section className="py-5">
+
+        {/* Filter Tabs */}
+        <div className="mb-5 d-flex justify-content-center w-100">
+          <FilterTabs
+            tabs={newsTabs}
+            activeTab={activeTab}
+            onTabChange={setActiveTab}
+          />
+        </div>
+
+        {/* News Cards */}
+        <NewsCard
+          newsData={filteredNews}
+          showHeader={false}
+          showFooter={true}
+          button={"mehr"}
+          buttonLink={"/agentur"}
+        />
+
+      </section>
+
+    </main>
+  );
+};
+
+export default News;

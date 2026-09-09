@@ -1640,22 +1640,22 @@ footer {
     font-family: var(--bs-roboto);
     font-size: var(--bs-fs30);
     flex-shrink: 0;
-  }
-  
-  .filter-tabs-wrapper {
+}
+
+.filter-tabs-wrapper {
     width: 100%;
     max-width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-  }
-  
-  .filter-tabs-wrapper::-webkit-scrollbar {
+}
+
+.filter-tabs-wrapper::-webkit-scrollbar {
     display: none;
-  }
-  
-  .filter-tabs {
+}
+
+.filter-tabs {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1663,8 +1663,8 @@ footer {
     width: max-content;
     min-width: 100%;
     padding-bottom: 8px;
-  }
-  
+}
+
 .intro-text {
     font-family: var(--bs-roboto);
     font-size: var(--bs-fs40);
@@ -1866,7 +1866,7 @@ footer {
 
         p {
             font-family: var(--bs-roboto);
-            font-size: var( --bs-fs24);
+            font-size: var(--bs-fs24);
             font-weight: 400;
 
 
@@ -1934,6 +1934,71 @@ footer {
             width: auto;
             height: auto;
             object-fit: contain;
+        }
+    }
+}
+
+/* news images section  */
+.image_layout_section {
+    .image_layout_item {
+        overflow: hidden;
+        border-radius: 20px;
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 20px;
+        }
+    }
+}
+
+.content_image_section {
+    background-color: #f7f7f7;
+    padding: 80px 0;
+
+    .content_image_content {
+        padding-right: 40px;
+
+        h2 {
+            margin-bottom: 20px;
+            font-family: var(--bs-roboto);
+            font-size: var(--bs-fs60);
+            font-weight: 400;
+            font-style: Regular;
+            line-height: 76px;
+            letter-spacing: -3%;
+            vertical-align: middle;
+
+        }
+
+        p {
+            margin-bottom: 24px;
+            font-family: var(--bs-roboto);
+            font-size: var(--bs-fs24);
+            line-height: 36px;
+            font-weight: 400;
+            letter-spacing: 0%;
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .content_image {
+        width: 100%;
+        max-width: 676px;
+        margin-left: auto;
+        overflow: hidden;
+        border-radius: 20px;
+
+        img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 676 / 740;
+            object-fit: cover;
+            display: block;
+            border-radius: 20px;
         }
     }
 }

@@ -10,6 +10,7 @@ import Insights from './pages/Insights';
 import Leistungen from './pages/Leistungen';
 import InsightInner from './pages/InsightInner';
 import News from './pages/News';
+import NewsInner from './pages/NewsInner';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -23,10 +24,10 @@ function App() {
         <Route path='/leistungen' element={<Leistungen/>}/>
          {/* insight page  */}
         <Route path='/insights' element={<Insights/>}/>
-        <Route path='/insights/inner/:id' element={<InsightInner/>}/>
+        <Route path='/insights/:id' element={<InsightInner/>}/>
         {/* news pages  */}
         <Route path='/news' element={<News/>}/>
-
+        <Route path='/news/:id' element={<NewsInner/>}/>
       </Routes>
       <Footer />
     </>

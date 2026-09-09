@@ -493,6 +493,7 @@
     .intro-text {
         font-size: 32px;
         line-height: 46px;
+
     }
 
 }
@@ -720,7 +721,7 @@
     }
 
     .intro-text {
-        text-align: center;
+        text-align: start;
     }
 
 }
@@ -939,75 +940,163 @@
         }
     }
 }
+
 /* filter tabs responsives  */
 @media (max-width: 991.98px) {
     .filter-tabs {
-      justify-content: flex-start;
+        justify-content: flex-start;
     }
-  }
-  
-  /* Mobile */
-  @media (max-width: 575.98px) {
+}
+
+/* Mobile */
+@media (max-width: 575.98px) {
     .filter-tabs {
-      justify-content: flex-start;
-      gap: 0.5rem;
+        justify-content: flex-start;
+        gap: 0.5rem;
     }
-  
+
     .tabs-font-family {
-      flex-shrink: 0;
+        flex-shrink: 0;
     }
-  }
+}
 
 .project-carousel-section {
 
     .project-carousel {
-  
-      .project-carousel-card {
-        width: 340px;
-        height: 318px;
-      }
-  
-      @media (max-width: 767.98px) {
-  
+
         .project-carousel-card {
-          width: 100%;
-          height: 280px;
-          border-radius: 24px;
+            width: 340px;
+            height: 318px;
         }
-  
-        .project-carousel-logo-wrapper {
-          padding: 24px;
+
+        @media (max-width: 767.98px) {
+
+            .project-carousel-card {
+                width: 100%;
+                height: 280px;
+                border-radius: 24px;
+            }
+
+            .project-carousel-logo-wrapper {
+                padding: 24px;
+            }
+
+            .project-carousel-logo {
+                max-width: 70%;
+                max-height: 70%;
+            }
         }
-  
-        .project-carousel-logo {
-          max-width: 70%;
-          max-height: 70%;
+
+        @media (max-width: 575.98px) {
+
+            .project-carousel-card {
+                height: 260px;
+                border-radius: 22px;
+            }
+
+            .project-carousel-logo-wrapper {
+                padding: 20px;
+            }
+
+            .project-carousel-logo {
+                max-width: 68%;
+                max-height: 68%;
+            }
         }
-      }
-  
-      @media (max-width: 575.98px) {
-  
-        .project-carousel-card {
-          height: 260px;
-          border-radius: 22px;
+
+        @media (max-width: 375px) {
+
+            .project-carousel-card {
+                height: 240px;
+                border-radius: 20px;
+            }
         }
-  
-        .project-carousel-logo-wrapper {
-          padding: 20px;
-        }
-  
-        .project-carousel-logo {
-          max-width: 68%;
-          max-height: 68%;
-        }
-      }
-  
-      @media (max-width: 375px) {
-  
-        .project-carousel-card {
-          height: 240px;
-          border-radius: 20px;
-        }
-      }
     }
-  }
+}
+
+/* news page styling  */
+@media (max-width: 991.98px) {
+    padding: 60px 0;
+
+    .content_image_content {
+        padding-right: 0;
+        margin-bottom: 40px;
+    }
+
+    .content_image {
+        max-width: 676px;
+        margin: 0 auto;
+    }
+}
+
+/* // Mobile */
+
+@media (max-width: 991.98px) {
+
+    .content_image_section {
+        padding: 60px 0;
+
+        .content_image_content {
+            padding-right: 0;
+            margin-bottom: 40px;
+
+            h2 {
+                line-height: 1.25;
+            }
+
+            p {
+                line-height: 1.6;
+            }
+        }
+
+        .content_image {
+            margin: 0 auto;
+        }
+    }
+}
+
+
+/* // ========================================
+// Mobile
+// ======================================== */
+
+@media (max-width: 575.98px) {
+
+    .content_image_section {
+        padding: 50px 0;
+
+        .content_image_content {
+            width: 100%;
+            padding-right: 0;
+            margin-bottom: 30px;
+
+            h2 {
+                font-size: var(--bs-fs30);
+                line-height: 1.25;
+                letter-spacing: normal;
+                margin-bottom: 18px;
+            }
+
+            p {
+                font-size: 16px;
+                line-height: 1.6;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* .content_image {
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            border-radius: 20px;
+
+            img {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 676 / 740;
+                object-fit: cover;
+                border-radius: 20px;
+            }
+        } */
+    }
+}
