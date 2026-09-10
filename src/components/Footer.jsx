@@ -24,7 +24,7 @@ const Footer = () => {
                         </div>
                     </div>
                     <div className='col-1 d-none d-lg-block'><div className='center_line_col'></div></div>
-                    <div className='col-sm-6 col-md-4 col-lg-2 ftr_col'>
+                    <div className='col-sm-6 col-md-3 col-lg-2 ftr_col'>
                         <div className='ftr_quick_links'>
                             <h3>Quick Links</h3>
                             <div className='quck_links'>
@@ -57,20 +57,14 @@ const Footer = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='col-md-3 col-lg-3 ftr_col mb-4 mb-md-0'>
+                    <div className='col-md-4 col-lg-3 ftr_col mb-4 mb-md-0'>
                         <div className='ftr_scl_links d-flex gap-5 justify-content-start justify-content-md-center align-items-center'>
                             <div className="border-end pe-4 cursorPointer " >
-                            <a href="https://www.swissmadesoftware.org/home.html" target="_blank"
-                                    rel="noopener noreferrer">
-                                         <img src="/images/footer/Group1412.png" />
-                                    </a>
-
+                                <a href="https://www.swissmadesoftware.org/home.html" target="_blank" rel="noopener noreferrer"> <img src="/images/footer/Group1412.png" /> </a>
                             </div>
                             <div className="cursorPointer" >
-                                <a href="https://www.swissmadesoftware.org/home.html" target="_blank"
-                                    rel="noopener noreferrer"> <img src="/images/footer/Group.png" /></a>
+                                <a href="https://www.swissmadesoftware.org/home.html" target="_blank" rel="noopener noreferrer"> <img src="/images/footer/Group.png" /></a>
                             </div>
-
                         </div>
                     </div>
                 </div>

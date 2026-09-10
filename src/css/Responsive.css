@@ -7,8 +7,195 @@
 }
 
 @media (min-width: 1600px) {
+    :root {
+        --bs-fs100: 140px;
+        --bs-fs80: 80px;
+        --bs-fs60: 58px;
+        --bs-fs50: 50px;
+        --bs-fs40: 40px;
+        --bs-fs35: 35px;
+        --bs-fs30: 30px;
+        --bs-fs24: 24px;
+        --bs-fs22: 22px;
+        --bs-fs20: 20px;
+    }
     .container {
         max-width: var(--content_width);
+    }
+    .button {
+        border-radius: 50px;
+        padding: 20px 35px;
+    }
+    .theme_btn, .dark_btn, .border_btn, .text_btn {
+        padding-right: 65px;
+        svg, img {
+            width: 35px;
+        }
+    }
+    .list_tick {
+        ul {
+            li {
+                gap: 1rem;
+                &::before {
+                    top: 3px;
+                    width: 30px;
+                    height: 30px;
+                    background-size: 15px;
+                }
+            }
+        }
+    }
+    header {
+        a.navbar-brand {
+            max-width: 250px;
+        }
+        .theme_toggle_btn {
+            width: 65px;
+            height: 65px;
+            svg {
+                width: 34px;
+            }
+        }
+        ul.navbar-nav {
+            padding: .5rem !important;
+            li.nav-item {
+                .nav-link {
+                    padding: .25rem 1rem !important;
+                    &:before {
+                        top: 50%;
+                    }
+                }
+            }
+        }
+    }
+    .project_section {
+        ul li {
+            padding-left: 45px;
+            &::before {
+                width: 30px;
+                height: 30px;
+            }
+        }
+    }
+    .sub_title {
+        gap: 15px;
+        &:before {
+            top: 12px;
+        }
+    }
+    .anim_circle {
+        width: 240px;
+        height: 240px;
+        span {
+            width: 155px;
+            height: 155px;
+            svg, img {
+                width: 80%;
+                height: 80%;
+            }
+        }
+    }
+    .project_section {
+        .anim_circle {
+            right: -90px;
+            bottom: -120px;
+        }
+    }
+    .insight_section {
+        .insight_img {
+            height: 400px;
+        }
+        .insight_item:hover {
+            .insight_img {
+                height: 300px;
+            }
+        }
+    }
+    .news_section {
+        .news_img {
+            height: 330px;
+        }
+        .news_content {
+            padding: 35px;
+        }
+        .arrow_btn {
+            svg {
+                width: 75px;
+                height: 75px;
+                margin-right: -10px;
+            }
+        }
+    }
+    footer {
+        .ftr_logo_col {
+            width: calc(100% + 2rem);
+        }
+    }
+    .inner_hero_section {
+        .inner-banner-content {
+            max-width: 1100px;
+            p {
+                max-width: 90%;
+                margin: 0 auto;
+            }
+        }
+        .rolling-eyes {
+            svg {
+                width: 90px;
+                height: 90px;
+            }
+        }
+    }
+    .service-grid {
+        .service-card {
+            padding: 2.25rem;
+            .service-icon {
+                width: 90px;
+                height: 90px;
+                margin-bottom: 1.5rem;
+            }
+        }
+    }
+    .team-image {
+        height: 380px;
+    }
+    .team-carousel {
+        .team-last-card a {
+            height: 380px;
+        }
+    }
+    .stat-card {
+        padding: 2.25rem;
+    }
+    .accordion-item {
+        margin-top: 1.5rem;
+        .accordion-button {
+            padding: 15px 32px;
+            padding-right: 60px;
+            &::after {
+                width: 50px;
+                height: 50px;
+            }
+        }
+        .accordion-body {
+            padding: 10px 32px 30px;
+        }
+    }
+    footer {
+        .ftr_logo_col {
+            img, svg.footer_logo_svg {
+                width: 270px;
+            }
+        }
+        .ftr_contact {
+            a {
+                .icon_style {
+                    width: 58px;
+                    height: 58px;
+                    padding: 13px;
+                }
+            }
+        }
     }
 }
 
