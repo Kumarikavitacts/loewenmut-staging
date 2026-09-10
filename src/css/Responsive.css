@@ -1,3 +1,11 @@
+@media screen and (-webkit-min-device-pixel-ratio: 0) and (max-width: 1024px) {
+    form {
+        .form-control {
+            font-size: 16px;
+        }
+    }
+}
+
 @media (min-width: 1600px) {
     .container {
         max-width: var(--content_width);

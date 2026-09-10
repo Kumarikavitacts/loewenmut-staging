@@ -256,6 +256,92 @@ img {
 a:hover {
     color: inherit;
 }
+form {
+    .form-group {
+        margin-bottom: 1.25rem;
+    }
+    label {
+        font-size: var(--bs-fs20);
+        font-family: var(--bs-stolzlregular);
+        margin-bottom: 5px;
+    }
+    .form-control {
+        width: 100%;
+        height: 50px;
+        color: var(--bs-black);
+        border: 0;
+        border-bottom: 1px solid #D9D9D9;
+        border-radius: 0;
+        font-size: var(--bs-fs24);
+        padding: 10px 0;
+        outline: none !important;
+        box-shadow: none !important;
+        background-color: transparent;
+    }
+    textarea {
+        height: auto !important;
+    }
+    .radio_item {
+        position: relative;
+    }
+    .inline_radio_btns {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 20px;
+    }
+    [type="checkbox"]:checked,
+    [type="checkbox"]:not(:checked) {
+        position: absolute;
+        left: -9999px;
+    }
+    [type="checkbox"]:checked+label,
+    [type="checkbox"]:not(:checked)+label {
+        position: relative;
+        padding-left: 35px;
+        cursor: pointer;
+        line-height: 28px;
+        display: inline-block;
+        color: var(--bs-darkgrey);
+        font-size: var(--bs-fs22);
+        font-weight: 400;
+        text-transform: uppercase;
+    }
+    [type="checkbox"]:checked+label:before,
+    [type="checkbox"]:not(:checked)+label:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 25px;
+        height: 25px;
+        background: #EFEFEF;
+        border-radius: 50%;
+    }
+    [type="checkbox"]:checked+label:after,
+    [type="checkbox"]:not(:checked)+label:after {
+        content: '';
+        width: 25px;
+        height: 25px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 50%;
+        background: var(--bs-themecolor) url(../../public/images/tick-icon.svg) no-repeat center;
+        background-size: 15px;
+        -webkit-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+    }
+    [type="checkbox"]:not(:checked)+label:after {
+        opacity: 0;
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+    [type="checkbox"]:checked+label:after {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
 .btn_block {
     display: flex;
     flex-wrap: wrap;
@@ -389,87 +475,6 @@ a:hover {
     }
 }
 
-form {
-    .form-group {
-        margin-bottom: 1.25rem;
-    }
-    label {
-        font-size: var(--bs-fs20);
-        font-family: var(--bs-roboto);
-        margin-bottom: 5px;
-    }
-    .form-control {
-        width: 100%;
-        height: 48px;
-        color: var(--bs-darkgrey);
-        border: 0;
-        border-bottom: 1px solid #D9D9D9;
-        border-radius: 0;
-        font-size: var(--bs-fs20);
-        font-family: var(--bs-roboto);
-        padding: 10px 0;
-        outline: none !important;
-        box-shadow: none !important;
-        background-color: transparent;
-    }
-    .form-control:focus{
-        background-color: transparent !important;
-    }
-    textarea {
-        height: auto !important;
-    }
-    .radio_item {
-        position: relative;
-    }
-    [type="radio"]:checked, [type="radio"]:not(:checked) {
-        position: absolute;
-        left: -9999px;
-    }
-    [type="radio"]:checked+label, [type="radio"]:not(:checked)+label {
-        position: relative;
-        padding-left: 28px;
-        cursor: pointer;
-        line-height: 20px;
-        display: inline-block;
-        color: var(--bs-darkgrey);
-        font-size: var(--bs-fs20);
-        text-transform: uppercase;
-        font-family: var(--bs-stolzllight);
-    }
-    [type="radio"]:checked+label:before, [type="radio"]:not(:checked)+label:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 18px;
-        height: 18px;
-        background: #EFEFEF;
-        border-radius: 50%;
-    }
-    [type="radio"]:checked+label:after, [type="radio"]:not(:checked)+label:after {
-        content: '';
-        width: 18px;
-        height: 18px;
-        position: absolute;
-        top: 0;
-        left: 0;
-        border-radius: 50%;
-        background: var(--bs-themecolor) url(../../public/images/radio-mask.png) no-repeat center;
-        background-size: contain;
-        -webkit-transition: all 0.2s ease;
-        transition: all 0.2s ease;
-    }
-    [type="radio"]:not(:checked)+label:after {
-        opacity: 0;
-        -webkit-transform: scale(0);
-        transform: scale(0);
-    }
-    [type="radio"]:checked+label:after {
-        opacity: 1;
-        -webkit-transform: scale(1);
-        transform: scale(1);
-    }
-}
 .container {
     max-width: 100%;
     padding-left: 80px;
@@ -638,6 +643,7 @@ header {
             right: 40px;
             top: 0;
             text-transform: uppercase;
+            z-index: 1;
         }
     }
     .line {
@@ -739,6 +745,17 @@ header {
             width: 70px;
             height: 70px;
         }
+    }
+    .victory-icon {
+        display: inline-block;
+        svg {
+            width: 100px;
+            height: 100px;
+        }
+    }
+    .inner-banner-content {
+        max-width: 700px;
+        margin: 0 auto;
     }
 }
 .feature_section {
@@ -2026,7 +2043,64 @@ footer {
     } 
 }
 
+.map-wrapper {
+    width: calc(100% + 80px);
+    margin-left: -80px;
+}
+.accordion-item {
+    border-radius: var(--radius-30) !important;
+    border: 1px solid #E9E9E9 !important;
+    margin-top: 1rem;
+    overflow: hidden;
+    .accordion-button {
+        padding: 12px 25px;
+        padding-right: 60px;
+        font-size: var(--bs-fs30);
+        font-weight: 500;
+        box-shadow: none !important;
+        display: block;
+        background: transparent;
+        color: var(--bs-darkgrey) !important;
+        line-height: 1.35;
+    }
+    .accordion-body {
+        padding: 0 25px 20px;
+        p:last-child {
+            margin-bottom: 0;
+        }
+    }
+    .accordion-button::after {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        right: 10px;
+        top: 9px;
+        border-radius: 50%;
+        background: var(--bs-themecolor) url(../../public/images/icon-plus.svg) no-repeat center;
+        background-size: 22px;
+    }
+    .accordion-button:not(.collapsed)::after {
+        transform: none;
+        background: var(--bs-themecolor) url(../../public/images/icon-minus.svg) no-repeat center;
+        background-size: 22px;
+    }
+}
 
+.error_thank_sec {
+    .img_col {
+        padding-top: 50px;
+        padding-bottom: 50px;
+        max-width: 400px;
+        margin: 0 auto;
+
+        svg {
+            width: 100%;
+            height: auto;
+            fill: var(--bs-themecolor);
+        }
+    }
+}
 
 /*---- Kumesh CSS ------ */
 .insight-card-title {

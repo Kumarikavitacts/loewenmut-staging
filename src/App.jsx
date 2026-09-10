@@ -13,6 +13,9 @@ import Team from './pages/Team';
 import InsightInner from './pages/InsightInner';
 import News from './pages/News';
 import NewsInner from './pages/NewsInner';
+import Kontakt from './pages/Kontakt';
+import Impressum from './pages/Impressum';
+import Datenschutz from './pages/Datenschutz';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -33,6 +36,9 @@ function App() {
         {/* news pages  */}
         <Route path='/news' element={<News/>}/>
         <Route path='/news/:id' element={<NewsInner/>}/>
+        <Route path='/kontakt' element={<Kontakt/>}/>
+        <Route path='/impressum' element={<Impressum/>}/>
+        <Route path='/datenschtuz' element={<Datenschutz/>}/>
       </Routes>
       <Footer />
     </>
