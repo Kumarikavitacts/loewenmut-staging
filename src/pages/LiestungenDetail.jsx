@@ -41,7 +41,7 @@ const cards = [
 return (
 <main>
 <section className="inner_hero_section">
-    <InnerBnanner  title={"Nibh vel velit Auctor Aliquet"} heading={ <>Marke & Kommunikation </> } description={<>Nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis<br /> bibendum auctor, nisi elit consequat   </>}/>
+    <InnerBnanner  title={"Nibh vel velit Auctor Aliquet"} heading={ <>Marke & Kommunikation </> } description={<>Nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat   </>}/>
 </section>
 <section className="content_emo_section liestung_emo_sec pt_pb_3">
     <div className="container">

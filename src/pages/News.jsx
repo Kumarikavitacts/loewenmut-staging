@@ -24,15 +24,13 @@ const News = () => {
           title={"Nibh vel velit Auctor Aliquet"}
           heading={
             <>
-              Aenean sollicitudin, lorem <br />
-              quis bibendum auctor
+              Aenean sollicitudin, lorem quis bibendum auctor
             </>
           }
           description={
             <>
               Nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis
-              bibendum auctor, <br />
-              nisi elit consequat
+              bibendum auctor, nisi elit consequat
             </>
           }
         />

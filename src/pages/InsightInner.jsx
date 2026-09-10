@@ -19,10 +19,7 @@ const InsightInner = () => {
           heading={<>BG Zurlinden</>}
           description={
             <>
-              Nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis
-              bibendum auctor,
-              <br />
-              nisi elit consequat
+              Nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat
             </>
           }
         />

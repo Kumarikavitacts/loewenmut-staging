@@ -18,7 +18,7 @@ activeTab === "all"
 return (
     <main>
     <section className="inner_hero_section">
-        <InnerBnanner  title={"Nibh vel velit Auctor Aliquet"} heading={ <> Getane Arbeit. Der beste <br/> Beweis unserer Fähigkeiten. </> } description={<>Nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor,<br/> nisi elit consequat </>}/>
+        <InnerBnanner  title={"Nibh vel velit Auctor Aliquet"} heading={ <> Getane Arbeit. Der beste Beweis unserer Fähigkeiten. </> } description={<>Nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat </>}/>
     </section>
 
     <section className="insight-tab-section pt_pb_3">

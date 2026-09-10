@@ -11,7 +11,7 @@ const NewsInner = () => {
     return (
         <main>
             <section className="inner_hero_section">
-                <InnerBnanner title={"lorem quis"} heading={<>Mine-ex</>} description={<>Seit 1995 schenkt mine-ex den leidgeprüften Menschen, die durch einen<br/> schrecklichen Minenunfall eine oder mehrere Gliedmassen verloren haben,<br/> eine bessere Zukunft. </>}  footer={true} button={'Besuchen Sie die Website'} buttonLink={'/news'}/>
+                <InnerBnanner title={"lorem quis"} heading={<>Mine-ex</>} description={<>Seit 1995 schenkt mine-ex den leidgeprüften Menschen, die durch einen schrecklichen Minenunfall eine oder mehrere Gliedmassen verloren haben,eine bessere Zukunft. </>}  footer={true} button={'Besuchen Sie die Website'} buttonLink={'/news'}/>
             </section>
             <section className="image_layout_section pt_pb_3">
                 <div className="container">
