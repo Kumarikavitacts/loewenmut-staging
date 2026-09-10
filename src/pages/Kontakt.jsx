@@ -2,6 +2,7 @@ import React from "react";
 import InnerBnanner from '../components/InnerBanner';
 import VictoryIcon from "../components/VictoryIcon";
 import MapComponent from "../components/MapComponent";
+import ContactInfo from "../components/ResuableComponents/ContactInfo";
 
 const Kontakt = () => {
 return(
@@ -9,8 +10,8 @@ return(
 <section className="inner_hero_section">
     <InnerBnanner title={"Starten Sie jetzt Ihren Countdown"} heading={ <> Wie können wir Sie unterstützen?<VictoryIcon /> </> } description={<>Erzählen Sie uns kurz, worum es geht. Wir hören zu, denken mit und melden uns persönlich bei Ihnen. </>}/>
 </section>
-<section className="common_info_section">
-
+<section className="common_info_section pt_3">
+    <ContactInfo/>
 </section>
 <section className="kontakt_section pt_pb_3">
     <div className="container">

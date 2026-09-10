@@ -6,11 +6,7 @@ const Error = () => {
         <StatusHeader
             statusType="wrong"
             title={
-                <>
-                    Diese Seite konnte leider
-                    <br />
-                    nicht gefunden werden
-                </>
+                <> Diese Seite konnte leider <br /> nicht gefunden werden </>
             }
             buttonText="Zurück zur Startseite"
             buttonLink="/"

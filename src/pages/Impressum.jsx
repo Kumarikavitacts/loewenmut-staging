@@ -8,7 +8,7 @@ return(
 <section className="inner_hero_section">
     <InnerBnanner title={"KLAR GEREGELT."} heading={ <> Impressum </> } description={<>Angaben zur Loewenmut Punkt GmbH, Kontaktinformationen und rechtliche Hinweise zu unserem Webauftritt. </>}/>
 </section>
-<section className="common_info_section">
+<section className="common_info_section pt_3">
     <ContactInfo/>
 </section>
 <section className="impressum_section pt_pb_3">

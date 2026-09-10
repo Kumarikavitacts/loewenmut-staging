@@ -43,7 +43,7 @@ function App() {
         <Route path='/datenschtuz' element={<Datenschutz/>}/>
 
         {/* thankyou and error page  */}
-        <Route path='/thankyou' element={<Thankyou/>}/>
+        <Route path='/vielen-dank' element={<Thankyou/>}/>
         <Route path='/*' element ={<Error/>}/>
       </Routes>
       <Footer />

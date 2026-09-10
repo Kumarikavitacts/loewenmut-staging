@@ -35,60 +35,29 @@ const StatusHeader = ({
         statusImages.yellow[statusType];
 
     return (
-        <section className="status-header-section">
-            <div className="container">
-                <div className="row justify-content-center">
-                    <div className="col-12 col-md-10 col-lg-8">
-
-                        <div className="pt_pb-3">
-
-                            {/* Status Image */}
-                            <div className="status-header-icon text-center">
-                                <img
-                                    src={statusImage}
-                                    alt={statusType === "correct" ? "Success" : "Error"}
-                                    className="img-fluid"
-                                />
-                            </div>
-
-                            {/* Content */}
-                            <div className="inner-banner">
-                                <div className="container">
-                                    <div className="inner-banner-content text-center">
-
-                                        {title && (
-                                            <h1>{title}</h1>
-                                        )}
-
-                                        {description && (
-                                            <p>{description}</p>
-                                        )}
-
-                                        {buttonText && buttonLink && (
-                                            <div className="ms-lg-3 mt-3 mt-lg-0">
-                                                <NavLink
-                                                    to={buttonLink}
-                                                    className="button theme_btn"
-                                                >
-                                                    {buttonText}
-                                                    <img
-                                                        src="/images/btn-arrow.svg"
-                                                        alt=""
-                                                    />
-                                                </NavLink>
-                                            </div>
-                                        )}
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
+    <section className="status-header-section pb_3" style={{ backgroundImage: "url('/images/bg-pattern.png')", }}>
+        <div className="container">
+            {/* Status Image */}
+            <div className="status-header-icon text-center">
+                <img  src={statusImage}  alt={statusType === "correct" ? "Success" : "Error"} className="img-fluid" />
             </div>
-        </section>
+            <div className="inner-banner-content text-center">
+                {title && (
+                <h1>{title}</h1>
+                )}
+                {description && (
+                <p>{description}</p>
+                )}
+                {buttonText && buttonLink && (
+                <div className="mt-4">
+                    <NavLink to={buttonLink} className="button theme_btn" >
+                        {buttonText} <img src="/images/btn-arrow.svg" alt="" />
+                    </NavLink>
+                </div>
+                )}
+            </div>
+        </div>
+    </section>
     );
 };
 

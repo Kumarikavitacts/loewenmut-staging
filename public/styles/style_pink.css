@@ -1,6 +1,7 @@
 :root {
     --bs-themecolor: #F158A7;
     --bs-themetext: #fff;
+    --bs-themesvg: #fff;
     --bs-underline: #000000;
     --color_1: #FF9AC8;
     --color_2: #F97EB8;
@@ -106,6 +107,11 @@ footer {
 .stacking-card-wrapper {
     .stacking-card {
         background: linear-gradient(29deg, #F158A7, black, black);
+    }
+    
+    .card-number {
+        border: 1px solid var(--bs-white);
+        color: var(--bs-white);
     }
 }
 

@@ -34,6 +34,7 @@
     --bs-bordergrey: #EFEFEF;
     --bs-textdarkgrey: #373737;
     --bs-textlightgrey: #999999;
+    --bs-themesvg: #222633;
     --bs-lineheight: 1.15;
     --bs-fs100: 120px;
     --bs-fs80: 70px;
@@ -598,7 +599,7 @@ header {
 .th_green {
     background: #539A14;
 }
-.inner_hero_section .inner-banner, .hero_section {
+.inner_hero_section .inner-banner, .hero_section, .status-header-section {
     padding-top: 170px !important;
 }
 .hero_section {
@@ -886,7 +887,7 @@ header {
     justify-content: center;
     overflow: hidden;
     position: relative;
-    img {
+    img.cursorPointer {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -902,7 +903,7 @@ header {
         border-radius: 50%;
         border: 1px solid #aaa;
         position: relative;
-        svg {
+        svg, img {
             content: '';
             position: absolute;
             left: 50%;
@@ -910,6 +911,7 @@ header {
             transform: translate(-50%, -50%);
             width: 60%;
             height: 60%;
+            object-fit: contain;
             /* background: var(--bs-themecolor); */
             border-radius: 50%;
         }
@@ -2101,6 +2103,15 @@ footer {
         }
     }
 }
+.common_info_section {
+    .info_col_item {
+        svg {
+            width: 70px;
+            height: 70px;
+            transition: .4s all;
+        }
+    }
+}
 
 /*---- Kumesh CSS ------ */
 .insight-card-title {
@@ -2421,37 +2432,25 @@ footer {
   }
  
  
-  /* status header file styling  */
- 
-  .status-header-section {
-    min-height: calc(100vh - 100px);
- 
+/* status header file styling  */
+.status-header-section {
     display: flex;
     align-items: center;
     justify-content: center;
- 
-    padding: 100px 0 60px;
     .status-header-icon {
-        width: 100px;
-        height: 100px;
- 
+        width: 300px;
+        height: 300px;
         display: flex;
         align-items: center;
         justify-content: center;
- 
         margin: 0 auto 25px;
- 
         flex-shrink: 0;
- 
- 
         img {
             width: 100%;
             height: 100%;
             max-width: 100%;
             max-height: 100%;
- 
             display: block;
- 
             object-fit: contain;
         }
     }
@@ -2459,5 +2458,4 @@ footer {
  
 .cursorPointer:hover{
     cursor: pointer;
-  }
- 
+}

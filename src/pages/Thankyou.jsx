@@ -6,11 +6,7 @@ const Thankyou = () => {
         <StatusHeader
             statusType="correct"
             title={
-                <>
-                    Vielen Dank für Ihre
-                    <br />
-                    Nachricht!
-                </>
+                <> Vielen Dank für Ihre <br /> Nachricht! </>
             }
             description="Wir werden uns mit Ihnen in Verbindung setzen."
             buttonText="Zurück zur Startseite"
