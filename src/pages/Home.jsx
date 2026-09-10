@@ -195,9 +195,9 @@ return (
                   <p>Mobile App - UI/UX Design</p>
                 </div>
                 <div className="arrow_btn">
-                  <svg width="62" height="62" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg" >
-                    <path d="M21.7031 15.3516L45.8089 15.3516L45.8089 39.4574" stroke="#878C91" trokeWidth="3" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M12.0547 49.1094L45.4732 15.6908" stroke="#878C91" strokeWidth="3" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                  <svg width="62" height="62" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21.7031 15.3516L45.8089 15.3516L45.8089 39.4574" stroke="#878C91" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M12.0547 49.1094L45.4732 15.6908" stroke="#878C91" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </div>
               </div>
@@ -216,9 +216,9 @@ return (
                   <p>Dashboard - UI/UX Design</p>
                 </div>
                 <div className="arrow_btn">
-                  <svg width="62" height="62" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg" >
-                    <path d="M21.7031 15.3516L45.8089 15.3516L45.8089 39.4574" stroke="#878C91" trokeWidth="3" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M12.0547 49.1094L45.4732 15.6908" stroke="#878C91" strokeWidth="3" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                  <svg width="62" height="62" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21.7031 15.3516L45.8089 15.3516L45.8089 39.4574" stroke="#878C91" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M12.0547 49.1094L45.4732 15.6908" stroke="#878C91" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </div>
               </div>
@@ -237,9 +237,9 @@ return (
                   <p>Landingpage - UI/UX Design</p>
                 </div>
                 <div className="arrow_btn">
-                  <svg width="62" height="62" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg" >
-                    <path d="M21.7031 15.3516L45.8089 15.3516L45.8089 39.4574" stroke="#878C91" trokeWidth="3" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M12.0547 49.1094L45.4732 15.6908" stroke="#878C91" strokeWidth="3" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                  <svg width="62" height="62" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21.7031 15.3516L45.8089 15.3516L45.8089 39.4574" stroke="#878C91" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M12.0547 49.1094L45.4732 15.6908" stroke="#878C91" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </div>
               </div>
