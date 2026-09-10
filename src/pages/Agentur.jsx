@@ -11,7 +11,7 @@ const Agentur = () => {
 return (
 <main>
 <section className="inner_hero_section">
-    <InnerBnanner title={"Nibh vel velit Auctor Aliquet"} heading={ <> Digitalagentur in der <br /> Schweiz </> } description={<>Nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, <br /> nisi elit consequat</>}/>
+    <InnerBnanner title={"Nibh vel velit Auctor Aliquet"} heading={ <> Digitalagentur in der Schweiz </> } description={<>Nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor,  nisi elit consequat</>}/>
 </section>
 <section className="content_emo_section agen_emo_sec pt_pb_3">
     <div className="container">
