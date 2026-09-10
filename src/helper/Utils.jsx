@@ -252,7 +252,7 @@ export const newsData = [
   {
     id: 2,
     category: "SEO",
-    categoryValue: "seo",
+    categoryValue: "print",
     categoryClass: "blue_badge",
     image: "/images/news-2.png",
     date: "25.06.2026",
@@ -265,7 +265,7 @@ export const newsData = [
   {
     id: 3,
     category: "Website-Entwicklung",
-    categoryValue: "entwicklug",
+    categoryValue: "website",
     categoryClass: "red_badge",
     image: "/images/news-3.png",
     date: "25.06.2026",

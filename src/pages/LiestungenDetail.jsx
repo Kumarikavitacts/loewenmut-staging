@@ -57,7 +57,7 @@ return (
                     <p>Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in <span className='txt-003'>elit.</span> </p>
                     <h3>Nam nec tellus a odio tincidunt auctor a ornare odio. </h3>
                     <div className="theme_btn_wrap mt-4">
-                        <a href="/projekt-starten" className="button theme_btn">Offerte anfordern <img src="/images/btn-arrow.svg" alt="Arrow" /></a>
+                        <a href="/kontakt" className="button theme_btn">Offerte anfordern <img src="/images/btn-arrow.svg" alt="Arrow" /></a>
                     </div>
                 </div>
             </div>
@@ -99,7 +99,7 @@ return (
                         <li>Duis sed odio sit amet nibh vulputate cursus a sit amet mauris.</li>
                     </ul>
                     <div className="theme_btn_wrap mt-4">
-                        <a href="/projekt-starten" className="button theme_btn">Dieses Projekt starten <img src="/images/btn-arrow.svg" alt="Arrow" /></a>
+                        <a href="/kontakt" className="button theme_btn">Dieses Projekt starten <img src="/images/btn-arrow.svg" alt="Arrow" /></a>
                     </div>
                 </div>
             </div>

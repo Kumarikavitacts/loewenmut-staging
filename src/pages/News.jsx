@@ -56,7 +56,7 @@ const News = () => {
           showHeader={false}
           showFooter={true}
           button={"mehr"}
-          buttonLink={"/agentur"}
+          buttonLink={"/news"}
         />
 
       </section>
