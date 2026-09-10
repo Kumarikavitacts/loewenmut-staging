@@ -280,6 +280,7 @@ header {
                     background-color: var(--bs-underline);
                     z-index: -1;
                     transition: .4s all;
+                    display: none;
                 }
             }
 
