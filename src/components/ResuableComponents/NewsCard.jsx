@@ -108,7 +108,7 @@ const NewsCard = ({
         </div>
 
         {/* All News Button */}
-        {showFooter && (
+        {showFooter && newsData?.length > 5  && (
           <div className="theme_btn_wrap d-flex justify-content-center mt-4">
             <Link
               to={buttonLink}

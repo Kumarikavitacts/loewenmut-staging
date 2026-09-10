@@ -169,7 +169,7 @@ const ProjectCarousel = ({
                         {description2 && (
                             <p className="text-dark fw-regular">{description2}</p>
                         )}
-                        <button  className="button theme_btn">{button} <img src="/images/btn-arrow.svg" alt="" /></button>
+                        <button  className="button theme_btn" onClick={()=>navigate('/insights')}>{button} <img src="/images/btn-arrow.svg" alt="" /></button>
                     </div>
                 </div>
             </div>

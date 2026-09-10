@@ -2328,3 +2328,136 @@ footer {
         }
     }
 }
+
+
+ 
+/* impressum page contact info styling  */
+.contact-info-section {
+    background-color: #fff;
+    padding: 36px 0 30px;
+ 
+    .contact-info-row {
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+ 
+    .contact-info-item {
+      min-height: 118px;
+      padding: 0 30px;
+ 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+ 
+      text-align: center;
+    }
+ 
+    /* // Icon */
+    .contact-info-icon {
+      width: 52px;
+      height: 52px;
+ 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+ 
+      margin-bottom: 10px;
+ 
+      border-radius: 50%;
+      background-color: #ffdf00;
+ 
+      box-shadow: 0 0 0 4px #f7f7f7;
+ 
+      .contact-icon-placeholder {
+        color: #242424;
+        font-size: 25px;
+        line-height: 1;
+      }
+    }
+ 
+    /* // Content */
+    .contact-info-content {
+      color: #383838;
+      font-size: 14px;
+      line-height: 21px;
+    }
+ 
+    .contact-info-link {
+      color: #383838;
+      font-weight: 600;
+      text-decoration: underline;
+ 
+      transition: color 0.2s ease;
+ 
+      &:hover {
+        color: var(--bs-themecolor);
+      }
+    }
+ 
+    .contact-info-address {
+      color: #383838;
+    }
+ 
+    /* // Vertical separator */
+    .contact-info-divider {
+      position: absolute;
+      top: 0;
+ 
+      width: 0.5px;
+      height: 118px;
+ 
+      background-color: #eeeeee;
+ 
+      &:nth-of-type(2) {
+        left: 33.333%;
+      }
+ 
+      &:nth-of-type(4) {
+        left: 66.666%;
+      }
+    }
+  }
+ 
+ 
+  /* status header file styling  */
+ 
+  .status-header-section {
+    min-height: calc(100vh - 100px);
+ 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ 
+    padding: 100px 0 60px;
+    .status-header-icon {
+        width: 100px;
+        height: 100px;
+ 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+ 
+        margin: 0 auto 25px;
+ 
+        flex-shrink: 0;
+ 
+ 
+        img {
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+ 
+            display: block;
+ 
+            object-fit: contain;
+        }
+    }
+}
+ 
+.cursorPointer:hover{
+    cursor: pointer;
+  }
+ 

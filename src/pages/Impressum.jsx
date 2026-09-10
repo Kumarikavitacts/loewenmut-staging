@@ -1,5 +1,6 @@
 import React from "react";
 import InnerBnanner from '../components/InnerBanner';
+import ContactInfo from '../components/ResuableComponents/ContactInfo'
 
 const Impressum = () => {
 return(
@@ -8,7 +9,7 @@ return(
     <InnerBnanner title={"KLAR GEREGELT."} heading={ <> Impressum </> } description={<>Angaben zur Loewenmut Punkt GmbH, Kontaktinformationen und rechtliche Hinweise zu unserem Webauftritt. </>}/>
 </section>
 <section className="common_info_section">
-
+    <ContactInfo/>
 </section>
 <section className="impressum_section pt_pb_3">
     <div className="container">
@@ -26,4 +27,4 @@ return(
 )
 }
 
-export default Impressum;
+export default Impressum

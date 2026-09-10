@@ -151,7 +151,7 @@ function Header() {
               {/* Project Button */}
               <div className="ms-lg-3 mt-3 mt-lg-0">
                 <NavLink
-                  to="/projekt-starten"
+                  to="/kontakt"
                   className="button theme_btn"
                   onClick={handleNavClick}
                 >

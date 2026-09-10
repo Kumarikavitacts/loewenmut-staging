@@ -174,7 +174,7 @@ const Home = () => {
 
                   <div className="theme_btn_wrap mt-4">
                     <Link
-                      to="/projekt-starten"
+                      to={`/insights/9`}
                       className="button theme_btn"
                     >
                       Case ansehen
@@ -215,7 +215,7 @@ const Home = () => {
 
               <div className="theme_btn_wrap">
                 <Link
-                  to="/projekt-starten"
+                  to="/insights"
                   className="button theme_btn"
                 >
                   alle Insights
@@ -232,7 +232,7 @@ const Home = () => {
             {/* Insight 1 */}
             <div className="col-12 col-sm-6 col-lg-4 item-col mt-4">
               <Link
-                to="/"
+                to="/insights/9"
                 className="insight_item"
               >
                 <div className="insight_img">
@@ -283,7 +283,7 @@ const Home = () => {
             {/* Insight 2 */}
             <div className="col-12 col-sm-6 col-lg-4 item-col mt-4">
               <Link
-                to="/"
+                to="/insights/8"
                 className="insight_item"
               >
                 <div className="insight_img">
@@ -334,7 +334,7 @@ const Home = () => {
             {/* Insight 3 */}
             <div className="col-12 col-sm-6 col-lg-4 item-col mt-4">
               <Link
-                to="/"
+                to="/insights/7"
                 className="insight_item"
               >
                 <div className="insight_img">

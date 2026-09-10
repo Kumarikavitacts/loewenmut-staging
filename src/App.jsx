@@ -16,6 +16,8 @@ import NewsInner from './pages/NewsInner';
 import Kontakt from './pages/Kontakt';
 import Impressum from './pages/Impressum';
 import Datenschutz from './pages/Datenschutz';
+import Thankyou from './pages/Thankyou';
+import Error from './pages/Error';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -39,6 +41,10 @@ function App() {
         <Route path='/kontakt' element={<Kontakt/>}/>
         <Route path='/impressum' element={<Impressum/>}/>
         <Route path='/datenschtuz' element={<Datenschutz/>}/>
+
+        {/* thankyou and error page  */}
+        <Route path='/thankyou' element={<Thankyou/>}/>
+        <Route path='/*' element ={<Error/>}/>
       </Routes>
       <Footer />
     </>
