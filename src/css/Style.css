@@ -65,6 +65,9 @@ body.body_overflow {
     position: fixed;
     width: 100%;
 }
+main {
+    overflow: hidden;
+}
 .bg_theme {
     background-color: var(--bs-themecolor);
 }

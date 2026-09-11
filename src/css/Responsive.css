@@ -199,6 +199,17 @@
     }
 }
 
+@media (min-width: 1200px) {
+    .status-header-section {
+        min-height: calc(100vh - 100px);
+    }
+    .project_section {
+        .anim_circle {
+            right: -60px;
+        }
+    }
+}
+
 @media (min-width: 992px) {
     header {
         .menu_container {
@@ -666,6 +677,17 @@ header {
 }
 }
 
+@media (min-width: 767px) and (max-width: 991.98px) {
+    .contact-info-section {
+        .contact-info-item {
+            padding: 0 15px;
+        }
+        .contact-info-content {
+            font-size: 13px;
+        }
+    }
+}
+
 @media (min-width: 700px) and (max-width: 991.98px) {
     :root {
         --bs-fs100: 65px;
@@ -831,6 +853,57 @@ header {
             margin-top: 1rem;
         }
     }
+    .project-showcase {
+        .project-image-card {
+            .project-image-info {
+                h3 {
+                    font-size: var(--bs-fs30);
+                    line-height: 30px;
+                }
+                p {
+                    font-size: var(--bs-fs24);
+                    line-height: 24px;
+                }
+                .project-logo-svg {
+                    width: 60px;
+                }
+            }
+        }
+    }
+    .project-carousel-section {
+        .project-carousel {
+        .project-carousel-card {
+                width: 100%;
+                height: 280px;
+                border-radius: 24px;
+            }
+            .project-carousel-logo-wrapper {
+                padding: 24px;
+            }
+            .project-carousel-logo {
+                max-width: 70%;
+                max-height: 70%;
+            }
+        }
+    }
+    .contact-info-section {
+        .contact-info-item {
+            min-height: auto;
+            padding: 20px 15px;
+            &:not(:last-child) {
+                border-bottom: 1px solid #eeeeee;
+            }
+        }
+        .contact-info-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 12px;
+        }
+        .contact-info-content {
+            font-size: 14px;
+            line-height: 20px;
+        }
+    }
 }
 
 @media (max-width: 575px) {
@@ -967,6 +1040,13 @@ footer {
 
     }
 }
+.filter-tabs {
+    justify-content: flex-start;
+    gap: 0.5rem;
+}
+.tabs-font-family {
+    flex-shrink: 0;
+}
 .status-header-section {
     padding-top: 130px !important;
     h1 br {
@@ -977,13 +1057,47 @@ footer {
         height: 200px;
     }
 }
+.project-carousel-section {
+    .project-carousel {
+        .project-carousel-card {
+            height: 260px;
+            border-radius: 22px;
+        }
+        .project-carousel-logo-wrapper {
+            padding: 20px;
+        }
+        .project-carousel-logo {
+            max-width: 68%;
+            max-height: 68%;
+        }
+    }
+}
 }
 
 @media (max-width: 480px) {
+.project-showcase {
+    .project-image-card {
+        .project-image-info {
+            h3 {
+                font-size: var(--bs-fs22);
+                line-height: 22px;
+                margin-bottom: 0 !important;
+            }
 
+            p {
+                font-size: var(--bs-fs20);
+                line-height: 18px;
+            }
+
+            .project-logo-svg {
+                width: 50px;
+            }
+        }
+    }
+}
 }
 
-@media (max-width: 370px) {
+@media (max-width: 375px) {
     :root {
         --bs-fs100: 32px;
         --bs-fs80: 32px;
@@ -1003,198 +1117,32 @@ footer {
             padding: 2rem;
         }
     }
-}
-
-
-.project-showcase {
-    .project-image-card {
-        .project-image-info {
-
-            @media (max-width: 767.98px) {
-                h3 {
-                    font-size: var(--bs-fs30);
-                    line-height: 30px;
-                }
-
-                p {
-                    font-size: var(--bs-fs24);
-                    line-height: 24px;
-                }
-
-                .project-logo-svg {
-                    width: 60px;
-                }
-            }
-
-            @media (max-width: 480px) {
-                h3 {
-                    font-size: var(--bs-fs22);
-                    line-height: 22px;
-                    margin-bottom: 0 !important;
-                }
-
-                p {
-                    font-size: var(--bs-fs20);
-                    line-height: 18px;
-                }
-
-                .project-logo-svg {
-                    width: 50px;
-                }
-            }
-
-            @media (max-width: 360px) {
-                h3 {
-                    font-size: var(--bs-fs22);
-                    line-height: 20px;
-                }
-
-                p {
-                    font-size: var(--bs-fs20);
-                    line-height: 17px;
-                }
-
-                .project-logo-svg {
-                    width: 42px;
-                }
-            }
-
-        }
-    }
-}
-
-/* Mobile */
-@media (max-width: 575.98px) {
-    .filter-tabs {
-        justify-content: flex-start;
-        gap: 0.5rem;
-    }
-
-    .tabs-font-family {
-        flex-shrink: 0;
-    }
-}
-
-.project-carousel-section {
-    .project-carousel {
-      .project-carousel-card {
-        width: 340px;
-        height: 318px;
-      }
-      @media (max-width: 767.98px) {
-  
-        .project-carousel-card {
-            width: 340px;
-            height: 318px;
-        }
-
-        @media (max-width: 767.98px) {
-
-            .project-carousel-card {
-                width: 100%;
-                height: 280px;
-                border-radius: 24px;
-            }
-
-            .project-carousel-logo-wrapper {
-                padding: 24px;
-            }
-
-            .project-carousel-logo {
-                max-width: 70%;
-                max-height: 70%;
-            }
-        }
-
-        @media (max-width: 575.98px) {
-
-            .project-carousel-card {
-                height: 260px;
-                border-radius: 22px;
-            }
-
-            .project-carousel-logo-wrapper {
-                padding: 20px;
-            }
-
-            .project-carousel-logo {
-                max-width: 68%;
-                max-height: 68%;
-            }
-        }
-
-        @media (max-width: 375px) {
-
+    .project-carousel-section {
+        .project-carousel {
             .project-carousel-card {
                 height: 240px;
                 border-radius: 20px;
             }
         }
-  
-        .project-carousel-logo-wrapper {
-          padding: 20px;
-        }
-  
-        .project-carousel-logo {
-          max-width: 68%;
-          max-height: 68%;
-        }
-      }
-  
-      @media (max-width: 375px) {
-        .project-carousel-card {
-          height: 240px;
-          border-radius: 20px;
-        }
-      }
     }
-
 }
 
-
-/* impressum page contact info styling  */
-.contact-info-section {
-    /* // Tablet */
-    @media (min-width: 768px) and (max-width: 991px) {
-      .contact-info-item {
-        padding: 0 15px;
-      }
-      .contact-info-content {
-        font-size: 13px;
-      }
-    }
- 
-    /* // Mobile */
-    @media (max-width: 767px) {
-      padding: 30px 0;
- 
-      .contact-info-item {
-        min-height: auto;
-        padding: 20px 15px;
- 
-        &:not(:last-child) {
-          border-bottom: 1px solid #eeeeee;
+@media (max-width: 360px) {
+    .project-showcase {
+        .project-image-card {
+            .project-image-info {
+                h3 {
+                    font-size: var(--bs-fs22);
+                    line-height: 20px;
+                }
+                p {
+                    font-size: var(--bs-fs20);
+                    line-height: 17px;
+                }
+                .project-logo-svg {
+                    width: 42px;
+                }
+            }
         }
-      }
- 
-      .contact-info-icon {
-        width: 50px;
-        height: 50px;
-        margin-bottom: 12px;
-      }
- 
-      .contact-info-content {
-        font-size: 14px;
-        line-height: 20px;
-      }
-    }
-  }
- 
- 
-  /* status header page styling  */
- 
-@media (min-width: 1200px) {
-    .status-header-section {
-        min-height: calc(100vh - 100px);
     }
 }
