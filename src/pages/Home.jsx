@@ -49,7 +49,7 @@ return (
     {/* ================= HERO ================= */}
     <section className="pb_3 hero_section">
       <div className="container position-relative">
-        <div className="hero_row pb-0">
+        <div className="hero_row pb-0" data-aos="zoom-in">
           <h1 className="text-center">
             <span>Strategie - Design - Technologie</span>
             <div className="line" data-text="Digitale Lösungen">.Digitale Lösungen.</div>
@@ -72,7 +72,7 @@ return (
         </div>
       </div>
     </section>
-    <section className='pb_3 feature_section'>
+    <section className='pb_3 feature_section' data-aos="fade-up">
       <div className='container'>
           <hr />
           <div className="row feature_row mt-4 mt-lg-5">
@@ -125,10 +125,10 @@ return (
     <section ref={nextSectionRef} className="pt_pb_3 services_section overflow-hidden" style={{ backgroundImage: "url('/images/bg-pattern.png')", }} >
       <div className="container">
         <div className="row">
-          <div className="col-12 col-lg-4 content-col">
+          <div className="col-12 col-lg-4 content-col" data-aos="fade-right">
             <div className="sub_title">Nibh vel velit auctor </div>
           </div>
-          <div className="col-12 col-lg-7 ms-auto content-col">
+          <div className="col-12 col-lg-7 ms-auto content-col" data-aos="fade-left">
             <h2> Lorem nibh vel{" "} <span>velit auctor aliquet. Aenean sollicitudin.</span></h2>
           </div>
         </div>
@@ -138,7 +138,7 @@ return (
     {/* ================= PROJECT ================= */}
     <section className="pt_3 project_section">
       <div className="container">
-        <div className="border-wrapper position-relative">
+        <div className="border-wrapper position-relative" data-aos="slide-up">
           <div className="row flex-lg-row-reverse">
             <div className="col-12 col-lg-6 ms-auto img-col">
               <img src="/images/ortweise.png" alt="BG Zurlinden" className="w-100 img_radius" />
@@ -171,7 +171,7 @@ return (
     {/* ================= INSIGHTS ================= */}
     <section className="pt_pb_3 insight_section">
       <div className="container">
-        <div className="sec-content">
+        <div className="sec-content" data-aos="fade-up">
           <div className="sub_title">
             AUSGEWÄHLTE insights
           </div>
@@ -182,7 +182,7 @@ return (
             </div>
           </div>
         </div>
-        <div className="row mt-lg-4">
+        <div className="row mt-lg-4" data-aos="fade-up">
           {/* Insight 1 */}
           <div className="col-12 col-sm-6 col-lg-4 item-col mt-4">
             <Link to="/insights/9" className="insight_item" >

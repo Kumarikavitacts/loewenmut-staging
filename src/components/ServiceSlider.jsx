@@ -223,7 +223,7 @@ const ServiceSlider = () => {
   };
 
   return (
-    <div className="row service-slider-row">
+    <div className="row service-slider-row" data-aos="fade-up" data-aos-delay="200">
       {/* Left Content */}
       <div className="col-12 col-lg-4 content-col align-self-end mt-4">
         <p>Nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat</p>

@@ -20,7 +20,7 @@ const NewsCard = ({
 
         {/* Section Header */}
         {showHeader && (
-          <div className="sec-content">
+          <div className="sec-content" data-aos="fade-right">
             <div className="sub_title">
               {subTitle}
             </div>
@@ -32,7 +32,7 @@ const NewsCard = ({
         )}
 
         {/* News Cards */}
-        <div className="row">
+        <div className="row" data-aos="slide-up">
           {newsData.map((news) => (
             <div
               className="col-12 col-sm-6 col-lg-4 item-col mt-4"
