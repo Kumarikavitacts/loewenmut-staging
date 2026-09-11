@@ -96,7 +96,23 @@ footer {
         }
     }
 }
-
+.team-card {
+    .team-arrow {
+        svg path {
+            fill: var(--bs-white);
+        }
+    }
+}
+.service-grid {
+    .service-card:not(:hover) {
+        .service-icon img {
+            filter: brightness(0) invert(1);
+        }
+    }
+    .service-card:hover {
+        color: var(--bs-white);
+    }
+}
 .stacking-card-wrapper {
     .stacking-card {
         background: linear-gradient(29deg, #539a14, black, black);

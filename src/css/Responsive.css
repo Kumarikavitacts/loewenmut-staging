@@ -18,6 +18,18 @@
         --bs-fs24: 24px;
         --bs-fs22: 22px;
         --bs-fs20: 20px;
+        --content_width_small: 1300px;
+        --content_width_smaller: 1000px;
+    }
+    .pt_pb_3 {
+        padding-top: 90px;
+        padding-bottom: 90px;
+    }
+    .pt_3 {
+        padding-top: 90px;
+    }
+    .pb_3 {
+        padding-bottom: 90px;
     }
     .container {
         max-width: var(--content_width);
@@ -68,6 +80,9 @@
             }
         }
     }
+    .inner_hero_section .inner-banner, .hero_section, .status-header-section {
+        padding-top: 210px !important;
+    }
     .project_section {
         ul li {
             padding-left: 45px;
@@ -95,9 +110,14 @@
             }
         }
     }
+    .service-slider {
+        .item {
+            padding: 30px;
+        }
+    }
     .project_section {
         .anim_circle {
-            right: -90px;
+            right: -100px !important;
             bottom: -120px;
         }
     }
@@ -187,14 +207,39 @@
                 width: 270px;
             }
         }
+        h3 {
+            margin-bottom: 2rem;
+        }
         .ftr_contact {
             a {
+                gap: 18px;
+                margin-bottom: 1.5rem;
                 .icon_style {
                     width: 58px;
                     height: 58px;
                     padding: 13px;
                 }
             }
+        }
+    }
+    .bg_theme_work_station {
+        .work-info-card {
+            width: 280px;
+            .work-card-number {
+                font-size: 18px;
+            }
+            h4 {
+                font-size: var(--bs-fs22);
+            }
+            p {
+                font-size: var(--bs-fs20);
+            }
+        }
+        .work-phone {
+            width: 365px;
+        }
+        .work-phone-content {
+            padding: 8rem 17px 2rem;
         }
     }
 }
@@ -326,6 +371,10 @@
         --bs-fs24: 18px;
         --bs-fs22: 16px;
         --bs-fs20: 15px;
+    }
+    [data-aos] {
+        opacity: 1 !important;
+        transform: none !important;
     }
 }
 
@@ -658,6 +707,15 @@ header {
         right: 1.5%;
     }
 }
+.agen_emo_sec  {
+    text-align: center;
+    .sub_title {
+        justify-content: center;
+    }
+    .anim_circle {
+        margin: auto;
+    }
+}
 .project-showcase {
     .project-info-list {
         .project-info-card {
@@ -910,6 +968,11 @@ header {
             line-height: 20px;
         }
     }
+    .common_info_section {
+        .row {
+            gap: 2rem;
+        }
+    }
 }
 
 @media (max-width: 575px) {
@@ -1099,6 +1162,11 @@ footer {
                 width: 50px;
             }
         }
+    }
+}
+.team_section {
+    .team-column {
+        width: 100%;
     }
 }
 }

@@ -1425,6 +1425,7 @@ footer {
             position: absolute;
             top: 13px;
             right: 13px;
+            line-height: 1;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -2118,6 +2119,9 @@ footer {
             width: 70px;
             height: 70px;
             transition: .4s all;
+        }
+        a:hover {
+            color: var(--bs-themecolor) !important;
         }
     }
 }

@@ -28,7 +28,7 @@ return (
     <>
     <div className="row g-4">
         {teamMembers.map((member, index) => (
-        <div className="col-6 col-lg-4" key={`${member.name}-${index}`}>
+        <div className="col-6 col-lg-4 team-column" key={`${member.name}-${index}`}>
             <div className="team-card" onClick={() => openModal(member)} role="button">
                 <div className={`team-image tm-img-bgcolor ${member.color}`}>
                     {/* Animated background elements */}
