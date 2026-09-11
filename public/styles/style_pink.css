@@ -42,14 +42,6 @@ header {
             background-size: contain;
         }
     }
-    .hero_row {
-        &:before {
-            background: url(/images/hero-icon-1-pink.png) no-repeat left;
-        }
-        &:after {
-            background: url(/images/hero-icon-2-pink.png) no-repeat left;
-        }
-    }
 }
 .news_section {
     .arrow_btn {
@@ -123,6 +115,28 @@ footer {
     }
     span.cursorPointer svg path {
         fill: var(--bs-white);
+    }
+}
+.project-showcase {
+    .project-info-list {
+        .project-info-card {
+            .project-icon img {
+                filter: brightness(0) invert(1);
+            }
+        }
+    }
+}
+.accordion-item {
+    .accordion-button::after {
+        background: var(--bs-themecolor) url(../../public/images/icon-plus-white.svg) no-repeat center;
+    }
+    .accordion-button:not(.collapsed)::after {
+        background: var(--bs-themecolor) url(../../public/images/icon-minus-white.svg) no-repeat center;
+    }
+}
+form {
+    [type="checkbox"]:checked+label:after, [type="checkbox"]:not(:checked)+label:after {
+        background: var(--bs-themecolor) url(../../public/images/tick-icon-white.svg) no-repeat center;
     }
 }
 

@@ -47,7 +47,7 @@ return (
     <div className="container">
         <div className="row">
             <div className="col-12 col-lg-4 ms-auto img-col">
-                <div class="anim_circle mx-auto">
+                <div className="anim_circle mx-auto">
                     <AnimatedText />
                 </div>
             </div>

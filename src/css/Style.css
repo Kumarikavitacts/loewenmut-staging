@@ -66,7 +66,7 @@ body.body_overflow {
     width: 100%;
 }
 main {
-    overflow: hidden;
+    overflow-x: clip;
 }
 .bg_theme {
     background-color: var(--bs-themecolor);
@@ -612,20 +612,17 @@ header {
     .hero_row {
         position: relative;
         padding: 3rem;
-        &:before, &:after {
-            content: '';
+        .hro_icon_1, .hro_icon_2 {
             position: absolute;
             top: -1rem;
             width: 80px;
             height: 80px;
-            background-size: contain !important;
+            object-fit: contain;
         }  
-        &:before {
-            background: url(/public/images/hero-icon-1.png) no-repeat left;
+        .hro_icon_1 {
             left: 90px;
         }  
-        &:after {
-            background: url(/public/images/hero-icon-2.png) no-repeat left;
+        .hro_icon_2 {
             right: 50px;
         } 
     }
@@ -760,6 +757,11 @@ header {
     .inner-banner-content {
         max-width: 700px;
         margin: 0 auto;
+    }
+}
+.inner_hero_section.news_banner {
+    .inner-banner-content {
+        max-width: 900px;
     }
 }
 .feature_section {
@@ -2087,12 +2089,12 @@ footer {
         top: 9px;
         border-radius: 50%;
         background: var(--bs-themecolor) url(../../public/images/icon-plus.svg) no-repeat center;
-        background-size: 22px;
+        background-size: 22px !important;
     }
     .accordion-button:not(.collapsed)::after {
         transform: none;
         background: var(--bs-themecolor) url(../../public/images/icon-minus.svg) no-repeat center;
-        background-size: 22px;
+        background-size: 22px !important;
     }
 }
 

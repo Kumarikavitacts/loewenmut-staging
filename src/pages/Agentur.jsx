@@ -17,13 +17,13 @@ return (
     <div className="container">
         <div className="row">
             <div className="col-12 col-lg-4">
-                <div class="sub_title">lorem quis</div>
+                <div className="sub_title">lorem quis</div>
             </div>
             <div className="col-12 col-lg-8">
                 <h2>Über <span>uns</span></h2>
             </div>
             <div className="col-12 col-lg-4 img-col mt-4">
-                <div class="anim_circle">
+                <div className="anim_circle">
                     <AnimatedText />
                 </div>
             </div>

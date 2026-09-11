@@ -19,7 +19,7 @@ const News = () => {
     <main>
 
       {/* Hero */}
-      <section className="inner_hero_section">
+      <section className="inner_hero_section news_banner">
         <InnerBnanner
           title={"Nibh vel velit Auctor Aliquet"}
           heading={

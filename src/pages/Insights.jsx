@@ -17,7 +17,7 @@ activeTab === "all"
 
 return (
     <main>
-    <section className="inner_hero_section">
+    <section className="inner_hero_section news_banner">
         <InnerBnanner  title={"Nibh vel velit Auctor Aliquet"} heading={ <> Getane Arbeit. Der beste Beweis unserer Fähigkeiten. </> } description={<>Nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat </>}/>
     </section>
 

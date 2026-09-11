@@ -11,23 +11,31 @@ import { newsData } from '../helper/Utils';
 
 const themeAssets = {
   yellow: {
-    icon1: "/images/hero-icon-3.png",
-    icon2: "/images/hero-icon-4.png",
+    icon1: "/images/hero-icon-1.png",
+    icon2: "/images/hero-icon-2.png",
+    icon3: "/images/hero-icon-3.png",
+    icon4: "/images/hero-icon-4.png",
   },
 
   blue: {
-    icon1: "/images/hero-icon-3-blue.png",
-    icon2: "/images/hero-icon-4-blue.png",
+    icon1: "/images/hero-icon-1-blue.png",
+    icon2: "/images/hero-icon-2-blue.png",
+    icon3: "/images/hero-icon-3-blue.png",
+    icon4: "/images/hero-icon-4-blue.png",
   },
 
   green: {
-    icon1: "/images/hero-icon-3-green.png",
-    icon2: "/images/hero-icon-4-green.png",
+    icon1: "/images/hero-icon-1-green.png",
+    icon2: "/images/hero-icon-2-green.png",
+    icon3: "/images/hero-icon-3-green.png",
+    icon3: "/images/hero-icon-4-green.png",
   },
 
   pink: {
-    icon1: "/images/hero-icon-3-pink.png",
-    icon2: "/images/hero-icon-4-pink.png",
+    icon1: "/images/hero-icon-1-pink.png",
+    icon2: "/images/hero-icon-2-pink.png",
+    icon3: "/images/hero-icon-3-pink.png",
+    icon4: "/images/hero-icon-4-pink.png",
   },
 };
 
@@ -49,19 +57,21 @@ return (
     {/* ================= HERO ================= */}
     <section className="pb_3 hero_section">
       <div className="container position-relative">
-        <div className="hero_row pb-0" data-aos="zoom-in">
+        <div className="hero_row pb-0">
+          <img src={assets.icon1} alt="" className="hro_icon_1" data-aos="zoom-in" />
+          <img src={assets.icon2} alt="" className="hro_icon_2" data-aos="zoom-in" />
           <h1 className="text-center">
             <span>Strategie - Design - Technologie</span>
             <div className="line" data-text="Digitale Lösungen">.Digitale Lösungen.</div>
-            <div className="line line-2" data-text="Mit Loewenmut">Mit Loewenmut </div>
+            <div className="line line-2" data-text="Mit Loewenmut">Mit Loewenmut</div>
           </h1>
           <div className="hero_tech_text">
             <div className="htt_left">
-              <img src={assets.icon1} alt="" />
+              <img src={assets.icon3} alt="" data-aos="zoom-in" />
               <p>Strategie, Design und Technologie aus einer Hand. Für Marken, Websites und Plattformen, die Unternehmen wirklich weiterbringen.</p>
             </div>
             <div className="htt_right">
-              <img src={assets.icon2} alt="" />
+              <img src={assets.icon4} alt="" data-aos="zoom-in" />
               <button type="button" className="scroll-down-btn" onClick={scrollToNext} aria-label="Scroll down" >
                 <span className="mouse-icon">
                   <span className="mouse-wheel"></span>
