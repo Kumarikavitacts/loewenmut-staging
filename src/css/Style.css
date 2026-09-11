@@ -1468,7 +1468,7 @@ footer {
     }
 }
 
-.stacking-card-wrapper {
+/* .stacking-card-wrapper {
     padding-top: 2rem;
     .stacking-card {
         position: sticky;
@@ -1516,7 +1516,78 @@ footer {
             border-radius: var(--radius-20);
         }
     }
-}
+} */
+
+.stacking-card-wrapper {
+    padding-top: 4rem;
+    padding-bottom: 8rem;
+    perspective: 1600px;
+    perspective-origin: 50% 0%;
+  }
+  
+  .stacking-card {
+    position: relative;
+    width: 100%;
+    margin: 0 auto 3vh;          /* good spacing between cards */
+  
+    display: flex;
+    overflow: hidden;
+    border-radius: var(--radius-30);
+  
+    background: linear-gradient(29deg, #675e06, black, black);
+  
+    z-index: calc(var(--i) + 1);
+  
+    /* Critical for the MDNT look */
+    transform-origin: center top;
+    transform-style: preserve-3d;
+    will-change: transform;
+    backface-visibility: hidden;
+  
+    /* JS controls the transform – start neutral */
+    transform: translate3d(0, 0, 0) rotateX(0deg) scale(1);
+    transition: none;
+  }
+  
+  .stacking-content {
+    width: 50%;
+    padding: 2rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--bs-white);
+  }
+  
+  .card-number {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    border: 1px solid var(--bs-themecolor);
+    border-radius: 50%;
+    font-weight: 700;
+    color: var(--bs-themecolor);
+    font-size: var(--bs-fs24);
+  }
+  
+  hr {
+    border-top-color: var(--bs-white);
+  }
+  
+  .stacking-image {
+    width: 50%;
+    padding: 1.5rem;
+  }
+  
+  .stacking-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: var(--radius-20);
+  }
 
 
 /* insights cards images */

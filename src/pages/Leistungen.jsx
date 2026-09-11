@@ -15,7 +15,7 @@ return (
       <LiestungenSlider />
     </div>
 </section>
-<section className="liestungen_section pt_pb_3">
+<section className="liestungen_section pt_3">
     <div className="container small_container">
         <div className='heading-content text-center'>
             <div className='sub_title justify-content-center'>Wie funktioniert das?</div>
