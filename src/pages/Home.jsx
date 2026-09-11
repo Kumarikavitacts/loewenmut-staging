@@ -28,7 +28,7 @@ const themeAssets = {
     icon1: "/images/hero-icon-1-green.png",
     icon2: "/images/hero-icon-2-green.png",
     icon3: "/images/hero-icon-3-green.png",
-    icon3: "/images/hero-icon-4-green.png",
+    icon4: "/images/hero-icon-4-green.png",
   },
 
   pink: {
