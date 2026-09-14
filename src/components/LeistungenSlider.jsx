@@ -70,106 +70,216 @@ const LiestungenSlider = () => {
     console.log(id)
   }
   useEffect(() => {
-    let mounted = true;
-    let resizeTimer;
-    const initializeSlider = async () => {
-      window.jQuery = $;
-      window.$ = $;
-      await import("owl.carousel");
-      if (!mounted || !sliderRef.current) return;
-      const slider = $(sliderRef.current);
-      if (typeof $.fn.owlCarousel !== "function") {
-        console.error("Owl Carousel was not attached to jQuery");
-        return;
-      }
+  let mounted = true;
+  let resizeTimer;
 
-      // Owl Carousel
-      slider.owlCarousel({
-        loop: true,
-        margin: 30,
-        autoplay: true,
-        autoplayHoverPause: true,
-        autoplayTimeout: 3000,
-        smartSpeed: 500,
-        dots: false,
-        nav: true,
-        navText: [
-          '<img src="/images/prev-arrow.svg" alt="Previous" />',
-          '<img src="/images/next-arrow.svg" alt="Next" />',
-        ],
-        responsive: {
-          0: {
-            items: 1,
-          },
-          460: {
-            items: 1,
-          },
-          768: {
-            items: 2,
-          },
-          900: {
-            items: 2,
-          },
-          1200: {
-            items: 3,
-          },
+  const initializeSlider = async () => {
+    window.jQuery = $;
+    window.$ = $;
+
+    await import("owl.carousel");
+
+    if (!mounted || !sliderRef.current) return;
+
+    const slider = $(sliderRef.current);
+
+    if (typeof $.fn.owlCarousel !== "function") {
+      console.error("Owl Carousel was not attached to jQuery");
+      return;
+    }
+
+    // ----------------------------------------
+    // Owl Carousel
+    // ----------------------------------------
+
+    slider.owlCarousel({
+      loop: true,
+      margin: 30,
+
+      autoplay: true,
+      autoplayHoverPause: true,
+      autoplayTimeout: 3000,
+
+      smartSpeed: 500,
+
+      dots: false,
+      nav: true,
+
+      navText: [
+        '<img src="/images/prev-arrow.svg" alt="Previous" />',
+        '<img src="/images/next-arrow.svg" alt="Next" />',
+      ],
+
+      responsive: {
+        0: {
+          items: 1,
         },
+        460: {
+          items: 1,
+        },
+        768: {
+          items: 2,
+        },
+        900: {
+          items: 2,
+        },
+        1200: {
+          items: 3,
+        },
+      },
+    });
+
+    // ----------------------------------------
+    // Equal Height
+    // ----------------------------------------
+
+    const equalHeight = () => {
+      if (!mounted || !sliderRef.current) return;
+
+      // IMPORTANT:
+      // Calculate only from original items
+      const $originalItems = slider.find(
+        ".owl-item:not(.cloned) .item"
+      );
+
+      if (!$originalItems.length) return;
+
+      // Reset original + cloned items
+      slider.find(".owl-item .item h3").css("height", "auto");
+      slider.find(".owl-item .item p").css("height", "auto");
+      slider.find(".owl-item .item .item-tags").css("height", "auto");
+
+      // ----------------------------------------
+      // Calculate max H3 height
+      // ----------------------------------------
+
+      let maxH3Height = 0;
+
+      $originalItems.find("h3").each(function () {
+        const height = $(this).outerHeight();
+
+        if (height > maxH3Height) {
+          maxH3Height = height;
+        }
       });
 
-      // Equal height
-      const equalHeight = () => {
-        slider.find(".item h3").css("height", "auto");
-        slider.find(".item p").css("height", "auto");
-        slider.find(".item .item-tags").css("height", "auto");
+      // ----------------------------------------
+      // Calculate max paragraph height
+      // ----------------------------------------
 
-        let maxH3Height = 0;
-        slider.find(".item h3").each(function () {
-          maxH3Height = Math.max(maxH3Height, $(this).outerHeight());
-        });
-        slider.find(".item h3").height(maxH3Height);
+      let maxPHeight = 0;
 
-        let maxPHeight = 0;
-        slider.find(".item p").each(function () {
-          maxPHeight = Math.max(maxPHeight, $(this).outerHeight());
-        });
-        slider.find(".item p").height(maxPHeight);
+      $originalItems.find("p").each(function () {
+        const height = $(this).outerHeight();
 
-        let maxTagHeight = 0;
-        slider.find(".item-tags").each(function () {
-          maxTagHeight = Math.max(maxTagHeight, $(this).outerHeight());
-        });
-        slider.find(".item-tags").height(maxTagHeight);
-      };
-
-      setTimeout(() => {
-        if (mounted) {
-          equalHeight();
+        if (height > maxPHeight) {
+          maxPHeight = height;
         }
-      }, 100);
-
-      $(window).on("resize.serviceSlider", function () {
-        clearTimeout(resizeTimer);
-
-        resizeTimer = setTimeout(() => {
-          equalHeight();
-        }, 150);
       });
-    };
 
-    initializeSlider();
+      // ----------------------------------------
+      // Calculate max tags height
+      // ----------------------------------------
 
-    return () => {
-      mounted = false;
-      clearTimeout(resizeTimer);
-      $(window).off("resize.serviceSlider");
-      if (sliderRef.current) {
-        const slider = $(sliderRef.current);
-        if (slider.hasClass("owl-loaded")) {
-          slider.trigger("destroy.owl.carousel");
+      let maxTagHeight = 0;
+
+      $originalItems.find(".item-tags").each(function () {
+        const height = $(this).outerHeight();
+
+        if (height > maxTagHeight) {
+          maxTagHeight = height;
         }
+      });
+
+      // ----------------------------------------
+      // Apply to ORIGINAL + CLONED items
+      // ----------------------------------------
+
+      if (maxH3Height > 0) {
+        slider
+          .find(".owl-item .item h3")
+          .height(maxH3Height);
+      }
+
+      if (maxPHeight > 0) {
+        slider
+          .find(".owl-item .item p")
+          .height(maxPHeight);
+      }
+
+      if (maxTagHeight > 0) {
+        slider
+          .find(".owl-item .item .item-tags")
+          .height(maxTagHeight);
       }
     };
-  }, []);
+
+    // ----------------------------------------
+    // Update after layout changes
+    // ----------------------------------------
+
+    const updateEqualHeight = () => {
+      if (!mounted) return;
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (mounted) {
+            equalHeight();
+          }
+        });
+      });
+    };
+
+    // Initial calculation
+    setTimeout(() => {
+      updateEqualHeight();
+    }, 100);
+
+    // Owl resize
+    slider.on("resized.owl.carousel", () => {
+      updateEqualHeight();
+    });
+
+    // Owl refresh
+    slider.on("refreshed.owl.carousel", () => {
+      updateEqualHeight();
+    });
+
+    // Browser resize
+    $(window).on("resize.serviceSlider", () => {
+      clearTimeout(resizeTimer);
+
+      resizeTimer = setTimeout(() => {
+        updateEqualHeight();
+      }, 200);
+    });
+  };
+
+  initializeSlider();
+
+  // ----------------------------------------
+  // Cleanup
+  // ----------------------------------------
+
+  return () => {
+    mounted = false;
+
+    clearTimeout(resizeTimer);
+
+    $(window).off("resize.serviceSlider");
+
+    if (sliderRef.current) {
+      const slider = $(sliderRef.current);
+
+      slider.off("resized.owl.carousel");
+      slider.off("refreshed.owl.carousel");
+
+      if (slider.hasClass("owl-loaded")) {
+        slider.trigger("destroy.owl.carousel");
+      }
+    }
+  };
+}, []);
 
 return (
     <div className="service-slider-row">

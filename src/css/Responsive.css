@@ -240,7 +240,7 @@
             }
         }
         .work-phone {
-            width: 365px;
+            width: 500px;
         }
         .work-phone-content {
             padding: 8rem 17px 2rem;
@@ -358,6 +358,11 @@
                     width: 60px;
                 }
             }
+        }
+    }
+    .bg_theme_work_station {
+        .work-phone {
+            width: 370px;
         }
     }
 }
@@ -705,7 +710,7 @@ header {
         }
     }
     .work-phone {
-        width: 275px;
+        width: 340px;
     }
     .work-card-1, .work-card-3, .work-card-5 {
         left: 1.5%;
@@ -745,6 +750,14 @@ header {
 }
 .filter-tabs {
     justify-content: flex-start;
+}
+}
+
+@media (min-width: 767px) and (max-width: 830.98px) {
+.bg_theme_work_station {
+    .work-phone {
+        width: 310px;
+    }
 }
 }
 

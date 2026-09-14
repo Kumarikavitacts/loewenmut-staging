@@ -70,143 +70,289 @@ const ServiceSlider = () => {
     console.log(id)
   }
   useEffect(() => {
-    let mounted = true;
-    let resizeTimer;
+  let mounted = true;
+  let equalHeightTimer = null;
 
-    const initializeSlider = async () => {
-      // Make jQuery globally available
-      window.jQuery = $;
-      window.$ = $;
+  const initializeSlider = async () => {
+    // -----------------------------------
+    // Make jQuery globally available
+    // -----------------------------------
 
-      // Load Owl Carousel after jQuery
-      await import("owl.carousel");
+    window.jQuery = $;
+    window.$ = $;
 
+    // Load Owl Carousel after jQuery
+    await import("owl.carousel");
+
+    if (!mounted || !sliderRef.current) return;
+
+    const slider = $(sliderRef.current);
+
+    // -----------------------------------
+    // Check Owl Carousel
+    // -----------------------------------
+
+    if (typeof $.fn.owlCarousel !== "function") {
+      console.error("Owl Carousel was not attached to jQuery");
+      return;
+    }
+
+    // -----------------------------------
+    // EQUAL HEIGHT FUNCTION
+    // -----------------------------------
+
+    const equalHeight = () => {
       if (!mounted || !sliderRef.current) return;
 
+      // -----------------------------------
+      // IMPORTANT:
+      // Only ORIGINAL items are used to
+      // calculate the maximum height.
+      // -----------------------------------
+
+      const $originalItems = slider.find(
+        ".owl-item:not(.cloned) .item"
+      );
+
+      if (!$originalItems.length) return;
+
+      // -----------------------------------
+      // Reset heights on ORIGINAL + CLONED
+      // items before measuring
+      // -----------------------------------
+
+      slider.find(".owl-item .item h3").css("height", "auto");
+      slider.find(".owl-item .item p").css("height", "auto");
+      slider
+        .find(".owl-item .item .item-tags")
+        .css("height", "auto");
+
+      // -----------------------------------
+      // Calculate maximum H3 height
+      // -----------------------------------
+
+      let maxH3Height = 0;
+
+      $originalItems.find("h3").each(function () {
+        const height = $(this).outerHeight();
+
+        if (height > maxH3Height) {
+          maxH3Height = height;
+        }
+      });
+
+      // -----------------------------------
+      // Calculate maximum P height
+      // -----------------------------------
+
+      let maxPHeight = 0;
+
+      $originalItems.find("p").each(function () {
+        const height = $(this).outerHeight();
+
+        if (height > maxPHeight) {
+          maxPHeight = height;
+        }
+      });
+
+      // -----------------------------------
+      // Calculate maximum TAGS height
+      // -----------------------------------
+
+      let maxTagsHeight = 0;
+
+      $originalItems.find(".item-tags").each(function () {
+        const height = $(this).outerHeight();
+
+        if (height > maxTagsHeight) {
+          maxTagsHeight = height;
+        }
+      });
+
+      // -----------------------------------
+      // APPLY CALCULATED HEIGHTS
+      // TO ORIGINAL + CLONED ITEMS
+      // -----------------------------------
+
+      if (maxH3Height > 0) {
+        slider
+          .find(".owl-item .item h3")
+          .height(maxH3Height);
+      }
+
+      if (maxPHeight > 0) {
+        slider
+          .find(".owl-item .item p")
+          .height(maxPHeight);
+      }
+
+      if (maxTagsHeight > 0) {
+        slider
+          .find(".owl-item .item .item-tags")
+          .height(maxTagsHeight);
+      }
+    };
+
+    // -----------------------------------
+    // DELAYED EQUAL HEIGHT
+    // -----------------------------------
+
+    const updateEqualHeight = () => {
+      if (!mounted) return;
+
+      // Cancel previous timer
+      clearTimeout(equalHeightTimer);
+
+      // Wait for Owl/browser layout calculation
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (!mounted) return;
+
+          equalHeight();
+        });
+      });
+    };
+
+    // -----------------------------------
+    // INITIALIZE OWL
+    // -----------------------------------
+
+    slider.owlCarousel({
+      loop: true,
+      margin: 30,
+
+      autoplay: true,
+      autoplayHoverPause: true,
+      autoplayTimeout: 3000,
+
+      smartSpeed: 500,
+
+      dots: false,
+      nav: true,
+
+      navText: [
+        '<img src="/images/prev-arrow.svg" alt="Previous" />',
+        '<img src="/images/next-arrow.svg" alt="Next" />',
+      ],
+
+      responsive: {
+        0: {
+          items: 1,
+        },
+
+        460: {
+          items: 1,
+        },
+
+        768: {
+          items: 2,
+        },
+
+        900: {
+          items: 2,
+        },
+
+        1200: {
+          items: 2,
+        },
+      },
+    });
+
+    // -----------------------------------
+    // INITIAL HEIGHT
+    // -----------------------------------
+
+    setTimeout(() => {
+      if (mounted) {
+        updateEqualHeight();
+      }
+    }, 100);
+
+    // -----------------------------------
+    // OWL RESIZE EVENT
+    // -----------------------------------
+
+    slider.on("resized.owl.carousel.equalHeight", () => {
+      updateEqualHeight();
+    });
+
+    // -----------------------------------
+    // OWL REFRESH EVENT
+    // -----------------------------------
+
+    slider.on("refreshed.owl.carousel.equalHeight", () => {
+      updateEqualHeight();
+    });
+
+    // -----------------------------------
+    // WINDOW RESIZE
+    // -----------------------------------
+
+    $(window).on("resize.serviceSlider", () => {
+      clearTimeout(equalHeightTimer);
+
+      equalHeightTimer = setTimeout(() => {
+        if (mounted) {
+          updateEqualHeight();
+        }
+      }, 250);
+    });
+
+    // -----------------------------------
+    // FONTS READY
+    // -----------------------------------
+    // Useful if custom fonts change the
+    // H3/P wrapping after page load.
+    // -----------------------------------
+
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(() => {
+        if (mounted) {
+          updateEqualHeight();
+        }
+      });
+    }
+
+    // -----------------------------------
+    // WINDOW LOAD
+    // -----------------------------------
+    // Useful if images/content affect
+    // the final card dimensions.
+    // -----------------------------------
+
+    $(window).on("load.serviceSlider", () => {
+      updateEqualHeight();
+    });
+  };
+
+  initializeSlider();
+
+  // -----------------------------------
+  // CLEANUP
+  // -----------------------------------
+
+  return () => {
+    mounted = false;
+
+    clearTimeout(equalHeightTimer);
+
+    // Remove window events
+    $(window).off("resize.serviceSlider");
+    $(window).off("load.serviceSlider");
+
+    if (sliderRef.current) {
       const slider = $(sliderRef.current);
 
-      if (typeof $.fn.owlCarousel !== "function") {
-        console.error("Owl Carousel was not attached to jQuery");
-        return;
+      // Remove Owl events
+      slider.off(".equalHeight");
+
+      // Destroy Owl
+      if (slider.hasClass("owl-loaded")) {
+        slider.trigger("destroy.owl.carousel");
       }
-
-      // Initialize Owl Carousel
-      slider.owlCarousel({
-        loop: true,
-        margin: 30,
-        autoplay: true,
-        autoplayHoverPause: true,
-        autoplayTimeout: 3000,
-        smartSpeed: 500,
-        dots: false,
-        nav: true,
-        navText: [
-          '<img src="/images/prev-arrow.svg" alt="Previous" />',
-          '<img src="/images/next-arrow.svg" alt="Next" />'
-        ],
-
-        responsive: {
-          0: {
-            items: 1,
-          },
-          460: {
-            items: 1,
-          },
-          768: {
-            items: 1,      // was 2 — now cards are wider on tablets
-          },
-          900: {
-            items: 1.6,
-          },
-          1200: {
-            items: 1.7,       // consider items: 1.5 for a "peek" effect — see below
-          },
-        },
-      });
-
-      // Equal height function
-      const equalHeight = () => {
-        // Reset heights
-        slider.find(".item h3").css("height", "auto");
-        slider.find(".item p").css("height", "auto");
-        slider.find(".item .item-tags").css("height", "auto");
-
-        // Equal H3 height
-        let maxH3Height = 0;
-
-        slider.find(".item h3").each(function () {
-          const height = $(this).outerHeight();
-
-          if (height > maxH3Height) {
-            maxH3Height = height;
-          }
-        });
-
-        slider.find(".item h3").height(maxH3Height);
-
-        // Equal P height
-        let maxPHeight = 0;
-
-        slider.find(".item p").each(function () {
-          const height = $(this).outerHeight();
-
-          if (height > maxPHeight) {
-            maxPHeight = height;
-          }
-        });
-
-        slider.find(".item p").height(maxPHeight);
-
-        // Equal Tags height
-        let maxTagHeight = 0;
-
-        slider.find(".item .item-tags").each(function () {
-          const height = $(this).outerHeight();
-
-          if (height > maxTagHeight) {
-            maxTagHeight = height;
-          }
-        });
-
-        slider.find(".item .item-tags").height(maxTagHeight);
-      };
-
-      // Run after Owl initialization
-      setTimeout(() => {
-        if (mounted) {
-          equalHeight();
-        }
-      }, 100);
-
-      // Recalculate on resize
-      $(window).on("resize.serviceSlider", function () {
-        clearTimeout(resizeTimer);
-
-        resizeTimer = setTimeout(() => {
-          equalHeight();
-        }, 150);
-      });
-    };
-
-    initializeSlider();
-
-    // Cleanup
-    return () => {
-      mounted = false;
-
-      $(window).off("resize.serviceSlider");
-
-      clearTimeout(resizeTimer);
-
-      if (sliderRef.current) {
-        const slider = $(sliderRef.current);
-
-        if (slider.hasClass("owl-loaded")) {
-          slider.trigger("destroy.owl.carousel");
-        }
-      }
-    };
-  }, []);
+    }
+  };
+}, []);
 
   // Previous slide
   const prevSlide = () => {
