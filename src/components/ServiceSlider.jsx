@@ -113,13 +113,13 @@ const ServiceSlider = () => {
             items: 1,
           },
           768: {
-            items: 2,
+            items: 1,      // was 2 — now cards are wider on tablets
           },
           900: {
-            items: 2,
+            items: 1.6,
           },
           1200: {
-            items: 2,
+            items: 1.7,       // consider items: 1.5 for a "peek" effect — see below
           },
         },
       });

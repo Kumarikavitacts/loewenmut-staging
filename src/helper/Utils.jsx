@@ -170,7 +170,29 @@ export const insights = [
   },
 ];
 
-
+export const homePageInsights= [
+  {
+    id: 9,
+    title: "mine-ex",
+    description: "Mobile App - UI/UX Design",
+    image: "/images/mine-ex.png",
+    alt: "mine-ex",
+  },
+  {
+    id: 8,
+    title: "Martin & Co.",
+    description: "Dashboard - UI/UX Design",
+    image: "/images/martin-guitar.jpg",
+    alt: "Martin Guitar",
+  },
+  {
+    id: 7,
+    title: "tellme",
+    description: "Landingpage - UI/UX Design",
+    image: "/images/tellme.png",
+    alt: "Tellme",
+  },
+];
 
 
 

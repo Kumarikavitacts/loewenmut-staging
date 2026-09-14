@@ -1,4 +1,9 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 const ThemeContext = createContext(null);
 
@@ -18,23 +23,19 @@ export const ThemeProvider = ({ children }) => {
   });
 
   useEffect(() => {
+    // Save selected theme
     localStorage.setItem("selectedTheme", theme);
 
-    // Optional: useful if you also want to target the theme using CSS
+    // Update data-theme
     document.documentElement.setAttribute("data-theme", theme);
 
-    // Load the corresponding CSS file
-    const themeId = "themeStylesheet";
-    let themeLink = document.getElementById(themeId);
+    // Find theme stylesheet
+    const themeLink = document.getElementById("themeStylesheet");
 
-    if (!themeLink) {
-      themeLink = document.createElement("link");
-      themeLink.id = themeId;
-      themeLink.rel = "stylesheet";
-      document.head.appendChild(themeLink);
+    // Update stylesheet
+    if (themeLink) {
+      themeLink.href = `/styles/style_${theme}.css`;
     }
-
-    themeLink.href = `/styles/style_${theme}.css`;
   }, [theme]);
 
   return (

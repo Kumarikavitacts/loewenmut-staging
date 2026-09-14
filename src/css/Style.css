@@ -668,8 +668,8 @@ header {
         &:after {
             content: '';
             display: inline-block;
-            width: 50px;
-            height: 50px;
+            width: 95px;
+            height: 80px;
             background: url(/public/images/dot_yellow.png) no-repeat center;
             background-size: contain;
             margin-bottom: -11px;
@@ -971,27 +971,41 @@ header {
 }
 
 .insight_section {
-    .title_btn_flex {
+    .title_btn_flex{
         display: flex;
         justify-content: space-between;
-        align-items: flex-end;
+        align-items:end
     }
+    .insight_item {
+        cursor: pointer;
+        height: 505px;          
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
     .insight_img {
-        height: 300px;
+        height: 403px;           
         overflow: hidden;
         border-radius: var(--radius-30);
-        transition: .4s all;
+        transition: height .4s ease; 
+        flex-shrink: 0;
+
         img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
     }
+
     .insight_content_btn {
         padding: 15px;
         display: flex;
         justify-content: space-between;
         gap: 5px 10px;
+        flex: 1;                   
+        transition: .4s ease;
+
         h3 {
             font-weight: 500;
             margin-bottom: 0;
@@ -1010,10 +1024,12 @@ header {
             object-fit: contain;
         }
     }
+
     .insight_item:hover {
         .insight_img {
-            height: 250px;
+            height: 305px;           
         }
+
         .insight_content_btn {
             .arrow_btn svg path {
                 stroke: var(--bs-themecolor);
@@ -1021,7 +1037,6 @@ header {
         }
     }
 }
-
 .news_section {
     .news_item {
         display: block;
