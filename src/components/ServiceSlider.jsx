@@ -245,15 +245,15 @@ const ServiceSlider = () => {
         },
 
         768: {
-          items: 2,
+          items: 1.5,
         },
 
         900: {
-          items: 2,
+          items: 1.5,
         },
 
         1200: {
-          items: 2,
+          items: 1.5,
         },
       },
     });
