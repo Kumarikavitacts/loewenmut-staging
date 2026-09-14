@@ -1067,6 +1067,13 @@ header {
         h1 {
             span {
                 position: unset;
+                img {
+                    /* height: 10px; */
+                    width: auto;
+                    object-fit: contain;
+                    flex-shrink: 0;
+                    /* margin : 0 2px; */
+                }
             }
         }
         .hro_icon_1, .hro_icon_2 {

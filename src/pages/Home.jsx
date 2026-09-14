@@ -61,7 +61,7 @@ const Home = () => {
             <img src={assets.icon1} alt="" className="hro_icon_1" data-aos="zoom-in" />
             <img src={assets.icon2} alt="" className="hro_icon_2" data-aos="zoom-in" />
             <h1 className="text-center">
-              <span>Strategie - Design - Technologie</span>
+              <span className="d-flex gap-md-2">Strategie <img src="/images/status/Line.png" className="pl-2" /> Design <img src="/images/status/Line.png" /> Technologie</span>
               <div className="line" data-text="Digitale Lösungen">.Digitale Lösungen.</div>
               <div className="line line-2" data-text="Mit Loewenmut">Mit Loewenmut</div>
             </h1>
@@ -160,12 +160,13 @@ const Home = () => {
                   <h3 className="fw-regular my-3">Digitaler Gesamtauftritt für eine innovative Baugenossenschaft.</h3>
                   <p>Wir durften die BG Zurlinden bei der digitalen Transformation begleiten. Mit Strategie, Design, Technologie und Content aus einer Hand.</p>
                   <ul>
-                    <li>Website-Relaunch</li>
-                    <li>Support</li>
-                    <li>Content-Struktur</li>
-                    <li>Projektkommunikation</li>
-                    <li>SEO</li>
-                  </ul>
+  {["Website-Relaunch", "Support", "Content-Struktur", "Projektkommunikation", "SEO"].map((item) => (
+    <li key={item}>
+  
+      {item}
+    </li>
+  ))}
+</ul>
                   <div className="theme_btn_wrap mt-4">
                     <Link to={`/insights/9`} className="button theme_btn"> Case ansehen <img src="/images/btn-arrow.svg" alt="" /></Link>
                   </div>
@@ -196,17 +197,17 @@ const Home = () => {
 
             {homePageInsights.map((insight) => (
               <div
-              className="col-12 col-sm-6 col-lg-4 item-col mt-4"
-              key={insight.id}
-            >
-        
-         
-        
+                className="col-12 col-sm-6 col-lg-4 item-col mt-4"
+                key={insight.id}
+              >
+
+
+
                 <div
-                  onClick={()=>navigate(`/insights/${insight.id}`)}
+                  onClick={() => navigate(`/insights/${insight.id}`)}
                   className="insight_item"
                 >
-        
+
                   {/* ONLY THIS CHANGES HEIGHT */}
                   <div className="insight_img">
                     <img
@@ -214,15 +215,15 @@ const Home = () => {
                       alt={insight.alt}
                     />
                   </div>
-        
+
                   {/* THIS MOVES WITH IMAGE */}
                   <div className="insight_content_btn">
-        
+
                     <div className="insight_content">
                       <h3>{insight.title}</h3>
                       <p>{insight.description}</p>
                     </div>
-        
+
                     <div className="arrow_btn">
                       <svg
                         width="62"
@@ -239,7 +240,7 @@ const Home = () => {
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         />
-        
+
                         <path
                           d="M12.0547 49.1094L45.4732 15.6908"
                           stroke="#878C91"
@@ -250,13 +251,13 @@ const Home = () => {
                         />
                       </svg>
                     </div>
-        
+
                   </div>
-        
+
                 </div>
-        
-        
-            </div>
+
+
+              </div>
             ))}
 
 

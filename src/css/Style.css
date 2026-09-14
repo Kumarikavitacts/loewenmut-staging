@@ -35,6 +35,7 @@
     --bs-textdarkgrey: #373737;
     --bs-textlightgrey: #999999;
     --bs-themesvg: #222633;
+    --bs-lightgrey3:#E6E6E6;
     --bs-lineheight: 1.15;
     --bs-fs100: 120px;
     --bs-fs80: 70px;
@@ -607,7 +608,7 @@ header {
 }
 .hero_section {
     hr {
-        border-color: #E6E6E6;
+        border-color: var(--bs-lightgrey3);
     }
     .hero_row {
         position: relative;
@@ -639,6 +640,7 @@ header {
         z-index: 1;
         span {
             font-size: var(--bs-fs20);
+            
             color: #878C91;
             font-weight: 400;
             position: absolute;
@@ -646,6 +648,13 @@ header {
             top: 0;
             text-transform: uppercase;
             z-index: 1;
+            img {
+                /* height: 10px; */
+                width: auto;
+                object-fit: contain;
+                flex-shrink: 0;
+                margin : 0 2px;
+            }
         }
     }
     .line {
@@ -766,6 +775,10 @@ header {
     }
 }
 .feature_section {
+    hr{
+        border-color: 1px  var(--bs-lightgrey3);
+
+    }
     .feature_row {
         .feature-col {
             svg {
@@ -786,7 +799,7 @@ header {
             }
         }
         .feature-col:not(:first-child) {
-            border-left: 1px solid #E6E6E6;
+            border-left: 1px solid var(--bs-lightgrey3);
         }
         .feature-col:hover {
             svg {
@@ -945,7 +958,7 @@ header {
         line-height: 1.5;
         list-style: none;
         &::before {
-            content: "✓";
+            content: "";
             position: absolute;
             left: 0;
             top: 2px;
@@ -954,7 +967,11 @@ header {
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--bs-themecolor);
+            background-color: var(--bs-themecolor);
+            background-image: url(../images/tick-icon.svg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 15px;
             border-radius: 50%;
             font-size: 15px;
             font-weight: 700;
