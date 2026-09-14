@@ -73,6 +73,7 @@
             li.nav-item {
                 .nav-link {
                     padding: .25rem 1rem !important;
+                    color: var(--bs-textdarkgrey);
                     &:before {
                         top: 50%;
                     }
@@ -122,8 +123,11 @@
         }
     }
     .insight_section {
+        .insight_item {
+            height: 470px;
+        }
         .insight_img {
-            height: 400px;
+            height: 360px;
         }
         .insight_item:hover {
             .insight_img {
@@ -662,6 +666,9 @@ header {
             display: none;
         }
     }
+    .insight_item {
+        height: auto;
+    }
 }
 .service-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -838,8 +845,13 @@ header {
 @media (max-width: 767px) {
     .insight_section {
         .insight_img {
-            height: 200px;
+            height: 270px;
             border-radius: 20px;
+        }
+        .insight_item:hover {
+            .insight_img {
+                height: 230px;
+            }
         }
         .insight_content_btn {
             .arrow_btn svg {
@@ -1067,9 +1079,11 @@ header {
         h1 {
             span {
                 position: unset;
+                font-size: 14px;
+                justify-content: center;
                 img {
                     /* height: 10px; */
-                    width: auto;
+                    width: 13px;
                     object-fit: contain;
                     flex-shrink: 0;
                     /* margin : 0 2px; */
@@ -1235,7 +1249,7 @@ footer {
     .hero_section {
         .hero_row {
             .hro_icon_1, .hro_icon_2 {
-                top: -2rem;
+                top: -3rem;
             }
         }
     }

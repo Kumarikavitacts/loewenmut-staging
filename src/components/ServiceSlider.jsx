@@ -96,8 +96,8 @@ const ServiceSlider = () => {
         margin: 30,
         autoplay: true,
         autoplayHoverPause: true,
-        autoplayTimeout: 5000,
-        smartSpeed: 400,
+        autoplayTimeout: 3000,
+        smartSpeed: 500,
         dots: false,
         nav: true,
         navText: [

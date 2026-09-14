@@ -53,7 +53,7 @@ header {
 .project_section {
     ul li {
         &::before {
-            color: var(--bs-white) !important;
+            background-image: url(../images/tick-icon-white.svg);
         }
     }
 }

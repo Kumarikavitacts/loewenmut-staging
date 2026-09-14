@@ -885,6 +885,10 @@ header {
         height: 55px;
         border-radius: 50%;
         border: none;
+        img {
+            position: relative;
+            top: -1px;
+        }
         &.btn-previous {
             margin-right: 10px;
             background-color: #F4F4F4;
@@ -971,11 +975,8 @@ header {
             background-image: url(../images/tick-icon.svg);
             background-repeat: no-repeat;
             background-position: center;
-            background-size: 15px;
+            background-size: 12px;
             border-radius: 50%;
-            font-size: 15px;
-            font-weight: 700;
-            color: #000;
         }
     }
     
@@ -995,14 +996,14 @@ header {
     }
     .insight_item {
         cursor: pointer;
-        height: 505px;          
+        height: 400px;          
         display: flex;
         flex-direction: column;
         overflow: hidden;
     }
 
     .insight_img {
-        height: 403px;           
+        height: 300px;           
         overflow: hidden;
         border-radius: var(--radius-30);
         transition: height .4s ease; 
@@ -1044,7 +1045,7 @@ header {
 
     .insight_item:hover {
         .insight_img {
-            height: 305px;           
+            height: 230px;           
         }
 
         .insight_content_btn {
