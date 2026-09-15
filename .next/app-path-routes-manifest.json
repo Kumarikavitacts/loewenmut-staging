@@ -1,0 +1,17 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/agentur/page": "/agentur",
+  "/datenschtuz/page": "/datenschtuz",
+  "/impressum/page": "/impressum",
+  "/insights/[id]/page": "/insights/[id]",
+  "/insights/page": "/insights",
+  "/kontakt/page": "/kontakt",
+  "/leistungen/[id]/page": "/leistungen/[id]",
+  "/leistungen/page": "/leistungen",
+  "/news/[id]/page": "/news/[id]",
+  "/news/page": "/news",
+  "/page": "/",
+  "/team/page": "/team",
+  "/vielen-dank/page": "/vielen-dank"
+}
