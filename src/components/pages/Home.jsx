@@ -19,7 +19,34 @@ import {
 
 import { fetchHomeData } from "@/register/slices/homeSlice";
 
+import HeroSkeleton from "@/components/Skeleton/HeroSkeleton";
+import ServicesSkeleton from "@/components/Skeleton/ServicesSkeleton";
+import ProjectSkeleton from "@/components/Skeleton/ProjectSkeleton";
+import CardGridSkeleton from "@/components/Skeleton/CardGridSkeleton";
+import TalkSkeleton from "@/components/Skeleton/TalkSkeleton";
+import StatusHeader from "@/components/ResuableComponents/StatusHeader";
+
 const DEFAULT_THEME = "yellow";
+
+/*
+ * One skeleton per home section, matching each section's real
+ * layout so the page doesn't "jump" once the API call resolves.
+ * "work" has no API data of its own (it's a static search /
+ * timezone widget), so it keeps the lightweight fallback.
+ */
+const HOME_SECTION_SKELETONS = {
+  hero: () => <HeroSkeleton />,
+  services: () => <ServicesSkeleton />,
+  project: () => <ProjectSkeleton />,
+  insights: () => (
+    <CardGridSkeleton sectionClassName="pt_pb_3 insight_section" />
+  ),
+  work: () => <SectionFallback />,
+  news: () => (
+    <CardGridSkeleton sectionClassName="pt_pb_3 news_section" />
+  ),
+  talk: () => <TalkSkeleton />,
+};
 
 const themeAssets = {
   yellow: {
@@ -158,6 +185,11 @@ const Home = () => {
 
   /*
    * Loading state.
+   *
+   * Instead of a single spinner for the whole page, render a
+   * skeleton for every section in the real section order, so the
+   * page already "looks like itself" while the API call is in
+   * flight and there's no layout jump once it resolves.
    */
   if (
     status === "loading" ||
@@ -167,8 +199,23 @@ const Home = () => {
       <main
         className={`home-page theme-${theme}`}
         data-theme={theme}
+        aria-busy="true"
+        aria-label="Seite wird geladen"
       >
-        <SectionFallback />
+        {sectionOrder.map((key) => {
+          const SectionSkeletonComponent =
+            HOME_SECTION_SKELETONS[key];
+
+          if (!SectionSkeletonComponent) {
+            return null;
+          }
+
+          return (
+            <React.Fragment key={key}>
+              {SectionSkeletonComponent()}
+            </React.Fragment>
+          );
+        })}
       </main>
     );
   }
@@ -178,19 +225,17 @@ const Home = () => {
    */
   if (status === "failed") {
     return (
-      <main
-        className={`home-page theme-${theme}`}
-        data-theme={theme}
-      >
-        <p
-          style={{
-            padding: "3rem",
-            textAlign: "center",
-          }}
-        >
-          Die Seite konnte nicht geladen werden.
-        </p>
-      </main>
+      <StatusHeader
+      statusType="wrong"
+      title={
+        <>
+          Diese Seite konnte leider <br />
+          nicht gefunden werden
+        </>
+      }
+      buttonText="Zurück zur Startseite"
+      buttonLink="/"
+    />
     );
   }
 
@@ -222,10 +267,19 @@ const Home = () => {
         const extraProps =
           sectionProps[key] || {};
 
+        const SectionSkeletonComponent =
+          HOME_SECTION_SKELETONS[key];
+
         return (
           <Suspense
             key={key}
-            fallback={<SectionFallback />}
+            fallback={
+              SectionSkeletonComponent ? (
+                SectionSkeletonComponent()
+              ) : (
+                <SectionFallback />
+              )
+            }
           >
             <SectionComponent
               {...extraProps}

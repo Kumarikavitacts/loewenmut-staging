@@ -1,13 +1,20 @@
 import React from "react";
 
 export const renderHtmlText = (html) => {
-  if (!html) return null;
+  if (html === null || html === undefined || html === "") {
+    return null;
+  }
+
+  // If React element / Fragment / number etc.
+  // return it directly instead of passing it to DOMParser.
+  if (typeof html !== "string") {
+    return html;
+  }
 
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, "text/html");
 
   const convertTextNode = (text, key) => {
-    // Convert literal "\n" into actual line breaks
     const parts = text.split(/\r?\n/);
 
     return parts.map((part, index) => (
@@ -22,10 +29,7 @@ export const renderHtmlText = (html) => {
   const convertNode = (node, index) => {
     // Text node
     if (node.nodeType === Node.TEXT_NODE) {
-      return convertTextNode(
-        node.textContent,
-        index
-      );
+      return convertTextNode(node.textContent, index);
     }
 
     // Ignore comments / unsupported node types
@@ -35,22 +39,13 @@ export const renderHtmlText = (html) => {
 
     const children = Array.from(node.childNodes).map(
       (child, childIndex) =>
-        convertNode(
-          child,
-          `${index}-${childIndex}`
-        )
+        convertNode(child, `${index}-${childIndex}`)
     );
 
     switch (node.tagName.toLowerCase()) {
-      // Paragraph
       case "p":
-        return (
-          <p key={index}>
-            {children}
-          </p>
-        );
+        return <p key={index}>{children}</p>;
 
-      // Headings
       case "h1":
         return <h1 key={index}>{children}</h1>;
 
@@ -69,102 +64,49 @@ export const renderHtmlText = (html) => {
       case "h6":
         return <h6 key={index}>{children}</h6>;
 
-      // Span
       case "span":
-        return (
-          <span key={index}>
-            {children}
-          </span>
-        );
+        return <span key={index}>{children}</span>;
 
-      // Bold
       case "strong":
       case "b":
-        return (
-          <strong key={index}>
-            {children}
-          </strong>
-        );
+        return <strong key={index}>{children}</strong>;
 
-      // Italic
       case "em":
       case "i":
-        return (
-          <em key={index}>
-            {children}
-          </em>
-        );
+        return <em key={index}>{children}</em>;
 
-      // Underline
       case "u":
-        return (
-          <u key={index}>
-            {children}
-          </u>
-        );
+        return <u key={index}>{children}</u>;
 
-      // Strikethrough
       case "s":
       case "del":
       case "strike":
-        return (
-          <del key={index}>
-            {children}
-          </del>
-        );
+        return <del key={index}>{children}</del>;
 
-      // Highlight
       case "mark":
-        return (
-          <mark key={index}>
-            {children}
-          </mark>
-        );
+        return <mark key={index}>{children}</mark>;
 
-      // Small text
       case "small":
-        return (
-          <small key={index}>
-            {children}
-          </small>
-        );
+        return <small key={index}>{children}</small>;
 
-      // Subscript
       case "sub":
-        return (
-          <sub key={index}>
-            {children}
-          </sub>
-        );
+        return <sub key={index}>{children}</sub>;
 
-      // Superscript
       case "sup":
-        return (
-          <sup key={index}>
-            {children}
-          </sup>
-        );
+        return <sup key={index}>{children}</sup>;
 
-      // Line break
       case "br":
         return <br key={index} />;
 
-      // Horizontal line
       case "hr":
         return <hr key={index} />;
 
-      // Links
       case "a":
         return (
           <a
             key={index}
-            href={
-              node.getAttribute("href") || "#"
-            }
-            target={
-              node.getAttribute("target") ||
-              undefined
-            }
+            href={node.getAttribute("href") || "#"}
+            target={node.getAttribute("target") || undefined}
             rel={
               node.getAttribute("target") === "_blank"
                 ? "noopener noreferrer"
@@ -175,79 +117,33 @@ export const renderHtmlText = (html) => {
           </a>
         );
 
-      // Unordered list
       case "ul":
-        return (
-          <ul key={index}>
-            {children}
-          </ul>
-        );
+        return <ul key={index}>{children}</ul>;
 
-      // Ordered list
       case "ol":
-        return (
-          <ol key={index}>
-            {children}
-          </ol>
-        );
+        return <ol key={index}>{children}</ol>;
 
-      // List item
       case "li":
-        return (
-          <li key={index}>
-            {children}
-          </li>
-        );
+        return <li key={index}>{children}</li>;
 
-      // Blockquote
       case "blockquote":
-        return (
-          <blockquote key={index}>
-            {children}
-          </blockquote>
-        );
+        return <blockquote key={index}>{children}</blockquote>;
 
-      // Code
       case "code":
-        return (
-          <code key={index}>
-            {children}
-          </code>
-        );
+        return <code key={index}>{children}</code>;
 
-      // Preformatted code
       case "pre":
-        return (
-          <pre key={index}>
-            {children}
-          </pre>
-        );
+        return <pre key={index}>{children}</pre>;
 
-      // Generic div
       case "div":
-        return (
-          <div key={index}>
-            {children}
-          </div>
-        );
+        return <div key={index}>{children}</div>;
 
-      // Section
       case "section":
-        return (
-          <section key={index}>
-            {children}
-          </section>
-        );
+        return <section key={index}>{children}</section>;
 
-      // Article
       case "article":
-        return (
-          <article key={index}>
-            {children}
-          </article>
-        );
+        return <article key={index}>{children}</article>;
 
-      // Unknown HTML tags
       default:
         return (
           <React.Fragment key={index}>
@@ -258,7 +154,6 @@ export const renderHtmlText = (html) => {
   };
 
   return Array.from(doc.body.childNodes).map(
-    (node, index) =>
-      convertNode(node, index)
+    (node, index) => convertNode(node, index)
   );
 };

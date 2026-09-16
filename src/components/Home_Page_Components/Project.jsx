@@ -1,4 +1,3 @@
-
 "use client";
 
 import React from "react";
@@ -15,18 +14,84 @@ const Project = () => {
     return null;
   }
 
+
+
   const kurztitel = projectData?.Kurztitel || "";
   const titel = projectData?.Titel || "";
 
-  const bild = projectData?.Bild?.[0];
+  /*
+   * ----------------------------------------
+   * IMAGE
+   * ----------------------------------------
+   */
 
-  const imageUrl = getMediaUrl(bild?.url) || "/images/ortweise.png";
+  const image = projectData?.Bild?.[0];
+
+  const imageFile =
+    image?.url || image;
+
+  const imageUrl =imageFile
+    ? getMediaUrl(imageFile)
+    : "";
+
+  /*
+   * ----------------------------------------
+   * VIDEO
+   * ----------------------------------------
+   *
+   * Video is an OBJECT in your API,
+   * not an array.
+   */
+
+  const video = projectData?.Video;
+
+  const videoUrl = video?.url
+    ? getMediaUrl(video.url)
+    : "";
+
+  /*
+   * ----------------------------------------
+   * VIDEO THUMBNAIL
+   * ----------------------------------------
+   */
+
+  const videoThumbnail = projectData?.Videominiatur;
+
+  const videoThumbnailFile =
+    videoThumbnail?.url ||
+    videoThumbnail;
+
+  const videoThumbnailUrl = videoThumbnailFile
+    ? getMediaUrl(videoThumbnailFile)
+    : "";
+
+  /*
+   * ----------------------------------------
+   * MEDIA TYPE
+   * ----------------------------------------
+   */
+
+  const mediaType = projectData?.Bild_oder_Video;
+
+
+
+  /*
+   * ----------------------------------------
+   * OTHER DATA
+   * ----------------------------------------
+   */
 
   const beschreibung = projectData?.Beschreibung || [];
 
-  const showButton = projectData?.Komponente === "Button";
-  const buttonText = projectData?.Button[0].button_text;
-  const buttonLink =projectData?.Button[0].button_link
+  const showButton =
+    projectData?.Komponente === "Button";
+
+  const buttonText =
+    projectData?.Button?.[0]?.button_text || "";
+
+  const buttonLink =
+    projectData?.Button?.[0]?.button_link || "#";
+
   /**
    * Get text from Strapi rich-text children
    */
@@ -49,12 +114,19 @@ const Project = () => {
       case "heading": {
         const level = block.level || 3;
 
-        const HeadingTag = `h${Math.min(Math.max(level, 1), 6)}`;
+        const HeadingTag = `h${Math.min(
+          Math.max(level, 1),
+          6
+        )}`;
 
         return (
           <HeadingTag
             key={index}
-            className={level === 3 ? "fw-regular my-3" : ""}
+            className={
+              level === 3
+                ? "fw-regular my-3"
+                : ""
+            }
           >
             {getText(block.children)}
           </HeadingTag>
@@ -72,19 +144,25 @@ const Project = () => {
         );
 
       /*
-       * UNORDERED / ORDERED LIST
+       * LIST
        */
       case "list": {
         const ListTag =
-          block.format === "ordered" ? "ol" : "ul";
+          block.format === "ordered"
+            ? "ol"
+            : "ul";
 
         return (
           <ListTag key={index}>
-            {block.children?.map((listItem, itemIndex) => (
-              <li key={itemIndex}>
-                {getText(listItem?.children)}
-              </li>
-            ))}
+            {block.children?.map(
+              (listItem, itemIndex) => (
+                <li key={itemIndex}>
+                  {getText(
+                    listItem?.children
+                  )}
+                </li>
+              )
+            )}
           </ListTag>
         );
       }
@@ -125,10 +203,7 @@ const Project = () => {
         );
 
       /*
-       * Default
-       *
-       * If Strapi adds another block type that we haven't
-       * explicitly handled, still try to render its text.
+       * DEFAULT
        */
       default:
         return (
@@ -148,17 +223,53 @@ const Project = () => {
         >
           <div className="row flex-lg-row-reverse">
 
-            {/* IMAGE */}
+            {/* MEDIA */}
             <div className="col-12 col-lg-6 ms-auto img-col">
-              <img
-                src={imageUrl}
-                alt={
-                  bild?.alternativeText ||
-                  titel ||
-                  "Project"
-                }
-                className="w-100 img_radius"
-              />
+
+              {/* =========================
+                  IMAGE
+                  ========================= */}
+              {mediaType === "Bild" &&
+                imageUrl && (
+                  <img
+                    src={imageUrl}
+                    alt={
+                      image?.alternativeText ||
+                      titel ||
+                      "Project"
+                    }
+                    className="w-100 img_radius"
+                  />
+                )}
+
+              {/* =========================
+                  VIDEO
+                  ========================= */}
+              {mediaType === "Video" &&
+                videoUrl && (
+                  <video
+                    className="w-100 img_radius"
+                    controls
+                    playsInline
+                    preload="metadata"
+                    poster={
+                      videoThumbnailUrl ||
+                      undefined
+                    }
+                  >
+                    <source
+                      src={videoUrl}
+                      type={
+                        video?.mime ||
+                        "video/mp4"
+                      }
+                    />
+
+                    Your browser does not
+                    support the video tag.
+                  </video>
+                )}
+
             </div>
 
             {/* CONTENT */}
@@ -174,10 +285,12 @@ const Project = () => {
 
                 {/* TITLE */}
                 {titel && (
-                  <h2>{renderHtmlText(titel)}</h2>
+                  <h2>
+                    {renderHtmlText(titel)}
+                  </h2>
                 )}
 
-                {/* DYNAMIC DESCRIPTION */}
+                {/* DESCRIPTION */}
                 {beschreibung.map(
                   renderDescriptionBlock
                 )}
@@ -186,7 +299,7 @@ const Project = () => {
                 {showButton && (
                   <div className="theme_btn_wrap mt-4">
                     <Link
-                      href={`${buttonLink}`}
+                      href={buttonLink}
                       className="button theme_btn"
                     >
                       {buttonText}
@@ -198,6 +311,7 @@ const Project = () => {
                     </Link>
                   </div>
                 )}
+
               </div>
             </div>
           </div>

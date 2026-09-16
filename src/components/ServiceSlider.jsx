@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
@@ -6,6 +5,7 @@ import $ from "jquery";
 import { useRouter } from "next/navigation";
 import { homepageApiStructure } from "@/Apis/HomePage/apis";
 import AOS from "aos";
+import { ServiceCardsSkeleton } from "@/components/Skeleton/ServicesSkeleton";
 
 const ServiceSlider = ({ paragraph }) => {
   const sliderRef = useRef(null);
@@ -241,7 +241,7 @@ const ServiceSlider = ({ paragraph }) => {
       {/* Slider */}
       <div className="col-12 col-lg-7 ms-auto slider-col mt-4">
         <div className="service-slider">
-          {loading && <p>Wird geladen...</p>}
+          {loading && <ServiceCardsSkeleton count={3} />}
 
           {error && (
             <p>
@@ -263,7 +263,7 @@ const ServiceSlider = ({ paragraph }) => {
                 ref={sliderRef}
                 className="owl-carousel owl-theme service-owl-carousel"
               >
-                {services.map((service, index) => (
+                {services.slice(0,4).map((service, index) => (
                   <div
                     className="item"
                     key={service.id}
@@ -305,4 +305,3 @@ const ServiceSlider = ({ paragraph }) => {
 };
 
 export default ServiceSlider;
-

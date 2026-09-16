@@ -2,81 +2,116 @@
 
 import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { getMediaUrl } from "@/helper/MediaUrl";
+import { renderHtmlText } from "@/components/ResuableComponents/renderHtmlText";
 
 const NewsCard = ({
   newsData = [],
   showHeader = false,
-  subTitle = "Related news",
-  heading = (
-    <>
-      Nibh vel velit <span>Auctor Aliquet</span>
-    </>
-  ),
-  showFooter  = false,
+  subTitle,
+  heading,
+  showFooter = false,
   button,
-  buttonLink
+  buttonLink,
 }) => {
-
   return (
-      <div className="container">
+    <div className="container">
 
-        {/* Section Header */}
-        {showHeader && (
-          <div className="sec-content" data-aos="fade-right">
+      {/* Section Header */}
+      {showHeader && (
+        <div
+          className="sec-content"
+          data-aos="fade-right"
+        >
+          {subTitle && (
             <div className="sub_title">
-              {subTitle}
+              {renderHtmlText(subTitle)}
             </div>
+          )}
 
+          {heading && (
             <h2>
-              {heading}
+              {renderHtmlText(heading)}
             </h2>
-          </div>
-        )}
+          )}
+        </div>
+      )}
 
-        {/* News Cards */}
-        <div className="row" data-aos="slide-up">
-          {newsData.map((news) => (
+      {/* News Cards */}
+      <div
+        className="row"
+        data-aos="slide-up"
+      >
+        {newsData.map((news) => {
+          const imageUrl = news?.image
+            ? getMediaUrl(news.image)
+            : "";
+
+          return (
             <div
               className="col-12 col-sm-6 col-lg-4 item-col mt-4"
               key={news.id}
             >
               <Link
-                href={`/news/${news.id}`|| "/"}
+                href={
+                  news?.slug
+                    ? `/news/${news.slug}`
+                    : "/news"
+                }
                 className="news_item grey_bg"
               >
                 <div className="news_img position-relative">
 
-                  <span
-                    className={`news_tag ${news.categoryClass}`}
-                  >
-                    {news.category}
-                  </span>
+                  {/* Category */}
+                  {news?.category && (
+                    <span
+                      className={`news_tag ${
+                        news.categoryClass || ""
+                      }`}
+                    >
+                      {news.category}
+                    </span>
+                  )}
 
-                  <img
-                    src={news.image}
-                    alt={news.title}
-                    className="w-100"
-                  />
+                  {/* Image */}
+                  {imageUrl && (
+                    <img
+                      src={imageUrl}
+                      alt={
+                        news?.alternativeText ||
+                        news?.title ||
+                        "News"
+                      }
+                      className="w-100"
+                    />
+                  )}
 
                 </div>
 
                 <div className="news_content">
 
-                  <div className="news_date">
-                    {news.date}
-                  </div>
+                  {/* Date */}
+                  {news?.date && (
+                    <div className="news_date">
+                      {news.date}
+                    </div>
+                  )}
 
+                  {/* Title */}
                   <h3>
-                    {news.title}
+                    {news?.title}
                   </h3>
 
-                  <p>
-                    {news.description}
-                  </p>
+                  {/* Description */}
+                  {news?.description && (
+                    <p>
+                      {news.description}
+                    </p>
+                  )}
 
                   <hr />
 
+                  {/* Read More */}
                   <div className="arrow_btn">
                     <span>
                       Weiterlesen
@@ -107,27 +142,28 @@ const NewsCard = ({
                 </div>
               </Link>
             </div>
-          ))}
-        </div>
-
-        {/* All News Button */}
-        {showFooter && newsData?.length > 5  && (
-          <div className="theme_btn_wrap d-flex justify-content-center mt-4">
-            <Link
-              href={buttonLink}
-              className="button theme_btn"
-            >
-           {button}
-
-              <img
-                src="/images/btn-arrow.svg"
-                alt="Arrow"
-              />
-            </Link>
-          </div>
-        )}
-
+          );
+        })}
       </div>
+
+      {/* All News Button */}
+      {showFooter && newsData?.length > 3 && (
+        <div className="theme_btn_wrap d-flex justify-content-center mt-4">
+          <Link
+            href={buttonLink || "/news"}
+            className="button theme_btn"
+          >
+            {button || "Alle News"}
+
+            <img
+              src="/images/btn-arrow.svg"
+              alt="Arrow"
+            />
+          </Link>
+        </div>
+      )}
+
+    </div>
   );
 };
 

@@ -1,11 +1,5 @@
-// Splits the Strapi "Modul" dynamic zone (an ordered array of differently
-// shaped components) into named slots your section components can consume
-// directly as props. Position-based, not just type-based, because your CMS
-// reuses "modules.kurztitel-titel-text-button" twice for two different
-// purposes (Services intro text vs. Insights heading) — the 1st occurrence
-// is always Services, the 2nd is always Insights, matching how the modules
-// were authored in the Strapi dynamic zone.
-// Lives at: src/helper/homepageParser.js
+// src/helper/homepageParser.js
+
 export const Homepageparser = (apiData) => {
   if (!apiData) return null;
 
@@ -15,58 +9,190 @@ export const Homepageparser = (apiData) => {
   let servicesIntro = null;
   let project = null;
   let insightsIntro = null;
-  let kurztitelSeen = 0; // tracks which occurrence of the reused component we're on
   let references = null;
   let workMobile = null;
+  let news = null;
+
+  let kurztitelSeen = 0;
+  let bildReTextSeen = 0;
+
   modules.forEach((mod) => {
     switch (mod.__component) {
+      /*
+       * ----------------------------------------
+       * BENEFITS
+       * ----------------------------------------
+       */
       case "modules.benefits":
         benefits = mod.Benefits_Data || [];
         break;
 
+      /*
+       * ----------------------------------------
+       * KURZTITEL / TITEL / TEXT
+       * ----------------------------------------
+       *
+       * This component is reused twice:
+       * 1st = services intro
+       * 2nd = insights intro
+       */
       case "modules.kurztitel-titel-text-button":
         kurztitelSeen += 1;
+
         if (kurztitelSeen === 1) {
           servicesIntro = mod;
-        } else {
+        } else if (kurztitelSeen === 2) {
           insightsIntro = mod;
         }
+
         break;
 
+      /*
+       * ----------------------------------------
+       * BILD / VIDEO
+       * ----------------------------------------
+       *
+       * This component is also reused:
+       * 1st = Project
+       * 2nd = CTA
+       */
       case "modules.bild-re-text":
-        project = mod;
+        bildReTextSeen += 1;
+
+        if (bildReTextSeen === 1) {
+          project = mod;
+        }
+
+        // Don't overwrite project with the second one.
         break;
 
+      /*
+       * ----------------------------------------
+       * REFERENCES
+       * ----------------------------------------
+       */
       case "modules.references":
         references = mod;
         break;
+
+      /*
+       * ----------------------------------------
+       * WORK / PROCESS
+       * ----------------------------------------
+       */
       case "modules.arbeiten":
         workMobile = mod;
         break;
 
+      /*
+       * ----------------------------------------
+       * NEWS
+       * ----------------------------------------
+       */
+      case "modules.news":
+        news = mod;
+        break;
 
       default:
         break;
     }
   });
 
+  /*
+   * ----------------------------------------
+   * NORMALIZE NEWS DATA
+   * ----------------------------------------
+   */
+
+  const normalizedNews = (news?.news || []).map((item) => {
+    const image =
+      item?.Bild?.formats?.small ||
+      item?.Bild?.formats?.thumbnail ||
+      item?.Bild;
+
+    return {
+      id: item?.id,
+      documentId: item?.documentId,
+
+      title: item?.Titel || "",
+
+      description: item?.Text || "",
+
+      date: item?.Publikation || "",
+
+      slug: item?.slug || "",
+
+      image: image?.url || "",
+
+      alternativeText:
+        item?.Bild?.alternativeText ||
+        item?.Titel ||
+        "News",
+
+      // Your current API doesn't contain category.
+      category: item?.category || "",
+
+      categoryClass: item?.categoryClass || "",
+    };
+  });
+
   return {
+    /*
+     * HERO
+     */
     hero: {
       untertitel: apiData.Untertitel,
       titel1: apiData.Titel_1,
       titel2: apiData.Titel_2,
       beschreibung: apiData.Beschreibung,
       benefits: benefits || [],
+      kontaktbereich: apiData.Kontaktbereich || null,
+
     },
+
+    /*
+     * SERVICES
+     */
     servicesIntro,
+
+    /*
+     * PROJECT
+     */
     project,
+
+    /*
+     * INSIGHTS
+     */
     insightsIntro,
+
+    /*
+     * REFERENCES
+     */
     references: references || {
       id: null,
       Kurztitel: "",
       Titel: "",
       referenzens: [],
     },
+
+    /*
+     * WORK
+     */
     workMobile,
+
+    /*
+     * NEWS
+     */
+    news: {
+      id: news?.id || null,
+
+      Kurztitel: news?.Kurztitel || "",
+
+      Titel: news?.Titel || "",
+
+      Button: news?.Button || [],
+
+      news: normalizedNews,
+    },
   };
 };

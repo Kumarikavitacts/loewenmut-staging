@@ -2593,3 +2593,77 @@ footer {
 .cursorPointer:hover{
     cursor: pointer;
 }
+  /* ---- extra skeleton primitives (home / section skeletons) ---- */
+ .skeleton-circle {
+    border-radius: 50%;
+  }
+
+  .skeleton-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+  }
+
+  .skeleton-badge {
+    width: 90px;
+    height: 14px;
+    margin-bottom: 14px;
+  }
+
+  .skeleton-btn-round {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+  }
+
+  .skeleton-tag {
+    width: 60px;
+    height: 22px;
+    border-radius: 20px;
+    display: inline-block;
+    margin: 0 8px 0 0;
+  }
+
+  .skeleton-section-header .skeleton-small {
+    margin-bottom: 14px;
+  }
+
+  .skeleton-section-header .skeleton-title {
+    width: 55%;
+    height: 42px;
+    margin-bottom: 0;
+  }
+
+  /* card used inside grid / slider skeletons */
+  .skeleton-card {
+    padding: 24px;
+    border-radius: 16px;
+    background: rgba(0, 0, 0, 0.03);
+  }
+
+  .skeleton-card .skeleton-small {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    margin-bottom: 18px;
+  }
+
+  .skeleton-card .skeleton-title {
+    width: 90%;
+    height: 22px;
+    margin-bottom: 14px;
+  }
+
+  /* fade the whole skeleton in/out smoothly instead of an abrupt swap */
+  .skeleton-fade-in {
+    animation: skeleton-fade-in 0.25s ease-out;
+  }
+
+  @keyframes skeleton-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }

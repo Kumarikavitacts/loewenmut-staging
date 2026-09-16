@@ -4,20 +4,18 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTheme } from "@/context/ThemeContext";
+import { renderHtmlText } from "@/components/ResuableComponents/renderHtmlText";
+import { useSelector } from "react-redux";
 
 const DEFAULT_THEME = "yellow";
 
-const TalkSection = ({
-  img,
-  title,
-  heading,
-  description,
-}) => {
+const TalkSection = ({talkData}) => {
+
   const router = useRouter();
+
 
   const themeContext = useTheme();
   const theme = themeContext?.theme || DEFAULT_THEME;
-
   const themeImages = {
     yellow: "/images/image-loewenmut-yellow.png",
     blue: "/images/image-loewenmut-blue.png",
@@ -26,20 +24,43 @@ const TalkSection = ({
   };
 
   /*
-   * If an image is manually passed, use it.
-   * Otherwise use the image belonging to the selected theme.
+   * STRAPI DATA
+   */
+  
+  const title = talkData?.Kurztitel
+  const heading = talkData?.Titel || "";
+  const description = talkData?.Text ;
+
+  /*
+   * BUTTON
+   */
+  const showButton = talkData?.button_link ;
+
+  const buttonText =talkData?.button_text ;
+
+
+  const buttonLink =talkData?.button_link 
+
+  /*
+   * THEME IMAGE
+   *
+   * This section currently doesn't have an image
+   * from Strapi, so we keep the theme-based image.
    */
   const talkImage =
-    img || themeImages[theme] || themeImages[DEFAULT_THEME];
+    themeImages[theme] || themeImages[DEFAULT_THEME];
+
+
 
   return (
     <div className="container">
       <div className="row flex-lg-row-reverse align-items-center">
-        {/* Image */}
+
+        {/* IMAGE */}
         <div
           className="col-12 col-lg-4 img-col cursorPointer text-center"
           data-aos="zoom-in"
-          onClick={() => router.push("/kontakt")}
+          onClick={() => router.push(buttonLink)}
         >
           <img
             src={talkImage}
@@ -48,34 +69,50 @@ const TalkSection = ({
           />
         </div>
 
-        {/* Content */}
+        {/* CONTENT */}
         <div
           className="col-12 col-lg-8 content-col mt-4 mt-lg-0"
           data-aos="fade-right"
         >
           <div className="sec-content">
-            <div className="sub_title">
-              Aenean sollicitudin
-            </div>
 
-            <h2>
-              Genug geredet.
-              <br />
-              Was dürfen <span>wir für Sie bewegen?</span>
-            </h2>
+            {/* KURZ TITEL */}
+            {title && (
+              <div className="sub_title">
+                {renderHtmlText(title)}
+              </div>
+            )}
 
-            <p>
-              Lassen Sie uns über Ihr Projekt sprechen.
-            </p>
+            {/* TITEL */}
+            {heading && (
+              <h2>
+                {renderHtmlText(heading)}
+              </h2>
+            )}
 
-            <div className="theme_btn_wrap mt-4">
-              <Link href="/kontakt" className="button theme_btn">
-                Los geht’s
-                <img src="/images/btn-arrow.svg" alt="Arrow" />
-              </Link>
-            </div>
+            {/* BESCHREIBUNG */}
+            <p>{renderHtmlText(description)}</p>
+
+            {/* BUTTON */}
+            {showButton && buttonText && (
+              <div className="theme_btn_wrap mt-4">
+                <Link
+                  href={buttonLink}
+                  className="button theme_btn"
+                >
+                  {buttonText}
+
+                  <img
+                    src="/images/btn-arrow.svg"
+                    alt="Arrow"
+                  />
+                </Link>
+              </div>
+            )}
+
           </div>
         </div>
+
       </div>
     </div>
   );
