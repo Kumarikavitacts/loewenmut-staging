@@ -7,15 +7,9 @@ export const fetchHomeData = createAsyncThunk(
   "home/fetchHomeData",
   async (_, { rejectWithValue }) => {
     try {
-      // IMPORTANT: await the API call
       const result = await homepageApiStructure.getHeader();
 
-
-
-      // Parse the actual Strapi data
       const parsedData = Homepageparser(result?.data);
-
-
 
       return parsedData;
     } catch (error) {
@@ -56,7 +50,9 @@ const homeSlice = createSlice({
       .addCase(fetchHomeData.rejected, (state, action) => {
         state.status = "failed";
         state.error =
-          action.payload || action.error?.message || "Something went wrong";
+          action.payload ||
+          action.error?.message ||
+          "Something went wrong";
       });
   },
 });

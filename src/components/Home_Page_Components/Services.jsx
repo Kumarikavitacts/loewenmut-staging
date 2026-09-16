@@ -1,28 +1,61 @@
 "use client";
 
-import React from 'react'
-import ServiceSlider from '@/components/ServiceSlider'
-import { useSelector } from 'react-redux'
-import { renderHtmlText } from '@/components/ResuableComponents/renderHtmlText';
- const Services = ({nextSectionRef}) => {
-  const servicesIntro = useSelector((state) => state.home.data?.servicesIntro);
+import React from "react";
+import { useSelector } from "react-redux";
+
+import ServiceSlider from "@/components/ServiceSlider";
+import { renderHtmlText } from "@/components/ResuableComponents/renderHtmlText";
+
+const Services = ({ nextSectionRef }) => {
+  const servicesIntro = useSelector(
+    (state) => state.home.data?.servicesIntro
+  );
+
+  if (!servicesIntro) {
+    return null;
+  }
+
   const kurztitel = servicesIntro?.Kurztitel || "";
-  const titel = servicesIntro?.Titel || "";
-  const paragraph=servicesIntro?.Text?.[0]?.children?.[0]?.text ||""
+  const titel = servicesIntro?.Title || "";
+  const paragraph = servicesIntro?.Text || "";
+
   return (
-    <section ref={nextSectionRef} className="pt_pb_3 services_section overflow-hidden" style={{ backgroundImage: "url('/images/bg-pattern.png')", }} >
-    <div className="container">
-      <div className="row">
-        <div className="col-12 col-lg-4 content-col" data-aos="fade-right">
-          <div className="sub_title">{kurztitel} </div>
+    <section
+      ref={nextSectionRef}
+      className="pt_pb_3 services_section overflow-hidden"
+      style={{
+        backgroundImage: "url('/images/bg-pattern.png')",
+      }}
+    >
+      <div className="container">
+
+        <div className="row">
+
+          <div
+            className="col-12 col-lg-4 content-col"
+            data-aos="fade-right"
+          >
+            <div className="sub_title">
+              {renderHtmlText(kurztitel)}
+            </div>
+          </div>
+
+          <div
+            className="col-12 col-lg-7 ms-auto content-col"
+            data-aos="fade-left"
+          >
+            <h2>
+              {renderHtmlText(titel)}
+            </h2>
+          </div>
+
         </div>
-        <div className="col-12 col-lg-7 ms-auto content-col" data-aos="fade-left">
-          <h2> {renderHtmlText(titel)}</h2>
-        </div>
+
+        <ServiceSlider paragraph={paragraph} />
+
       </div>
-      <ServiceSlider paragraph={renderHtmlText(paragraph)}/>
-    </div>
-  </section>
-  )
-}
-export default Services
+    </section>
+  );
+};
+
+export default Services;

@@ -1,20 +1,25 @@
 "use client";
 
-import React from 'react'
-import TalkSection from '@/components/TalkSection'
-import { useSelector } from 'react-redux';
+import React from "react";
+import { useSelector } from "react-redux";
+
+import TalkSection from "@/components/TalkSection";
 
 const Talk = () => {
-  const talkData = useSelector((state) => state.home.data?.hero);
+  const talkData = useSelector(
+    (state) =>
+      state.home.data?.hero?.kontaktbereich
+  );
 
   if (!talkData) {
     return null;
   }
-  const data =talkData?.kontaktbereich
+
   return (
     <section className="pt_pb_3 talk_section">
-    <TalkSection talkData={data} />
-  </section>  )
-}
+      <TalkSection talkData={talkData} />
+    </section>
+  );
+};
 
-export default Talk
+export default Talk;

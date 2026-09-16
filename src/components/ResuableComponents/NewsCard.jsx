@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { getMediaUrl } from "@/helper/MediaUrl";
 import { renderHtmlText } from "@/components/ResuableComponents/renderHtmlText";
+const DEFAULT_NEWS_IMAGE = "/images/news-1.png";
 
 const NewsCard = ({
   newsData = [],
@@ -44,8 +45,9 @@ const NewsCard = ({
       >
         {newsData.map((news) => {
           const imageUrl = news?.image
-            ? getMediaUrl(news.image)
-            : "";
+          ? getMediaUrl(news.image)
+          : DEFAULT_NEWS_IMAGE;
+
 
           return (
             <div
@@ -76,7 +78,7 @@ const NewsCard = ({
                   {/* Image */}
                   {imageUrl && (
                     <img
-                      src={imageUrl}
+                      src={imageUrl || '/images/news-1.png'}
                       alt={
                         news?.alternativeText ||
                         news?.title ||
@@ -153,7 +155,7 @@ const NewsCard = ({
             href={buttonLink || "/news"}
             className="button theme_btn"
           >
-            {button || "Alle News"}
+            {button }
 
             <img
               src="/images/btn-arrow.svg"

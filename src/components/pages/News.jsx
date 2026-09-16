@@ -51,13 +51,13 @@ const News = () => {
         </div>
 
         {/* News Cards */}
-        <NewsCard
+        {/* <NewsCard
           newsData={filteredNews}
           showHeader={false}
           showFooter={true}
           button={"mehr"}
           buttonLink={"/news"}
-        />
+        /> */}
 
       </section>
 
