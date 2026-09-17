@@ -3,30 +3,33 @@
 const SITE_NAME = "Loewenmut";
 const DEFAULT_TITLE = "Loewenmut";
 const DEFAULT_DESCRIPTION = "Loewenmut";
-const DEFAULT_OG_IMAGE = "/images/og_image.png";
+const DEFAULT_OG_IMAGE = "/images/og-image.png";
 
-// Your Strapi backend's base URL (where uploaded media actually lives).
-// Adjust the env var name to whatever you already use elsewhere in the project.
+
 const STRAPI_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
 
+// Some content types have Metadaten as a single component (object),
+// others have it set to "repeatable" in Strapi (array). Normalize both.
+const normalizeMetadaten = (metadaten) => {
+  if (!metadaten) return null;
+  if (Array.isArray(metadaten)) return metadaten[0] || null;
+  return metadaten;
+};
+
 function resolveOgImage(metadata) {
-  // Handles both Strapi v4 (data.attributes.url) and v5 (flat url) shapes
   const raw =
-    metadata?.Meta_Bild?.data?.attributes?.url || // v4
-    metadata?.Meta_Bild?.url ||                   // v5
+    metadata?.Meta_Bild?.data?.attributes?.url ||
+    metadata?.Meta_Bild?.url ||
     null;
 
-  if (!raw) return DEFAULT_OG_IMAGE; // no image uploaded — use static fallback
-
-  // If Strapi already returned a full URL, use it as-is.
+  if (!raw) return DEFAULT_OG_IMAGE;
   if (raw.startsWith("http://") || raw.startsWith("https://")) return raw;
 
-  // Otherwise it's relative to the Strapi backend — prefix it.
   return `${STRAPI_BASE_URL}${raw}`;
 }
 
 export function createMetadata(pageData, fallback = {}) {
-  const metadata  = pageData?.Metadaten;
+  const metadata = normalizeMetadaten(pageData?.Metadaten);
 
   const title = metadata?.Meta_Titel || fallback.title || DEFAULT_TITLE;
   const description =
@@ -45,8 +48,6 @@ export function createMetadata(pageData, fallback = {}) {
       images: [
         {
           url: ogImage,
-          width: 1200,
-          height: 630,
           alt: title,
         },
       ],

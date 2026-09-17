@@ -1,13 +1,23 @@
-import LeistungenDetail from "@/components/pages/LiestungenDetail";
+
 import { getLeistungBySlug } from "@/Apis/leistungenDetailPage/api";
+import LeistungenDetail from "@/components/pages/LiestungenDetail";
 import { createMetadata } from "@/helper/Metadata";
 
 export async function generateMetadata({ params }) {
   try {
     const { id } = await params;
     const data = await getLeistungBySlug(id);
-    return createMetadata(data);
+
+    if (!data) {
+      return createMetadata(null);
+    }
+
+    return createMetadata(data, {
+      title: data?.Titel,
+      description: data?.Text,
+    });
   } catch (error) {
+    console.error("Error fetching Leistung detail metadata:", error);
     return createMetadata(null);
   }
 }
