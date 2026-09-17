@@ -12,12 +12,53 @@ import "../css/OwlTheme.css";
 import Script from "next/script";
 import Providers from "@/components/Providers";
 import SiteChrome from "@/components/SiteChrome";
-
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL
 export const metadata = {
-  title: "Loewenmut",
-  description: "Loewenmut",
+  metadataBase: new URL(SITE_URL),
+
+  title:
+    "Webdesign | Branding: Löwenmut. Die Webagentur in Winterthur Zürich",
+
+  description:
+    "Agentur für Grafik-, Webdesign & Programmierung in Winterthur. Unsere Referenzen werden Sie überzeugen",
+
   icons: {
     icon: "/images/favicon.ico",
+  },
+
+  openGraph: {
+    title:
+      "Webdesign | Branding: Löwenmut. Die Webagentur in Winterthur Zürich",
+
+    description:
+      "Agentur für Grafik-, Webdesign & Programmierung in Winterthur. Unsere Referenzen werden Sie überzeugen",
+
+    url: SITE_URL,
+
+    siteName: "Löwenmut",
+
+    images: [
+      {
+        url: "/images/og_image.png",
+   
+      },
+    ],
+
+    locale: "de_CH",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+
+    title:
+      "Webdesign | Branding: Löwenmut. Die Webagentur in Winterthur Zürich",
+
+    description:
+      "Agentur für Grafik-, Webdesign & Programmierung in Winterthur. Unsere Referenzen werden Sie überzeugen",
+
+    images: ["/images/og_image.png"],
   },
 };
 const roboto = Roboto({
