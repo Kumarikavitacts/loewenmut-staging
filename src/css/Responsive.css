@@ -181,7 +181,7 @@
         }
     }
     .team-image {
-        height: 380px;
+        height: 400px;
     }
     .team-carousel {
         .team-last-card a {
@@ -244,6 +244,28 @@
         }
         .work-phone-content {
             padding: 8rem 17px 2rem;
+        }
+    }
+    .team-modal {
+        max-width: 1250px;
+        .team-modal-image {
+            height: 520px;
+        }
+    }
+    .project-showcase {
+        .project-info-list {
+            .project-info-card {
+                ul li:before {
+                    width: 25px;
+                    height: 25px;
+                    background-size: 13px;
+                }
+                .project-icon {
+                    width: 60px;
+                    height: 60px;
+                    padding: 12px;
+                }
+            }
         }
     }
 }
@@ -964,6 +986,13 @@ header {
     .team-modal {
         padding: 20px;
         max-height: 95vh;
+        .team-modal-image {
+            height: auto;
+            min-height: 250px;
+        }
+        .team-modal-content {
+            padding: 30px 0 0;
+        }
     }
     .bg_theme_work_station {
         .work-section {
@@ -1221,6 +1250,12 @@ footer {
         }
     }
 }
+}
+
+@media (min-width: 481px) and (max-width: 520px) {
+    .team-card .team-image {
+        height: 250px;
+    }
 }
 
 @media (max-width: 480px) {

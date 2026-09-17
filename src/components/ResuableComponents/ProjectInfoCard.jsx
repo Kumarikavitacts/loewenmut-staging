@@ -10,7 +10,7 @@ const ProjectInfoCard = ({ icon, title, items, active = false }) => {
       {/* Icon + Title */}
       <div className="project-info-header d-flex align-items-center gap-3 mb-4">
         <div className="project-icon flex-shrink-0 d-flex align-items-center justify-content-center rounded-circle"><img src={icon} alt="" /></div>
-        <h3 className="mb-0 fs_40">{title}</h3>
+        <h3 className="mb-0">{title}</h3>
       </div>
 
       {/* List */}

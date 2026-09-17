@@ -68,7 +68,7 @@ return (
             <button type="button" className="team-modal-close" onClick={closeModal} aria-label="Close">
                 <img src="./images/modal-close.svg" />
             </button>
-            <div className="row align-items-center">
+            <div className="row">
                 <div className="col-md-5">
                     <div className={`team-modal-image tm-img-bgcolor ${selectedMember.color}`}>
                         {/* Animated background elements */}
