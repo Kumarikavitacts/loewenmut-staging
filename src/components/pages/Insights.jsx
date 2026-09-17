@@ -10,6 +10,7 @@ import {
 } from "@/Apis/insightPage/api";
 import InnerBannerSkeleton from "@/components/Skeleton/InnerBannerSkeleton";
 import CardGridSkeleton from "@/components/Skeleton/CardGridSkeleton";
+import StatusHeader from "@/components/ResuableComponents/StatusHeader";
 
 const Insights = () => {
   const [headingData, setHeadingData] = useState(null);
@@ -101,11 +102,17 @@ const Insights = () => {
   if (error) {
     return (
       <main>
-        <section className="inner_hero_section news_banner">
-          <div className="container py-5">
-            <h2>Insights konnten nicht geladen werden.</h2>
-          </div>
-        </section>
+        <StatusHeader
+      statusType="wrong"
+      title={
+        <>
+          Diese Seite konnte leider <br />
+          nicht gefunden werden
+        </>
+      }
+      buttonText="Zurück zur Startseite"
+      buttonLink="/"
+    />
       </main>
     );
   }

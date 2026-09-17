@@ -13,11 +13,25 @@ const ProjectCarousel = ({
     button
 }) => {
     const carouselRef = useRef(null);
-    const router = useRouter()
-    const handleInsightClick =(id)=>{
-     
-      router.push(`/insights/${id}`)
-    }
+    const router = useRouter();
+
+    const handleInsightClick = (item) => {
+        // Internal detail page
+        if (item?.detailseite === "Ja" && item?.slug) {
+            router.push(`/insights/${item.slug}`);
+            return;
+        }
+
+        // External website
+        if (item?.websiteLink) {
+            window.open(
+                item.websiteLink,
+                item?.linkziel === "Extern" ? "_blank" : "_self",
+                "noopener,noreferrer"
+            );
+        }
+    };
+
     useEffect(() => {
         window.$ = $;
         window.jQuery = $;
@@ -124,25 +138,38 @@ const ProjectCarousel = ({
                         <div
                             className="project-carousel-item"
                             key={item.id}
-                         
+
                         >
                             <div
                                 className="project-carousel-card position-relative overflow-hidden d-flex align-items-center justify-content-center"
                                 style={{
-                                    backgroundColor: item.bgColor ,
+                                    backgroundColor: item.bgColor,
                                 }}
-                                onClick={() => handleInsightClick(item.id)}
+                                onClick={() => handleInsightClick(item)}
                             >
 
                                 {/* =========================
-                    HOVER IMAGE
+                    HOVER IMAGE / VIDEO
                 ========================== */}
-                                {item.image && (
-                                    <img
-                                        src={item.image}
-                                        alt={item.title || ""}
+                                {item.isVideo ? (
+                                    <video
+                                        src={item.video}
+                                        poster={item.poster || undefined}
+                                        autoPlay
+                                        muted
+                                        loop
+                                        playsInline
+                                        preload="metadata"
                                         className="project-carousel-image position-absolute top-0 start-0 w-100 h-100"
                                     />
+                                ) : (
+                                    item.image && (
+                                        <img
+                                            src={item.image}
+                                            alt={item.title || ""}
+                                            className="project-carousel-image position-absolute top-0 start-0 w-100 h-100"
+                                        />
+                                    )
                                 )}
 
                                 {/* =========================

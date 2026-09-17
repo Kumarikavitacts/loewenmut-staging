@@ -11,4 +11,6 @@ export const apiEndpoints ={
     getReferenzenDocumentsIdEndpoint: `api/referenzens?fields[0]=documentId&fields[1]=Slug`,
     getReferenzenInnerBySlugEndpoint: (documentId) =>
       `api/referenzens/${documentId}?populate[0]=Inhaltsabschnitt.Bild&populate[1]=Inhaltsabschnitt.Logo&populate[2]=Inhaltsabschnitt.Inhalt.Icon&populate[3]=Bildbereich.Bild&populate[4]=Projekte`,
+      teamSeiteEndpoint: `api/team-seite?populate=*`,
+      teamsEndpoint: `api/teams?populate=*`,
 }

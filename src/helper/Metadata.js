@@ -3,7 +3,7 @@
 const SITE_NAME = "Loewenmut";
 const DEFAULT_TITLE = "Loewenmut";
 const DEFAULT_DESCRIPTION = "Loewenmut";
-const DEFAULT_OG_IMAGE = "/images/og-image.png";
+const DEFAULT_OG_IMAGE = "/images/og_image.png";
 
 // Your Strapi backend's base URL (where uploaded media actually lives).
 // Adjust the env var name to whatever you already use elsewhere in the project.

@@ -9,6 +9,7 @@ import { getMediaUrl } from "@/helper/MediaUrl";
 import {
   renderHtmlText,
 } from "@/components/ResuableComponents/renderHtmlText";
+import { truncateText } from "@/helper/TruncateString";
 
 const Insights = () => {
   const router = useRouter();
@@ -31,28 +32,43 @@ const Insights = () => {
   // --------------------------------
   const mappedReferences = (
     insights?.referenzens || []
-  ).map((item) => ({
-    id: item?.id,
-    documentId: item?.documentId,
-    title: item?.Titel || "",
-    slug: item?.Slug || "",
-    text: item?.Text || "",
+  ).map((item) => {
+    const isVideo =
+      item?.Bild_oder_Video === "Video" && item?.Video?.url;
 
-    image: item?.Bild,
+    return {
+      id: item?.id,
+      documentId: item?.documentId,
+      title: item?.Titel || "",
+      slug: item?.Slug || "",
+      text: item?.Text || "",
 
-    imageUrl: item?.Bild?.url
-      ? getMediaUrl(item.Bild.url)
-      : null,
+      isVideo,
 
-    alternativeText:
-      item?.Bild?.alternativeText ||
-      item?.Titel ||
-      "Insight",
+      image: item?.Bild,
 
-    detailseite: item?.Detailseite || "",
-    websiteLink: item?.Link_zur_Website || "",
-    linkziel: item?.Linkziel || "",
-  }));
+      imageUrl: item?.Bild?.url
+        ? getMediaUrl(item.Bild.url)
+        : null,
+
+      videoUrl: item?.Video?.url
+        ? getMediaUrl(item.Video.url)
+        : null,
+
+      posterUrl: item?.Videominiatur?.url
+        ? getMediaUrl(item.Videominiatur.url)
+        : null,
+
+      alternativeText:
+        item?.Bild?.alternativeText ||
+        item?.Titel ||
+        "Insight",
+
+      detailseite: item?.Detailseite || "",
+      websiteLink: item?.Link_zur_Website || "",
+      linkziel: item?.Linkziel || "",
+    };
+  });
 
   // --------------------------------
   // HANDLE CARD CLICK
@@ -140,15 +156,27 @@ const Insights = () => {
                 }}
               >
 
-                {/* IMAGE */}
+                {/* IMAGE / VIDEO */}
                 <div className="insight_img">
-                  {insight.imageUrl && (
-                    <img
-                      src={insight.imageUrl}
-                      alt={
-                        insight.alternativeText
-                      }
+                  {insight.isVideo ? (
+                    <video
+                      src={insight.videoUrl}
+                      poster={insight.posterUrl || undefined}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
                     />
+                  ) : (
+                    insight.imageUrl && (
+                      <img
+                        src={insight.imageUrl}
+                        alt={
+                          insight.alternativeText
+                        }
+                      />
+                    )
                   )}
                 </div>
 
@@ -157,11 +185,11 @@ const Insights = () => {
 
                   <div className="insight_content">
                     <h3>
-                      {insight.title}
+                      {renderHtmlText(insight.title)}
                     </h3>
 
                     <p>
-                      {insight.text}
+                      {truncateText(renderHtmlText(insight.text),30)}
                     </p>
                   </div>
 

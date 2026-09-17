@@ -1,4 +1,5 @@
 import React from "react";
+import { getMediaUrl } from "@/helper/MediaUrl";
 
 export const tabs = [
   {
@@ -336,3 +337,28 @@ export const newsData = [
     link: "/",
   },
 ];
+
+
+// Converts a raw referenzens API item into the shape ProjectCarousel expects
+export const mapReferenzForCarousel = (item) => {
+  const isVideo = item?.Bild_oder_Video === "Video" && Boolean(item?.Video?.url);
+
+  return {
+    id: item?.id,
+    documentId: item?.documentId,
+    title: item?.Titel || "",
+    slug: item?.Slug || "",
+    detailseite: item?.Detailseite || "",
+    websiteLink: item?.Link_zur_Website || "",
+    linkziel: item?.Linkziel || "",
+
+    bgColor: item?.Farbe || "#000000",
+
+    logo: item?.Logo?.url ? getMediaUrl(item.Logo.url) : "",
+
+    isVideo,
+    image: item?.Bild?.url ? getMediaUrl(item.Bild.url) : "",
+    video: item?.Video?.url ? getMediaUrl(item.Video.url) : "",
+    poster: item?.Videominiatur?.url ? getMediaUrl(item.Videominiatur.url) : "",
+  };
+};

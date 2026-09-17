@@ -9,9 +9,9 @@ import ProjectInfoCard from "@/components/ResuableComponents/ProjectInfoCard";
 import StatusHeader from "@/components/ResuableComponents/StatusHeader";
 import InsightInnerSkeleton from "@/components/Skeleton/InsightInnerSkeleton";
 
-import { getReferenzBySlug } from "@/Apis/insightPage/api";
+import { getReferenzBySlug, getInsightPageCategory } from "@/Apis/insightPage/api";
 import { getMediaUrl } from "@/helper/MediaUrl";
-import { insights } from "@/helper/Utils";
+import { mapReferenzForCarousel } from "@/helper/Utils";
 
 // Flattens a Strapi block-editor "list" field (Inhaltsabschnitt.Inhalt[].Text)
 // into a plain string array, since ProjectInfoCard expects items: string[]
@@ -39,6 +39,7 @@ const InsightInner = () => {
   const slug = params?.id;
 
   const [data, setData] = useState(null);
+  const [relatedProjects, setRelatedProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -50,7 +51,10 @@ const InsightInner = () => {
         setLoading(true);
         setError(false);
 
-        const result = await getReferenzBySlug(slug);
+        const [result, allReferenzen] = await Promise.all([
+          getReferenzBySlug(slug),
+          getInsightPageCategory(),
+        ]);
 
         if (!result) {
           setError(true);
@@ -58,6 +62,13 @@ const InsightInner = () => {
         }
 
         setData(result);
+
+        // Exclude the project currently being viewed
+        const others = (allReferenzen || [])
+          .filter((item) => item.documentId !== result.documentId)
+          .map(mapReferenzForCarousel);
+
+        setRelatedProjects(others);
       } catch (err) {
         console.error("Insight detail error:", err);
         setError(true);
@@ -123,7 +134,8 @@ const InsightInner = () => {
     hasBildbereichHeading || hasBildbereichImage || hasBildbereichTextRow;
 
   const hasProjekte = Boolean(
-    Projekte?.Titel || Projekte?.Text_1 || Projekte?.Text_2
+    (Projekte?.Titel || Projekte?.Text_1 || Projekte?.Text_2) &&
+      relatedProjects.length > 0
   );
 
   return (
@@ -316,7 +328,7 @@ const InsightInner = () => {
                 />
               ) : null
             }
-            project={insights}
+            project={relatedProjects}
             button={Projekte?.button_text || "Case ansehen"}
           />
         </section>
