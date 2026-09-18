@@ -15,6 +15,7 @@ const NewsCard = ({
   button,
   buttonLink,
 }) => {
+
   return (
     <div className="container">
 

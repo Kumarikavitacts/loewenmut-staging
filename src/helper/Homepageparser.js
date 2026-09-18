@@ -6,12 +6,14 @@ export const Homepageparser = (apiData) => {
   // --------------------------------
   // NEWS
   // --------------------------------
+
+  // --------------------------------
   const normalizedNews = (apiData?.News?.news || []).map((item) => {
     const image =
       item?.Bild?.formats?.small ||
       item?.Bild?.formats?.thumbnail ||
       item?.Bild;
-
+  
     return {
       id: item?.id || null,
       documentId: item?.documentId || null,
@@ -24,10 +26,15 @@ export const Homepageparser = (apiData) => {
         item?.Bild?.alternativeText ||
         item?.Titel ||
         "News",
-      category: item?.category || "",
+  
+      // Get category title from news_kategories array
+      category: item?.news_kategories?.[0]?.Titel || "",
+  
       categoryClass: item?.categoryClass || "",
     };
   });
+ 
+  
 
   // --------------------------------
   // RETURN NORMALIZED HOME DATA
