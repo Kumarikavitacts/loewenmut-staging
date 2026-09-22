@@ -6,17 +6,23 @@ import InnerBnanner from "@/components/InnerBanner";
 import NewsCard from "@/components/ResuableComponents/NewsCard";
 import InnerBannerSkeleton from "@/components/Skeleton/InnerBannerSkeleton";
 
-import { getNewsPageCategory, getNewsPageHeading } from "@/Apis/NewsPage/api";
+import {
+  getNewsPageCategory,
+  getNewsPageHeading,
+} from "@/Apis/NewsPage/api";
 
-// Rotate through the existing badge color classes for variety across
-// different categories — same classes your static newsData already used.
-const BADGE_CLASSES = ["purple_badge", "blue_badge", "red_badge"];
+// -----------------------------------------
+// FORMAT DATE
+// -----------------------------------------
 
-// "2026-09-15" -> "15.09.2026" (matches your static date format)
 const formatDate = (isoDate) => {
   if (!isoDate) return "";
+
   const d = new Date(isoDate);
-  if (isNaN(d.getTime())) return isoDate;
+
+  if (isNaN(d.getTime())) {
+    return isoDate;
+  }
 
   const day = String(d.getDate()).padStart(2, "0");
   const month = String(d.getMonth() + 1).padStart(2, "0");
@@ -31,15 +37,20 @@ const News = () => {
   const [activeTab, setActiveTab] = useState("all");
   const [loading, setLoading] = useState(true);
 
+  // -----------------------------------------
+  // FETCH DATA
+  // -----------------------------------------
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
 
-        const [headingResult, categoryResult] = await Promise.all([
-          getNewsPageHeading(),
-          getNewsPageCategory(),
-        ]);
+        const [headingResult, categoryResult] =
+          await Promise.all([
+            getNewsPageHeading(),
+            getNewsPageCategory(),
+          ]);
 
         setPageData(headingResult);
         setNewsList(categoryResult || []);
@@ -54,112 +65,176 @@ const News = () => {
   }, []);
 
   // -----------------------------------------
-  // BUILD FILTER TABS FROM ACTUAL CATEGORIES
+  // BUILD FILTER TABS
   // -----------------------------------------
-  const { tabs, badgeClassByCategory } = useMemo(() => {
+
+  const tabs = useMemo(() => {
     const seen = new Map();
 
     newsList.forEach((item) => {
       (item?.news_kategories || []).forEach((cat) => {
-        if (cat?.documentId && !seen.has(cat.documentId)) {
-          seen.set(cat.documentId, cat.Titel);
+        if (
+          cat?.documentId &&
+          !seen.has(cat.documentId)
+        ) {
+          seen.set(
+            cat.documentId,
+            cat.Titel
+          );
         }
       });
     });
 
-    const uniqueCategories = Array.from(seen.entries()); // [documentId, Titel]
+    const uniqueCategories =
+      Array.from(seen.entries());
 
-    const classMap = {};
-    uniqueCategories.forEach(([documentId], index) => {
-      classMap[documentId] = BADGE_CLASSES[index % BADGE_CLASSES.length];
-    });
+    return [
+      {
+        label: "Alle",
+        value: "all",
+      },
 
-    return {
-      tabs: [
-        { label: "Alle", value: "all" },
-        ...uniqueCategories.map(([documentId, Titel]) => ({
+      ...uniqueCategories.map(
+        ([documentId, Titel]) => ({
           label: Titel,
           value: documentId,
-        })),
-      ],
-      badgeClassByCategory: classMap,
-    };
+        })
+      ),
+    ];
   }, [newsList]);
 
   // -----------------------------------------
   // MAP API DATA FOR NewsCard
   // -----------------------------------------
+
   const mappedNews = useMemo(() => {
     return newsList.map((item) => {
-      const firstCategory = item?.news_kategories?.[0];
+      const firstCategory =
+        item?.news_kategories?.[0];
+
+      const categoryColor =
+        firstCategory?.Farbe
+          ?.toString()
+          .trim()
+          .toLowerCase();
 
       return {
         id: item?.id,
         documentId: item?.documentId,
-        slug: item?.slug || "",
-        title: item?.Titel || "",
-        description: item?.Text || "",
-        date: formatDate(item?.Publikation),
-        image: item?.Bild?.url || "",
-        alternativeText: item?.Bild?.alternativeText || item?.Titel || "",
 
-        category: firstCategory?.Titel || "",
-        categoryClass: firstCategory?.documentId
-          ? badgeClassByCategory[firstCategory.documentId]
+        slug: item?.slug || "",
+
+        title: item?.Titel || "",
+
+        description: item?.Text || "",
+
+        date: formatDate(
+          item?.Publikation
+        ),
+
+        image: item?.Bild?.url || "",
+
+        alternativeText:
+          item?.Bild?.alternativeText ||
+          item?.Titel ||
+          "",
+
+        // Category title
+        category:
+          firstCategory?.Titel || "",
+
+        // Backend color
+        categoryColor:
+          categoryColor || "",
+
+        // Backend color -> existing CSS class
+        categoryClass: categoryColor
+          ? `${categoryColor}_badge`
           : "",
 
-        categoryIds: (item?.news_kategories || []).map((c) => c.documentId),
+        categoryIds:
+          (item?.news_kategories || []).map(
+            (category) =>
+              category?.documentId
+          ),
       };
     });
-  }, [newsList, badgeClassByCategory]);
+  }, [newsList]);
 
   // -----------------------------------------
-  // FILTER BY ACTIVE TAB
+  // FILTER NEWS
   // -----------------------------------------
+
   const filteredNews =
     activeTab === "all"
       ? mappedNews
-      : mappedNews.filter((news) => news.categoryIds.includes(activeTab));
+      : mappedNews.filter((news) =>
+          news.categoryIds.includes(
+            activeTab
+          )
+        );
 
-  const banner = pageData?.Bannerbereich;
+  const banner =
+    pageData?.Bannerbereich;
 
   return (
     <main>
-      {/* Hero */}
+
+      {/* =========================
+          Hero
+      ========================= */}
+
       <section className="inner_hero_section news_banner">
+
         {loading ? (
           <InnerBannerSkeleton />
         ) : (
           <InnerBnanner
-            title={banner?.Kurztitel || ""}
-            heading={banner?.Titel || ""}
-            description={banner?.Text || ""}
+            title={
+              banner?.Kurztitel || ""
+            }
+            heading={
+              banner?.Titel || ""
+            }
+            description={
+              banner?.Text || ""
+            }
           />
         )}
+
       </section>
 
-      {/* News Section */}
+      {/* =========================
+          News Section
+      ========================= */}
+
       <section className="news-page-section news_section pt_pb_3">
+
         {/* Filter Tabs */}
         {tabs.length > 1 && (
           <div className="d-flex justify-content-center w-100">
             <FilterTabs
               tabs={tabs}
               activeTab={activeTab}
-              onTabChange={setActiveTab}
+              onTabChange={
+                setActiveTab
+              }
             />
           </div>
         )}
 
         {/* News Cards */}
-        {!loading && filteredNews.length > 0 && (
-          <NewsCard
-            newsData={filteredNews}
-            showHeader={false}
-            showFooter={false}
-          />
-        )}
+        {!loading &&
+          filteredNews.length > 0 && (
+            <NewsCard
+              newsData={filteredNews}
+              showHeader={false}
+              showFooter={false}
+            />
+          )}
+
       </section>
+
     </main>
   );
 };

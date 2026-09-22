@@ -1,6 +1,7 @@
 import { Roboto, Urbanist } from "next/font/google";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+
 import "@/index.css";
 import "../css/Style.css";
 import "../css/Responsive.css";
@@ -12,6 +13,8 @@ import "../css/OwlTheme.css";
 import Script from "next/script";
 import Providers from "@/components/Providers";
 import SiteChrome from "@/components/SiteChrome";
+import BootstrapInit from "@/components/BootstrapInit";
+
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL
 export const metadata = {
@@ -117,6 +120,7 @@ export default function RootLayout({ children }) {
       </head>
 
       <body>
+      <BootstrapInit />
         <Providers>
           <SiteChrome>{children}</SiteChrome>
         </Providers>

@@ -7,38 +7,53 @@ export const Homepageparser = (apiData) => {
   // NEWS
   // --------------------------------
 
-  // --------------------------------
   const normalizedNews = (apiData?.News?.news || []).map((item) => {
     const image =
       item?.Bild?.formats?.small ||
       item?.Bild?.formats?.thumbnail ||
       item?.Bild;
-  
+
+    const category = item?.news_kategories?.[0];
+
+    // Get badge class directly from backend Farbe
+    const categoryColor = category?.Farbe
+      ?.toString()
+      .trim()
+      .toLowerCase();
+
     return {
       id: item?.id || null,
       documentId: item?.documentId || null,
+
       title: item?.Titel || "",
       description: item?.Text || "",
       date: item?.Publikation || "",
       slug: item?.slug || "",
+
       image: image?.url || "",
+
       alternativeText:
         item?.Bild?.alternativeText ||
         item?.Titel ||
         "News",
-  
-      // Get category title from news_kategories array
-      category: item?.news_kategories?.[0]?.Titel || "",
-  
-      categoryClass: item?.categoryClass || "",
+
+      // Category data from backend
+      category: category?.Titel || "",
+
+      // Farbe comes directly from Strapi
+      categoryColor: categoryColor || "",
+
+      // Convert backend Farbe into your existing CSS class
+      categoryClass: categoryColor
+        ? `${categoryColor}_badge`
+        : "",
     };
   });
- 
-  
 
   // --------------------------------
   // RETURN NORMALIZED HOME DATA
   // --------------------------------
+
   return {
     // HERO
     hero: {

@@ -27,4 +27,5 @@ export const apiEndpoints = {
   getKontaktPageEndpoint: `api/kontakt?populate=*`,
 
   getImpressumPageEndpoint: `api/impressum?populate=*`,
+  getDatenschutzPageEndpoint: `api/datenschutzerklaerung?populate=*`,
 }

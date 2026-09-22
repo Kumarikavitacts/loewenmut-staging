@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 
 import ServiceSlider from "@/components/ServiceSlider";
 import { renderHtmlText } from "@/components/ResuableComponents/renderHtmlText";
+import ScrollFillText from "@/components/ResuableComponents/ScrollFillText";
 
 const Services = ({ nextSectionRef }) => {
   const servicesIntro = useSelector(
@@ -45,8 +46,13 @@ const Services = ({ nextSectionRef }) => {
             data-aos="fade-left"
           >
             <h2>
-              {renderHtmlText(titel)}
-            </h2>
+            <ScrollFillText
+                        html={titel}
+                        className="leistungen_fill_title"
+                        startColor="var(--bs-textdarkgrey)"
+                        fillColor="var(--bs-textdarkgrey)"
+                    />
+                    </h2>
           </div>
 
         </div>

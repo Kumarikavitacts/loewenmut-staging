@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useTheme } from "@/context/ThemeContext";
 import { renderHtmlText } from "@/components/ResuableComponents/renderHtmlText";
 import { useSelector } from "react-redux";
+import ScrollFillText from "@/components/ResuableComponents/ScrollFillText";
 
 const DEFAULT_THEME = "yellow";
 
@@ -86,7 +87,12 @@ const TalkSection = ({talkData}) => {
             {/* TITEL */}
             {heading && (
               <h2>
-                {renderHtmlText(heading)}
+                 <ScrollFillText
+                        html={heading}
+                        className="leistungen_fill_title"
+                        startColor="var(--bs-textdarkgrey)"
+                        fillColor="var(--bs-textdarkgrey)"
+                    />
               </h2>
             )}
 

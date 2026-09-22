@@ -2717,3 +2717,54 @@ footer {
     display: inline-block;
     transition: none; /* let GSAP drive it, not CSS transitions */
   }
+
+
+ .scroll-fill-text {
+    position: relative;
+    width: 100%;
+}
+
+/* Normal/default text */
+.scroll-fill-text-base {
+    width: 100%;
+    color: var(--scroll-start-color);
+}
+
+/* Fill layer */
+.scroll-fill-text-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    color: var(--scroll-fill-color);
+
+    pointer-events: none;
+
+    will-change: clip-path;
+
+    z-index: 2;
+}
+
+/* Keep span styling */
+.scroll-fill-text-fill span {
+    color: var(--scroll-fill-color) !important;
+}
+
+/* Keep typography identical */
+.scroll-fill-text-base h1,
+.scroll-fill-text-base h2,
+.scroll-fill-text-base h3,
+.scroll-fill-text-base p,
+.scroll-fill-text-base div,
+.scroll-fill-text-fill h1,
+.scroll-fill-text-fill h2,
+.scroll-fill-text-fill h3,
+.scroll-fill-text-fill p,
+.scroll-fill-text-fill div {
+    margin-top: 0;
+}
+/* according text color  */
+.privacy_accordion .accordion-button >  span{
+    color: var(--bs-textdarkgrey) !important;
+}

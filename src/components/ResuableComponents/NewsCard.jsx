@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { getMediaUrl } from "@/helper/MediaUrl";
 import { renderHtmlText } from "@/components/ResuableComponents/renderHtmlText";
+import ScrollFillText from "@/components/ResuableComponents/ScrollFillText";
 const DEFAULT_NEWS_IMAGE = "/images/news-1.png";
 
 const NewsCard = ({
@@ -33,7 +34,12 @@ const NewsCard = ({
 
           {heading && (
             <h2>
-              {renderHtmlText(heading)}
+              <ScrollFillText
+                        html={heading}
+                        className="leistungen_fill_title"
+                        startColor="var(--bs-textdarkgrey)"
+                        fillColor="var(--bs-textdarkgrey)"
+                    />
             </h2>
           )}
         </div>
