@@ -1122,6 +1122,7 @@ header {
         h3 {
             font-weight: 700;
             margin-bottom: 10px;
+            min-height: 70px;
         }
         hr {
             border-top-color: #D7D7D7;

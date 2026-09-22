@@ -1,49 +1,78 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React, { useEffect, useRef, useState } from "react";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
-const ScrollFillText = ({ text, className = "" }) => {
-  const containerRef = useRef(null);
+const ScrollFillText = ({
+  children,
+  className = "",
+  startColor = "#9B9B9B",
+  fillColor = "#373737",
+}) => {
+  const wrapperRef = useRef(null);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    const updateProgress = () => {
+      const element = wrapperRef.current;
 
-    const words = containerRef.current.querySelectorAll(".sf-word");
+      if (!element) return;
 
-    const ctx = gsap.context(() => {
-      gsap.to(words, {
-        color: "var(--sf-fill-color, #000000)",
-        stagger: 0.05,
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 85%",
-          end: "bottom 40%",
-          scrub: true,
-        },
-      });
-    }, containerRef);
+      const rect = element.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
 
-    // Recalculate trigger positions after fonts/images load, layout shifts, etc.
-    ScrollTrigger.refresh();
+      // Start filling when element is around 85% of viewport
+      const start = windowHeight * 0.85;
 
-    return () => ctx.revert();
-  }, [text]);
+      // Finish filling when element reaches around 25% of viewport
+      const end = windowHeight * 0.25;
+
+      const current = rect.top;
+
+      let value = (start - current) / (start - end);
+
+      value = Math.max(0, Math.min(1, value));
+
+      setProgress(value);
+    };
+
+    updateProgress();
+
+    window.addEventListener("scroll", updateProgress, {
+      passive: true,
+    });
+
+    window.addEventListener("resize", updateProgress);
+
+    return () => {
+      window.removeEventListener("scroll", updateProgress);
+      window.removeEventListener("resize", updateProgress);
+    };
+  }, []);
 
   return (
-    <p ref={containerRef} className={`sf-text ${className}`}>
-      {text.split(" ").map((word, i) => (
-        <span className="sf-word" key={i}>
-          {word}{" "}
-        </span>
-      ))}
-    </p>
+    <div
+      ref={wrapperRef}
+      className={`scroll-fill-text ${className}`}
+      style={{
+        "--start-color": startColor,
+        "--fill-color": fillColor,
+      }}
+    >
+      {/* Gray text */}
+      <div className="scroll-fill-text-base">
+        {children}
+      </div>
+
+      {/* Dark text that fills on scroll */}
+      <div
+        className="scroll-fill-text-fill"
+        style={{
+          clipPath: `inset(0 ${100 - progress * 100}% 0 0)`,
+        }}
+      >
+        {children}
+      </div>
+    </div>
   );
 };
 

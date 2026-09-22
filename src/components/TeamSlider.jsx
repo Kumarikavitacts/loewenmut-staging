@@ -6,7 +6,8 @@ import { useRouter } from "next/navigation"
 import $ from "jquery";
 
 
-import { teamMembers } from "@/helper/TeamUtil";
+import { teamMembers as staticTeamMembers } from "@/helper/TeamUtil";
+import { getMediaUrl } from "@/helper/MediaUrl";
 
 const Shape = ({ type, index }) => {
     return (
@@ -16,7 +17,39 @@ const Shape = ({ type, index }) => {
     );
 };
 
-const TeamSlider = () => {
+// Flattens the first paragraph of a Strapi block-editor "Text"
+// field into a short plain-text teaser for the slider card.
+const getFirstParagraphText = (content = []) => {
+    if (!Array.isArray(content)) return "";
+
+    const firstParagraph = content.find(
+        (block) => block?.type === "paragraph"
+    );
+
+    if (!firstParagraph) return "";
+
+    return (
+        firstParagraph.children?.map((child) => child.text || "").join("") ||
+        ""
+    );
+};
+
+const TeamSlider = ({ teams }) => {
+    // Map API data (Team_Bereich.teams) into the shape this
+    // slider renders. Falls back to the static list only when
+    // no API data is available at all.
+    const teamMembers =
+        Array.isArray(teams) && teams.length > 0
+            ? teams.map((item) => ({
+                  id: item?.id,
+                  name: item?.Titel || "",
+                  role: item?.Bezeichnung || "",
+                  desciption: getFirstParagraphText(item?.Text),
+                  image: item?.Bild?.url ? getMediaUrl(item.Bild.url) : "",
+                  color: item?.Class_Name || "yellow",
+              }))
+            : staticTeamMembers;
+
     const carouselRef = useRef(null);
     const owlInstance = useRef(null);
 
@@ -135,15 +168,14 @@ const TeamSlider = () => {
                     </div>
                 </div>
             ))}
+            
 
-            {/* Last Item */}
-            {teamMembers?.length > 3 && (
+            {/* Last Item - always shown as a CTA to the full team page */}
             <div className="team-carousel-item">
                 <div className="team-last-card">
                     <Link href={`/team`}>LERN DAS GANZE TEAM KENNEN <img src="/images/more-button-arrow.svg" /></Link>
                 </div>
             </div>
-            )}
         </div>
     );
 };

@@ -31,7 +31,7 @@ const News = () => {
         BADGE_CLASSES[index % BADGE_CLASSES.length],
     }));
 
-  console.log("newsItemsWithClasses", newsItemsWithClasses);
+  
 
   const button = newsData?.Button?.[0];
 

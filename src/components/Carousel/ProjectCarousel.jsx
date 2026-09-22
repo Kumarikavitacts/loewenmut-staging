@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import $ from "jquery";
 
 const ProjectCarousel = ({
@@ -11,6 +12,7 @@ const ProjectCarousel = ({
     button,
 }) => {
     const carouselRef = useRef(null);
+    const router = useRouter();
 
     useEffect(() => {
         window.$ = $;
@@ -34,6 +36,7 @@ const ProjectCarousel = ({
 
             const href = card.getAttribute("data-href");
             const target = card.getAttribute("data-target");
+            const isInternal = card.getAttribute("data-internal") === "true";
 
             if (!href || href === "#") {
                 return;
@@ -47,12 +50,21 @@ const ProjectCarousel = ({
             event.stopPropagation();
 
             if (target === "_blank") {
+                // External website (Link_zur_Website) with
+                // Linkziel === "Extern" -> always a new tab.
                 window.open(
                     href,
                     "_blank",
                     "noopener,noreferrer"
                 );
+            } else if (isInternal) {
+                // Internal case page (Detailseite === "Ja" + Slug)
+                // -> client-side navigation, no full page reload.
+                router.push(href);
             } else {
+                // External website without Linkziel === "Extern"
+                // -> same tab, but still a real site, so a full
+                // navigation is correct here.
                 window.location.href = href;
             }
         };
@@ -248,6 +260,7 @@ const ProjectCarousel = ({
                             <a
                                 href={href}
                                 data-href={href}
+                                data-internal={isInternal}
                                 data-target={
                                     openInNewTab
                                         ? "_blank"

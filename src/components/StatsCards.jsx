@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
- 
-const stats = [
+
+// Static fallback, used only when no API data is passed in.
+const staticStats = [
   {
     title: "PROJEKTE",
     value: 72,
@@ -25,10 +26,27 @@ const stats = [
     color: "#cdd9f5",
   },
 ];
- 
+
+// The API doesn't provide a color per counter, so cycle through
+// the same palette the design already uses.
+const STAT_COLORS = ["#405cff", "#6bd36b", "#cdd9f5", "#f5c542", "#e57cd8"];
+
 const TOTAL_SEGMENTS = 40;
- 
-const StatsCards = () => {
+
+const StatsCards = ({ counters }) => {
+  // Map API data (Thekenbereich.Counter) into the shape this
+  // component renders. Falls back to the static list only when
+  // no API data is available at all.
+  const stats =
+    Array.isArray(counters) && counters.length > 0
+      ? counters.map((item, index) => ({
+          title: item?.Titel || "",
+          value: Number(item?.Wert) || 0,
+          description: item?.Text || "",
+          color: STAT_COLORS[index % STAT_COLORS.length],
+        }))
+      : staticStats;
+
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
   const [animatedValues, setAnimatedValues] = useState(

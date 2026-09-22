@@ -1,28 +1,196 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
+import Link from 'next/link';
 import InnerBnanner from '@/components/InnerBanner';
 import TalkSection from '@/components/TalkSection';
 import AnimatedText from '@/components/AnimatedText';
 import ProjectCarousel from '@/components/Carousel/ProjectCarousel';
-import { insights } from '@/helper/Utils';
+import { mapReferenzForCarousel } from '@/helper/Utils';
 import StatsCards from '@/components/StatsCards';
 import TeamSlider from '@/components/TeamSlider';
+import InnerBannerSkeleton from '@/components/Skeleton/InnerBannerSkeleton';
+import SectionSkeleton from '@/components/Skeleton/SectionSkeleton';
+import TalkSkeleton from '@/components/Skeleton/TalkSkeleton';
+import StatusHeader from '@/components/ResuableComponents/StatusHeader';
+import { renderHtmlText } from '@/components/ResuableComponents/renderHtmlText';
+import { getMediaUrl } from '@/helper/MediaUrl';
+import { getAgenturPageData } from '@/Apis/agenturPage/api';
+import { getInsightPageCategory } from '@/Apis/insightPage/api';
+
+// =====================================================
+// RICH TEXT
+//
+// "Text" / "Beschreibung" fields coming from Strapi's block
+// editor are arrays of paragraph blocks. Some inline children
+// carry raw HTML in a "code" flag (e.g. highlighted <span>s).
+// =====================================================
+
+const RichText = ({ content = [] }) => {
+    if (!Array.isArray(content)) return null;
+
+    return (
+        <>
+            {content.map((block, blockIndex) => {
+                if (block.type !== "paragraph") return null;
+
+                return (
+                    <p key={blockIndex}>
+                        {block.children?.map((child, childIndex) => {
+                            // HTML/span coming from Strapi
+                            if (child.code) {
+                                return (
+                                    <span
+                                        key={childIndex}
+                                        dangerouslySetInnerHTML={{
+                                            __html: child.text || "",
+                                        }}
+                                    />
+                                );
+                            }
+
+                            if (child.bold) {
+                                return (
+                                    <strong key={childIndex}>{child.text}</strong>
+                                );
+                            }
+
+                            return (
+                                <React.Fragment key={childIndex}>
+                                    {child.text}
+                                </React.Fragment>
+                            );
+                        })}
+                    </p>
+                );
+            })}
+        </>
+    );
+};
 
 const Agentur = () => {
+    const [pageData, setPageData] = useState(null);
+    const [projects, setProjects] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                setLoading(true);
+                setError(false);
+
+                const [data, referenzen] = await Promise.all([
+                    getAgenturPageData(),
+                    getInsightPageCategory(),
+                ]);
+
+                if (!data) {
+                    setError(true);
+                    return;
+                }
+
+                setPageData(data);
+                setProjects((referenzen || []).map(mapReferenzForCarousel));
+            } catch (err) {
+                console.error("Agentur page error:", err);
+                setError(true);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    // ===================================================
+    // LOADING
+    // ===================================================
+
+    if (loading) {
+        return (
+            <main>
+                <InnerBannerSkeleton />
+                <SectionSkeleton />
+                <SectionSkeleton />
+                <SectionSkeleton />
+                <TalkSkeleton />
+            </main>
+        );
+    }
+
+    // ===================================================
+    // ERROR / NOT FOUND
+    // ===================================================
+
+    if (error || !pageData) {
+        return (
+            <StatusHeader
+                statusType="wrong"
+                title={
+                    <>
+                        Diese Seite konnte leider <br />
+                        nicht gefunden werden
+                    </>
+                }
+                buttonText="Zurück zur Startseite"
+                buttonLink="/"
+            />
+        );
+    }
+
+    // ===================================================
+    // DATA
+    // ===================================================
+
+    const {
+        Kurztitel,
+        Titel,
+        Text,
+        Projekte,
+        Kontaktbereich,
+        Bannerbereich,
+        Bildre_Text,
+        Thekenbereich,
+        Team_Bereich,
+    } = pageData;
+
+    const talkData = Array.isArray(Kontaktbereich)
+        ? Kontaktbereich[0]
+        : Kontaktbereich;
+
+    // --------------------------------
+    // BILDRE_TEXT ("Das macht uns einzigartig") MEDIA + BUTTON
+    // --------------------------------
+    const aboutImage = Bildre_Text?.Bild?.[0];
+    const aboutVideo = Bildre_Text?.Video;
+    const aboutVideoUrl = aboutVideo?.url ? getMediaUrl(aboutVideo.url) : "";
+    const aboutVideoThumbnail = Bildre_Text?.Videominiatur;
+    const aboutVideoThumbnailUrl = aboutVideoThumbnail?.url
+        ? getMediaUrl(aboutVideoThumbnail.url)
+        : "";
+    const aboutMediaType = Bildre_Text?.Bild_oder_Video;
+
+    const aboutButton = Bildre_Text?.Button?.[0];
+    const showAboutButton = Boolean(aboutButton);
+
     return (
         <main>
             <section className="inner_hero_section">
-                <InnerBnanner title={"Nibh vel velit Auctor Aliquet"} heading={<> Digitalagentur in der Schweiz </>} description={<>Nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor,  nisi elit consequat</>} />
+                <InnerBnanner
+                    title={Bannerbereich?.Kurztitel || ""}
+                    heading={Bannerbereich?.Titel || ""}
+                    description={Bannerbereich?.Text || ""}
+                />
             </section>
             <section className="content_emo_section agen_emo_sec pt_pb_3">
                 <div className="container">
                     <div className="row">
                         <div className="col-12 col-lg-4">
-                            <div className="sub_title">lorem quis</div>
+                            <div className="sub_title">{Kurztitel}</div>
                         </div>
                         <div className="col-12 col-lg-8">
-                            <h2>Über <span>uns</span></h2>
+                            <h2>{renderHtmlText(Titel)}</h2>
                         </div>
                         <div className="col-12 col-lg-4 img-col mt-4">
                             <div className="anim_circle">
@@ -31,7 +199,7 @@ const Agentur = () => {
                         </div>
                         <div className="col-12 col-lg-8 content-col mt-4">
                             <div className="sec-content">
-                                <p>Loewenmut ist seit 2006 Ihr kompetenter Partner in allen <span className='txt-004'>digitalen Fragen.</span> Professionelles Webdesign, starke Vermarktung, gewinnbringende Werbeplatzierung oder Entwicklung <span className='txt-005'>eines</span> umfassendes Konzeptes: Wir unterstützen Sie in jeder Situation. Nennen Sie uns Ihre Anforderungen, Ziele und Wünsche - gemeinsam realisieren <span className='txt-006'>wir</span> Ihren Erfolg.</p>
+                                <RichText content={Text || []} />
                             </div>
                         </div>
                     </div>
@@ -42,14 +210,47 @@ const Agentur = () => {
                     <div className="row align-items-center">
                         <div className="col-12 col-lg-6 content-col mb-4 mb-lg-0">
                             <div className="sec-content pe-lg-4">
-                                <div className="sub_title">auctor aliquet </div>
-                                <h2>Das macht uns einzigartig</h2>
-                                <p>Wir bieten mit unserem grenzenlosen Webdesign nachhaltigen Mehrwert für jedes Unternehmen. Unsere Leidenschaft sind Produkte und Dienstleistungen, welche durch uns auch in der digitalen Welt jeden Tag aufs Neue begeistern. Wir sind ein zuverlässiger und innovativer Partner und arbeiten mit den neuesten Technologien.</p>
-                                <p>Mit der Idee verbinden wir das Ziel, aussergewöhnliche Chancen zu bieten – sowohl in wirtschaftlicher, beruflicher als auch persönlicher Hinsicht. Gerade weil es in unserem Metier auch um Menschen geht, machen wir das was wir tun, mit grosser Leidenschaft.</p>
+                                <div className="sub_title">{Bildre_Text?.Kurztitel}</div>
+                                <h2>{renderHtmlText(Bildre_Text?.Titel)}</h2>
+                                <RichText content={Bildre_Text?.Beschreibung || []} />
+
+                                {showAboutButton && (
+                                    <div className="theme_btn_wrap mt-4">
+                                        <Link
+                                            href={aboutButton?.button_link || "#"}
+                                            className="button theme_btn"
+                                        >
+                                            {aboutButton?.button_text}
+                                            <img src="/images/btn-arrow.svg" alt="" />
+                                        </Link>
+                                    </div>
+                                )}
                             </div>
                         </div>
                         <div className="col-12 col-lg-6 img-col">
-                            <img src="/images/image-unique.png" alt="Aenean sollicitudin" className='rounded' />
+                            {aboutMediaType === "Bild" && aboutImage?.url && (
+                                <img
+                                    src={getMediaUrl(aboutImage.url)}
+                                    alt={aboutImage?.alternativeText || Bildre_Text?.Titel || ""}
+                                    className='rounded'
+                                />
+                            )}
+
+                            {aboutMediaType === "Video" && aboutVideoUrl && (
+                                <video
+                                    className="rounded w-100"
+                                    controls
+                                    playsInline
+                                    preload="metadata"
+                                    poster={aboutVideoThumbnailUrl || undefined}
+                                >
+                                    <source
+                                        src={aboutVideoUrl}
+                                        type={aboutVideo?.mime || "video/mp4"}
+                                    />
+                                    Your browser does not support the video tag.
+                                </video>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -57,31 +258,37 @@ const Agentur = () => {
             <section className='agentur_team_section pt_3 overflow-hidden'>
                 <div className='container'>
                     <div className='sec-heading mb-4'>
-                        <div className='sub_title'>auctor aliquet</div>
-                        <h2>Lernen Sie die <br />kreativen Köpfe kennen</h2>
+                        <div className='sub_title'>{Team_Bereich?.Kurztitel}</div>
+                        <h2>{renderHtmlText(Team_Bereich?.Titel)}</h2>
                     </div>
-                    <TeamSlider />
+                    <TeamSlider teams={Team_Bereich?.teams} />
                 </div>
             </section>
             <section className='project_stats_section pt_pb_3'>
                 <div className='container'>
                     <div className='sec-heading mb-4'>
-                        <div className='sub_title'>auctor aliquet</div>
-                        <h2>Nibh vel velit <span>Auctor Aliquet</span></h2>
+                        <div className='sub_title'>{Thekenbereich?.Kurztitel}</div>
+                        <h2>{renderHtmlText(Thekenbereich?.Titel)}</h2>
                     </div>
-                    <StatsCards />
+                    <StatsCards counters={Thekenbereich?.Counter} />
                 </div>
             </section>
             <section className='pt_pb_3 project-carousel-section overflow-hidden' style={{ backgroundImage: "url('/images/bg-pattern.png')" }}>
-                <ProjectCarousel title={<>Aenean <span>velit auctor aliquet.</span></>} description={"Proin gravida nibh vel velit auctor aliquet. Aenea sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit."} description2={<> Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit <span className='txt-008'>consequat</span> ipsum, nec sagittis sem nibh id elit.</>} project={insights} button={"Insights ansehen"} />
+                <ProjectCarousel
+                    title={renderHtmlText(Projekte?.Titel)}
+                    description={Projekte?.Text_1}
+                    description2={renderHtmlText(Projekte?.Text_2)}
+                    project={projects}
+                    button={Projekte?.button_text}
+                />
             </section>
             <section className="pt_pb_3 talk_section">
-                <TalkSection />
+                <TalkSection talkData={talkData} />
             </section>
         </main>
     );
 }
-  
+
 
 
 
