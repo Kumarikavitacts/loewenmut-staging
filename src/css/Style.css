@@ -2375,45 +2375,74 @@ footer {
 .project-carousel-section {
     .project-carousel {
         clip-path: inset(-100vw -100vw -100vw 0);
+
         .owl-stage-outer {
             overflow: unset !important;
         }
+
         .project-carousel-item {
             width: 100%;
         }
+
+        /*
+         * IMPORTANT:
+         * Make the clickable area fill the entire Owl item.
+         */
+        .project-carousel-card-link {
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        .project-carousel-card-link:hover {
+            text-decoration: none;
+            color: inherit;
+        }
+
         .project-carousel-card {
-            width: 340px;
+            width: 100%;
             height: 318px;
-            max-width: 100%;
             border-radius: var(--radius-30);
             overflow: hidden;
             position: relative;
         }
+
         .project-carousel-image {
             object-fit: cover;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.45s ease, visibility 0.45s ease;
+            transition:
+                opacity 0.45s ease,
+                visibility 0.45s ease;
             z-index: 1;
+            pointer-events: none;
         }
+
         .project-carousel-card:hover {
             .project-carousel-image {
                 opacity: 1;
                 visibility: visible;
             }
         }
+
         .project-carousel-logo-wrapper {
             width: 100%;
             height: 100%;
             z-index: 2;
             padding: 30px;
+            pointer-events: none;
         }
+
         .project-carousel-logo {
             max-width: 75%;
             max-height: 75%;
             width: auto;
             height: auto;
             object-fit: contain;
+            pointer-events: none;
         }
     }
 }
