@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 const STRAPI_URL = process.env.STRAPI_URL;
 const STRAPI_API_TOKEN = process.env.STRAPI_API_TOKEN;
-const TURNSTILE_SECRET_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY;
 
 async function verifyTurnstileToken(token, remoteIp) {
   const response = await fetch(
