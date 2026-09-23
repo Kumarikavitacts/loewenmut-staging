@@ -5,7 +5,7 @@ import InnerBnanner from "@/components/InnerBanner";
 import PrivacyAccordion from "@/components/DatenData";
 import InnerBannerSkeleton from "@/components/Skeleton/InnerBannerSkeleton";
 
-import { getDatenschutzPage } from "@/Apis/DatenschutzPage/api";
+import { getDatenschutzPage } from "@/Apis/datenschutzPage/api";
 
 const renderRichText = (blocks = []) => {
   if (!Array.isArray(blocks)) {

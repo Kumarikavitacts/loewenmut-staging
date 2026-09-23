@@ -15,11 +15,7 @@ const TurnstileWidget = forwardRef(({ onVerify, onExpire }, ref) => {
   const [loadError, setLoadError] = useState(false);
 
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
-  console.log("Turnstile site key exists:", !!siteKey);
-  console.log(
-    "Turnstile site key preview:",
-    siteKey ? `${siteKey.substring(0, 8)}...` : "UNDEFINED"
-  );
+
   const renderWidget = () => {
     if (!window.turnstile || !containerRef.current || widgetIdRef.current) {
       return;

@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import TurnstileWidget from "@/components/ResuableComponents/TurnstileWidget";
-
+import { useRouter } from "next/navigation";
 const strategies = [
   { id: "strategie", label: "Strategie", value: "Strategie" },
   { id: "beratung", label: "Beratung", value: "Beratung" },
@@ -15,7 +15,7 @@ const strategies = [
 
 const ContactForm = () => {
   const turnstileRef = useRef(null);
-
+const router = useRouter();
   const [selectedStrategies, setSelectedStrategies] = useState([]);
   const [turnstileToken, setTurnstileToken] = useState("");
 
@@ -91,8 +91,11 @@ const ContactForm = () => {
         betreff: "",
         nachricht: "",
       });
-
       setSelectedStrategies([]);
+      // Redirect after 2 seconds
+          setTimeout(() => {
+            router.push("/vielen-dank");
+          }, 2000);
     } catch (error) {
       console.error(error);
       setErrorMessage(
@@ -103,6 +106,7 @@ const ContactForm = () => {
       // Turnstile tokens are single-use — always reset after an attempt,
       // whether it succeeded or failed.
       turnstileRef.current?.reset();
+
     }
   };
 
@@ -131,7 +135,7 @@ const ContactForm = () => {
           <input
             type="text"
             className="form-control"
-            placeholder="Vorname"
+            placeholder="Vorname*"
             name="vorname"
             value={formData.vorname}
             onChange={handleChange}
@@ -143,7 +147,7 @@ const ContactForm = () => {
           <input
             type="text"
             className="form-control"
-            placeholder="Nachname"
+            placeholder="Nachname*"
             name="nachname"
             value={formData.nachname}
             onChange={handleChange}
@@ -155,7 +159,7 @@ const ContactForm = () => {
           <input
             type="email"
             className="form-control"
-            placeholder="E-Mail"
+            placeholder="E-Mail*"
             name="email"
             value={formData.email}
             onChange={handleChange}
@@ -167,10 +171,11 @@ const ContactForm = () => {
           <input
             type="text"
             className="form-control"
-            placeholder="Telefon"
+            placeholder="Telefon*"
             name="telefon"
             value={formData.telefon}
             onChange={handleChange}
+            required
           />
         </div>
 
@@ -193,7 +198,7 @@ const ContactForm = () => {
             name="nachricht"
             value={formData.nachricht}
             onChange={handleChange}
-            required
+            
           />
         </div>
 

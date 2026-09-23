@@ -44,7 +44,10 @@ export const metadata = {
     images: [
       {
         url: "/images/og_image.png",
-   
+        width: 1200,
+        height: 630,
+        alt: "Löwenmut – Webdesign, Branding und digitale Lösungen",
+
       },
     ],
 
@@ -120,7 +123,7 @@ export default function RootLayout({ children }) {
       </head>
 
       <body>
-      <BootstrapInit />
+        <BootstrapInit />
         <Providers>
           <SiteChrome>{children}</SiteChrome>
         </Providers>
