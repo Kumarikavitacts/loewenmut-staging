@@ -24,6 +24,8 @@ const TurnstileWidget = forwardRef(({ onVerify, onExpire }, ref) => {
     try {
       widgetIdRef.current = window.turnstile.render(containerRef.current, {
         sitekey: siteKey,
+        // German language
+        language: "de",
         callback: (token) => {
           onVerify?.(token);
         },

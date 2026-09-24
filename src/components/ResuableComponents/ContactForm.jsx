@@ -13,9 +13,25 @@ const strategies = [
   { id: "content", label: "Content", value: "Content" },
 ];
 
+// VALIDATION FIX: German replacements for the browser's default
+// (English) HTML5 validation bubble text, keyed by validity state.
+// Passed per-field into handleInvalid() below.
+const DEFAULT_MESSAGES = {
+  valueMissing: "Bitte füllen Sie dieses Feld aus.",
+  typeMismatch: "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+  patternMismatch: "Bitte geben Sie eine gültige Telefonnummer ein (nur Zahlen).",
+};
+
+// VALIDATION FIX: only digits, spaces, "+", "-", "(" and ")" are allowed
+// in the Telefon field — letters and other characters are stripped as
+// the user types, and this same pattern backs the HTML5 `pattern`
+// attribute on the input for a final check on submit.
+const PHONE_ALLOWED_CHARS_REGEX = /[^0-9+\-\s()]/g;
+const PHONE_PATTERN = "^[0-9+\\-\\s()]{6,}$";
+
 const ContactForm = () => {
   const turnstileRef = useRef(null);
-const router = useRouter();
+  const router = useRouter();
   const [selectedStrategies, setSelectedStrategies] = useState([]);
   const [turnstileToken, setTurnstileToken] = useState("");
 
@@ -47,6 +63,46 @@ const router = useRouter();
       ...current,
       [name]: value,
     }));
+
+    // VALIDATION FIX: clear any previously set custom validity message
+    // as soon as the user edits the field, so the browser re-checks
+    // validity fresh on the next submit attempt instead of re-showing
+    // a stale message.
+    e.target.setCustomValidity("");
+  };
+
+  // VALIDATION FIX: Telefon-specific change handler — strips any
+  // character that isn't a digit, space, "+", "-", "(" or ")" so the
+  // user simply cannot type letters/symbols into the phone field.
+  const handlePhoneChange = (e) => {
+    const { name, value } = e.target;
+    const filteredValue = value.replace(PHONE_ALLOWED_CHARS_REGEX, "");
+
+    setFormData((current) => ({
+      ...current,
+      [name]: filteredValue,
+    }));
+
+    e.target.setCustomValidity("");
+  };
+
+  // VALIDATION FIX: fires when a field fails native HTML5 validation
+  // (e.g. left empty, or — for Telefon — fails the pattern check) and
+  // sets a German message instead of the browser's default English one.
+  // `messages` lets each field override individual messages as needed.
+  const handleInvalid = (e, messages = {}) => {
+    const target = e.target;
+    const merged = { ...DEFAULT_MESSAGES, ...messages };
+
+    if (target.validity.valueMissing) {
+      target.setCustomValidity(merged.valueMissing);
+    } else if (target.validity.typeMismatch) {
+      target.setCustomValidity(merged.typeMismatch);
+    } else if (target.validity.patternMismatch) {
+      target.setCustomValidity(merged.patternMismatch);
+    } else {
+      target.setCustomValidity("");
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -93,9 +149,9 @@ const router = useRouter();
       });
       setSelectedStrategies([]);
       // Redirect after 2 seconds
-          setTimeout(() => {
-            router.push("/vielen-dank");
-          }, 2000);
+      setTimeout(() => {
+        router.push("/vielen-dank");
+      }, 2000);
     } catch (error) {
       console.error(error);
       setErrorMessage(
@@ -106,7 +162,6 @@ const router = useRouter();
       // Turnstile tokens are single-use — always reset after an attempt,
       // whether it succeeded or failed.
       turnstileRef.current?.reset();
-
     }
   };
 
@@ -139,6 +194,8 @@ const router = useRouter();
             name="vorname"
             value={formData.vorname}
             onChange={handleChange}
+            // VALIDATION FIX: German message on empty submit
+            onInvalid={(e) => handleInvalid(e)}
             required
           />
         </div>
@@ -151,6 +208,7 @@ const router = useRouter();
             name="nachname"
             value={formData.nachname}
             onChange={handleChange}
+            onInvalid={(e) => handleInvalid(e)}
             required
           />
         </div>
@@ -163,18 +221,39 @@ const router = useRouter();
             name="email"
             value={formData.email}
             onChange={handleChange}
+            // VALIDATION FIX: German messages for both "empty" and
+            // "not a valid email format" cases
+            onInvalid={(e) =>
+              handleInvalid(e, {
+                valueMissing: "Bitte füllen Sie dieses Feld aus.",
+                typeMismatch: "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+              })
+            }
             required
           />
         </div>
 
         <div className="col-sm-6 form-group">
           <input
-            type="text"
+            type="tel"
             className="form-control"
             placeholder="Telefon*"
             name="telefon"
             value={formData.telefon}
-            onChange={handleChange}
+            // VALIDATION FIX: numeric-only handler instead of the
+            // generic handleChange
+            onChange={handlePhoneChange}
+            // VALIDATION FIX: only digits/spaces/+/-/() allowed, at
+            // least 6 characters — with a German message either way
+            pattern={PHONE_PATTERN}
+            inputMode="tel"
+            onInvalid={(e) =>
+              handleInvalid(e, {
+                valueMissing: "Bitte füllen Sie dieses Feld aus.",
+                patternMismatch:
+                  "Bitte geben Sie eine gültige Telefonnummer ein (nur Zahlen).",
+              })
+            }
             required
           />
         </div>
@@ -198,7 +277,6 @@ const router = useRouter();
             name="nachricht"
             value={formData.nachricht}
             onChange={handleChange}
-            
           />
         </div>
 
