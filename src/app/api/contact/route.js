@@ -714,7 +714,7 @@ export async function POST(request) {
 
     const strapiResponseText = await strapiResponse.text();
 
-    console.log("Strapi status:", strapiResponse.status);
+    // console.log("Strapi status:", strapiResponse.status);
 
     if (!strapiResponse.ok) {
       console.error("Strapi response:", strapiResponseText);
@@ -758,7 +758,7 @@ export async function POST(request) {
         kontaktInfo,
       })
         .then(() => {
-          console.log(`Confirmation email sent to: ${email}`);
+          // console.log(`Confirmation email sent to: ${email}`);
         })
         .catch((emailError) => {
           console.error("Confirmation email failed:", emailError);

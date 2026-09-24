@@ -5,6 +5,7 @@ import Link from "next/link";
 import { getMediaUrl } from "@/helper/MediaUrl";
 import { renderHtmlText } from "@/components/ResuableComponents/renderHtmlText";
 import ScrollFillText from "@/components/ResuableComponents/ScrollFillText";
+import { truncateText } from "@/helper/TruncateString";
 const DEFAULT_NEWS_IMAGE = "/images/news-1.png";
 
 const NewsCard = ({
@@ -36,7 +37,7 @@ const NewsCard = ({
             <h2>
               <ScrollFillText
                         html={heading}
-                        className="leistungen_fill_title"
+                        className="News_fill_title"
                         startColor="var(--bs-textdarkgrey)"
                         fillColor="var(--bs-textdarkgrey)"
                     />
@@ -114,9 +115,9 @@ const NewsCard = ({
                   {/* Description */}
                   {news?.description && (
                     <p>
-                      {news.description}
+                      {truncateText(news.description ,90)}
                     </p>
-                  )}
+                  )} 
 
                   <hr />
 
@@ -156,7 +157,7 @@ const NewsCard = ({
       </div>
 
       {/* All News Button */}
-      {showFooter && newsData?.length > 3 && (
+      {showFooter  && (
         <div className="theme_btn_wrap d-flex justify-content-center mt-4">
           <Link
             href={buttonLink || "/news"}

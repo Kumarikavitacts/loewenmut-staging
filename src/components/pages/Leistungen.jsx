@@ -11,6 +11,7 @@ import InnerBannerSkeleton from "@/components/Skeleton/InnerBannerSkeleton";
 import SectionSkeleton from "@/components/Skeleton/SectionSkeleton";
 import LeistungenListSkeleton from "@/components/Skeleton/LeistungenListSkeleton";
 import StatusHeader from "@/components/ResuableComponents/StatusHeader";
+import ScrollFillText from "@/components/ResuableComponents/ScrollFillText";
 
 
 const Leistungen = () => {
@@ -153,11 +154,14 @@ const Leistungen = () => {
               )}
 
               {Funktioniert.Titel && (
-                <h2
-                  dangerouslySetInnerHTML={{
-                    __html: Funktioniert.Titel,
-                  }}
-                />
+                <h2>
+                    <ScrollFillText
+                        html={Funktioniert.Titel}
+                        className="leistungen_fill_title"
+                        startColor="var(--bs-textdarkgrey)"
+                        fillColor="var(--bs-textdarkgrey)"
+                    />
+                </h2>
               )}
 
               {Funktioniert.Text && (

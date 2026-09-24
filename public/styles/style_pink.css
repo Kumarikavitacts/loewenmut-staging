@@ -157,7 +157,13 @@ form {
     }
 }
 
-
+.filter_tabs {
+    .btn {
+        &.active {
+            color:var(--bs-themetext) !important;
+        }
+    }
+}
 @media (max-width: 767px) {
     .service-slider {
         .owl-item.active .item {

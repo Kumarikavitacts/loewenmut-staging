@@ -60,10 +60,10 @@ const Footer = () => {
                     <div className='col-md-4 col-lg-3 ftr_col mb-4 mb-md-0'>
                         <div className='ftr_scl_links d-flex gap-5 justify-content-start justify-content-md-center align-items-center'>
                             <div className="border-end pe-4 cursorPointer " >
-                                <a href="https://www.swissmadesoftware.org/home.html" target="_blank" rel="noopener noreferrer"> <img src="/images/footer/Group1412.png" /> </a>
+                                <a href="https://www.swissmadesoftware.org/home.html" target="_blank" rel="noopener noreferrer"> <img src="/images/footer/swiss-made-software.svg" /> </a>
                             </div>
                             <div className="cursorPointer" >
-                                <a href="https://www.swissmadesoftware.org/home.html" target="_blank" rel="noopener noreferrer"> <img src="/images/footer/Group.png" /></a>
+                                <a href="https://www.swissmadesoftware.org/home.html" target="_blank" rel="noopener noreferrer"> <img src="/images/footer/swiss-digital-services.svg" /></a>
                             </div>
                         </div>
                     </div>

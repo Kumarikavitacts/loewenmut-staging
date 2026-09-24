@@ -23,7 +23,7 @@ export const apiEndpoints = {
     `api/newss?fields[0]=documentId&fields[1]=slug`,
 
   getNewsInnerBySlugEndpoint: (documentId) =>
-    `api/newss/${documentId}?populate[Bild_Text_Abschnitt][populate][Bild]=true&populate[Bildre_Text][populate][Bild]=true&populate[Bildre_Text][populate][Video]=true&populate[Bildre_Text][populate][Videominiatur]=true&populate[Bildre_Text][populate][Button]=true&populate[Kontaktbereich]=true&populate[Metadaten]=true&populate[Button]=true`,
+    `api/newss/${documentId}?populate[Bild_Text_Abschnitt][populate][Bild]=true&populate[Bildre_Text][populate][Bild]=true&populate[Bildre_Text][populate][Video]=true&populate[Bildre_Text][populate][Videominiatur]=true&populate[Bildre_Text][populate][Button]=true&populate[Kontaktbereich]=true&populate[Metadaten]=true&populate[Button]=true&populate[RelatedNews][populate][news][populate]=*`,
   getKontaktPageEndpoint: `api/kontakt?populate=*`,
 
   getImpressumPageEndpoint: `api/impressum?populate=*`,

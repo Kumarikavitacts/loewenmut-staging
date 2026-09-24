@@ -2,17 +2,19 @@ import React from "react";
 
 const FilterTabs = ({ tabs, activeTab, onTabChange }) => {
   return (
-    <div className="filter-tabs-wrapper">
+    <div className="filter-tabs-wrapper container">
       <div className="filter-tabs filter_tabs">
         {tabs.map((tab) => (
           <button key={tab.value} type="button" className={`btn rounded-pill text-nowrap ${
               activeTab === tab.value
-                ? "text-white border-0"
-                : "bg-white border text-dark"
+                ? " border-0"
+                : " border "
             }`}
             style={
               activeTab === tab.value
-                ? { backgroundColor: "var(--bs-themecolor)" }
+                ? { backgroundColor: "var(--bs-themecolor)",
+                    color: "var(--bs-themetext)"
+                 }
                 : {}
             }
             onClick={() => onTabChange(tab.value)}

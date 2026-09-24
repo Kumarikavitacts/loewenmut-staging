@@ -9,79 +9,70 @@ import TalkSection from "@/components/TalkSection";
 import StatusHeader from "@/components/ResuableComponents/StatusHeader";
 import InsightInnerSkeleton from "@/components/Skeleton/InsightInnerSkeleton";
 
-import {
-  getNewsBySlug,
-  getNewsPageCategory,
-} from "@/Apis/NewsPage/api";
+import { getNewsBySlug } from "@/Apis/NewsPage/api";
 import { getMediaUrl } from "@/helper/MediaUrl";
-
-const BADGE_CLASSES = [
-  "purple_badge",
-  "blue_badge",
-  "red_badge",
-];
 
 const NewsInner = () => {
   const params = useParams();
   const slug = params?.id;
 
   const [data, setData] = useState(null);
-  const [allNews, setAllNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
     if (!slug) return;
 
+    let isMounted = true;
+
     const fetchData = async () => {
       try {
         setLoading(true);
         setError(false);
 
-        const [result, newsResult] = await Promise.all([
-          getNewsBySlug(slug),
-          getNewsPageCategory(),
-        ]);
+        const result = await getNewsBySlug(slug);
+
+        if (!isMounted) return;
 
         if (!result) {
           setError(true);
+          setData(null);
           return;
         }
 
         setData(result);
-        setAllNews(newsResult || []);
       } catch (err) {
         console.error("News detail error:", err);
-        setError(true);
+
+        if (isMounted) {
+          setError(true);
+          setData(null);
+        }
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
 
     fetchData();
+
+    return () => {
+      isMounted = false;
+    };
   }, [slug]);
 
+  /*
+   * Related news is already coming from the detail API.
+   *
+   * data.RelatedNews.news
+   */
   const relatedNews = useMemo(() => {
-    if (!data?.documentId) return [];
+    if (!data?.RelatedNews?.news) {
+      return [];
+    }
 
-    const categoryClassMap = {};
-
-    (allNews || []).forEach((item) => {
-      (item?.news_kategories || []).forEach((category, index) => {
-        if (
-          category?.documentId &&
-          !categoryClassMap[category.documentId]
-        ) {
-          categoryClassMap[category.documentId] =
-            BADGE_CLASSES[
-            Object.keys(categoryClassMap).length %
-            BADGE_CLASSES.length
-            ];
-        }
-      });
-    });
-
-    return (allNews || [])
+    return data.RelatedNews.news
       .filter(
         (item) => item?.documentId !== data?.documentId
       )
@@ -97,24 +88,30 @@ const NewsInner = () => {
           title: item?.Titel || "",
           description: item?.Text || "",
           date: formatDate(item?.Publikation),
-          image: item?.Bild?.url || "",
+
+          image: item?.Bild?.url
+            ? getMediaUrl(item.Bild.url)
+            : "",
+
           alternativeText:
             item?.Bild?.alternativeText ||
             item?.Titel ||
             "",
-          category: firstCategory?.Titel || "",
+
+          category:
+            firstCategory?.Titel || "",
+
           categoryClass:
-            firstCategory?.documentId
-              ? categoryClassMap[
-              firstCategory.documentId
-              ] || ""
-              : "",
+            getCategoryClass(firstCategory),
+
           categoryIds: (
             item?.news_kategories || []
-          ).map((category) => category?.documentId),
+          ).map(
+            (category) => category?.documentId
+          ),
         };
       });
-  }, [allNews, data?.documentId]);
+  }, [data]);
 
   if (loading) {
     return <InsightInnerSkeleton />;
@@ -140,7 +137,6 @@ const NewsInner = () => {
     Titel,
     Kurztitel,
     Text,
-    Publikation,
     Button,
     Bild_Text_Abschnitt,
     Bildre_Text,
@@ -252,9 +248,7 @@ const NewsInner = () => {
                       >
                         <div className="image_layout_item">
                           <img
-                            src={getMediaUrl(
-                              image.url
-                            )}
+                            src={getMediaUrl(image.url)}
                             alt={
                               image?.alternativeText ||
                               Titel ||
@@ -315,8 +309,7 @@ const NewsInner = () => {
                           return (
                             <a
                               key={
-                                button?.id ||
-                                index
+                                button?.id || index
                               }
                               href={
                                 button?.button_link ||
@@ -335,6 +328,7 @@ const NewsInner = () => {
                               }
                             >
                               {button.button_text}
+
                               <img
                                 src="/images/btn-arrow.svg"
                                 alt=""
@@ -373,6 +367,7 @@ const NewsInner = () => {
                           "video/mp4"
                         }
                       />
+
                       Your browser does not support
                       the video tag.
                     </video>
@@ -406,7 +401,9 @@ const NewsInner = () => {
         <section className="news-page-section news_section pt_3">
           <NewsCard
             newsData={relatedNews}
-            showHeader={false}
+            showHeader={true}
+            subTitle={data?.RelatedNews?.Kurztitel || ""}
+            heading={data?.RelatedNews?.Titel || ""}
             showFooter={false}
           />
         </section>
@@ -415,12 +412,36 @@ const NewsInner = () => {
       {/* ================= CONTACT ================= */}
       {Kontaktbereich && (
         <section className="pt_pb_3 talk_section">
-          <TalkSection talkData={Kontaktbereich} />
+          <TalkSection
+            talkData={Kontaktbereich}
+          />
         </section>
       )}
     </main>
   );
 };
+
+/* =========================================================
+   CATEGORY CLASS
+========================================================= */
+
+const getCategoryClass = (category) => {
+  if (!category) return "";
+
+  const color = category?.Farbe?.toLowerCase();
+
+  const colorMap = {
+    purple: "purple_badge",
+    blue: "blue_badge",
+    red: "red_badge",
+  };
+
+  return colorMap[color] || "";
+};
+
+/* =========================================================
+   STRAPI RICH TEXT
+========================================================= */
 
 const StrapiRichText = ({ content }) => {
   if (!content) return null;
@@ -460,9 +481,7 @@ const StrapiRichText = ({ content }) => {
 
               if (child?.bold) {
                 return (
-                  <strong
-                    key={childIndex}
-                  >
+                  <strong key={childIndex}>
                     {text}
                   </strong>
                 );
@@ -519,14 +538,32 @@ const StrapiRichText = ({ content }) => {
   );
 };
 
-/* ========================================================= DATE FORMATTER ========================================================= */
-const formatDate = (date) => {
-  if (!date) { return ""; }
-  const parsedDate = new Date(date);
-  if (Number.isNaN(parsedDate.getTime())) { return date; }
+/* =========================================================
+   DATE FORMATTER
+========================================================= */
 
-  const day = String(parsedDate.getDate()).padStart(2, "0");
-  const month = String(parsedDate.getMonth() + 1).padStart(2, "0");
-  const year = parsedDate.getFullYear(); return `${day}.${month}.${year}`;
+const formatDate = (date) => {
+  if (!date) {
+    return "";
+  }
+
+  const parsedDate = new Date(date);
+
+  if (Number.isNaN(parsedDate.getTime())) {
+    return date;
+  }
+
+  const day = String(
+    parsedDate.getDate()
+  ).padStart(2, "0");
+
+  const month = String(
+    parsedDate.getMonth() + 1
+  ).padStart(2, "0");
+
+  const year = parsedDate.getFullYear();
+
+  return `${day}.${month}.${year}`;
 };
+
 export default NewsInner;

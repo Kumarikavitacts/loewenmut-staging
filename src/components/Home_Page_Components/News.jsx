@@ -24,7 +24,7 @@ const News = () => {
     newsData?.Button?.[0];
 
   return (
-    <section className="pt_pb_3 news_section">
+    <section className="pt_pb_2 news_section">
 
       <NewsCard
         newsData={newsItemsWithClasses}

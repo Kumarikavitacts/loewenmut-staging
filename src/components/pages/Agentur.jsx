@@ -17,6 +17,7 @@ import { renderHtmlText } from '@/components/ResuableComponents/renderHtmlText';
 import { getMediaUrl } from '@/helper/MediaUrl';
 import { getAgenturPageData } from '@/Apis/agenturPage/api';
 import { getInsightPageCategory } from '@/Apis/insightPage/api';
+import ScrollFillText from '@/components/ResuableComponents/ScrollFillText';
 
 // =====================================================
 // RICH TEXT
@@ -268,7 +269,13 @@ const Agentur = () => {
                 <div className='container'>
                     <div className='sec-heading mb-4'>
                         <div className='sub_title'>{Thekenbereich?.Kurztitel}</div>
-                        <h2>{renderHtmlText(Thekenbereich?.Titel)}</h2>
+                        <h2> 
+                             <ScrollFillText
+                        html={Thekenbereich?.Titel}
+                        className="Agentur_fill_title"
+                        startColor="var(--bs-textdarkgrey)"
+                        fillColor="var(--bs-textdarkgrey)"
+                    /></h2>
                     </div>
                     <StatsCards counters={Thekenbereich?.Counter} />
                 </div>

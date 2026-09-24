@@ -451,7 +451,7 @@ const LiestungenSlider = () => {
                   {/* NUMBER */}
 
                   <div className="item-count">
-                    {index+1}
+                    {`0${index + 1}/0${services?.length}`}
                   </div>
 
                   {/* TITLE */}

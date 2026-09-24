@@ -12,6 +12,7 @@ import InsightInnerSkeleton from "@/components/Skeleton/InsightInnerSkeleton";
 import { getReferenzBySlug, getInsightPageCategory } from "@/Apis/insightPage/api";
 import { getMediaUrl } from "@/helper/MediaUrl";
 import { mapReferenzForCarousel } from "@/helper/Utils";
+import ScrollFillText from "@/components/ResuableComponents/ScrollFillText";
 
 // Flattens a Strapi block-editor "list" field (Inhaltsabschnitt.Inhalt[].Text)
 // into a plain string array, since ProjectInfoCard expects items: string[]
@@ -271,9 +272,14 @@ const InsightInner = () => {
                 )}
 
                 {Bildbereich?.Titel && (
-                  <h2
-                    dangerouslySetInnerHTML={{ __html: Bildbereich.Titel }}
-                  />
+                <h2>
+                    <ScrollFillText
+                        html={Bildbereich?.Titel}
+                        className="leistungen_fill_title"
+                        startColor="var(--bs-textdarkgrey)"
+                        fillColor="var(--bs-textdarkgrey)"
+                    />
+                </h2>
                 )}
               </div>
             )}

@@ -84,10 +84,10 @@ h2 {
     font-family: var(--bs-roboto);
     font-size: var(--bs-fs60);
     font-weight: 400;
-    color: var(--bs-textdarkgrey);
+    /* color: var(--bs-textdarkgrey);
     span {
         color: var(--bs-textlightgrey);
-    }
+    } */
 }
 h3 {
     font-size: var(--bs-fs30);
@@ -490,6 +490,10 @@ form {
 }
 .wi_full {
     width: 100%;
+}
+.pt_pb_2 {
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 .pt_pb_3 {
     padding-top: 60px;
@@ -1179,34 +1183,36 @@ footer {
             margin-bottom: 1rem;
         }
     }
+    .ftr_contact, .ftr_quick_links {
+        .icon_style {
+            flex-shrink: 0;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            padding: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--bs-themecolor);
+            svg {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                fill: var(--bs-darkgrey);
+            }
+        }
+        a:hover {
+            .icon_style {
+                background-color: var(--bs-themecolor);
+            }
+        }
+    }
     .ftr_contact {
         a {
             display: flex;
             align-items: center;
             margin-bottom: 1rem;
             gap: 10px;
-            .icon_style {
-                flex-shrink: 0;
-                border-radius: 50%;
-                width: 48px;
-                height: 48px;
-                padding: 10px;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                border: 1px solid var(--bs-themecolor);
-                svg {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: contain;
-                    fill: var(--bs-darkgrey);
-                }
-            }
-            &:hover {
-                .icon_style {
-                    background-color: var(--bs-themecolor);
-                }
-            }
         }
     }
     .scl_links {
@@ -1676,11 +1682,12 @@ footer {
     .btn {
         font-size: var(--bs-fs24);
         font-weight: 400;
-        color: #090A11;
+        color: var(--bs-darkgrey);
         padding: .65rem 1.25rem;
         &.active {
             background: var(--bs-themecolor);
             border-color: var(--bs-themecolor);
+            color:var(--bs-darkgrey) 
         }
     }
 }
@@ -2159,23 +2166,31 @@ footer {
         font-size: var(--bs-fs20);
     }
     .team-last-card a {
-        width: 100%;
-        height: 320px;
-        background-color: #F34E9B;
-        color: var(--bs-white);
-        display: inline-flex;
-        justify-content: flex-end;
-        padding: 4rem;
-        font-size: var(--bs-fs50);
-        font-weight: 600;
-        flex-direction: column;
-        line-height: 1;
+    width: 100%;
+    height: 320px;
+    background-color: #F34E9B;
+    color: var(--bs-white);
+    display: inline-flex;
+    justify-content: flex-end;
+    padding: 4rem;
+    font-size: var(--bs-fs50);
+    font-weight: 600;
+    flex-direction: column;
+    line-height: 1;
+
+    img {
+        width: 60px !important;
+        margin-left: auto;
+        margin-top: -30px;
+        transition: transform 0.35s ease;
+    }
+
+    &:hover {
         img {
-            width: 60px !important;
-            margin-left: auto;
-            margin-top: -30px;
+            transform: translateX(10px);
         }
-    } 
+    }
+}
 }
 
 .map-wrapper {
@@ -2241,7 +2256,10 @@ footer {
         svg {
             width: 70px;
             height: 70px;
-            transition: .4s all;
+            transition: all .4s;
+            border: 4px solid #fff;
+            border-radius: 50%;
+            box-shadow: 0px 4px 15px rgb(0 0 0 / 15%);
         }
         a:hover {
             color: var(--bs-themecolor) !important;
@@ -2277,12 +2295,16 @@ footer {
 }
 
 .filter-tabs-wrapper {
-    width: 100%;
+    
     max-width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    display:flex;
+    justify-content: flex-start;
+
+    
 }
 
 .filter-tabs-wrapper::-webkit-scrollbar {
@@ -2292,7 +2314,7 @@ footer {
 .filter-tabs {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     gap: 0.5rem;
     width: max-content;
     min-width: 100%;
@@ -2717,40 +2739,89 @@ footer {
     display: inline-block;
     transition: none; /* let GSAP drive it, not CSS transitions */
   }
-
-
+ 
+ 
  .scroll-fill-text {
     position: relative;
     width: 100%;
 }
-
+ 
 /* Normal/default text */
 .scroll-fill-text-base {
     width: 100%;
     color: var(--scroll-start-color);
+    /* ANIMATION FIX: dim the not-yet-revealed text so there's always
+       a visible contrast with the fill layer on top, even when
+       startColor and fillColor are set to the same value. */
+    opacity: var(--scroll-start-opacity, 1);
 }
-
+ 
 /* Fill layer */
 .scroll-fill-text-fill {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-
+ 
     color: var(--scroll-fill-color);
-
+ 
     pointer-events: none;
-
+ 
     will-change: clip-path;
-
+ 
     z-index: 2;
 }
-
+ 
 /* Keep span styling */
 .scroll-fill-text-fill span {
     color: var(--scroll-fill-color) !important;
 }
-
+ 
+/*
+ * ANIMATION FIX: per-word progressive fill.
+ * Each word is its own inline-block span. Its actual reveal amount
+ * (clip-path) is now set directly in JavaScript by ScrollFillText.jsx
+ * on every scroll tick — a previous version tried to compute this
+ * purely in CSS via nested clamp()/calc() custom-property math, but
+ * that silently failed in some browsers (the whole clip-path
+ * declaration gets dropped if the browser can't resolve the nested
+ * expression), leaving the fill layer permanently fully visible
+ * instead of animating.
+ *
+ * This rule only sets the SAFE DEFAULT — fully hidden — so that if
+ * JS hasn't run yet (e.g. right at first paint, before hydration),
+ * the fill layer doesn't flash fully visible. ScrollFillText.jsx's
+ * inline style on each word then overrides this on every scroll tick.
+ */
+.sf-fill-word {
+    display: inline-block;
+}
+ 
+.scroll-fill-text-fill .sf-fill-word {
+    clip-path: inset(0 100% 0 0);
+}
+ 
+/*
+ * ANIMATION FIX: bug fix, not new behavior.
+ * The global `h2 span { color: var(--bs-textlightgrey); }` rule
+ * (further up this file) was overriding the color of every
+ * .sf-fill-word span whenever ScrollFillText is rendered inside an
+ * <h2> — which is how it's used everywhere (Services.jsx, NewsCard.jsx,
+ * TalkSection.jsx). That made word spans render in light grey, nearly
+ * invisible against the page background. Two classes here outrank the
+ * single-class-free "h2 span" selector, so this always wins regardless
+ * of source order — keep this even though you've since commented that
+ * rule out locally, since it may still exist for other headings.
+ */
+.scroll-fill-text-base .sf-fill-word {
+    color: var(--scroll-start-color);
+}
+ 
+.scroll-fill-text-fill .sf-fill-word {
+    color: var(--scroll-fill-color);
+}
+ 
+ 
 /* Keep typography identical */
 .scroll-fill-text-base h1,
 .scroll-fill-text-base h2,

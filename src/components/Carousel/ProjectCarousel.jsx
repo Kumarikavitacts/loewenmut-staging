@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import $ from "jquery";
+import ScrollFillText from "../ResuableComponents/ScrollFillText";
 
 const ProjectCarousel = ({
     title,
@@ -193,8 +194,13 @@ const ProjectCarousel = ({
                     <div className="project-carousel-heading">
 
                         <h2 className="mb-3">
-                            {title}
-                        </h2>
+                            <ScrollFillText
+                                html={title}
+                                className="Agentur_fill_title"
+                                startColor="var(--bs-textdarkgrey)"
+                                fillColor="var(--bs-textdarkgrey)"
+                            />
+                            </h2>
 
                         {description && (
                             <p className="text-dark mb-4 fw-regular">

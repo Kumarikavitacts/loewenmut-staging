@@ -21,6 +21,10 @@
         --content_width_small: 1300px;
         --content_width_smaller: 1000px;
     }
+    .map-wrapper {
+    width: calc(100% + 300px);
+    margin-left: -300px;
+}
     .pt_pb_3 {
         padding-top: 90px;
         padding-bottom: 90px;
@@ -1284,6 +1288,11 @@ footer {
     .team-column {
         width: 100%;
     }
+}
+
+.team-carousel .team-last-card a img {
+    margin-top: 1rem;
+    margin-left: 0;
 }
 }
 

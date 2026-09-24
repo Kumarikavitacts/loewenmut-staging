@@ -10,6 +10,7 @@ import {
   renderHtmlText,
 } from "@/components/ResuableComponents/renderHtmlText";
 import { truncateText } from "@/helper/TruncateString";
+import ScrollFillText from "@/components/ResuableComponents/ScrollFillText";
 
 const Insights = () => {
   const router = useRouter();
@@ -106,7 +107,13 @@ const Insights = () => {
           <div className="title_btn_flex">
 
             <h2 className="mb-0">
-              {renderHtmlText(titel)}
+              {/* {renderHtmlText(titel)} */}
+                <ScrollFillText
+                                      html={titel}
+                                      className="Insight_fill_title"
+                                      startColor="var(--bs-textdarkgrey)"
+                                      fillColor="var(--bs-textdarkgrey)"
+                                  />
             </h2>
 
             {buttonText && (

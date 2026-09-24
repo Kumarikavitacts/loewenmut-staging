@@ -32,7 +32,7 @@ const InnerBnanner = ({
           <p>{renderHtmlText(description)}</p>
 
           {footer && button && (
-            <div className="ms-lg-3 mt-3 mt-lg-0">
+            <div className="ms-lg-3 mt-3 ">
               {isExternal ? (
                 <a
                   href={buttonLink || "#"}

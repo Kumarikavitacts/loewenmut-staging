@@ -277,7 +277,7 @@ const ServiceSlider = ({ paragraph }) => {
                       }
                     >
                       <div className="item-count">
-                        {index + 1}
+                        {` 0${index + 1}/0${services?.length} `}
                       </div>
 
                       <h3>{service.title}</h3>

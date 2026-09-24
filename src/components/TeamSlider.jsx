@@ -16,6 +16,15 @@ const Shape = ({ type, index }) => {
         />
     );
 };
+const SHAPE_SETS = {
+  yellow: ["crosshatch", "eye", "eye-small", "scribble", "curve", "blob-small"],
+  pink: ["scribble", "dots", "blob", "blob-small", "branch", "bottom-wave"],
+  blue: ["top-wave", "blob", "blob-small", "star", "curve", "bottom-blob"],
+  green: ["dots", "blob", "star", "curve", "blob-small", "bottom-wave"],
+  purple: ["crosshatch", "blob", "eye-small", "branch", "blob-small", "top-wave"],
+};
+
+const getShapes = (color) => SHAPE_SETS[color] || SHAPE_SETS.yellow;
 
 // Flattens the first paragraph of a Strapi block-editor "Text"
 // field into a short plain-text teaser for the slider card.
@@ -47,6 +56,7 @@ const TeamSlider = ({ teams }) => {
                   desciption: getFirstParagraphText(item?.Text),
                   image: item?.Bild?.url ? getMediaUrl(item.Bild.url) : "",
                   color: item?.Class_Name || "yellow",
+                  shapes: getShapes(item?.Class_Name),
               }))
             : staticTeamMembers;
 
@@ -152,7 +162,7 @@ const TeamSlider = ({ teams }) => {
                     <div className="team-card">
                         <div className={`team-image tm-img-bgcolor ${member.color}`} >
                             <div className="animated-background">
-                                {(member.shapes || ["blob","wave","dots",]).map((shape, shapeIndex) => (
+                                {(member.shapes).map((shape, shapeIndex) => (
                                     <Shape key={shapeIndex} type={shape} index={shapeIndex} />
                                 ))}
                             </div>
@@ -173,7 +183,7 @@ const TeamSlider = ({ teams }) => {
             {/* Last Item - always shown as a CTA to the full team page */}
             <div className="team-carousel-item">
                 <div className="team-last-card">
-                    <Link href={`/team`}>LERN DAS GANZE TEAM KENNEN <img src="/images/more-button-arrow.svg" /></Link>
+                    <Link href={`/team`} className="team-last-link">LERN DAS GANZE TEAM KENNEN <img src="/images/more-button-arrow.svg"   alt="" className="team-arrow"/></Link>
                 </div>
             </div>
         </div>
