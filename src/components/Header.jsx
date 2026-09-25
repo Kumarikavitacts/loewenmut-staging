@@ -164,7 +164,7 @@ function Header() {
                   Projekt starten
                   <img
                     src="/images/btn-arrow.svg"
-                    alt=""
+                    alt="right arrow"
                   />
                 </Link>
               </div>

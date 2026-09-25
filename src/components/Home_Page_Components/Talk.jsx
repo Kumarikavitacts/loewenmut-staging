@@ -16,9 +16,14 @@ const Talk = () => {
   }
 
   return (
+    <>
+   {
+   talkData && 
     <section className="pt_pb_3 talk_section">
       <TalkSection talkData={talkData} />
     </section>
+    }
+    </>
   );
 };
 

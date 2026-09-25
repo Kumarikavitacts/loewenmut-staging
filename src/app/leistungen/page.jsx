@@ -5,9 +5,9 @@ import { createMetadata } from "@/helper/Metadata";
 export async function generateMetadata() {
   try {
     const data = await getLeistungenPage();
-    return createMetadata(data);
+    return createMetadata(data, {}, "/leistungen");
   } catch (error) {
-    return createMetadata(null);
+    return createMetadata(null, {}, "/leistungen");
   }
 }
 

@@ -94,7 +94,7 @@ function WorkSection() {
           <div className="work-status-bar">
             <span>{germanyTime}</span>
             <div className="work-status-icons">
-              <img src="/images/mobile-icons.svg" alt="" />
+              <img src="/images/mobile-icons.svg" alt="mobile icons" />
             </div>
           </div>
 

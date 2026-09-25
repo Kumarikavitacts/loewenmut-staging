@@ -288,7 +288,7 @@ const ContactForm = () => {
           <div className="form_btn d-flex justify-content-md-end">
             <button type="submit" className="button theme_btn" disabled={loading}>
               {loading ? "Senden..." : "Senden"}
-              <img src="/images/btn-arrow.svg" alt="" />
+              <img src="/images/btn-arrow.svg" alt="button arrow" />
             </button>
           </div>
         </div>

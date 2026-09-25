@@ -25,14 +25,14 @@ const Hero = ({ assets, scrollToNext }) => {
 
             <img
               src={assets.icon1}
-              alt=""
+              alt="icons"
               className="hro_icon_1"
               data-aos="zoom-in"
             />
 
             <img
               src={assets.icon2}
-              alt=""
+              alt="icons"
               className="hro_icon_2"
               data-aos="zoom-in"
             />
@@ -62,7 +62,7 @@ const Hero = ({ assets, scrollToNext }) => {
               <div className="htt_left">
                 <img
                   src={assets.icon3}
-                  alt=""
+                  alt="icons"
                   data-aos="zoom-in"
                 />
 
@@ -73,7 +73,7 @@ const Hero = ({ assets, scrollToNext }) => {
 
                 <img
                   src={assets.icon4}
-                  alt=""
+                  alt="icons"
                   data-aos="zoom-in"
                 />
 

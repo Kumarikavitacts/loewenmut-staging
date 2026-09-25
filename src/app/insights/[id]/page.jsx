@@ -8,16 +8,16 @@ export async function generateMetadata({ params }) {
     const data = await getReferenzBySlug(id);
 
     if (!data) {
-      return createMetadata(null);
+      return createMetadata(null, {}, `/insights/${id}`);
     }
 
     return createMetadata(data, {
       title: data?.Titel,
       description: data?.Text,
-    });
+    }, `/insights/${id}`);
   } catch (error) {
     console.error("Error fetching Insight detail metadata:", error);
-    return createMetadata(null);
+    return createMetadata(null, {}, `/insights/${id}`);
   }
 }
 

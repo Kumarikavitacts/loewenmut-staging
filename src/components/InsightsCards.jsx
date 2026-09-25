@@ -80,6 +80,7 @@ export const InsightCard = ({ insight }) => {
             src={imageUrl}
             alt={insight?.Bild?.alternativeText || insight?.Titel || ""}
             className="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
+            loading="lazy"
             style={{
               opacity: isHovered ? 1 : 0,
               transition: "opacity 0.4s ease",

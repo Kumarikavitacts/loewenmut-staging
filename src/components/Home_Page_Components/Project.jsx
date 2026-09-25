@@ -267,7 +267,7 @@ const Project = () => {
 
                       <img
                         src="/images/btn-arrow.svg"
-                        alt=""
+                        alt="button arrow"
                       />
                     </Link>
 

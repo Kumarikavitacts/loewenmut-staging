@@ -6,11 +6,11 @@ export async function generateMetadata() {
   try {
     const result = await getInsightPageHeading();
 
-    return createMetadata(result);
+    return createMetadata(result, {}, "/insights");
   } catch (error) {
     console.error("Error fetching Insights metadata:", error);
 
-    return createMetadata(null);
+    return createMetadata(null, {}, "/insights");
   }
 }
 

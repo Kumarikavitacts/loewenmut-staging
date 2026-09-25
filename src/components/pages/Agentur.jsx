@@ -222,7 +222,7 @@ const Agentur = () => {
                                             className="button theme_btn"
                                         >
                                             {aboutButton?.button_text}
-                                            <img src="/images/btn-arrow.svg" alt="" />
+                                            <img src="/images/btn-arrow.svg" alt="button arrow" />
                                         </Link>
                                     </div>
                                 )}
@@ -289,9 +289,9 @@ const Agentur = () => {
                     button={Projekte?.button_text}
                 />
             </section>
-            <section className="pt_pb_3 talk_section">
+         {talkData &&   <section className="pt_pb_3 talk_section">
                 <TalkSection talkData={talkData} />
-            </section>
+            </section>}
         </main>
     );
 }

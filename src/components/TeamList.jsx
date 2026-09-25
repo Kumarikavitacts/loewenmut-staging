@@ -137,7 +137,7 @@ const TeamList = ({ teamData = [], loading = false }) => {
               onClick={closeModal}
               aria-label="Close"
             >
-              <img src="./images/modal-close.svg" />
+              <img src="./images/modal-close.svg"  alt="Close" />
             </button>
             <div className="row align-items-center">
               <div className="col-md-5">

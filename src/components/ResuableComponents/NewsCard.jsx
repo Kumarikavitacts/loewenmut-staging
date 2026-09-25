@@ -160,10 +160,10 @@ const NewsCard = ({
       {showFooter  && (
         <div className="theme_btn_wrap d-flex justify-content-center mt-4">
           <Link
-            href={buttonLink || "/news"}
+            href={buttonLink}
             className="button theme_btn"
           >
-            {button }
+            {button || "mehr" }
 
             <img
               src="/images/btn-arrow.svg"

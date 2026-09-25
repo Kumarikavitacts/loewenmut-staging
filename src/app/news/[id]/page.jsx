@@ -8,17 +8,17 @@ export async function generateMetadata({ params }) {
     const data = await getNewsBySlug(id);
 
     if (!data) {
-      return createMetadata(null);
+      return createMetadata(null, {}, `/news/${id}`);
     }
 
     return createMetadata(data, {
       title: data?.Titel,
       description: data?.Text,
-    });
+    }, `/news/${id}`);
   } catch (error) {
     console.error("Error fetching News detail metadata:", error);
 
-    return createMetadata(null);
+    return createMetadata(null, {}, `/news/${id}`);
   }
 }
 

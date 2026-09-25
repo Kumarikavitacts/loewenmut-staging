@@ -28,7 +28,7 @@ function resolveOgImage(metadata) {
   return `${STRAPI_BASE_URL}${raw}`;
 }
 
-export function createMetadata(pageData, fallback = {}) {
+export function createMetadata(pageData, fallback = {},path = "/") {
   const metadata = normalizeMetadaten(pageData?.Metadaten);
 
   const title = metadata?.Meta_Titel || fallback.title || DEFAULT_TITLE;
@@ -40,7 +40,9 @@ export function createMetadata(pageData, fallback = {}) {
   return {
     title,
     description,
-
+    alternates: {
+      canonical: path,
+    },
     openGraph: {
       title,
       description,

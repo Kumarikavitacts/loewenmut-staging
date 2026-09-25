@@ -6,11 +6,11 @@ export async function generateMetadata() {
   try {
     const data = await getImpressumPage();
 
-    return createMetadata(data);
+    return createMetadata(data,{}, "/impressum");
   } catch (error) {
     console.error("Error generating Impressum metadata:", error);
 
-    return createMetadata(null);
+    return createMetadata(null, {}, "/impressum");
   }
 }
 

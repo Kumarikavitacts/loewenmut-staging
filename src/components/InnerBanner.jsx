@@ -43,7 +43,7 @@ const InnerBnanner = ({
                   {button}
                   <img
                     src="/images/btn-arrow.svg"
-                    alt=""
+                    alt="button arrow"
                   />
                 </a>
               ) : (
@@ -54,7 +54,7 @@ const InnerBnanner = ({
                   {button}
                   <img
                     src="/images/btn-arrow.svg"
-                    alt=""
+                    alt="button arrow"
                   />
                 </Link>
               )}

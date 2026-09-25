@@ -29,14 +29,14 @@ const AnimatedText = () => {
   return (
     <>
       <span>
-        <img src={talkImage} alt="" />
+        <img src={talkImage} alt="talk image" />
       </span>
 
       <img
         src="/images/moving-text.svg"
         className="cursorPointer"
         onClick={handleGoToContact}
-        alt=""
+       alt="talk image" 
       />
     </>
   );

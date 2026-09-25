@@ -7,14 +7,14 @@ export async function generateMetadata() {
     const data =
       await getDatenschutzPage();
 
-    return createMetadata(data);
+    return createMetadata(data, {}, "/datenschutz");
   } catch (error) {
     console.error(
       "Error generating Datenschutz metadata:",
       error
     );
 
-    return createMetadata(null);
+    return createMetadata(null, {}, "/datenschutz");
   }
 }
 

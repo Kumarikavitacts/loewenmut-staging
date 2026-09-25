@@ -9,16 +9,16 @@ export async function generateMetadata({ params }) {
     const data = await getLeistungBySlug(id);
 
     if (!data) {
-      return createMetadata(null);
+      return createMetadata(null, {}, `/leistungen/${id}`);
     }
 
     return createMetadata(data, {
       title: data?.Titel,
       description: data?.Text,
-    });
+    }, `/leistungen/${id}`);
   } catch (error) {
     console.error("Error fetching Leistung detail metadata:", error);
-    return createMetadata(null);
+    return createMetadata(null, {}, `/leistungen/${id}`);
   }
 }
 

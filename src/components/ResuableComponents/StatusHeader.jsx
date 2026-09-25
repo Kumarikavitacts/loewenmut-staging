@@ -77,7 +77,7 @@ const StatusHeader = ({
             <div className="mt-4">
               <Link href={buttonLink} className="button theme_btn">
                 {buttonText}
-                <img src="/images/btn-arrow.svg" alt="" />
+                <img src="/images/btn-arrow.svg" alt="button arrow" />
               </Link>
             </div>
           )}

@@ -183,7 +183,7 @@ const TeamSlider = ({ teams }) => {
             {/* Last Item - always shown as a CTA to the full team page */}
             <div className="team-carousel-item">
                 <div className="team-last-card">
-                    <Link href={`/team`} className="team-last-link">LERN DAS GANZE TEAM KENNEN <img src="/images/more-button-arrow.svg"   alt="" className="team-arrow"/></Link>
+                    <Link href={`/team`} className="team-last-link">LERN DAS GANZE TEAM KENNEN <img src="/images/more-button-arrow.svg"   alt="right arrow" className="team-arrow"/></Link>
                 </div>
             </div>
         </div>

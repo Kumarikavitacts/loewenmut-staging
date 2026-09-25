@@ -6,11 +6,11 @@ export async function generateMetadata() {
   try {
     const data = await getKontaktPage();
 
-    return createMetadata(data);
+    return createMetadata(data, {}, "/kontakt");
   } catch (error) {
     console.error("Error fetching Kontakt metadata:", error);
 
-    return createMetadata(null);
+    return createMetadata(null, {}, "/kontakt");
   }
 }
 

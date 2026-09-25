@@ -17,9 +17,23 @@ import BootstrapInit from "@/components/BootstrapInit";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL
+const IS_PRODUCTION =
+  !!SITE_URL && !SITE_URL.includes("staging");
+
 export const metadata = {
   metadataBase: new URL(SITE_URL),
-
+  // SEO FIX: renders <meta name="robots" content="noindex, nofollow">
+  // on every page when not on the production domain.
+  robots: IS_PRODUCTION
+    ? {
+      index: true,
+      follow: true,
+    }
+    : {
+      index: false,
+      follow: false,
+    },
+ 
   title:
     "Webdesign | Branding: Löwenmut. Die Webagentur in Winterthur Zürich",
 

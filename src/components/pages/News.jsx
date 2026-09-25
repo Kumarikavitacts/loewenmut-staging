@@ -229,7 +229,7 @@ const News = () => {
             <NewsCard
               newsData={filteredNews}
               showHeader={false}
-              showFooter={false}
+              showFooter={true}
             />
           )}
 

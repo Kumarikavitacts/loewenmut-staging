@@ -8,10 +8,10 @@ export async function generateMetadata() {
     return createMetadata(data, {
       title: data?.Bannerbereich?.Titel,
       description: data?.Bannerbereich?.Text,
-    });
+    }, "/agentur");
   } catch (error) {
     console.error("Error fetching Agentur metadata:", error);
-    return createMetadata(null);
+    return createMetadata(null, {}, "/agentur");
   }
 }
 
