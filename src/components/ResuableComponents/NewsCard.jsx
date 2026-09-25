@@ -6,6 +6,7 @@ import { getMediaUrl } from "@/helper/MediaUrl";
 import { renderHtmlText } from "@/components/ResuableComponents/renderHtmlText";
 import ScrollFillText from "@/components/ResuableComponents/ScrollFillText";
 import { truncateText } from "@/helper/TruncateString";
+
 const DEFAULT_NEWS_IMAGE = "/images/news-1.png";
 
 const NewsCard = ({
@@ -16,12 +17,15 @@ const NewsCard = ({
   showFooter = false,
   button,
   buttonLink,
+  onButtonClick,
 }) => {
-
   return (
     <div className="container">
 
-      {/* Section Header */}
+      {/* =========================
+          Section Header
+      ========================= */}
+
       {showHeader && (
         <div
           className="sec-content"
@@ -36,140 +40,172 @@ const NewsCard = ({
           {heading && (
             <h2>
               <ScrollFillText
-                        html={heading}
-                        className="News_fill_title"
-                        startColor="var(--bs-textdarkgrey)"
-                        fillColor="var(--bs-textdarkgrey)"
-                    />
+                html={heading}
+                className="News_fill_title"
+                startColor="var(--bs-textdarkgrey)"
+                fillColor="var(--bs-textdarkgrey)"
+              />
             </h2>
           )}
         </div>
       )}
 
-      {/* News Cards */}
-      <div
-        className="row"
-        data-aos="slide-up"
-      >
-        {newsData.map((news) => {
-          const imageUrl = news?.image
-          ? getMediaUrl(news.image)
-          : DEFAULT_NEWS_IMAGE;
+      {/* =========================
+          News Cards
+      ========================= */}
 
+      {newsData.length > 0 && (
+        <div
+          className="row"
+          data-aos="slide-up"
+        >
+          {newsData.map((news) => {
+            const imageUrl = news?.image
+              ? getMediaUrl(news.image)
+              : DEFAULT_NEWS_IMAGE;
 
-          return (
-            <div
-              className="col-12 col-sm-6 col-lg-4 item-col mt-4"
-              key={news.id}
-            >
-              <Link
-                href={
-                  news?.slug
-                    ? `/news/${news.slug}`
-                    : "/news"
+            return (
+              <div
+                className="col-12 col-sm-6 col-lg-4 item-col mt-4"
+                key={
+                  news?.id ||
+                  news?.documentId
                 }
-                className="news_item grey_bg"
               >
-                <div className="news_img position-relative">
+                <Link
+                  href={
+                    news?.slug
+                      ? `/news/${news.slug}`
+                      : "/news"
+                  }
+                  className="news_item grey_bg"
+                >
+                  <div className="news_img position-relative">
 
-                  {/* Category */}
-                  {news?.category && (
-                    <span
-                      className={`news_tag ${
-                        news.categoryClass || ""
-                      }`}
-                    >
-                      {news.category}
-                    </span>
-                  )}
+                    {/* Category */}
+                    {news?.category && (
+                      <span
+                        className={`news_tag ${
+                          news.categoryClass || ""
+                        }`}
+                      >
+                        {news.category}
+                      </span>
+                    )}
 
-                  {/* Image */}
-                  {imageUrl && (
-                    <img
-                      src={imageUrl || '/images/news-1.png'}
-                      alt={
-                        news?.alternativeText ||
-                        news?.title ||
-                        "News"
-                      }
-                      className="w-100"
-                    />
-                  )}
-
-                </div>
-
-                <div className="news_content">
-
-                  {/* Date */}
-                  {news?.date && (
-                    <div className="news_date">
-                      {news.date}
-                    </div>
-                  )}
-
-                  {/* Title */}
-                  <h3>
-                    {news?.title}
-                  </h3>
-
-                  {/* Description */}
-                  {news?.description && (
-                    <p>
-                      {truncateText(news.description ,90)}
-                    </p>
-                  )} 
-
-                  <hr />
-
-                  {/* Read More */}
-                  <div className="arrow_btn">
-                    <span>
-                      Weiterlesen
-                    </span>
-
-                    <svg
-                      width="74"
-                      height="74"
-                      viewBox="0 0 74 74"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <circle
-                        cx="36.7696"
-                        cy="36.7696"
-                        r="26"
-                        transform="rotate(-45 36.7696 36.7696)"
-                        fill="var(--bs-themecolor)"
+                    {/* Image */}
+                    {imageUrl && (
+                      <img
+                        src={imageUrl}
+                        alt={
+                          news?.alternativeText ||
+                          news?.title ||
+                          "News"
+                        }
+                        className="w-100"
                       />
+                    )}
 
-                      <path
-                        d="M47.1916 26.7107L47.4887 42.1906L45.1998 42.1464L44.9756 30.4976L27.8367 47.6365L26.1986 45.9984L43.1878 29.0092L31.5364 28.7862L31.492 26.4895L47.1916 26.7107Z"
-                        fill="#373737"
-                      />
-                    </svg>
                   </div>
 
-                </div>
-              </Link>
-            </div>
-          );
-        })}
-      </div>
+                  <div className="news_content">
 
-      {/* All News Button */}
-      {showFooter  && (
+                    {/* Date */}
+                    {news?.date && (
+                      <div className="news_date">
+                        {news.date}
+                      </div>
+                    )}
+
+                    {/* Title */}
+                    <h3>
+                      {news?.title}
+                    </h3>
+
+                    {/* Description */}
+                    {news?.description && (
+                      <p>
+                        {truncateText(
+                          news.description,
+                          90
+                        )}
+                      </p>
+                    )}
+
+                    <hr />
+
+                    {/* Read More */}
+                    <div className="arrow_btn">
+                      <span>
+                        Weiterlesen
+                      </span>
+
+                      <svg
+                        width="74"
+                        height="74"
+                        viewBox="0 0 74 74"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <circle
+                          cx="36.7696"
+                          cy="36.7696"
+                          r="26"
+                          transform="rotate(-45 36.7696 36.7696)"
+                          fill="var(--bs-themecolor)"
+                        />
+
+                        <path
+                          d="M47.1916 26.7107L47.4887 42.1906L45.1998 42.1464L44.9756 30.4976L27.8367 47.6365L26.1986 45.9984L43.1878 29.0092L31.5364 28.7862L31.492 26.4895L47.1916 26.7107Z"
+                          fill="#373737"
+                        />
+                      </svg>
+                    </div>
+
+                  </div>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* =========================
+          FOOTER BUTTON
+      ========================= */}
+
+      {showFooter && (
         <div className="theme_btn_wrap d-flex justify-content-center mt-4">
-          <Link
-            href={buttonLink}
-            className="button theme_btn"
-          >
-            {button || "mehr" }
 
-            <img
-              src="/images/btn-arrow.svg"
-              alt="Arrow"
-            />
-          </Link>
+          {onButtonClick ? (
+            // LOAD MORE BUTTON
+            <button
+              type="button"
+              className="button theme_btn"
+              onClick={onButtonClick}
+            >
+              {button || "mehr"}
+
+              <img
+                src="/images/btn-arrow.svg"
+                alt=""
+              />
+            </button>
+          ) : (
+            // NORMAL LINK BUTTON
+            <Link
+              href={buttonLink || "/news"}
+              className="button theme_btn"
+            >
+              {button || "mehr"}
+
+              <img
+                src="/images/btn-arrow.svg"
+                alt=""
+              />
+            </Link>
+          )}
+
         </div>
       )}
 

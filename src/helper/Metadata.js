@@ -3,7 +3,7 @@
 const SITE_NAME = "Loewenmut";
 const DEFAULT_TITLE = "Loewenmut";
 const DEFAULT_DESCRIPTION = "Loewenmut";
-const DEFAULT_OG_IMAGE = "/images/og_image.png";
+const DEFAULT_OG_IMAGE = "/images/website_image.png";
 
 
 const STRAPI_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";

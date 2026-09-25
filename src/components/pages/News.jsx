@@ -31,11 +31,21 @@ const formatDate = (isoDate) => {
   return `${day}.${month}.${year}`;
 };
 
+// -----------------------------------------
+// NEWS PER LOAD
+// -----------------------------------------
+
+const NEWS_PER_LOAD = 6;
+
 const News = () => {
   const [pageData, setPageData] = useState(null);
   const [newsList, setNewsList] = useState([]);
   const [activeTab, setActiveTab] = useState("all");
   const [loading, setLoading] = useState(true);
+
+  // Number of news currently visible
+  const [visibleCount, setVisibleCount] =
+    useState(NEWS_PER_LOAD);
 
   // -----------------------------------------
   // FETCH DATA
@@ -147,7 +157,7 @@ const News = () => {
         categoryColor:
           categoryColor || "",
 
-        // Backend color -> existing CSS class
+        // Backend color -> CSS class
         categoryClass: categoryColor
           ? `${categoryColor}_badge`
           : "",
@@ -173,6 +183,44 @@ const News = () => {
             activeTab
           )
         );
+
+  // -----------------------------------------
+  // VISIBLE NEWS
+  // -----------------------------------------
+
+  const visibleNews = filteredNews.slice(
+    0,
+    visibleCount
+  );
+
+  // -----------------------------------------
+  // LOAD MORE
+  // -----------------------------------------
+
+  const handleLoadMore = () => {
+    setVisibleCount(
+      (currentCount) =>
+        currentCount + NEWS_PER_LOAD
+    );
+  };
+
+  // -----------------------------------------
+  // CATEGORY CHANGE
+  // -----------------------------------------
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+
+    // Start again from first 6
+    setVisibleCount(NEWS_PER_LOAD);
+  };
+
+  // -----------------------------------------
+  // CHECK MORE NEWS
+  // -----------------------------------------
+
+  const hasMoreNews =
+    visibleCount < filteredNews.length;
 
   const banner =
     pageData?.Bannerbereich;
@@ -216,22 +264,34 @@ const News = () => {
             <FilterTabs
               tabs={tabs}
               activeTab={activeTab}
-              onTabChange={
-                setActiveTab
-              }
+              onTabChange={handleTabChange}
             />
           </div>
         )}
 
         {/* News Cards */}
         {!loading &&
-          filteredNews.length > 0 && (
+          visibleNews.length > 0 && (
             <NewsCard
-              newsData={filteredNews}
+              newsData={visibleNews}
               showHeader={false}
-              showFooter={true}
+              showFooter={false}
             />
           )}
+
+        {/* =========================
+            MEHR BUTTON
+        ========================= */}
+
+        {!loading && hasMoreNews && (
+          <NewsCard
+            newsData={[]}
+            showHeader={false}
+            showFooter={true}
+            button="mehr"
+            onButtonClick={handleLoadMore}
+          />
+        )}
 
       </section>
 

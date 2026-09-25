@@ -57,7 +57,7 @@ export const metadata = {
 
     images: [
       {
-        url: "/images/og_image.png",
+        url: "/images/website_image.png",
         width: 1200,
         height: 630,
         alt: "Löwenmut – Webdesign, Branding und digitale Lösungen",
@@ -78,7 +78,7 @@ export const metadata = {
     description:
       "Agentur für Grafik-, Webdesign & Programmierung in Winterthur. Unsere Referenzen werden Sie überzeugen",
 
-    images: ["/images/og_image.png"],
+    images: ["/images/website_image.png"],
   },
 };
 const roboto = Roboto({
