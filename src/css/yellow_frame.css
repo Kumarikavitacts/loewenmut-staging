@@ -1,0 +1,51 @@
+*{box-sizing:border-box}
+body{margin:0;background:#fff}
+.yellow-frame{
+    width:min(100%,493px);
+    overflow:hidden;
+    position:relative;
+    background:#FFD21C;
+}
+.yellow-frame svg{
+    display:block;
+    width:100%;
+    height:auto;
+}
+.yellow-frame svg path{
+    transform-box:fill-box;
+    transform-origin:center;
+    animation:organicFloat var(--d,7s) ease-in-out infinite alternate;
+}
+.yellow-frame svg path:nth-of-type(3n+1){--d:6.2s}
+.yellow-frame svg path:nth-of-type(3n+2){--d:7.7s}
+.yellow-frame svg path:nth-of-type(3n){--d:9.1s}
+
+.yellow-frame svg path:nth-of-type(4n+1){animation-name:moveA}
+.yellow-frame svg path:nth-of-type(4n+2){animation-name:moveB}
+.yellow-frame svg path:nth-of-type(4n+3){animation-name:moveC}
+.yellow-frame svg path:nth-of-type(4n){animation-name:moveD}
+
+@keyframes moveA{
+  0%{transform:translate(0,0) rotate(0deg)}
+  50%{transform:translate(2px,-3px) rotate(.7deg)}
+  100%{transform:translate(-3px,2px) rotate(-.8deg)}
+}
+@keyframes moveB{
+  0%{transform:translate(0,0) rotate(0deg)}
+  50%{transform:translate(-3px,2px) rotate(-.7deg)}
+  100%{transform:translate(2px,4px) rotate(.8deg)}
+}
+@keyframes moveC{
+  0%{transform:translate(0,0) rotate(0deg)}
+  50%{transform:translate(3px,2px) rotate(.6deg)}
+  100%{transform:translate(-2px,-3px) rotate(-.6deg)}
+}
+@keyframes moveD{
+  0%{transform:translate(0,0) rotate(0deg)}
+  50%{transform:translate(-2px,-2px) rotate(.5deg)}
+  100%{transform:translate(3px,3px) rotate(-.5deg)}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .yellow-frame svg path{animation:none!important}
+}

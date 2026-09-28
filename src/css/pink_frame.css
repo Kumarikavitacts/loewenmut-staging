@@ -1,0 +1,42 @@
+*{box-sizing:border-box}
+body{margin:0;background:#fff}
+.frame{width:min(100%,493px);overflow:hidden;position:relative}
+.frame svg{display:block;width:100%;height:auto}
+
+
+
+.floaty > g > :not(rect){
+  transform-box:fill-box;
+  transform-origin:center;
+  animation:moveA var(--d,4s) ease-in-out infinite alternate;
+}
+.floaty > g > :nth-child(3n+1):not(rect){--d:3.2s}
+.floaty > g > :nth-child(3n+2):not(rect){--d:3.9s}
+.floaty > g > :nth-child(3n):not(rect){--d:4.6s}
+.floaty > g > :nth-child(4n+1):not(rect){animation-name:moveA}
+.floaty > g > :nth-child(4n+2):not(rect){animation-name:moveB}
+.floaty > g > :nth-child(4n+3):not(rect){animation-name:moveC}
+.floaty > g > :nth-child(4n):not(rect){animation-name:moveD}
+@keyframes moveA{
+  0%{transform:translate(0,0) rotate(0deg)}
+  50%{transform:translate(2px,-3px) rotate(.7deg)}
+  100%{transform:translate(-3px,2px) rotate(-.8deg)}
+}
+@keyframes moveB{
+  0%{transform:translate(0,0) rotate(0deg)}
+  50%{transform:translate(-3px,2px) rotate(-.7deg)}
+  100%{transform:translate(2px,4px) rotate(.8deg)}
+}
+@keyframes moveC{
+  0%{transform:translate(0,0) rotate(0deg)}
+  50%{transform:translate(3px,2px) rotate(.6deg)}
+  100%{transform:translate(-2px,-3px) rotate(-.6deg)}
+}
+@keyframes moveD{
+  0%{transform:translate(0,0) rotate(0deg)}
+  50%{transform:translate(-2px,-2px) rotate(.5deg)}
+  100%{transform:translate(3px,3px) rotate(-.5deg)}
+}
+@media (prefers-reduced-motion:reduce){
+  .floaty > g > *{animation:none!important}
+}

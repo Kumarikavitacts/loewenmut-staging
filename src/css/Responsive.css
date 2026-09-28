@@ -1343,3 +1343,20 @@ footer {
         }
     }
 }
+
+@media (max-width: 400px) {
+    .cky-consent-container .cky-consent-bar {
+        padding: 20px 0;
+    }
+}
+ 
+@media (max-width: 352px) {
+    .cky-notice .cky-title {
+        font-size: 16px;
+    }
+ 
+    .cky-notice-des,
+    .cky-btn {
+        font-size: 12px;
+    }
+}

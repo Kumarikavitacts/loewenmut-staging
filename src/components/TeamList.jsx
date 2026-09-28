@@ -2,6 +2,9 @@
 
 import React, { useState } from "react";
 import { getMediaUrl } from "@/helper/MediaUrl";
+import YellowFrame from "@/components/ResuableComponents/YellowFrame";
+import PinkFrame from "@/components/ResuableComponents/PinkFrame";
+import BlueFrame from "@/components/ResuableComponents/BlueFrame";
 
 // Decorative shapes aren't part of the API — pick a consistent
 // combo per Class_Name so members of the same color still look varied.
@@ -12,7 +15,11 @@ const SHAPE_SETS = {
   green: ["dots", "blob", "star", "curve", "blob-small", "bottom-wave"],
   purple: ["crosshatch", "blob", "eye-small", "branch", "blob-small", "top-wave"],
 };
-
+const frameComponents = {
+    yellow: <YellowFrame />,
+    blue: <BlueFrame />,
+    pink: <PinkFrame />,
+};
 const getShapes = (color) => SHAPE_SETS[color] || SHAPE_SETS.yellow;
 
 // Team members' bio (Text) is a Strapi block-editor field — an array
@@ -83,11 +90,10 @@ const TeamList = ({ teamData = [], loading = false }) => {
             >
               <div className={`team-image tm-img-bgcolor ${member.color}`}>
                 {/* Animated background elements */}
-                <div className="animated-background">
-                  {member.shapes.map((shape, shapeIndex) => (
-                    <Shape key={shapeIndex} type={shape} index={shapeIndex} />
-                  ))}
-                </div>
+                {/* <YellowFrame/> */}
+                {/* <PinkFrame/> */}
+                {/* <BlueFrame/> */}
+                   {frameComponents[member.color]}
                 {/* Person */}
                 {member.image && (
                   <img
