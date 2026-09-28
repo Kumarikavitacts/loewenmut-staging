@@ -77,6 +77,7 @@ const Footer = () => {
                     </div>
                 </div>
             </footer>
+            {/* <!-- Elfsight WhatsApp Chat | Loewenmut Website --> */}
             <script
                 src="https://elfsightcdn.com/platform.js"
                 async
@@ -87,6 +88,12 @@ const Footer = () => {
                 data-elfsight-app-lazy
                 suppressHydrationWarning
             ></div>
+
+       
+            {/* <!-- Start cookieyes banner -->  */}
+            <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/594f6c14466a211fe9f89ce3111b24d0/script.js"></script>
+             {/* <!-- End cookieyes banner --> */}
+ 
         </>
     )
 }

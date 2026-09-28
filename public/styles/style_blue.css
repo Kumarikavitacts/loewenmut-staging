@@ -21,7 +21,16 @@
 .bg_theme {
     color: var(--bs-themetext) !important;
 }
-.theme_btn, .theme_btn:hover {
+.theme_btn , .theme_btn:hover {
+    color: var(--bs-themetext) !important;
+    svg path {
+        fill: var(--bs-themetext) !important;
+    }
+    img {
+        filter: brightness(0) invert(1);
+    }
+}
+.project_btn , .project_btn:hover {
     color: var(--bs-themetext) !important;
     svg path {
         fill: var(--bs-themetext) !important;

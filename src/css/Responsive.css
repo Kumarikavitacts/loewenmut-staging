@@ -63,7 +63,7 @@
     }
     header {
         a.navbar-brand {
-            max-width: 250px;
+            max-width: 240px;
         }
         .theme_toggle_btn {
             width: 65px;
@@ -418,6 +418,11 @@
         opacity: 1 !important;
         transform: none !important;
     }
+
+    .inner_hero_section .rolling-eyes svg, .inner_hero_section .victory-icon svg {
+	    width: 60px;
+	    height: 60px;
+	}
 }
 
 @media (max-width: 991px) {
@@ -711,7 +716,13 @@ header {
 .service-grid {
     grid-template-columns: repeat(2, 1fr);
 }
-
+span.txt-008:before {
+    height: 10px;
+}
+.map-wrapper {
+    width: 100%;
+    margin-left: 0;
+}
 .talk_section {
     .sec-content {
         text-align: center;
@@ -725,16 +736,19 @@ header {
         width: 160px;
         padding: 15px;
         .work-card-number {
-            width: 22px;
-            height: 22px;
-            font-size: 11px;
-            line-height: 1;
+            width: 20px;
+	        height: 20px;
+	        font-size: 10px;
+	        line-height: 1;
+	        top: 8px;
+	        right: 8px;
         }
         p {
             font-size: 12px;
         }
         h4 {
-            font-size: 15px;
+            font-size: 13px;
+        	padding-right: 20px;
         }
     }
     .work-suggestions {
@@ -928,26 +942,6 @@ header {
             } 
         }  
     }
-    /* .stacking-card-wrapper {
-        .stacking-card {
-            height: auto;
-            min-height: 500px;
-            display: block;
-            margin-bottom: 20px;
-            position: unset;
-            .stacking-content, .stacking-image {
-                width: 100%;
-            }
-            .stacking-content {
-                min-height: 250px;
-                padding: 30px;
-            }
-            .stacking-image {
-                height: 250px;
-                padding-top: 0;
-            }
-        }
-    } */
     .stacking-card-wrapper {
         padding-top: 2rem;
         padding-bottom: 6rem;
@@ -1008,26 +1002,30 @@ header {
     .bg_theme_work_station {
         .work-section {
             flex-wrap: wrap;
-            padding: 0 1rem;
+            padding: 0 .5rem;
         }
         .work-info-card {
-            width: calc(50% - 1rem);
-            min-height: 65px;
-            padding: 10px;
-            position: relative;
-            left: unset;
-            right: unset;
-            top: unset;
-            bottom: unset;
-            transform: none;
-            margin: .5rem;
-            border-radius: 15px 15px 15px 0;
+            width: calc(50% - 0.5rem);
+	        min-height: 65px;
+	        left: unset;
+	        right: unset;
+	        top: unset;
+	        bottom: unset;
+	        border-radius: 15px 15px 15px 0;
+	        margin: .25rem;
+	        padding: 10px;
+	        position: relative;
+	        transform: none;
         }
         .work-phone {
             width: 290px;
             margin-top: 1rem;
         }
     }
+    .inner_hero_section .rolling-eyes svg, .inner_hero_section .victory-icon svg {
+	    width: 40px;
+	    height: 40px;
+	}
     .project-showcase {
         .project-image-card {
             .project-image-info {
@@ -1087,11 +1085,11 @@ header {
 }
 
 @media (max-width: 575px) {
-:root {
-    --bs-fs100: 40px;
-    --bs-fs80: 40px;
-    --bs-fs70: 38px;
-    --bs-fs60: 35px;
+ :root {
+    --bs-fs100: 38px;
+    --bs-fs80: 32px;
+    --bs-fs70: 34px;
+    --bs-fs60: 30px;
     --bs-fs50: 28px;
     --bs-fs40: 24px;
     --bs-fs35: 22px;
@@ -1299,7 +1297,7 @@ footer {
 @media (max-width: 375px) {
     :root {
         --bs-fs100: 32px;
-        --bs-fs80: 32px;
+        --bs-fs80: 28px;
         --bs-fs70: 32px;
         --bs-fs60: 32px;
         --bs-fs50: 30px;

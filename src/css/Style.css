@@ -389,6 +389,56 @@ form {
         fill: #fff;
     }
 }
+.project_btn{
+     position: relative;
+    padding: 10px;
+    background-color: var(--bs-themecolor);
+     width: auto;
+    max-width: 100%;
+    display: inline-block;
+    font-size: var(--bs-fs26);
+    font-family: var(--bs-roboto);
+    font-weight: 400;
+    border-radius: 50px;
+    padding: 15px 25px;
+    line-height: normal;
+    text-align: center;
+    box-shadow: none;
+    cursor: pointer;
+    text-decoration: none !important;
+    outline: none !important;
+    transition: .3s all;
+}
+
+/* ---------- text roll effect ---------- */
+.project_btn_roll {
+    display: block;
+    height: 1.2em;
+    line-height: 1.2;
+    overflow: hidden;      /* only one line visible at a time */
+    position: relative;
+}
+
+.project_btn_roll_item {
+    display: block;
+    transition: transform .45s cubic-bezier(.76, 0, .24, 1);
+    will-change: transform;
+}
+
+/* on hover / keyboard focus both lines move up by one line */
+@media (hover: hover) {
+    .project_btn:hover .project_btn_roll_item {
+        transform: translateY(-100%);
+    }
+}
+
+.project_btn:focus-visible .project_btn_roll_item {
+    transform: translateY(-100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .project_btn_roll_item { transition: none; }
+}
 .theme_btn, .dark_btn, .border_btn, .text_btn {
     position: relative;
     padding-right: 55px;
@@ -609,6 +659,9 @@ header {
 }
 .inner_hero_section .inner-banner, .hero_section, .status-header-section {
     padding-top: 170px !important;
+}
+.inner-banner-content .sub_title:before {
+    display: none;
 }
 .hero_section {
     hr {
@@ -889,7 +942,7 @@ header {
         }
         &.owl-prev {
             margin-right: 10px;
-            background-color: #F4F4F4;
+            background-color: #F4F4F4 !important;
         }
         &.owl-next {
             background-color: var(--bs-themecolor) !important;
@@ -2199,6 +2252,7 @@ footer {
     width: calc(100% + 80px);
     margin-left: -80px;
 }
+
 .accordion-item {
     border-radius: var(--radius-30) !important;
     border: 1px solid #E9E9E9 !important;
@@ -2862,4 +2916,106 @@ footer {
   0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--bs-themecolor) 50%, transparent); }
   70%  { box-shadow: 0 0 0 10px color-mix(in srgb, var(--bs-themecolor) 0%, transparent); }
   100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--bs-themecolor) 0%, transparent); }
+}
+
+
+/* filled buttons: Accept All + Reject All */
+.cky-btn-revisit-wrapper {
+    background-color: var(--bs-themecolor) !important;
+}
+ 
+.cky-consent-container .cky-consent-bar {
+    background: rgb(255 255 255 / 90%) !important;
+    border-radius: 15px !important;
+}
+ 
+.cky-notice-btn-wrapper .cky-btn {
+    text-shadow: none;
+    box-shadow: none;
+}
+ 
+.cky-consent-bar {
+    .cky-title {
+        color: var(--bs-themecolor) !important;
+        font-family: var(--bs-roboto) !important;
+        font-size: 20px !important;
+        font-weight: 700 !important;
+    }
+ 
+    .cky-notice-des p {
+        font-size: 15px !important;
+        font-weight: 300;
+        font-family: var(--bs-roboto) !important;
+ 
+        a {
+            font-size: 15px !important;
+            color: #212121 !important;
+        }
+    }
+}
+ 
+.cky-notice-btn-wrapper {
+    button.cky-btn.cky-btn-customize {
+        text-decoration: underline;
+        border: 0 !important;
+        padding: 0;
+        font-size: 15px !important;
+        font-weight: 500 !important;
+        font-family: var(--bs-roboto) !important;
+        color: var(--bs-themetext) !important;
+        order: 2;
+    }
+ 
+    .cky-policy {
+        color: #000 !important;
+    }
+ 
+    button.cky-btn.cky-btn-accept {
+        border: 0 !important;
+        font-size: 15px !important;
+        font-weight: 500 !important;
+        font-family: var(--bs-roboto) !important;
+        background: var(--bs-themecolor) !important;
+        border-radius: 50px;
+        text-align: left;
+        padding-left: 20px;
+        width: auto !important;
+        min-width: 225px !important;
+        position: relative;
+        order: 1;
+        line-height: 2.15;
+ 
+    }
+ 
+}
+
+/* //support card  */
+
+.support_tool_card{
+    opacity: 1;
+    background: var(--bs-lightgrey2);
+    border-radius: 30px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    padding: 2rem;
+    display: flex;
+    height: 100%;
+    img,svg{
+        width: 100%;
+        height: 100%;
+    }
+    h3{ 
+        font-weight: 700;
+        font-style: Bold;
+        font-size: var(--bs-fs50);
+        line-height: 38px;
+        letter-spacing: 0%;
+    }
+    p{
+        font-weight: 400;
+        font-size: var(--bs-fs22);
+
+        letter-spacing: 0%;
+    }
 }

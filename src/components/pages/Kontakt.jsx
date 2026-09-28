@@ -118,16 +118,8 @@ const Kontakt = () => {
       {/* ================= CONTACT CONTENT ================= */}
       <section className="kontakt_section pt_pb_3">
         <div className="container">
-          <div className="row">
-            <div className="col-lg-6 map-col pe-lg-5">
-              <div className="map-wrapper">
-                <MapComponent />
-              </div>
-
-              <div className="fw-regular mt-4">
-                {Inhalt?.Text || ""}
-              </div>
-            </div>
+          <div className="row flex-lg-row-reverse">
+            
 
             <div className="col-lg-6 form-col">
               <div className="form_wrapper">
@@ -140,6 +132,15 @@ const Kontakt = () => {
                 </h2>
 
                 <ContactForm />
+              </div>
+            </div>
+            <div className="col-lg-6 map-col pe-lg-5">
+              <div className="map-wrapper">
+                <MapComponent />
+              </div>
+
+              <div className="fw-regular mt-4">
+                {Inhalt?.Text || ""}
               </div>
             </div>
           </div>

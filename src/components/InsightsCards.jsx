@@ -59,7 +59,7 @@ export const InsightCard = ({ insight }) => {
   };
 
   return (
-    <div className="col-12 col-sm-6 col-lg-3">
+    <div className="col-6 col-sm-6 col-lg-3">
       <article
         className="insight-card position-relative overflow-hidden rounded-4"
         style={{

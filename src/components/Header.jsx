@@ -152,22 +152,30 @@ function Header() {
                     Kontakt
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link
+                    className={navClass("/support")}
+                    href="/support"
+                    onClick={handleNavClick}
+                  >
+                    Support
+                  </Link>
+                </li>
               </ul>
 
               {/* Project Button */}
-              <div className="ms-lg-3 mt-3 mt-lg-0">
-                <Link
-                  href="/kontakt"
-                  className="button theme_btn"
-                  onClick={handleNavClick}
-                >
-                  Projekt starten
-                  <img
-                    src="/images/btn-arrow.svg"
-                    alt="right arrow"
-                  />
-                </Link>
-              </div>
+             <div className="ms-lg-3 mt-3 mt-lg-0">
+  <Link
+    href="/kontakt"
+    className="project_btn"
+    onClick={handleNavClick}
+  >
+    <span className="project_btn_roll">
+      <span className="project_btn_roll_item">Projekt starten</span>
+      <span className="project_btn_roll_item" aria-hidden="true">Projekt starten</span>
+    </span>
+  </Link>
+</div>
 
             </div>
           </div>
