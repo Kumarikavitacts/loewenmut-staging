@@ -89,10 +89,7 @@ const TeamList = ({ teamData = [], loading = false }) => {
               role="button"
             >
               <div className={`team-image tm-img-bgcolor ${member.color}`}>
-            
-                {/* <YellowFrame/> */}
-                {/* <PinkFrame/> */}
-                {/* <BlueFrame/> */}
+                {/* Animated background elements */}
                    {frameComponents[member.color]}
                 {/* Person */}
                 {member.image && (
@@ -151,11 +148,9 @@ const TeamList = ({ teamData = [], loading = false }) => {
                   className={`team-modal-image tm-img-bgcolor ${selectedMember.color}`}
                 >
                   {/* Animated background elements */}
-                  <div className="animated-background">
-                    {selectedMember.shapes.map((shape, shapeIndex) => (
-                      <Shape key={shapeIndex} type={shape} index={shapeIndex} />
-                    ))}
-                  </div>
+                  <>
+          {frameComponents[selectedMember.color]}
+                  </>
                   {selectedMember.image && (
                     <img
                       src={selectedMember.image}

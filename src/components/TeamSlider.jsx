@@ -8,6 +8,9 @@ import $ from "jquery";
 
 import { teamMembers as staticTeamMembers } from "@/helper/TeamUtil";
 import { getMediaUrl } from "@/helper/MediaUrl";
+import YellowFrame from "@/components/ResuableComponents/YellowFrame";
+import PinkFrame from "@/components/ResuableComponents/PinkFrame";
+import BlueFrame from "@/components/ResuableComponents/BlueFrame";
 
 const Shape = ({ type, index }) => {
     return (
@@ -23,7 +26,11 @@ const SHAPE_SETS = {
   green: ["dots", "blob", "star", "curve", "blob-small", "bottom-wave"],
   purple: ["crosshatch", "blob", "eye-small", "branch", "blob-small", "top-wave"],
 };
-
+const frameComponents = {
+    yellow: <YellowFrame />,
+    blue: <BlueFrame />,
+    pink: <PinkFrame />,
+};
 const getShapes = (color) => SHAPE_SETS[color] || SHAPE_SETS.yellow;
 
 // Flattens the first paragraph of a Strapi block-editor "Text"
@@ -161,11 +168,7 @@ const TeamSlider = ({ teams }) => {
                 <div className="team-carousel-item" key={`${member.name}-${index}`} >
                     <div className="team-card">
                         <div className={`team-image tm-img-bgcolor ${member.color}`} >
-                            <div className="animated-background">
-                                {(member.shapes).map((shape, shapeIndex) => (
-                                    <Shape key={shapeIndex} type={shape} index={shapeIndex} />
-                                ))}
-                            </div>
+                            {frameComponents[member.color]}
                             <img src={member.image} alt={member.name} className="team-person" />
                         </div>
                         <div className="team-info">

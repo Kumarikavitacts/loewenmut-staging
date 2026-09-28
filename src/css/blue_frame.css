@@ -1,6 +1,6 @@
 *{box-sizing:border-box}
 body{margin:0;background:#fff}
-.frame{width:min(100%,493px);overflow:hidden;position:relative}
+.frame{width:min(100%,493px);}
 .frame svg{display:block;width:100%;height:auto}
 
 

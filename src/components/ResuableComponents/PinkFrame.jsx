@@ -2,8 +2,8 @@ import React from 'react'
 
 const PinkFrame = () => {
     return (
-        <div class="frame">
-            <svg class="floaty" width="493" height="469" viewBox="0 0 493 469" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div className="team-framee frame">
+            <svg className="floaty" width="493" height="469" viewBox="0 0 493 469" fill="none" xmlns="http://www.w3.org/2000/svg">
 
                 <g clip-path="url(#clip0_1214_126)">
                     <rect width="493" height="469" fill="#F34E9B" />

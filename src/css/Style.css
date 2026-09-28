@@ -1798,7 +1798,13 @@ footer {
         }
     }
 }
-
+.team-framee {
+    z-index: 1;
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
 .team-card {
 	position: relative;
     img.team-person {

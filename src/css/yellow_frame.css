@@ -2,8 +2,7 @@
 body{margin:0;background:#fff}
 .yellow-frame{
     width:min(100%,493px);
-    overflow:hidden;
-    position:relative;
+
     background:#FFD21C;
 }
 .yellow-frame svg{
