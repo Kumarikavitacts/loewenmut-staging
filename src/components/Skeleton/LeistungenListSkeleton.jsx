@@ -13,7 +13,7 @@ import { ServiceCardsSkeleton } from "@/components/Skeleton/ServicesSkeleton";
  */
 const LeistungenListSkeleton = () => {
   return (
-    <main>
+    <div>
       <section className="inner_hero_section news_banner">
         <InnerBannerSkeleton />
       </section>
@@ -49,7 +49,7 @@ const LeistungenListSkeleton = () => {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 };
 

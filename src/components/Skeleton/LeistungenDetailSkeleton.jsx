@@ -16,7 +16,7 @@ import SectionSkeleton from "@/components/Skeleton/SectionSkeleton";
  */
 const LeistungenDetailSkeleton = () => {
   return (
-    <main>
+    <div>
       {/* HERO */}
       <section className="inner_hero_section">
         <InnerBannerSkeleton />
@@ -106,7 +106,7 @@ const LeistungenDetailSkeleton = () => {
 
       {/* TALK */}
       <TalkSkeleton />
-    </main>
+    </div>
   );
 };
 
