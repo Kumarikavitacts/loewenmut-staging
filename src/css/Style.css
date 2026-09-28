@@ -2841,3 +2841,25 @@ footer {
 .privacy_accordion .accordion-button >  span{
     color: var(--bs-textdarkgrey) !important;
 }
+
+/* whatsapp icon theme colour  */
+.es-portal-root .es-button-base-container {
+  background-color: var(--bs-themecolor) !important;
+  color: var(--bs-themetext) !important;
+  animation: waThemePulse 2s infinite !important;
+}
+
+/* kill Elfsight's own yellow ring layers */
+.es-portal-root .es-button-base-container::before,
+.es-portal-root .es-button-base-container::after {
+  animation: none !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+@keyframes waThemePulse {
+  0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--bs-themecolor) 50%, transparent); }
+  70%  { box-shadow: 0 0 0 10px color-mix(in srgb, var(--bs-themecolor) 0%, transparent); }
+  100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--bs-themecolor) 0%, transparent); }
+}
