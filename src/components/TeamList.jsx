@@ -89,7 +89,7 @@ const TeamList = ({ teamData = [], loading = false }) => {
               role="button"
             >
               <div className={`team-image tm-img-bgcolor ${member.color}`}>
-                {/* Animated background elements */}
+            
                 {/* <YellowFrame/> */}
                 {/* <PinkFrame/> */}
                 {/* <BlueFrame/> */}
