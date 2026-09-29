@@ -2,6 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import TurnstileWidget from "@/components/ResuableComponents/TurnstileWidget";
+import { useRouter } from "next/navigation";
 
 // German replacements for the browser's default (English) validation text
 const DEFAULT_MESSAGES = {
@@ -24,6 +25,7 @@ const INITIAL_FORM = {
 };
 
 const SupportForm = () => {
+  const router = useRouter();
   const turnstileRef = useRef(null);
   const [turnstileToken, setTurnstileToken] = useState("");
   const [formData, setFormData] = useState(INITIAL_FORM);
@@ -59,7 +61,7 @@ const SupportForm = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     setSuccessMessage("");
@@ -72,16 +74,35 @@ const SupportForm = () => {
 
     setLoading(true);
 
-    // No backend yet – just show the data in the console
-    console.log("Support form data:", formData);
+    try {
+      const response = await fetch("/api/support", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, turnstileToken }),
+      });
 
-    setSuccessMessage("Ihre Supportanfrage wurde erfasst.");
-    setFormData(INITIAL_FORM);
-    setLoading(false);
+      const result = await response.json();
 
-    // Turnstile tokens are single-use – reset after every submit
-    setTurnstileToken("");
-    turnstileRef.current?.reset();
+      if (!response.ok) {
+        throw new Error(result.message || "Etwas ist schiefgelaufen.");
+      }
+
+      setSuccessMessage(
+        result.message || "Ihre Supportanfrage wurde erfolgreich gesendet."
+      );
+      setFormData(INITIAL_FORM);
+      router.push("/vielen-dank");
+    } catch (error) {
+      setErrorMessage(
+        error.message || "Ihre Anfrage konnte nicht gesendet werden."
+      );
+    } finally {
+      setLoading(false);
+
+      // Turnstile tokens are single-use – reset after every attempt
+      setTurnstileToken("");
+      turnstileRef.current?.reset();
+    }
   };
 
   return (

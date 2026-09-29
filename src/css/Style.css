@@ -1178,12 +1178,16 @@ header {
             font-size: var(--bs-fs20);
             font-family: var(--bs-roboto);
             font-weight: 300;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         h3 {
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 2px;
             min-height: 70px;
+        }
+        p {
+            min-height: 108px;
+            margin-bottom: 2px;
         }
         hr {
             border-top-color: #D7D7D7;

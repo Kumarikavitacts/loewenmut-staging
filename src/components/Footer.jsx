@@ -34,6 +34,7 @@ const Footer = () => {
                                     <Link href={'/agentur'}>Agentur</Link>
                                     <Link href={'/news'}>News</Link>
                                     <Link href={'/kontakt'}>Kontakt</Link>
+                                    <Link href={'/support'}>Support</Link>
                                 </div>
                             </div>
                         </div>

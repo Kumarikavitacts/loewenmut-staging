@@ -28,4 +28,6 @@ export const apiEndpoints = {
 
   getImpressumPageEndpoint: `api/impressum?populate=*`,
   getDatenschutzPageEndpoint: `api/datenschutzerklaerung?populate=*`,
+
+  getSupportPageEndpoint: `api/support?populate[Metadaten]=true&populate[Bannerbereich]=true&populate[Text]=true&populate[Bild]=true&populate[Inhalt][populate]=*`,
 }
