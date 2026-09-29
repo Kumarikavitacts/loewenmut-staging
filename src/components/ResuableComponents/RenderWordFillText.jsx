@@ -15,7 +15,7 @@ import parse, { domToReact } from "html-react-parser";
  * new line. That's what makes the "fill line 1 completely, then
  * start line 2" behavior work: ScrollFillText.jsx reads these
  * data-word-index attributes at scroll time and sets each word's
- * clip-path directly in JS (see the ANIMATION FIX note there for
+ * clipPath directly in JS (see the ANIMATION FIX note there for
  * why — a pure-CSS calc()/clamp() version turned out to silently
  * fail in some browsers, always rendering the fill layer fully
  * visible instead of clipped).

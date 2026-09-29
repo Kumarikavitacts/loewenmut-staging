@@ -41,14 +41,14 @@ const ScrollFillText = ({
 
   useEffect(() => {
     // ANIMATION FIX: previously each word's reveal amount was computed
-    // by the browser via a nested clip-path/clamp()/calc() CSS
+    // by the browser via a nested clipPath/clamp()/calc() CSS
     // expression driven by custom properties. That turned out to be
     // unreliable — when a browser can't resolve that exact nested-math
-    // expression it silently drops the *entire* clip-path declaration,
+    // expression it silently drops the *entire* clipPath declaration,
     // which leaves the fill layer permanently unclipped (fully
     // visible), so the text just looked static instead of animating.
     //
-    // This version computes each word's clip-path in plain JavaScript
+    // This version computes each word's clipPath in plain JavaScript
     // and sets it directly as that word's inline style. No CSS math
     // functions are involved, so there's nothing for a browser to
     // silently fail to parse.
@@ -99,7 +99,7 @@ const ScrollFillText = ({
         Math.min(initialFilledWords, totalWords || 0)
       );
 
-      // ANIMATION FIX: set each word's own clip-path directly — word i
+      // ANIMATION FIX: set each word's own clipPath directly — word i
       // is fully revealed once `words` passes i, fully hidden while
       // `words` is still below i, and partially (smoothly) revealed
       // in between. Because words are indexed in natural reading
@@ -164,7 +164,7 @@ const ScrollFillText = ({
 
       {/* Filled text — identical word markup to the base layer, so
          both layers wrap at exactly the same points. Each word's
-         clip-path is set directly in JS above (see the effect) —
+         clipPath is set directly in JS above (see the effect) —
          not via CSS custom-property math. */}
       <div className="scroll-fill-text-fill" ref={fillLayerRef}>
         {content}
