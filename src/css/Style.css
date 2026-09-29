@@ -1582,56 +1582,6 @@ footer {
     }
 }
 
-/* .stacking-card-wrapper {
-    padding-top: 2rem;
-    .stacking-card {
-        position: sticky;
-        top: 120px;
-        width: 100%;
-        margin: 0 auto 2rem;
-        display: flex;
-        overflow: hidden;
-        border-radius: var(--radius-30);
-        background: linear-gradient(29deg, #675e06, black, black);
-        z-index: calc(var(--i) + 1);
-    }
-    .stacking-content {
-        width: 50%;
-        padding: 2rem 3rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        color: var(--bs-white);
-    }
-    .card-number {
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 15px;
-        border: 1px solid var(--bs-themecolor);
-        border-radius: 50%;
-        font-weight: 700;
-        color: var(--bs-themecolor);
-        font-size: var(--bs-fs24);
-    }
-    hr {
-        border-top-color: var(--bs-white);
-    }
-    .stacking-image {
-        width: 50%;
-        padding: 1.5rem;
-        img {
-            width: 100%;
-            height: 100%;
-            display: block;
-            object-fit: cover;
-            border-radius: var(--radius-20);
-        }
-    }
-} */
-
 .stacking-card-wrapper {
     padding-top: 4rem;
     padding-bottom: 8rem;
@@ -2801,9 +2751,6 @@ footer {
 .scroll-fill-text-base {
     width: 100%;
     color: var(--scroll-start-color);
-    /* ANIMATION FIX: dim the not-yet-revealed text so there's always
-       a visible contrast with the fill layer on top, even when
-       startColor and fillColor are set to the same value. */
     opacity: var(--scroll-start-opacity, 1);
 }
  
@@ -2827,23 +2774,7 @@ footer {
 .scroll-fill-text-fill span {
     color: var(--scroll-fill-color) !important;
 }
- 
-/*
- * ANIMATION FIX: per-word progressive fill.
- * Each word is its own inline-block span. Its actual reveal amount
- * (clip-path) is now set directly in JavaScript by ScrollFillText.jsx
- * on every scroll tick — a previous version tried to compute this
- * purely in CSS via nested clamp()/calc() custom-property math, but
- * that silently failed in some browsers (the whole clip-path
- * declaration gets dropped if the browser can't resolve the nested
- * expression), leaving the fill layer permanently fully visible
- * instead of animating.
- *
- * This rule only sets the SAFE DEFAULT — fully hidden — so that if
- * JS hasn't run yet (e.g. right at first paint, before hydration),
- * the fill layer doesn't flash fully visible. ScrollFillText.jsx's
- * inline style on each word then overrides this on every scroll tick.
- */
+
 .sf-fill-word {
     display: inline-block;
 }
@@ -2852,18 +2783,6 @@ footer {
     clip-path: inset(0 100% 0 0);
 }
  
-/*
- * ANIMATION FIX: bug fix, not new behavior.
- * The global `h2 span { color: var(--bs-textlightgrey); }` rule
- * (further up this file) was overriding the color of every
- * .sf-fill-word span whenever ScrollFillText is rendered inside an
- * <h2> — which is how it's used everywhere (Services.jsx, NewsCard.jsx,
- * TalkSection.jsx). That made word spans render in light grey, nearly
- * invisible against the page background. Two classes here outrank the
- * single-class-free "h2 span" selector, so this always wins regardless
- * of source order — keep this even though you've since commented that
- * rule out locally, since it may still exist for other headings.
- */
 .scroll-fill-text-base .sf-fill-word {
     color: var(--scroll-start-color);
 }
@@ -2958,7 +2877,7 @@ footer {
         font-size: 15px !important;
         font-weight: 500 !important;
         font-family: var(--bs-roboto) !important;
-        color: var(--bs-themetext) !important;
+        color: var(--bs-darkgrey) !important;
         order: 2;
     }
  
@@ -2973,10 +2892,8 @@ footer {
         font-family: var(--bs-roboto) !important;
         background: var(--bs-themecolor) !important;
         border-radius: 50px;
-        text-align: left;
-        padding-left: 20px;
-        width: auto !important;
-        min-width: 225px !important;
+        text-align: center;
+        color: var(--bs-themetext) !important;
         position: relative;
         order: 1;
         line-height: 2.15;
@@ -2984,6 +2901,20 @@ footer {
     }
  
 }
+.cky-preference-header .cky-preference-title {
+    color: var(--bs-themecolor) !important;
+}
+
+.cky-prefrence-btn-wrapper .cky-btn {
+	color: var(--bs-themetext) !important;
+    background: var(--bs-themecolor) !important;
+    border: 0 !important;
+    border-radius: 50px !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+
+}
+ 
 
 /* //support card  */
 
@@ -3011,7 +2942,7 @@ footer {
     p{
         font-weight: 400;
         font-size: var(--bs-fs22);
-
         letter-spacing: 0%;
     }
 }
+
