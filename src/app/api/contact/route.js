@@ -35,7 +35,7 @@ const LOGO_PATH = path.join(
   process.cwd(),
   "public",
   "images",
-  "website_image.png"
+  "loewenmut-logo-mail.png"
 );
 
 const LOGO_CID = "loewenmut-logo";
@@ -182,7 +182,7 @@ function getLogoHtml() {
   return `
     <div
       style="
-        margin: 2px 0 0;
+        margin: 20px 0 0;
         padding: 0;
         text-align: left;
       "
