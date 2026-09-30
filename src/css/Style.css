@@ -886,7 +886,7 @@ header {
 
 .service-slider {
     .owl-carousel {
-        clipPath: inset(-100vw -100vw -100vw 0);
+        clip-path: inset(-100vw -100vw -100vw 0);
         .owl-stage-outer {
             overflow: unset !important;
         }
@@ -2025,7 +2025,7 @@ footer {
 	height: 17px;
 	right: 8%;
 	top: 45%;
-	clipPath: polygon(50% 0%,61% 35%,100% 50%,61% 65%,50% 100%,39% 65%,0% 50%,39% 35%);
+	clip-path: polygon(50% 0%,61% 35%,100% 50%,61% 65%,50% 100%,39% 65%,0% 50%,39% 35%);
 	animation: starAnimation 4s ease-in-out infinite;
 }
 .team-modal-backdrop {
@@ -2175,7 +2175,7 @@ footer {
 }
 
 .team-carousel {
-    clipPath: inset(-100vw -100vw -100vw 0);
+    clip-path: inset(-100vw -100vw -100vw 0);
     .owl-stage-outer {
         overflow: unset !important;
     }
@@ -2415,7 +2415,7 @@ footer {
 }
 .project-carousel-section {
     .project-carousel {
-        clipPath: inset(-100vw -100vw -100vw 0);
+        clip-path: inset(-100vw -100vw -100vw 0);
 
         .owl-stage-outer {
             overflow: unset !important;
@@ -2769,7 +2769,7 @@ footer {
  
     pointer-events: none;
  
-    will-change: clipPath;
+    will-change: clip-path;
  
     z-index: 2;
 }
@@ -2784,7 +2784,7 @@ footer {
 }
  
 .scroll-fill-text-fill .sf-fill-word {
-    clipPath: inset(0 100% 0 0);
+    clip-path: inset(0 100% 0 0);
 }
  
 .scroll-fill-text-base .sf-fill-word {
@@ -2937,9 +2937,8 @@ footer {
         height: 100%;
     }
     h3{ 
-        font-weight: 700;
-        font-style: Bold;
-        font-size: var(--bs-fs50);
+        font-weight: 400;
+        font-size: var(--bs-fs40);
         line-height: 38px;
         letter-spacing: 0%;
     }

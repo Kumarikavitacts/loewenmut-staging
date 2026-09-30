@@ -13,19 +13,13 @@ const strategies = [
   { id: "content", label: "Content", value: "Content" },
 ];
 
-// VALIDATION FIX: German replacements for the browser's default
-// (English) HTML5 validation bubble text, keyed by validity state.
-// Passed per-field into handleInvalid() below.
 const DEFAULT_MESSAGES = {
   valueMissing: "Bitte füllen Sie dieses Feld aus.",
   typeMismatch: "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
   patternMismatch: "Bitte geben Sie eine gültige Telefonnummer ein (nur Zahlen).",
 };
 
-// VALIDATION FIX: only digits, spaces, "+", "-", "(" and ")" are allowed
-// in the Telefon field — letters and other characters are stripped as
-// the user types, and this same pattern backs the HTML5 `pattern`
-// attribute on the input for a final check on submit.
+
 const PHONE_ALLOWED_CHARS_REGEX = /[^0-9+\-\s()]/g;
 const PHONE_PATTERN = "^[0-9+\\-\\s()]{6,}$";
 
@@ -64,16 +58,11 @@ const ContactForm = () => {
       [name]: value,
     }));
 
-    // VALIDATION FIX: clear any previously set custom validity message
-    // as soon as the user edits the field, so the browser re-checks
-    // validity fresh on the next submit attempt instead of re-showing
-    // a stale message.
+
     e.target.setCustomValidity("");
   };
 
-  // VALIDATION FIX: Telefon-specific change handler — strips any
-  // character that isn't a digit, space, "+", "-", "(" or ")" so the
-  // user simply cannot type letters/symbols into the phone field.
+
   const handlePhoneChange = (e) => {
     const { name, value } = e.target;
     const filteredValue = value.replace(PHONE_ALLOWED_CHARS_REGEX, "");
@@ -86,10 +75,7 @@ const ContactForm = () => {
     e.target.setCustomValidity("");
   };
 
-  // VALIDATION FIX: fires when a field fails native HTML5 validation
-  // (e.g. left empty, or — for Telefon — fails the pattern check) and
-  // sets a German message instead of the browser's default English one.
-  // `messages` lets each field override individual messages as needed.
+  
   const handleInvalid = (e, messages = {}) => {
     const target = e.target;
     const merged = { ...DEFAULT_MESSAGES, ...messages };
@@ -136,9 +122,10 @@ const ContactForm = () => {
       if (!response.ok) {
         throw new Error(result.message || "Something went wrong.");
       }
-
-      setSuccessMessage(result.message || "Nachricht erfolgreich gesendet.");
-
+      
+      // setSuccessMessage(result.message || "Nachricht erfolgreich gesendet.");
+      
+      router.push("/vielen-dank");
       setFormData({
         vorname: "",
         nachname: "",
@@ -148,10 +135,8 @@ const ContactForm = () => {
         nachricht: "",
       });
       setSelectedStrategies([]);
-      // Redirect after 2 seconds
-      setTimeout(() => {
-        router.push("/vielen-dank");
-      }, 2000);
+    
+
     } catch (error) {
       console.error(error);
       setErrorMessage(
@@ -292,12 +277,12 @@ const ContactForm = () => {
             </button>
           </div>
         </div>
-
+{/* 
         {successMessage && (
           <div className="col-12">
             <div className="alert alert-success">{successMessage}</div>
           </div>
-        )}
+        )} */}
 
         {errorMessage && (
           <div className="col-12">

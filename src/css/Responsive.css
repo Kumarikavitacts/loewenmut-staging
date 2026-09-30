@@ -548,6 +548,7 @@ header {
                 padding: 0 40px;
                 overflow: auto;
                 overflow-x: hidden;
+                text-align:right;
             }
 
             &.collapse ul.navbar-nav {
@@ -1112,6 +1113,7 @@ header {
                 padding: 0 20px;
                 overflow: auto;
                 overflow-x: hidden;
+                text-align:right;
             }
         }
     }

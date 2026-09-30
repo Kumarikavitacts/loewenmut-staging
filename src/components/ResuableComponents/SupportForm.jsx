@@ -199,11 +199,11 @@ const SupportForm = () => {
           </div>
         </div>
 
-        {successMessage && (
+        {/* {successMessage && (
           <div className="col-12">
             <div className="alert alert-success">{successMessage}</div>
           </div>
-        )}
+        )} */}
 
         {errorMessage && (
           <div className="col-12">
