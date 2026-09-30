@@ -932,6 +932,10 @@ span.txt-008:before {
             }
         }
     }
+      .service-card {
+    height: auto !important;
+    min-height: 0;
+  }
     footer {
         .ftr_contact {
             a {

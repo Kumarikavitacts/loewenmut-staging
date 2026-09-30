@@ -64,7 +64,7 @@ export const InsightCard = ({ insight }) => {
         className="insight-card position-relative overflow-hidden rounded-4"
         style={{
           aspectRatio: "375 / 345",
-          backgroundColor,
+          backgroundColor: isHovered ? "transparent" : backgroundColor,
           cursor:
             insight?.Slug || insight?.Link_zur_Website
               ? "pointer"

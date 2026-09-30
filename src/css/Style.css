@@ -1709,6 +1709,7 @@ footer {
     gap: 1.5rem;
     width: 100%;
     .service-card {
+          height: auto;
         padding: 1.75rem;
         border-radius: var(--radius-30);
         background: #F6F6F6 url("/images/bg-pattern.png") no-repeat center;

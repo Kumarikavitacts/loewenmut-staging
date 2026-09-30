@@ -1,15 +1,18 @@
 import { NextResponse, after } from "next/server";
 import nodemailer from "nodemailer";
-// PERF FIX: `after()` is built into Next.js (no extra package needed).
-// It lets us respond to the client immediately while the confirmation
-// emails keep sending in the background, after the response is flushed.
-// Works on Vercel and on self-hosted Next.js (Node.js runtime).
+import path from "node:path";
+
+export const runtime = "nodejs";
+
+/**
+ * ---------------------------------------------------------
+ * Environment variables
+ * ---------------------------------------------------------
+ */
 
 const STRAPI_URL = process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/+$/, "");
 const STRAPI_API_TOKEN = process.env.STRAPI_API_TOKEN;
 
-// Public site URL — same env var used in src/app/layout.jsx — for the
-// website link/banner in the confirmation email.
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "");
 
 const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY;
@@ -19,13 +22,69 @@ const SMTP_PORT = Number(process.env.SMTP_PORT || 587);
 const SMTP_USER = process.env.SMTP_USER;
 const SMTP_PASSWORD = process.env.SMTP_PASSWORD;
 const SMTP_FROM = process.env.SMTP_FROM || SMTP_USER;
+
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+
+/**
+ * ---------------------------------------------------------
+ * Logo
+ * ---------------------------------------------------------
+ */
+
+const LOGO_PATH = path.join(
+  process.cwd(),
+  "public",
+  "images",
+  "website_image.png"
+);
+
+const LOGO_CID = "loewenmut-logo";
+
+/**
+ * ---------------------------------------------------------
+ * Escape HTML
+ * ---------------------------------------------------------
+ */
+
+function escapeHtml(value = "") {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+
+
+function formatAddressHtml(address = "") {
+  if (!address) {
+    return "";
+  }
+
+  let formatted = escapeHtml(address);
+
+  // Allow <br>
+  formatted = formatted
+    .replace(/&lt;br\s*\/?&gt;/gi, "<br />")
+
+    // Allow <strong>
+    .replace(/&lt;strong&gt;/gi, "<strong>")
+    .replace(/&lt;\/strong&gt;/gi, "</strong>")
+
+    // Allow <b>
+    .replace(/&lt;b&gt;/gi, "<b>")
+    .replace(/&lt;\/b&gt;/gi, "</b>");
+
+  return formatted;
+}
 
 /**
  * ---------------------------------------------------------
  * Verify Cloudflare Turnstile
  * ---------------------------------------------------------
  */
+
 async function verifyTurnstileToken(token, remoteIp) {
   const response = await fetch(
     "https://challenges.cloudflare.com/turnstile/v0/siteverify",
@@ -47,12 +106,10 @@ async function verifyTurnstileToken(token, remoteIp) {
 
 /**
  * ---------------------------------------------------------
- * Fetch company contact details (Telefon, Adresse, Email)
- * from the same Strapi "Kontakt" content type the /kontakt
- * page uses, for display in the confirmation email footer.
- * Never blocks/breaks email sending if this fails.
+ * Fetch company contact details from Strapi
  * ---------------------------------------------------------
  */
+
 async function getKontaktInfo() {
   try {
     const response = await fetch(`${STRAPI_URL}/api/kontakt?populate=*`, {
@@ -60,14 +117,22 @@ async function getKontaktInfo() {
     });
 
     if (!response.ok) {
-      console.error("Failed to fetch Kontakt info:", response.status);
+      console.error(
+        "Failed to fetch Kontakt info:",
+        response.status,
+        response.statusText
+      );
+
       return null;
     }
 
     const json = await response.json();
+
     const data = json?.data;
 
-    if (!data) return null;
+    if (!data) {
+      return null;
+    }
 
     return {
       telefon: data.Telefon || "",
@@ -76,6 +141,7 @@ async function getKontaktInfo() {
     };
   } catch (error) {
     console.error("Error fetching Kontakt info:", error);
+
     return null;
   }
 }
@@ -83,23 +149,24 @@ async function getKontaktInfo() {
 /**
  * ---------------------------------------------------------
  * SMTP transporter
- * PERF FIX: enabled connection pooling (`pool: true`) so
- * nodemailer reuses one SMTP connection/TLS handshake across
- * both emails instead of opening a new connection per send.
- * This alone typically saves 1-3s.
  * ---------------------------------------------------------
  */
+
 const transporter = nodemailer.createTransport({
   host: SMTP_HOST,
   port: SMTP_PORT,
   secure: false,
-  pool: true, // PERF FIX: reuse connections
-  maxConnections: 3, // PERF FIX: allow the two emails to send concurrently
+
+  pool: true,
+
+  maxConnections: 3,
   maxMessages: 100,
+
   auth: {
     user: SMTP_USER,
     pass: SMTP_PASSWORD,
   },
+
   tls: {
     minVersion: "TLSv1.2",
   },
@@ -107,23 +174,175 @@ const transporter = nodemailer.createTransport({
 
 /**
  * ---------------------------------------------------------
- * Escape HTML
+ * Logo HTML
  * ---------------------------------------------------------
  */
-function escapeHtml(value = "") {
-  return String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+
+function getLogoHtml() {
+  return `
+    <div
+      style="
+        margin: 2px 0 0;
+        padding: 0;
+        text-align: left;
+      "
+    >
+      <a
+        href="${escapeHtml(
+    SITE_URL || "https://staging2.loewenmut.ch"
+  )}"
+        target="_blank"
+        rel="noopener noreferrer"
+        style="
+          display: inline-block;
+          text-decoration: none;
+        "
+      >
+        <img
+          src="cid:${LOGO_CID}"
+          alt="Löwenmut"
+          width="250"
+          style="
+            display: block;
+            width: 250px;
+            max-width: 100%;
+            height: auto;
+            border: 0;
+            outline: none;
+            text-decoration: none;
+          "
+        />
+      </a>
+    </div>
+  `;
 }
 
 /**
  * ---------------------------------------------------------
- * Send confirmation email
+ * Company details
+ *
+ * Used only in customer confirmation email.
  * ---------------------------------------------------------
  */
+
+function getCompanyDetailsHtml(kontaktInfo) {
+  const companyTelefon = kontaktInfo?.telefon || "";
+  const companyAdresse = kontaktInfo?.adresse || "";
+  const companyEmail = kontaktInfo?.email || "";
+
+  const companyTelefonHref = companyTelefon.replace(/\s+/g, "");
+
+  if (!companyTelefon && !companyAdresse && !companyEmail) {
+    return "";
+  }
+
+  return `
+    <div
+      style="
+        margin-top: 35px;
+        padding-top: 30px;
+        border-top: 1px solid #EFEFEF;
+        text-align: left;
+      "
+    >
+
+      <p
+        style="
+          margin: 0 0 15px;
+          font-size: 16px;
+          font-weight: 300;
+          line-height: 1.65;
+          color: #373737;
+        "
+      >
+        Freundliche Grüsse
+      </p>
+
+      ${companyAdresse
+      ? `
+            <p
+              style="
+                margin: 0 0 5px;
+                font-size: 15px;
+                font-weight: 300;
+                line-height: 1.6;
+                color: #373737;
+              "
+            >
+              ${formatAddressHtml(companyAdresse)}
+            </p>
+          `
+      : ""
+    }
+
+      ${companyEmail
+      ? `
+            <p
+              style="
+                margin: 0 0 10px;
+                font-size: 15px;
+                font-weight: 300;
+                line-height: 1.5;
+                color: #373737;
+              "
+            >
+              <strong style="font-weight: 600;">
+                E-Mail:
+              </strong>
+
+              <a
+                href="mailto:${escapeHtml(companyEmail)}"
+                style="
+                  color: #373737;
+                  text-decoration: underline;
+                "
+              >
+                ${escapeHtml(companyEmail)}
+              </a>
+            </p>
+          `
+      : ""
+    }
+
+      ${companyTelefon
+      ? `
+            <p
+              style="
+                margin: 0;
+                font-size: 15px;
+                font-weight: 300;
+                line-height: 1.5;
+                color: #373737;
+              "
+            >
+              <strong style="font-weight: 600;">
+                Telefon:
+              </strong>
+
+              <a
+                href="tel:${escapeHtml(companyTelefonHref)}"
+                style="
+                  color: #373737;
+                  text-decoration: underline;
+                "
+              >
+                ${escapeHtml(companyTelefon)}
+              </a>
+            </p>
+          `
+      : ""
+    }
+
+    </div>
+  `;
+}
+
+/**
+ * ---------------------------------------------------------
+ * Send confirmation + admin emails
+ * ---------------------------------------------------------
+ */
+
 async function sendConfirmationEmail({
   email,
   vorname,
@@ -136,441 +355,514 @@ async function sendConfirmationEmail({
 }) {
   const fullName = `${vorname || ""} ${nachname || ""}`.trim();
 
-  const companyTelefon = kontaktInfo?.telefon || "";
-  const companyAdresse = kontaktInfo?.adresse || "";
-  const companyEmail = kontaktInfo?.email || "";
-  const companyTelefonHref = companyTelefon.replace(/\s+/g, "");
+  /**
+   * -------------------------------------------------------
+   * Strategy list
+   * -------------------------------------------------------
+   */
 
   const strategyList =
     Array.isArray(strategien) && strategien.length > 0
-      ? strategien.map((strategy) => `<li>${escapeHtml(strategy)}</li>`).join("")
-      : "<li>Keine Auswahl</li>";
+      ? strategien
+        .map(
+          (strategy) => `
+              <li
+                style="
+                  margin-bottom: 6px;
+                  font-size: 15px;
+                  font-weight: 300;
+                  line-height: 1.6;
+                  color: #373737;
+                "
+              >
+                ${escapeHtml(strategy)}
+              </li>
+            `
+        )
+        .join("")
+      : `
+          <li
+            style="
+              font-size: 15px;
+              font-weight: 300;
+              line-height: 1.6;
+              color: #373737;
+            "
+          >
+            Keine Auswahl
+          </li>
+        `;
 
   /**
-   * ---------------------------------------------------------
-   * Brand tokens — mirrored from src/css/Style.css (:root)
-   * Email clients don't reliably load CSS custom properties,
-   * so values are inlined directly, but kept in sync with:
-   *   --bs-roboto:        "Roboto"
-   *   --bs-textdarkgrey:  #373737   (body text)
-   *   --bs-textlightgrey: #999999   (secondary text)
-   *   --bs-bordergrey:    #EFEFEF   (dividers)
-   *   --bs-lightgrey2:    #f8f8f8   (section background)
-   *   --color_5:          #FFD900   (brand yellow / theme accent)
-   *   --bs-darkgrey:      #222633   (on-yellow text)
-   *   --radius-20:        20px
-   * ---------------------------------------------------------
+   * -------------------------------------------------------
+   * CUSTOMER EMAIL
+   * -------------------------------------------------------
    */
-  const adminHtml = `
+
+  const customerHtml = `
     <!DOCTYPE html>
+
     <html lang="de">
+
       <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;600;700&display=swap"
-          rel="stylesheet"
+
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
         />
-        <title>Vielen Dank für Ihre Anfrage</title>
+
+        <title>
+          Vielen Dank für Ihre Anfrage bei Löwenmut
+        </title>
       </head>
+
       <body
         style="
           margin: 0;
           padding: 0;
-          background-color: #f8f8f8;
-          font-family: 'Roboto', Arial, Helvetica, sans-serif;
+          background-color: #ffffff;
+          font-family: Arial, Helvetica, sans-serif;
           color: #373737;
         "
       >
+
         <div
           style="
+            width: 100%;
             max-width: 650px;
-            margin: 40px auto;
-            background: #ffffff;
-            border-radius: 20px;
-            overflow: hidden;
-            font-family: 'Roboto', Arial, Helvetica, sans-serif;
+            box-sizing: border-box;
+            background-color: #ffffff;
           "
         >
-          <div style="background-color: #FFD900; padding: 28px 30px;">
-            <h2
-              style="
-                margin: 0 0 16px;
-                font-family: 'Roboto', Arial, Helvetica, sans-serif;
-                font-size: 20px;
-                font-weight: 400;
-                color: #373737;
-              "
-            >
-              Sie haben eine neue Nachricht
-            </h2>
-          </div>
 
-          <div style="padding: 40px;">
-            <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
-              <tr>
-                <td
-                  style="
-                    padding: 12px 0;
-                    border-bottom: 1px solid #EFEFEF;
-                    font-size: 15px;
-                    font-weight: 600;
-                    color: #373737;
-                    width: 35%;
-                  "
-                >
-                  Name
-                </td>
-                <td
-                  style="
-                    padding: 12px 0;
-                    border-bottom: 1px solid #EFEFEF;
-                    font-size: 15px;
-                    font-weight: 300;
-                    color: #373737;
-                  "
-                >
-                  ${escapeHtml(fullName)}
-                </td>
-              </tr>
-
-              <tr>
-                <td
-                  style="
-                    padding: 12px 0;
-                    border-bottom: 1px solid #EFEFEF;
-                    font-size: 15px;
-                    font-weight: 600;
-                    color: #373737;
-                  "
-                >
-                  E-Mail
-                </td>
-                <td
-                  style="
-                    padding: 12px 0;
-                    border-bottom: 1px solid #EFEFEF;
-                    font-size: 15px;
-                    font-weight: 300;
-                    color: #373737;
-                  "
-                >
-                  ${escapeHtml(email)}
-                </td>
-              </tr>
-
-              <tr>
-                <td
-                  style="
-                    padding: 12px 0;
-                    border-bottom: 1px solid #EFEFEF;
-                    font-size: 15px;
-                    font-weight: 600;
-                    color: #373737;
-                  "
-                >
-                  Telefon
-                </td>
-                <td
-                  style="
-                    padding: 12px 0;
-                    border-bottom: 1px solid #EFEFEF;
-                    font-size: 15px;
-                    font-weight: 300;
-                    color: #373737;
-                  "
-                >
-                  ${escapeHtml(telefon || "-")}
-                </td>
-              </tr>
-
-              <tr>
-                <td
-                  style="
-                    padding: 12px 0;
-                    font-size: 15px;
-                    font-weight: 600;
-                    color: #373737;
-                  "
-                >
-                  Betreff
-                </td>
-                <td
-                  style="
-                    padding: 12px 0;
-                    font-size: 15px;
-                    font-weight: 300;
-                    color: #373737;
-                  "
-                >
-                  ${escapeHtml(betreff || "-")}
-                </td>
-              </tr>
-            </table>
-
-            <h2
-              style="
-                margin: 0 0 16px;
-                font-family: 'Roboto', Arial, Helvetica, sans-serif;
-                font-size: 20px;
-                font-weight: 400;
-                color: #373737;
-              "
-            >
-              Gewünschte Leistungen
-            </h2>
-
-            <ul
-              style="
-                margin: 0 0 30px;
-                padding-left: 20px;
-                font-size: 15px;
-                font-weight: 300;
-                color: #373737;
-                line-height: 1.65;
-              "
-            >
-              ${strategyList}
-            </ul>
-
-            <h2
-              style="
-                margin: 0 0 16px;
-                font-family: 'Roboto', Arial, Helvetica, sans-serif;
-                font-size: 20px;
-                font-weight: 400;
-                color: #373737;
-              "
-            >
-              Kundendaten
-            </h2>
-
-            <div
-              style="
-                background-color: #f8f8f8;
-                border: 1px solid #EFEFEF;
-                padding: 20px;
-                border-radius: 20px;
-                font-size: 15px;
-                font-weight: 300;
-                color: #373737;
-                white-space: pre-line;
-                margin-bottom: 30px;
-              "
-            >
-              ${escapeHtml(nachricht || "")}
-            </div>
-
-            <!-- Company Details -->
-            ${
-              companyTelefon || companyAdresse || companyEmail
-                ? `
-                <div
-                  style="
-                    margin-top: 10px;
-                    padding-top: 30px;
-                    border-top: 1px solid #EFEFEF;
-                    text-align: left;
-                  "
-                >
-                  <p style="margin: 35px 0 0; font-size: 16px; font-weight: 300; line-height: 1.65;">
-                    Freundliche Grüsse<br />
-                  </p>
-
-                  ${
-                    companyAdresse
-                      ? `
-                        <p style="margin: 0; font-size: 15px; font-weight: 300; line-height: 1.6;">
-                          ${companyAdresse}
-                        </p>
-                      `
-                      : ""
-                  }
-
-                  ${
-                    companyEmail
-                      ? `
-                        <p style="margin: 0 0 10px; font-size: 15px; font-weight: 300; line-height: 1.5;">
-                          <strong style="font-weight: 600;">E-Mail:</strong>
-                          <a href="mailto:${companyEmail}" style="color: #373737; text-decoration: underline;">
-                            ${escapeHtml(companyEmail)}
-                          </a>
-                        </p>
-                      `
-                      : ""
-                  }
-
-                  ${
-                    companyTelefon
-                      ? `
-                        <p style="margin: 0 0 10px; font-size: 15px; font-weight: 300; line-height: 1.5;">
-                          <strong style="font-weight: 600;">Telefon:</strong>
-                          <a href="tel:${companyTelefonHref}" style="color: #373737; text-decoration: underline;">
-                            ${escapeHtml(companyTelefon)}
-                          </a>
-                        </p>
-                      `
-                      : ""
-                  }
-                </div>
-              `
-                : ""
-            }
-          </div>
-        </div>
-      </body>
-    </html>
-  `;
-
-  const customerHtml = `
-  <!DOCTYPE html>
-  <html lang="de">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;600;700&display=swap"
-        rel="stylesheet"
-      />
-      <title>Vielen Dank für Ihre Anfrage</title>
-    </head>
-    <body
-      style="
-        margin: 0;
-        padding: 0;
-        background-color: #f8f8f8;
-        font-family: 'Roboto', Arial, Helvetica, sans-serif;
-        color: #373737;
-      "
-    >
-      <div
-        style="
-          max-width: 650px;
-          margin: 40px auto;
-          background-color: #ffffff;
-          border-radius: 20px;
-          overflow: hidden;
-        "
-      >
-        <!-- Header -->
-        <div style="background-color: #FFD900; padding: 28px 40px;">
-          <h1
+          <p
             style="
-              margin: 0;
-              font-family: 'Roboto', Arial, Helvetica, sans-serif;
-              font-size: 26px;
-              font-weight: 600;
-              color: #222633;
+              margin: 0 0 20px;
+              font-size: 16px;
+              font-weight: 300;
+              line-height: 1.65;
+              color: #373737;
             "
           >
-            Vielen Dank für Ihre Anfrage
-          </h1>
-        </div>
-
-        <!-- Content -->
-        <div style="padding: 40px;">
-          <p style="margin: 0 0 20px; font-size: 16px; font-weight: 300; line-height: 1.65;">
             Hallo ${escapeHtml(vorname || "")},
           </p>
 
-          <p style="margin: 0 0 20px; font-size: 16px; font-weight: 300; line-height: 1.65;">
+
+          <p
+            style="
+              margin: 0 0 20px;
+              font-size: 16px;
+              font-weight: 300;
+              line-height: 1.65;
+              color: #373737;
+            "
+          >
             vielen Dank für Ihre Nachricht an Löwenmut.
             Wir haben Ihre Anfrage erfolgreich erhalten.
           </p>
 
-          <p style="margin: 0 0 30px; font-size: 16px; font-weight: 300; line-height: 1.65;">
-            Unser Team wird Ihre Anfrage prüfen und sich
-            so bald wie möglich bei Ihnen melden.
+
+          <p
+            style="
+              margin: 0 0 20px;
+              font-size: 16px;
+              font-weight: 300;
+              line-height: 1.65;
+              color: #373737;
+            "
+          >
+            Unser Team prüft Ihr Anliegen und meldet sich
+            so bald wie möglich persönlich bei Ihnen.
           </p>
 
-          <p style="margin: 0 0 30px; font-size: 16px; font-weight: 300; line-height: 1.65;">
+
+          <p
+            style="
+              margin: 0 0 30px;
+              font-size: 16px;
+              font-weight: 300;
+              line-height: 1.65;
+              color: #373737;
+            "
+          >
             Wir freuen uns darauf, mit Ihnen ins Gespräch zu kommen.
           </p>
 
-          <!-- Company Details -->
-          ${
-            companyTelefon || companyAdresse || companyEmail
-              ? `
-                <div
+
+          <!-- Company details -->
+
+          ${getCompanyDetailsHtml(kontaktInfo)}
+
+
+          <!-- Clickable logo -->
+
+          ${getLogoHtml()}
+
+        </div>
+
+      </body>
+
+    </html>
+  `;
+
+  /**
+   * -------------------------------------------------------
+   * ADMIN EMAIL
+   * -------------------------------------------------------
+   */
+
+  const adminHtml = `
+    <!DOCTYPE html>
+
+    <html lang="de">
+
+      <head>
+        <meta charset="UTF-8" />
+
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
+        />
+
+        <title>
+          Neue Kontaktanfrage von ${escapeHtml(fullName)}
+        </title>
+      </head>
+
+      <body
+        style="
+          margin: 0;
+          padding: 0;
+          background-color: #ffffff;
+          font-family: Arial, Helvetica, sans-serif;
+          color: #373737;
+        "
+      >
+
+        <div
+          style="
+            width: 100%;
+            max-width: 650px;
+            box-sizing: border-box;
+            background-color: #ffffff;
+          "
+        >
+
+          <h2
+            style="
+              margin: 0 0 30px;
+              font-size: 22px;
+              line-height: 1.4;
+              font-weight: 400;
+              color: #373737;
+            "
+          >
+            Sie haben eine neue Kontaktanfrage
+          </h2>
+
+  <h2
+            style="
+              margin: 15px 0 10px;
+              font-size: 20px;
+              line-height: 1.4;
+              font-weight: 400;
+              color: #373737;
+            "
+          >
+            Gewünschte Leistungen
+          </h2>
+
+
+          <ul
+            style="
+              margin: 0;
+              padding-left: 20px;
+            "
+          >
+            ${strategyList}
+          </ul>
+
+          <table
+            width="100%"
+            cellpadding="0"
+            cellspacing="0"
+            border="0"
+            style="
+              width: 100%;
+              border-collapse: collapse;
+            "
+          >
+
+            <tr>
+
+              <td
+                style="
+                  padding: 12px 0;
+                  border-bottom: 1px solid #EFEFEF;
+                  font-size: 15px;
+                  font-weight: 600;
+                  color: #373737;
+                  width: 35%;
+                  vertical-align: top;
+                "
+              >
+                Vorname
+              </td>
+              <td
+                style="
+                  padding: 12px 0;
+                  border-bottom: 1px solid #EFEFEF;
+                  font-size: 15px;
+                  font-weight: 300;
+                  color: #373737;
+                  vertical-align: top;
+                "
+              >
+                ${escapeHtml(vorname || "-")}
+              </td>
+
+            </tr>
+
+
+            <tr>
+
+              <td
+                style="
+                  padding: 12px 0;
+                  border-bottom: 1px solid #EFEFEF;
+                  font-size: 15px;
+                  font-weight: 600;
+                  color: #373737;
+                  width: 35%;
+                  vertical-align: top;
+                "
+              >
+                Nachname
+              </td>
+              <td
+                style="
+                  padding: 12px 0;
+                  border-bottom: 1px solid #EFEFEF;
+                  font-size: 15px;
+                  font-weight: 300;
+                  color: #373737;
+                  vertical-align: top;
+                "
+              >
+                ${escapeHtml(nachname || "-")}
+              </td>
+
+            </tr>
+
+
+            <tr>
+
+              <td
+                style="
+                  padding: 12px 0;
+                  border-bottom: 1px solid #EFEFEF;
+                  font-size: 15px;
+                  font-weight: 600;
+                  color: #373737;
+                  vertical-align: top;
+                "
+              >
+                E-Mail
+              </td>
+
+              <td
+                style="
+                  padding: 12px 0;
+                  border-bottom: 1px solid #EFEFEF;
+                  font-size: 15px;
+                  font-weight: 300;
+                  color: #373737;
+                  vertical-align: top;
+                "
+              >
+                <a
+                  href="mailto:${escapeHtml(email)}"
                   style="
-                    margin-top: 10px;
-                    padding-top: 30px;
-                    border-top: 1px solid #EFEFEF;
-                    text-align: left;
+                    color: #373737;
+                    text-decoration: underline;
                   "
                 >
-                  <p style="margin: 35px 0 0; font-size: 16px; font-weight: 300; line-height: 1.65;">
-                    Freundliche Grüsse
-                  </p>
+                  ${escapeHtml(email)}
+                </a>
+              </td>
 
-                  ${
-                    companyAdresse
-                      ? `
-                        <p style="margin: 0; font-size: 15px; font-weight: 300; line-height: 1.6;">
-                          ${companyAdresse}
-                        </p>
-                      `
-                      : ""
-                  }
+            </tr>
 
-                  ${
-                    companyEmail
-                      ? `
-                        <p style="margin: 0 0 10px; font-size: 15px; font-weight: 300; line-height: 1.5;">
-                          <strong style="font-weight: 600;">E-Mail:</strong>
-                          <a href="mailto:${companyEmail}" style="color: #373737; text-decoration: underline;">
-                            ${escapeHtml(companyEmail)}
-                          </a>
-                        </p>
-                      `
-                      : ""
-                  }
 
-                  ${
-                    companyTelefon
-                      ? `
-                        <p style="margin: 0 0 10px; font-size: 15px; font-weight: 300; line-height: 1.5;">
-                          <strong style="font-weight: 600;">Telefon:</strong>
-                          <a href="tel:${companyTelefonHref}" style="color: #373737; text-decoration: underline;">
-                            ${escapeHtml(companyTelefon)}
-                          </a>
-                        </p>
-                      `
-                      : ""
-                  }
+            <tr>
+
+              <td
+                style="
+                  padding: 12px 0;
+                  border-bottom: 1px solid #EFEFEF;
+                  font-size: 15px;
+                  font-weight: 600;
+                  color: #373737;
+                  vertical-align: top;
+                "
+              >
+                Telefon
+              </td>
+
+              <td
+                style="
+                  padding: 12px 0;
+                  border-bottom: 1px solid #EFEFEF;
+                  font-size: 15px;
+                  font-weight: 300;
+                  color: #373737;
+                  vertical-align: top;
+                "
+              >
+                ${escapeHtml(telefon || "-")}
+              </td>
+
+            </tr>
+
+
+            <tr>
+
+              <td
+                style="
+                  padding: 12px 0;
+                  border-bottom: 1px solid #EFEFEF;
+                  font-size: 15px;
+                  font-weight: 600;
+                  color: #373737;
+                  vertical-align: top;
+                "
+              >
+                Betreff
+              </td>
+
+              <td
+                style="
+                  padding: 12px 0;
+                  border-bottom: 1px solid #EFEFEF;
+                  font-size: 15px;
+                  font-weight: 300;
+                  color: #373737;
+                  vertical-align: top;
+                "
+              >
+                ${escapeHtml(betreff || "-")}
+              </td>
+
+            </tr>
+
+          </table>
+
+
+        
+
+          ${nachricht
+      ? `
+                <h2
+                  style="
+                    margin: 35px 0 15px;
+                    font-size: 20px;
+                    line-height: 1.4;
+                    font-weight: 400;
+                    color: #373737;
+                  "
+                >
+                  Nachricht
+                </h2>
+
+                <div
+                  style="
+                    margin: 0;
+                    padding: 20px;
+                    background-color: #f8f8f8;
+                    border: 1px solid #EFEFEF;
+                    border-radius: 10px;
+                    font-size: 15px;
+                    font-weight: 300;
+                    line-height: 1.65;
+                    color: #373737;
+                    white-space: pre-line;
+                  "
+                >
+                  ${escapeHtml(nachricht)}
                 </div>
               `
-              : ""
-          }
-        </div>
-      </div>
-    </body>
-  </html>
-`;
+      : ""
+    }
 
-  // PERF FIX: send both emails concurrently instead of one after another.
-  // With pooled connections this lets nodemailer use two connections
-  // in parallel, roughly halving total email send time.
+
+          <!-- Clickable logo -->
+
+          ${getLogoHtml()}
+
+        </div>
+
+      </body>
+
+    </html>
+  `;
+
+  /**
+   * -------------------------------------------------------
+   * Embedded logo
+   * -------------------------------------------------------
+   */
+
+  const logoAttachment = {
+    filename: "website_image.png",
+    path: LOGO_PATH,
+    cid: LOGO_CID,
+    contentType: "image/png",
+  };
+
+  /**
+   * -------------------------------------------------------
+   * Send both emails
+   * -------------------------------------------------------
+   */
+
   await Promise.all([
+    /**
+     * Customer email
+     */
     transporter.sendMail({
       from: `"Löwenmut" <${SMTP_FROM}>`,
       to: email,
-      replyTo: email,
+
+      replyTo: SMTP_FROM,
+
       subject: "Vielen Dank für Ihre Anfrage bei Löwenmut",
+
       html: customerHtml,
+
+      attachments: [logoAttachment],
     }),
+
+    /**
+     * Admin email
+     */
     transporter.sendMail({
       from: `"Löwenmut" <${SMTP_FROM}>`,
       to: ADMIN_EMAIL,
+
       replyTo: email,
+
       subject: `Neue Kontaktanfrage von ${fullName}`,
+
       html: adminHtml,
+
+      attachments: [logoAttachment],
     }),
   ]);
 
   return {
     success: true,
-    message: "Email sent successfully",
+    message: "Emails sent successfully",
   };
 }
 
@@ -579,8 +871,15 @@ async function sendConfirmationEmail({
  * POST /api/contact
  * ---------------------------------------------------------
  */
+
 export async function POST(request) {
   try {
+    /**
+     * -------------------------------------------------------
+     * Strapi configuration
+     * -------------------------------------------------------
+     */
+
     if (!STRAPI_URL || !STRAPI_API_TOKEN) {
       console.error("Missing Strapi configuration:", {
         STRAPI_URL: Boolean(STRAPI_URL),
@@ -588,33 +887,73 @@ export async function POST(request) {
       });
 
       return NextResponse.json(
-        { success: false, message: "Strapi-Konfiguration fehlt." },
-        { status: 500 }
+        {
+          success: false,
+          message: "Strapi-Konfiguration fehlt.",
+        },
+        {
+          status: 500,
+        }
       );
     }
+
+    /**
+     * -------------------------------------------------------
+     * Turnstile configuration
+     * -------------------------------------------------------
+     */
 
     if (!TURNSTILE_SECRET_KEY) {
       console.error("Missing TURNSTILE_SECRET_KEY");
 
       return NextResponse.json(
-        { success: false, message: "Turnstile-Konfiguration fehlt." },
-        { status: 500 }
+        {
+          success: false,
+          message: "Turnstile-Konfiguration fehlt.",
+        },
+        {
+          status: 500,
+        }
       );
     }
 
-    if (!SMTP_HOST || !SMTP_USER || !SMTP_PASSWORD || !SMTP_FROM) {
+    /**
+     * -------------------------------------------------------
+     * SMTP configuration
+     * -------------------------------------------------------
+     */
+
+    if (
+      !SMTP_HOST ||
+      !SMTP_USER ||
+      !SMTP_PASSWORD ||
+      !SMTP_FROM ||
+      !ADMIN_EMAIL
+    ) {
       console.error("Missing SMTP configuration:", {
         SMTP_HOST: Boolean(SMTP_HOST),
         SMTP_USER: Boolean(SMTP_USER),
         SMTP_PASSWORD: Boolean(SMTP_PASSWORD),
         SMTP_FROM: Boolean(SMTP_FROM),
+        ADMIN_EMAIL: Boolean(ADMIN_EMAIL),
       });
 
       return NextResponse.json(
-        { success: false, message: "E-Mail-Konfiguration fehlt." },
-        { status: 500 }
+        {
+          success: false,
+          message: "E-Mail-Konfiguration fehlt.",
+        },
+        {
+          status: 500,
+        }
       );
     }
+
+    /**
+     * -------------------------------------------------------
+     * Request body
+     * -------------------------------------------------------
+     */
 
     const body = await request.json();
 
@@ -629,13 +968,21 @@ export async function POST(request) {
       turnstileToken,
     } = body;
 
+    /**
+     * -------------------------------------------------------
+     * Turnstile
+     * -------------------------------------------------------
+     */
+
     if (!turnstileToken) {
       return NextResponse.json(
         {
           success: false,
           message: "Bitte bestätigen Sie, dass Sie kein Bot sind.",
         },
-        { status: 400 }
+        {
+          status: 400,
+        }
       );
     }
 
@@ -644,19 +991,36 @@ export async function POST(request) {
       request.headers.get("x-real-ip") ||
       undefined;
 
-    const turnstileResult = await verifyTurnstileToken(turnstileToken, remoteIp);
+    const turnstileResult = await verifyTurnstileToken(
+      turnstileToken,
+      remoteIp
+    );
 
     if (!turnstileResult.success) {
-      console.error("Turnstile verification failed:", turnstileResult["error-codes"]);
+      console.error(
+        "Turnstile verification failed:",
+        turnstileResult["error-codes"]
+      );
 
       return NextResponse.json(
         {
           success: false,
-          message: "Die Bot-Überprüfung ist fehlgeschlagen. Bitte versuchen Sie es erneut.",
+          message:
+            "Die Bot-Überprüfung ist fehlgeschlagen. Bitte versuchen Sie es erneut.",
         },
-        { status: 400 }
+        {
+          status: 400,
+        }
       );
     }
+
+    /**
+     * -------------------------------------------------------
+     * Required fields
+     *
+     * nachricht is optional.
+     * -------------------------------------------------------
+     */
 
     if (!vorname || !nachname || !email || !telefon) {
       return NextResponse.json(
@@ -664,9 +1028,17 @@ export async function POST(request) {
           success: false,
           message: "Bitte füllen Sie alle erforderlichen Felder aus.",
         },
-        { status: 400 }
+        {
+          status: 400,
+        }
       );
     }
+
+    /**
+     * -------------------------------------------------------
+     * Email validation
+     * -------------------------------------------------------
+     */
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -676,27 +1048,27 @@ export async function POST(request) {
           success: false,
           message: "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
         },
-        { status: 400 }
+        {
+          status: 400,
+        }
       );
     }
 
     /**
-     * -----------------------------------------------------
-     * Save contact request to Strapi
-     * PERF FIX: run the Strapi save and the Kontakt-info fetch
-     * (used later for the email footer) in parallel with
-     * Promise.all instead of sequentially — they don't depend
-     * on each other, so there's no reason to wait for one
-     * before starting the other.
-     * -----------------------------------------------------
+     * -------------------------------------------------------
+     * Save to Strapi and get company information
+     * -------------------------------------------------------
      */
+
     const [strapiResponse, kontaktInfo] = await Promise.all([
       fetch(`${STRAPI_URL}/api/contact-submissions`, {
         method: "POST",
+
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${STRAPI_API_TOKEN}`,
         },
+
         body: JSON.stringify({
           data: {
             vorname,
@@ -709,15 +1081,24 @@ export async function POST(request) {
           },
         }),
       }),
-      getKontaktInfo(), // PERF FIX: moved up, runs concurrently with the save
+
+      getKontaktInfo(),
     ]);
+
+    /**
+     * -------------------------------------------------------
+     * Check Strapi response
+     * -------------------------------------------------------
+     */
 
     const strapiResponseText = await strapiResponse.text();
 
-    // console.log("Strapi status:", strapiResponse.status);
-
     if (!strapiResponse.ok) {
-      console.error("Strapi response:", strapiResponseText);
+      console.error(
+        "Strapi response:",
+        strapiResponse.status,
+        strapiResponseText
+      );
 
       return NextResponse.json(
         {
@@ -726,26 +1107,18 @@ export async function POST(request) {
           strapiStatus: strapiResponse.status,
           strapiError: strapiResponseText,
         },
-        { status: 500 }
+        {
+          status: 500,
+        }
       );
     }
 
     /**
-     * -----------------------------------------------------
-     * PERF FIX: THE BIG ONE.
-     * The submission is already safely saved in Strapi at this
-     * point — the user doesn't need to wait for two SMTP emails
-     * to finish before getting their success response. We fire
-     * off the email sending and respond to the client right away.
-     *
-     * `after()` schedules the callback to run once the response has
-     * been sent to the client, and keeps the function alive until it
-     * finishes — without the client's HTTP request waiting for it.
-     * Errors are caught and logged instead of being surfaced to the
-     * user, since the lead itself is already safe in Strapi regardless
-     * of whether the email succeeds.
-     * -----------------------------------------------------
+     * -------------------------------------------------------
+     * Send emails after response
+     * -------------------------------------------------------
      */
+
     after(() =>
       sendConfirmationEmail({
         email,
@@ -758,29 +1131,42 @@ export async function POST(request) {
         kontaktInfo,
       })
         .then(() => {
-          // console.log(`Confirmation email sent to: ${email}`);
+          console.log(
+            `Confirmation and admin emails sent successfully for ${email}`
+          );
         })
         .catch((emailError) => {
-          console.error("Confirmation email failed:", emailError);
+          console.error("Email sending failed:", emailError);
         })
     );
 
-    // PERF FIX: response now returns as soon as Strapi confirms the
-    // save, instead of after both emails have also finished sending.
+    /**
+     * -------------------------------------------------------
+     * Success response
+     * -------------------------------------------------------
+     */
+
     return NextResponse.json(
       {
         success: true,
         message:
           "Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet. Sie erhalten eine Bestätigung per E-Mail.",
       },
-      { status: 200 }
+      {
+        status: 200,
+      }
     );
   } catch (error) {
     console.error("Contact form error:", error);
 
     return NextResponse.json(
-      { success: false, message: "Ein unerwarteter Fehler ist aufgetreten." },
-      { status: 500 }
+      {
+        success: false,
+        message: "Ein unerwarteter Fehler ist aufgetreten.",
+      },
+      {
+        status: 500,
+      }
     );
   }
 }
