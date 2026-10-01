@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useTheme } from "@/context/ThemeContext";
 
@@ -29,7 +30,13 @@ const AnimatedText = () => {
   return (
     <>
       <span>
-        <img src={talkImage} alt="talk image" />
+        <Image
+          src={talkImage}
+          alt="talk image"
+          width={800}
+          height={800}
+          sizes="(max-width: 767px) 150px, 200px"
+        />
       </span>
 
       <img

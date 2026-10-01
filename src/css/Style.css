@@ -766,8 +766,9 @@ header {
         width: 40%;
         font-weight: 400;
         margin-top: -50px;
-        img {
+        img{
             width: 120px;
+             height: auto;
         }
         p {
             margin-bottom: 0;
@@ -780,6 +781,7 @@ header {
         justify-content: space-between;
         img {
              width: 80px;
+                height: auto;
             flex-shrink: 0;
             align-self: flex-start;
         }
@@ -1712,7 +1714,7 @@ footer {
           height: auto;
         padding: 1.75rem;
         border-radius: var(--radius-30);
-        background: #F6F6F6 url("/images/bg-pattern.png") no-repeat center;
+        background: #F6F6F6 url("/images/bg-pattern.webp") no-repeat center;
         background-size: cover;
         transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
         .service-icon {

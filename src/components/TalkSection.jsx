@@ -1,22 +1,21 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTheme } from "@/context/ThemeContext";
 import { renderHtmlText } from "@/components/ResuableComponents/renderHtmlText";
-import { useSelector } from "react-redux";
 import ScrollFillText from "@/components/ResuableComponents/ScrollFillText";
 
 const DEFAULT_THEME = "yellow";
 
-const TalkSection = ({talkData}) => {
-
+const TalkSection = ({ talkData }) => {
   const router = useRouter();
-
 
   const themeContext = useTheme();
   const theme = themeContext?.theme || DEFAULT_THEME;
+
   const themeImages = {
     yellow: "/images/image-loewenmut-yellow.png",
     blue: "/images/image-loewenmut-blue.png",
@@ -27,31 +26,25 @@ const TalkSection = ({talkData}) => {
   /*
    * STRAPI DATA
    */
-  
-  const title = talkData?.Kurztitel
+
+  const title = talkData?.Kurztitel;
   const heading = talkData?.Titel || "";
-  const description = talkData?.Text ;
+  const description = talkData?.Text;
 
   /*
    * BUTTON
    */
-  const showButton = talkData?.button_link ;
 
-  const buttonText =talkData?.button_text ;
-
-
-  const buttonLink =talkData?.button_link 
+  const showButton = talkData?.button_link;
+  const buttonText = talkData?.button_text;
+  const buttonLink = talkData?.button_link;
 
   /*
    * THEME IMAGE
-   *
-   * This section currently doesn't have an image
-   * from Strapi, so we keep the theme-based image.
    */
+
   const talkImage =
     themeImages[theme] || themeImages[DEFAULT_THEME];
-
-
 
   return (
     <div className="container">
@@ -61,11 +54,14 @@ const TalkSection = ({talkData}) => {
         <div
           className="col-12 col-lg-4 img-col cursorPointer text-center"
           data-aos="zoom-in"
-          onClick={() => router.push(buttonLink)}
+          onClick={() => buttonLink && router.push(buttonLink)}
         >
-          <img
+          <Image
             src={talkImage}
             alt={title || "Genug geredet"}
+            width={800}
+            height={800}
+            sizes="(max-width: 991px) 100vw, 33vw"
             className="img-fluid mx-auto"
           />
         </div>
@@ -87,17 +83,19 @@ const TalkSection = ({talkData}) => {
             {/* TITEL */}
             {heading && (
               <h2>
-                 <ScrollFillText
-                        html={heading}
-                        className="leistungen_fill_title"
-                        startColor="var(--bs-textdarkgrey)"
-                        fillColor="var(--bs-textdarkgrey)"
-                    />
+                <ScrollFillText
+                  html={heading}
+                  className="leistungen_fill_title"
+                  startColor="var(--bs-textdarkgrey)"
+                  fillColor="var(--bs-textdarkgrey)"
+                />
               </h2>
             )}
 
             {/* BESCHREIBUNG */}
-            <p>{renderHtmlText(description)}</p>
+            <p>
+              {renderHtmlText(description)}
+            </p>
 
             {/* BUTTON */}
             {showButton && buttonText && (

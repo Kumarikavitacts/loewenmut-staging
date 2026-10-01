@@ -79,7 +79,7 @@ const LeistungenDetailSkeleton = () => {
       {/* SECTION 3 — image + content */}
       <section
         className="ld_section_3 pt_pb_3 position-relative skeleton-fade-in"
-        style={{ backgroundImage: "url('/images/bg-pattern.png')" }}
+        style={{ backgroundImage: "url('/images/bg-pattern.webp')" }}
       >
         <div className="container">
           <div className="row flex-lg-row-reverse">

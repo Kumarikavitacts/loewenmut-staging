@@ -206,7 +206,7 @@ const Agentur = () => {
                     </div>
                 </div>
             </section>
-            <section className="uber_unique_section pt_pb_3" style={{ backgroundImage: "url('/images/bg-pattern.png')" }}>
+            <section className="uber_unique_section pt_pb_3" style={{ backgroundImage: "url('/images/bg-pattern.webp')" }}>
                 <div className="container">
                     <div className="row align-items-center">
                         <div className="col-12 col-lg-6 content-col mb-4 mb-lg-0">
@@ -280,7 +280,7 @@ const Agentur = () => {
                     <StatsCards counters={Thekenbereich?.Counter} />
                 </div>
             </section>
-            <section className='pt_pb_3 project-carousel-section overflow-hidden' style={{ backgroundImage: "url('/images/bg-pattern.png')" }}>
+            <section className='pt_pb_3 project-carousel-section overflow-hidden' style={{ backgroundImage: "url('/images/bg-pattern.webp')" }}>
                 <ProjectCarousel
                     title={renderHtmlText(Projekte?.Titel)}
                     description={Projekte?.Text_1}

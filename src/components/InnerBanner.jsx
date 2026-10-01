@@ -18,7 +18,7 @@ const InnerBnanner = ({
     <div
       className="pt_pb_3 inner-banner"
       style={{
-        backgroundImage: "url('/images/bg-pattern.png')",
+        backgroundImage: "url('/images/bg-pattern.webp')",
       }}
     >
       <div className="container">

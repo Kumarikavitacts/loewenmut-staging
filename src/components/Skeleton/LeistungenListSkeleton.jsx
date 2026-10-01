@@ -20,7 +20,7 @@ const LeistungenListSkeleton = () => {
 
       <section
         className="liestungen_section pb_3 overflow-hidden skeleton-fade-in"
-        style={{ backgroundImage: "url('/images/bg-pattern.png')" }}
+        style={{ backgroundImage: "url('/images/bg-pattern.webp')" }}
       >
         <div className="container">
           <ServiceCardsSkeleton count={3} />

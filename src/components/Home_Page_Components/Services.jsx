@@ -25,7 +25,7 @@ const Services = ({ nextSectionRef }) => {
       ref={nextSectionRef}
       className="pt_pb_3 services_section overflow-hidden"
       style={{
-        backgroundImage: "url('/images/bg-pattern.png')",
+        backgroundImage: "url('/images/bg-pattern.webp')",
       }}
     >
       <div className="container">

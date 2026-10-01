@@ -14,7 +14,7 @@ const ProjectCarousel = ({
 }) => {
     const carouselRef = useRef(null);
     const router = useRouter();
-
+    const videoRef = useRef(null);
     useEffect(() => {
         window.$ = $;
         window.jQuery = $;
@@ -200,7 +200,7 @@ const ProjectCarousel = ({
                                 startColor="var(--bs-textdarkgrey)"
                                 fillColor="var(--bs-textdarkgrey)"
                             />
-                            </h2>
+                        </h2>
 
                         {description && (
                             <p className="text-dark mb-4 fw-regular">
@@ -289,15 +289,18 @@ const ProjectCarousel = ({
                                     {item?.isVideo ? (
                                         <video
                                             src={item?.video}
-                                            poster={
-                                                item?.poster ||
-                                                undefined
-                                            }
-                                            autoPlay
+                                            poster={item?.poster || undefined}
                                             muted
                                             loop
                                             playsInline
                                             preload="metadata"
+                                            onMouseEnter={(e) => {
+                                                e.currentTarget.play().catch(() => { });
+                                            }}
+                                            onMouseLeave={(e) => {
+                                                e.currentTarget.pause();
+                                                e.currentTarget.currentTime = 0;
+                                            }}
                                             className="project-carousel-image position-absolute top-0 start-0 w-100 h-100"
                                         />
                                     ) : (

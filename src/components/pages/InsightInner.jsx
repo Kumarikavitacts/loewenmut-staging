@@ -262,7 +262,7 @@ const InsightInner = () => {
       {hasBildbereichSection && (
         <section
           className="pt_pb_3 search_section"
-          style={{ backgroundImage: "url('/images/bg-pattern.png')" }}
+          style={{ backgroundImage: "url('/images/bg-pattern.webp')" }}
         >
           <div className="container">
             {hasBildbereichHeading && (

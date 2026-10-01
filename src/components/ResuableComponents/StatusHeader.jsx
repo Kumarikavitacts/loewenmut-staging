@@ -56,7 +56,7 @@ const StatusHeader = ({
     <section
       className="status-header-section pb_3"
       style={{
-        backgroundImage: "url('/images/bg-pattern.png')",
+        backgroundImage: "url('/images/bg-pattern.webp')",
       }}
     >
       <div className="container">

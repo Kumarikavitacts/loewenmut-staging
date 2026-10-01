@@ -130,7 +130,7 @@ const Leistungen = () => {
       <section
         className="liestungen_section pb_3 overflow-hidden"
         style={{
-          backgroundImage: "url('/images/bg-pattern.png')",
+          backgroundImage: "url('/images/bg-pattern.webp')",
         }}
       >
         <div className="container">

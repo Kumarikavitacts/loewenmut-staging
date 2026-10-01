@@ -401,7 +401,7 @@ const LeistungenDetail = () => {
           className="ld_section_3 pt_pb_3 position-relative"
           style={{
             backgroundImage:
-              "url('/images/bg-pattern.png')",
+              "url('/images/bg-pattern.webp')",
           }}
         >
 

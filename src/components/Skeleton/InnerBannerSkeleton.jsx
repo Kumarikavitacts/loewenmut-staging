@@ -10,7 +10,7 @@ const InnerBannerSkeleton = () => {
   return (
     <div
       className="pt_pb_3 inner-banner skeleton-fade-in"
-      style={{ backgroundImage: "url('/images/bg-pattern.png')" }}
+      style={{ backgroundImage: "url('/images/bg-pattern.webp')" }}
     >
       <div className="container">
         <div className="inner-banner-content text-center">

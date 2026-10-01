@@ -26,7 +26,7 @@ const ServicesSkeleton = () => {
   return (
     <section
       className="pt_pb_3 services_section overflow-hidden skeleton-fade-in"
-      style={{ backgroundImage: "url('/images/bg-pattern.png')" }}
+      style={{ backgroundImage: "url('/images/bg-pattern.webp')" }}
     >
       <div className="container">
         <div className="row">
