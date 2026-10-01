@@ -2935,9 +2935,11 @@ footer {
     padding: 2rem;
     display: flex;
     height: 100%;
-    img,svg{
-        width: 100%;
-        height: 100%;
+    .support_tool_icon{
+        img,svg{
+            width: 100%;
+            height: 100%;
+        }
     }
     h3{ 
         font-weight: 400;
