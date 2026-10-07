@@ -201,10 +201,10 @@ function getLogoHtml() {
         <img
           src="cid:${LOGO_CID}"
           alt="Löwenmut"
-          width="250"
+          width="220"
           style="
             display: block;
-            width: 250px;
+            width: 220px;
             max-width: 100%;
             height: auto;
             border: 0;
@@ -237,101 +237,62 @@ function getCompanyDetailsHtml(kontaktInfo) {
   }
 
   return `
-    <div
-      style="
-        margin-top: 35px;
-        padding-top: 30px;
-        border-top: 1px solid #EFEFEF;
-        text-align: left;
-      "
-    >
+    <div>
 
-      <p
-        style="
-          margin: 0 0 15px;
-          font-size: 16px;
-          font-weight: 300;
-          line-height: 1.65;
-          color: #373737;
-        "
-      >
+      <p>
         Freundliche Grüsse
       </p>
 
       ${companyAdresse
       ? `
-            <p
-              style="
-                margin: 0 0 5px;
-                font-size: 15px;
-                font-weight: 300;
-                line-height: 1.6;
-                color: #373737;
-              "
-            >
+            <p>
               ${formatAddressHtml(companyAdresse)}
             </p>
           `
       : ""
     }
-
-      ${companyEmail
+   ${companyTelefon
       ? `
-            <p
-              style="
-                margin: 0 0 10px;
-                font-size: 15px;
-                font-weight: 300;
-                line-height: 1.5;
-                color: #373737;
-              "
-            >
-              <strong style="font-weight: 600;">
-                E-Mail:
-              </strong>
-
-              <a
-                href="mailto:${escapeHtml(companyEmail)}"
-                style="
-                  color: #373737;
-                  text-decoration: underline;
-                "
-              >
-                ${escapeHtml(companyEmail)}
-              </a>
-            </p>
-          `
-      : ""
-    }
-
-      ${companyTelefon
-      ? `
-            <p
-              style="
-                margin: 0;
-                font-size: 15px;
-                font-weight: 300;
-                line-height: 1.5;
-                color: #373737;
-              "
-            >
-              <strong style="font-weight: 600;">
-                Telefon:
-              </strong>
+            <p>
+              <span>
+                Tel:
+              </span>
 
               <a
                 href="tel:${escapeHtml(companyTelefonHref)}"
-                style="
-                  color: #373737;
-                  text-decoration: underline;
-                "
-              >
+                >
                 ${escapeHtml(companyTelefon)}
               </a>
             </p>
           `
       : ""
     }
+      ${companyEmail
+      ? `
+            <p>
+              <a
+                href="mailto:${escapeHtml(companyEmail)}"
+               >
+                ${escapeHtml(companyEmail)}
+              </a>
+            </p>
+          `
+      : ""
+    }
+     <p>
+        <a
+          href="${escapeHtml(
+    SITE_URL 
+  )}"
+          target="_blank"
+          rel="noopener noreferrer"
+          >
+          ${escapeHtml(
+    SITE_URL 
+  )}
+        </a>
+      </p>
+   
 
     </div>
   `;
@@ -362,37 +323,9 @@ async function sendConfirmationEmail({
    */
 
   const strategyList =
-    Array.isArray(strategien) && strategien.length > 0
-      ? strategien
-        .map(
-          (strategy) => `
-              <li
-                style="
-                  margin-bottom: 6px;
-                  font-size: 15px;
-                  font-weight: 300;
-                  line-height: 1.6;
-                  color: #373737;
-                "
-              >
-                ${escapeHtml(strategy)}
-              </li>
-            `
-        )
-        .join("")
-      : `
-          <li
-            style="
-              font-size: 15px;
-              font-weight: 300;
-              line-height: 1.6;
-              color: #373737;
-            "
-          >
-            Keine Auswahl
-          </li>
-        `;
-
+Array.isArray(strategien) && strategien.length > 0
+    ? strategien.map((strategy) => escapeHtml(strategy)).join(", ")
+    : "Keine Auswahl";
   /**
    * -------------------------------------------------------
    * CUSTOMER EMAIL
@@ -417,75 +350,28 @@ async function sendConfirmationEmail({
         </title>
       </head>
 
-      <body
-        style="
-          margin: 0;
-          padding: 0;
-          background-color: #ffffff;
-          font-family: Arial, Helvetica, sans-serif;
-          color: #373737;
-        "
-      >
+      <body>
 
-        <div
-          style="
-            width: 100%;
-            max-width: 650px;
-            box-sizing: border-box;
-            background-color: #ffffff;
-          "
-        >
+        <div>
 
-          <p
-            style="
-              margin: 0 0 20px;
-              font-size: 16px;
-              font-weight: 300;
-              line-height: 1.65;
-              color: #373737;
-            "
-          >
+          <p>
             Hallo ${escapeHtml(vorname || "")},
           </p>
 
 
-          <p
-            style="
-              margin: 0 0 20px;
-              font-size: 16px;
-              font-weight: 300;
-              line-height: 1.65;
-              color: #373737;
-            "
-          >
+          <p>
             vielen Dank für Ihre Nachricht an Löwenmut.
             Wir haben Ihre Anfrage erfolgreich erhalten.
           </p>
 
 
-          <p
-            style="
-              margin: 0 0 20px;
-              font-size: 16px;
-              font-weight: 300;
-              line-height: 1.65;
-              color: #373737;
-            "
-          >
+          <p>
             Unser Team prüft Ihr Anliegen und meldet sich
             so bald wie möglich persönlich bei Ihnen.
           </p>
 
 
-          <p
-            style="
-              margin: 0 0 30px;
-              font-size: 16px;
-              font-weight: 300;
-              line-height: 1.65;
-              color: #373737;
-            "
-          >
+          <p>
             Wir freuen uns darauf, mit Ihnen ins Gespräch zu kommen.
           </p>
 
@@ -530,95 +416,32 @@ async function sendConfirmationEmail({
         </title>
       </head>
 
-      <body
-        style="
-          margin: 0;
-          padding: 0;
-          background-color: #ffffff;
-          font-family: Arial, Helvetica, sans-serif;
-          color: #373737;
-        "
-      >
+      <body>
 
-        <div
-          style="
-            width: 100%;
-            max-width: 650px;
-            box-sizing: border-box;
-            background-color: #ffffff;
-          "
-        >
+        <div>
 
-          <h2
-            style="
-              margin: 0 0 30px;
-              font-size: 22px;
-              line-height: 1.4;
-              font-weight: 400;
-              color: #373737;
-            "
-          >
+          <h2>
             Sie haben eine neue Kontaktanfrage
           </h2>
 
-  <h2
-            style="
-              margin: 15px 0 10px;
-              font-size: 20px;
-              line-height: 1.4;
-              font-weight: 400;
-              color: #373737;
-            "
-          >
-            Gewünschte Leistungen
-          </h2>
+ 
 
+          <table>
+            <tr>
+              <td>
+                Projekt:
+              </td>
 
-          <ul
-            style="
-              margin: 0;
-              padding-left: 20px;
-            "
-          >
-            ${strategyList}
-          </ul>
-
-          <table
-            width="100%"
-            cellpadding="0"
-            cellspacing="0"
-            border="0"
-            style="
-              width: 100%;
-              border-collapse: collapse;
-            "
-          >
-
+              <td>
+                ${strategyList}
+              </td>
+            </tr>
             <tr>
 
-              <td
-                style="
-                  padding: 12px 0;
-                  border-bottom: 1px solid #EFEFEF;
-                  font-size: 15px;
-                  font-weight: 600;
-                  color: #373737;
-                  width: 35%;
-                  vertical-align: top;
-                "
-              >
-                Vorname
+              <td>
+                Vorname:
               </td>
-              <td
-                style="
-                  padding: 12px 0;
-                  border-bottom: 1px solid #EFEFEF;
-                  font-size: 15px;
-                  font-weight: 300;
-                  color: #373737;
-                  vertical-align: top;
-                "
-              >
+              <td>
                 ${escapeHtml(vorname || "-")}
               </td>
 
@@ -627,29 +450,10 @@ async function sendConfirmationEmail({
 
             <tr>
 
-              <td
-                style="
-                  padding: 12px 0;
-                  border-bottom: 1px solid #EFEFEF;
-                  font-size: 15px;
-                  font-weight: 600;
-                  color: #373737;
-                  width: 35%;
-                  vertical-align: top;
-                "
-              >
-                Nachname
+              <td>
+                Nachname:
               </td>
-              <td
-                style="
-                  padding: 12px 0;
-                  border-bottom: 1px solid #EFEFEF;
-                  font-size: 15px;
-                  font-weight: 300;
-                  color: #373737;
-                  vertical-align: top;
-                "
-              >
+              <td>
                 ${escapeHtml(nachname || "-")}
               </td>
 
@@ -658,36 +462,14 @@ async function sendConfirmationEmail({
 
             <tr>
 
-              <td
-                style="
-                  padding: 12px 0;
-                  border-bottom: 1px solid #EFEFEF;
-                  font-size: 15px;
-                  font-weight: 600;
-                  color: #373737;
-                  vertical-align: top;
-                "
-              >
-                E-Mail
+              <td>
+                E-Mail:
               </td>
 
-              <td
-                style="
-                  padding: 12px 0;
-                  border-bottom: 1px solid #EFEFEF;
-                  font-size: 15px;
-                  font-weight: 300;
-                  color: #373737;
-                  vertical-align: top;
-                "
-              >
+              <td>
                 <a
                   href="mailto:${escapeHtml(email)}"
-                  style="
-                    color: #373737;
-                    text-decoration: underline;
-                  "
-                >
+                  >
                   ${escapeHtml(email)}
                 </a>
               </td>
@@ -697,29 +479,11 @@ async function sendConfirmationEmail({
 
             <tr>
 
-              <td
-                style="
-                  padding: 12px 0;
-                  border-bottom: 1px solid #EFEFEF;
-                  font-size: 15px;
-                  font-weight: 600;
-                  color: #373737;
-                  vertical-align: top;
-                "
-              >
-                Telefon
+              <td>
+                Telefon:
               </td>
 
-              <td
-                style="
-                  padding: 12px 0;
-                  border-bottom: 1px solid #EFEFEF;
-                  font-size: 15px;
-                  font-weight: 300;
-                  color: #373737;
-                  vertical-align: top;
-                "
-              >
+              <td>
                 ${escapeHtml(telefon || "-")}
               </td>
 
@@ -728,73 +492,25 @@ async function sendConfirmationEmail({
 
             <tr>
 
-              <td
-                style="
-                  padding: 12px 0;
-                  border-bottom: 1px solid #EFEFEF;
-                  font-size: 15px;
-                  font-weight: 600;
-                  color: #373737;
-                  vertical-align: top;
-                "
-              >
-                Betreff
+              <td>
+                Betreff:
               </td>
 
-              <td
-                style="
-                  padding: 12px 0;
-                  border-bottom: 1px solid #EFEFEF;
-                  font-size: 15px;
-                  font-weight: 300;
-                  color: #373737;
-                  vertical-align: top;
-                "
-              >
+              <td>
                 ${escapeHtml(betreff || "-")}
               </td>
 
             </tr>
-
+             <tr>
+             
+              <td>
+                Nachricht:
+              </td>
+              <td>
+                ${escapeHtml(nachricht || "-")}
+              </td>
+            </tr>
           </table>
-
-
-        
-
-          ${nachricht
-      ? `
-                <h2
-                  style="
-                    margin: 35px 0 15px;
-                    font-size: 20px;
-                    line-height: 1.4;
-                    font-weight: 400;
-                    color: #373737;
-                  "
-                >
-                  Nachricht
-                </h2>
-
-                <div
-                  style="
-                    margin: 0;
-                    padding: 20px;
-                    background-color: #f8f8f8;
-                    border: 1px solid #EFEFEF;
-                    border-radius: 10px;
-                    font-size: 15px;
-                    font-weight: 300;
-                    line-height: 1.65;
-                    color: #373737;
-                    white-space: pre-line;
-                  "
-                >
-                  ${escapeHtml(nachricht)}
-                </div>
-              `
-      : ""
-    }
-
 
           <!-- Clickable logo -->
 
@@ -836,7 +552,7 @@ async function sendConfirmationEmail({
 
       replyTo: SMTP_FROM,
 
-      subject: "Vielen Dank für Ihre Anfrage bei Löwenmut",
+      subject: "Fwd: Loewenmut GmbH - Kontaktanfrage",
 
       html: customerHtml,
 
@@ -852,7 +568,7 @@ async function sendConfirmationEmail({
 
       replyTo: email,
 
-      subject: `Neue Kontaktanfrage von ${fullName}`,
+      subject: `Fwd: Loewenmut GmbH - Kontaktanfrage`,
 
       html: adminHtml,
 

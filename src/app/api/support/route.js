@@ -237,10 +237,10 @@ function getLogoHtml() {
         <img
           src="cid:${LOGO_CID}"
           alt="Löwenmut"
-          width="250"
+          width="220"
           style="
             display: block;
-            width: 250px;
+            width: 220px;
             max-width: 100%;
             height: auto;
             border: 0;
@@ -283,70 +283,17 @@ function getCompanyDetailsHtml(kontaktInfo) {
   }
 
   return `
-    <div
-      style="
-        margin-top: 35px;
-        padding-top: 30px;
-        border-top: 1px solid #EFEFEF;
-        text-align: left;
-      "
-    >
+    <div>
 
-      <p
-        style="
-          margin: 0 0 15px;
-          font-size: 16px;
-          font-weight: 300;
-          line-height: 1.65;
-          color: #373737;
-        "
-      >
+      <p>
         Freundliche Grüsse
       </p>
 
       ${
         companyAdresse
           ? `
-            <p
-              style="
-                margin: 0 0 5px;
-                font-size: 15px;
-                font-weight: 300;
-                line-height: 1.6;
-                color: #373737;
-              "
-            >
+            <p>
               ${formatAddressHtml(companyAdresse)}
-            </p>
-          `
-          : ""
-      }
-
-      ${
-        companyEmail
-          ? `
-            <p
-              style="
-                margin: 0 0 10px;
-                font-size: 15px;
-                font-weight: 300;
-                line-height: 1.5;
-                color: #373737;
-              "
-            >
-              <strong style="font-weight: 600;">
-                E-Mail:
-              </strong>
-
-              <a
-                href="mailto:${escapeHtml(companyEmail)}"
-                style="
-                  color: #373737;
-                  text-decoration: underline;
-                "
-              >
-                ${escapeHtml(companyEmail)}
-              </a>
             </p>
           `
           : ""
@@ -355,34 +302,49 @@ function getCompanyDetailsHtml(kontaktInfo) {
       ${
         companyTelefon
           ? `
-            <p
-              style="
-                margin: 0;
-                font-size: 15px;
-                font-weight: 300;
-                line-height: 1.5;
-                color: #373737;
-              "
-            >
-              <strong style="font-weight: 600;">
-                Telefon:
-              </strong>
+            <p>
+              <span>
+                Tel:
+              </span>
 
               <a
                 href="tel:${escapeHtml(
                   companyTelefonHref
                 )}"
-                style="
-                  color: #373737;
-                  text-decoration: underline;
-                "
-              >
+                >
                 ${escapeHtml(companyTelefon)}
               </a>
             </p>
           `
           : ""
       }
+      ${
+        companyEmail
+          ? `
+            <p>
+                      <a
+                href="mailto:${escapeHtml(companyEmail)}"
+                >
+                ${escapeHtml(companyEmail)}
+              </a>
+            </p>
+          `
+          : ""
+      }
+
+           <p>
+        <a
+          href="${escapeHtml(
+    SITE_URL 
+  )}"
+          target="_blank"
+          rel="noopener noreferrer"
+          >
+          ${escapeHtml(
+    SITE_URL 
+  )}
+        </a>
+      </p>
 
     </div>
   `;
@@ -440,80 +402,33 @@ async function sendSupportEmails({
 
       </head>
 
-      <body
-        style="
-          margin: 0;
-          padding: 0;
-          background-color: #ffffff;
-          font-family: Arial, Helvetica, sans-serif;
-          color: #373737;
-        "
-      >
+      <body>
 
-        <div
-          style="
-            width: 100%;
-            max-width: 650px;
-            box-sizing: border-box;
-            background-color: #ffffff;
-          "
-        >
+        <div>
 
           <!-- Greeting -->
 
-          <p
-            style="
-              margin: 0 0 20px;
-              font-size: 16px;
-              font-weight: 300;
-              line-height: 1.65;
-              color: #373737;
-            "
-          >
+          <p>
             Hallo ${escapeHtml(vorname || "")},
           </p>
 
 
           <!-- Main message -->
 
-          <p
-            style="
-              margin: 0 0 20px;
-              font-size: 16px;
-              font-weight: 300;
-              line-height: 1.65;
-              color: #373737;
-            "
-          >
+          <p>
             vielen Dank für Ihre Nachricht an Löwenmut.
             Wir haben Ihre Supportanfrage erfolgreich
             erhalten.
           </p>
 
 
-          <p
-            style="
-              margin: 0 0 20px;
-              font-size: 16px;
-              font-weight: 300;
-              line-height: 1.65;
-              color: #373737;
-            "
-          >
+          <p>
             Unser Team prüft Ihr Anliegen und meldet sich
             so bald wie möglich persönlich bei Ihnen.
           </p>
 
 
-          <p
-            style="
-              margin: 0 0 30px;
-              font-size: 16px;
-              font-weight: 300;
-              line-height: 1.65;
-              color: #373737;
-            "
-          >
+          <p>
             Wir freuen uns darauf, Ihnen weiterzuhelfen.
           </p>
 
@@ -569,81 +484,30 @@ async function sendSupportEmails({
 
       </head>
 
-      <body
-        style="
-          margin: 0;
-          padding: 0;
-          background-color: #ffffff;
-          font-family: Arial, Helvetica, sans-serif;
-          color: #373737;
-        "
-      >
+      <body>
 
-        <div
-          style="
-            width: 100%;
-            max-width: 650px;
-            box-sizing: border-box;
-            background-color: #ffffff;
-          "
-        >
+        <div>
 
           <!-- Title -->
 
-          <h2
-            style="
-              margin: 0 0 30px;
-              font-size: 22px;
-              line-height: 1.4;
-              font-weight: 400;
-              color: #373737;
-            "
-          >
+          <h2>
             Sie haben eine neue Supportanfrage
           </h2>
 
 
           <!-- Support information -->
 
-          <table
-            width="100%"
-            cellpadding="0"
-            cellspacing="0"
-            border="0"
-            style="
-              width: 100%;
-              border-collapse: collapse;
-            "
-          >
+          <table>
 
             <!-- Name -->
 
             <tr>
 
-              <td
-                style="
-                  padding: 12px 0;
-                  border-bottom: 1px solid #EFEFEF;
-                  font-size: 15px;
-                  font-weight: 600;
-                  color: #373737;
-                  width: 35%;
-                  vertical-align: top;
-                "
-              >
-                Vorname
+              <td>
+                Vorname:
               </td>
 
-              <td
-                style="
-                  padding: 12px 0;
-                  border-bottom: 1px solid #EFEFEF;
-                  font-size: 15px;
-                  font-weight: 300;
-                  color: #373737;
-                  vertical-align: top;
-                "
-              >
+              <td>
                 ${escapeHtml(vorname || "-")}
               </td>
 
@@ -651,30 +515,11 @@ async function sendSupportEmails({
 
             <tr>
 
-              <td
-                style="
-                  padding: 12px 0;
-                  border-bottom: 1px solid #EFEFEF;
-                  font-size: 15px;
-                  font-weight: 600;
-                  color: #373737;
-                  width: 35%;
-                  vertical-align: top;
-                "
-              >
-                Nachname
+              <td>
+                Nachname:
               </td>
 
-              <td
-                style="
-                  padding: 12px 0;
-                  border-bottom: 1px solid #EFEFEF;
-                  font-size: 15px;
-                  font-weight: 300;
-                  color: #373737;
-                  vertical-align: top;
-                "
-              >
+              <td>
                 ${escapeHtml(nachname || "-")}
               </td>
 
@@ -685,36 +530,14 @@ async function sendSupportEmails({
 
             <tr>
 
-              <td
-                style="
-                  padding: 12px 0;
-                  border-bottom: 1px solid #EFEFEF;
-                  font-size: 15px;
-                  font-weight: 600;
-                  color: #373737;
-                  vertical-align: top;
-                "
-              >
-                E-Mail
+              <td>
+                E-Mail:
               </td>
 
-              <td
-                style="
-                  padding: 12px 0;
-                  border-bottom: 1px solid #EFEFEF;
-                  font-size: 15px;
-                  font-weight: 300;
-                  color: #373737;
-                  vertical-align: top;
-                "
-              >
+              <td>
                 <a
                   href="mailto:${escapeHtml(email)}"
-                  style="
-                    color: #373737;
-                    text-decoration: underline;
-                  "
-                >
+                 >
                   ${escapeHtml(email)}
                 </a>
               </td>
@@ -726,29 +549,11 @@ async function sendSupportEmails({
 
             <tr>
 
-              <td
-                style="
-                  padding: 12px 0;
-                  border-bottom: 1px solid #EFEFEF;
-                  font-size: 15px;
-                  font-weight: 600;
-                  color: #373737;
-                  vertical-align: top;
-                "
-              >
-                Telefon
+              <td>
+                Telefon:
               </td>
 
-              <td
-                style="
-                  padding: 12px 0;
-                  border-bottom: 1px solid #EFEFEF;
-                  font-size: 15px;
-                  font-weight: 300;
-                  color: #373737;
-                  vertical-align: top;
-                "
-              >
+              <td>
                 ${escapeHtml(telefon || "-")}
               </td>
 
@@ -759,75 +564,28 @@ async function sendSupportEmails({
 
             <tr>
 
-              <td
-                style="
-                  padding: 12px 0;
-                  border-bottom: 1px solid #EFEFEF;
-                  font-size: 15px;
-                  font-weight: 600;
-                  color: #373737;
-                  vertical-align: top;
-                "
-              >
-                Supportanfrage
+              <td>
+                Supportanfrage:
               </td>
 
-              <td
-                style="
-                  padding: 12px 0;
-                  border-bottom: 1px solid #EFEFEF;
-                  font-size: 15px;
-                  font-weight: 300;
-                  color: #373737;
-                  vertical-align: top;
-                "
-              >
+              <td>
                 ${escapeHtml(
                   supportanfrage || "-"
                 )}
               </td>
 
             </tr>
+            <tr>
+            
+              <td>
+                Nachricht:
+              </td>
+              <td>
+                ${escapeHtml(nachricht || "-")}
+              </td>
+            </tr>
 
           </table>
-
-
-          <!-- Message -->
-
-          ${
-            nachricht
-              ? `
-                <h2
-                  style="
-                    margin: 35px 0 15px;
-                    font-size: 20px;
-                    line-height: 1.4;
-                    font-weight: 400;
-                    color: #373737;
-                  "
-                >
-                  Nachricht
-                </h2>
-
-                <div
-                  style="
-                    margin: 0;
-                    padding: 20px;
-                    background-color: #f8f8f8;
-                    border: 1px solid #EFEFEF;
-                    border-radius: 10px;
-                    font-size: 15px;
-                    font-weight: 300;
-                    line-height: 1.65;
-                    color: #373737;
-                    white-space: pre-line;
-                  "
-                >
-                  ${escapeHtml(nachricht)}
-                </div>
-              `
-              : ""
-          }
 
 
           <!-- Clickable logo -->
@@ -873,7 +631,7 @@ async function sendSupportEmails({
       replyTo: ADMIN_EMAIL,
 
       subject:
-        "Vielen Dank für Ihre Supportanfrage bei Löwenmut",
+        "Fwd: Loewenmut GmbH - Supportanfrage",
 
       html: customerHtml,
 
@@ -891,7 +649,7 @@ async function sendSupportEmails({
 
       replyTo: email,
 
-      subject: `Neue Supportanfrage von ${safeName}`,
+      subject: `Fwd: Loewenmut GmbH - Supportanfrage`,
 
       html: adminHtml,
 
