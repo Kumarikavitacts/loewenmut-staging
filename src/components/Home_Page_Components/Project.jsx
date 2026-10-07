@@ -192,7 +192,7 @@ const Project = () => {
 
             {/* MEDIA */}
             <div className="col-12 col-lg-6 ms-auto img-col">
-
+               <div className="hom_content_image_video">
               {mediaType === "Bild" &&
                 imageUrl && (
                   <img
@@ -210,8 +210,11 @@ const Project = () => {
                 videoUrl && (
                   <video
                     className="w-100 img_radius"
-                    controls
-                    playsInline
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      controls
                     preload="metadata"
                     poster={
                       videoThumbnailUrl ||
@@ -230,7 +233,7 @@ const Project = () => {
                     support the video tag.
                   </video>
                 )}
-
+              </div>
             </div>
 
             {/* CONTENT */}

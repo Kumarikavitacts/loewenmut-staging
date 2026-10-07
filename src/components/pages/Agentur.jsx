@@ -490,10 +490,10 @@ const Agentur = () => {
                         </div>
 
                         {/* MEDIA */}
-                        <div className="col-12 col-lg-6 img-col">
+                        <div className="col-12 col-lg-6 img-co">
 
                             {/* IMAGE */}
-
+                           <div className="ag_content_image_video">
                             {showAboutImage && (
                                 <img
                                     src={getMediaUrl(
@@ -513,8 +513,11 @@ const Agentur = () => {
                             {showAboutVideo && (
                                 <video
                                     className="w-100 d-block rounded"
-                                    controls
+                                     autoPlay
+                                    muted
+                                    loop
                                     playsInline
+                                    controls
                                     preload="metadata"
                                     poster={
                                         aboutVideoThumbnailUrl ||
@@ -534,6 +537,7 @@ const Agentur = () => {
                                 </video>
                             )}
 
+</div>
                         </div>
 
                     </div>

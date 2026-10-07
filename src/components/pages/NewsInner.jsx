@@ -442,8 +442,11 @@ const NewsInner = () => {
                   <div className="content_video">
 
                     <video
-                      controls
-                      playsInline
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        controls
                       preload="metadata"
                       poster={
                         videoThumbnail?.url
