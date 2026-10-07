@@ -580,7 +580,6 @@ const getCategoryClass = (category) => {
 ========================================================= */
 
 const StrapiRichText = ({ content }) => {
-
   if (!content) {
     return null;
   }
@@ -599,102 +598,160 @@ const StrapiRichText = ({ content }) => {
     return null;
   }
 
+  /*
+   * Render inline children
+   */
+  const renderChildren = (children = []) => {
+    return children.map((child, childIndex) => {
+      if (!child) {
+        return null;
+      }
+
+      /*
+       * LINK
+       */
+      if (child.type === "link") {
+        const linkText = renderChildren(child.children);
+
+        return (
+          <a
+            key={childIndex}
+            className="strapi_link"
+            href={child.url || "#"}
+            target={
+              child.target === "blank"
+                ? "_blank"
+                : undefined
+            }
+            rel={
+              child.target === "blank"
+                ? "noopener noreferrer"
+                : undefined
+            }
+          >
+            {linkText}
+          </a>
+        );
+      }
+
+      /*
+       * NORMAL TEXT
+       */
+      const text = child.text || "";
+
+      /*
+       * BOLD
+       */
+      if (child.bold) {
+        return (
+          <strong key={childIndex}>
+            {text}
+          </strong>
+        );
+      }
+
+      /*
+       * ITALIC
+       */
+      if (child.italic) {
+        return (
+          <em key={childIndex}>
+            {text}
+          </em>
+        );
+      }
+
+      /*
+       * UNDERLINE
+       */
+      if (child.underline) {
+        return (
+          <u key={childIndex}>
+            {text}
+          </u>
+        );
+      }
+
+      /*
+       * STRIKETHROUGH
+       */
+      if (child.strikethrough) {
+        return (
+          <del key={childIndex}>
+            {text}
+          </del>
+        );
+      }
+
+      /*
+       * NORMAL TEXT
+       */
+      return (
+        <React.Fragment key={childIndex}>
+          {text}
+        </React.Fragment>
+      );
+    });
+  };
+
   return (
     <div className="strapi_rich_text">
 
-      {content.map(
-        (block, blockIndex) => {
+      {content.map((block, blockIndex) => {
+        if (!block) {
+          return null;
+        }
 
-          if (!block) {
-            return null;
-          }
+        const blockType =
+          block?.type || "paragraph";
 
-          const blockType =
-            block?.type || "paragraph";
+        const children =
+          block?.children || [];
 
-          const children =
-            block?.children || [];
+        const renderedChildren =
+          renderChildren(children);
 
-          const renderedChildren =
-            children.map(
-              (child, childIndex) => {
+        /*
+         * HEADING
+         */
+        if (blockType === "heading") {
+          const level = Math.min(
+            Math.max(
+              block?.level || 2,
+              1
+            ),
+            6
+          );
 
-                if (!child) {
-                  return null;
-                }
-
-                const text =
-                  child?.text || "";
-
-                if (child?.bold) {
-                  return (
-                    <strong
-                      key={childIndex}
-                    >
-                      {text}
-                    </strong>
-                  );
-                }
-
-                if (child?.italic) {
-                  return (
-                    <em
-                      key={childIndex}
-                    >
-                      {text}
-                    </em>
-                  );
-                }
-
-                return (
-                  <React.Fragment
-                    key={childIndex}
-                  >
-                    {text}
-                  </React.Fragment>
-                );
-              }
-            );
-
-          if (blockType === "heading") {
-
-            const level = Math.min(
-              Math.max(
-                block?.level || 2,
-                1
-              ),
-              6
-            );
-
-            const HeadingTag =
-              `h${level}`;
-
-            return (
-              <HeadingTag
-                key={blockIndex}
-              >
-                {renderedChildren}
-              </HeadingTag>
-            );
-          }
-
-          if (blockType === "quote") {
-            return (
-              <blockquote
-                key={blockIndex}
-              >
-                {renderedChildren}
-              </blockquote>
-            );
-          }
+          const HeadingTag = `h${level}`;
 
           return (
-            <p key={blockIndex}>
+            <HeadingTag key={blockIndex}>
               {renderedChildren}
-            </p>
+            </HeadingTag>
           );
         }
-      )}
+
+        /*
+         * QUOTE
+         */
+        if (blockType === "quote") {
+          return (
+            <blockquote key={blockIndex}>
+              {renderedChildren}
+            </blockquote>
+          );
+        }
+
+        /*
+         * PARAGRAPH
+         */
+        return (
+          <p key={blockIndex}>
+            {renderedChildren}
+          </p>
+        );
+      })}
 
     </div>
   );

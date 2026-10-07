@@ -125,6 +125,7 @@ export const renderHtmlText = (html) => {
 
             return (
               <a
+                className="strapi_link"
                 href={href}
                 target={target}
                 rel={
