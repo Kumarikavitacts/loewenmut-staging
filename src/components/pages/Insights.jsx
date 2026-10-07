@@ -32,7 +32,13 @@ const Insights = () => {
         ]);
 
         setHeadingData(headingResult);
-        setInsights(categoryResult || []);
+        // Sort by sortOrder ascending, same as the Team page
+        const sortedInsights = [...(categoryResult || [])].sort(
+          (a, b) => (a?.sortOrder ?? 0) - (b?.sortOrder ?? 0)
+        );
+
+        setInsights(sortedInsights);
+        // setInsights(categoryResult || []);
       } catch (error) {
         console.error("Insights page error:", error);
         setError(true);

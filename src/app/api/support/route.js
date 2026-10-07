@@ -409,14 +409,14 @@ async function sendSupportEmails({
           <!-- Greeting -->
 
           <p>
-            Hallo ${escapeHtml(vorname || "")},
+            Guten Tag ${escapeHtml(vorname || "")},
           </p>
 
 
           <!-- Main message -->
 
           <p>
-            vielen Dank für Ihre Nachricht an Löwenmut.
+            Vielen Dank für Ihre Nachricht an Löwenmut.
             Wir haben Ihre Supportanfrage erfolgreich
             erhalten.
           </p>

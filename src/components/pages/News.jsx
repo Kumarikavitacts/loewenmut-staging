@@ -63,7 +63,12 @@ const News = () => {
           ]);
 
         setPageData(headingResult);
-        setNewsList(categoryResult || []);
+        // Sort by sortOrder ascending, same as the Team page
+        const sortedNews = [...(categoryResult || [])].sort(
+          (a, b) => (a?.sortOrder ?? 0) - (b?.sortOrder ?? 0)
+        );
+
+        setNewsList(sortedNews);
       } catch (error) {
         console.error("News page error:", error);
       } finally {

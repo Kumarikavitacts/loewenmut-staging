@@ -40,8 +40,12 @@ const LiestungenSlider = () => {
           await homepageApiStructure.getLeistungens();
 
         if (!mounted) return;
+        // Sort by sortOrder ascending, same as the Team page
+        const sortedData = [...(result?.data || [])].sort(
+          (a, b) => (a?.sortOrder ?? 0) - (b?.sortOrder ?? 0)
+        );
 
-        const mapped = (result?.data || []).map(
+        const mapped = sortedData.map(
           (item) => ({
             id: item.documentId || item.id,
 
@@ -386,8 +390,8 @@ const LiestungenSlider = () => {
   if (loading) {
     return (
       <div className="service-slider-row">
-      <ServiceCardsSkeleton count={4} />
-    </div>
+        <ServiceCardsSkeleton count={4} />
+      </div>
     );
   }
 

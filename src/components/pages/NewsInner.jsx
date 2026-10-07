@@ -63,9 +63,7 @@ const NewsInner = () => {
   }, [slug]);
 
   /*
-   * Related news is already coming from the detail API.
-   *
-   * data.RelatedNews.news
+   * Related news
    */
   const relatedNews = useMemo(() => {
     if (!data?.RelatedNews?.news) {
@@ -113,10 +111,16 @@ const NewsInner = () => {
       });
   }, [data]);
 
+  /*
+   * Loading
+   */
   if (loading) {
     return <InsightInnerSkeleton />;
   }
 
+  /*
+   * Not found
+   */
   if (error || !data) {
     return (
       <StatusHeader
@@ -143,17 +147,48 @@ const NewsInner = () => {
     Kontaktbereich,
   } = data;
 
+  /*
+   * =====================================================
+   * FIRST SECTION IMAGES
+   * =====================================================
+   */
+
   const firstSectionImages =
     Bild_Text_Abschnitt?.Bild || [];
+
+  /*
+   * =====================================================
+   * SECOND SECTION MEDIA
+   *
+   * IMPORTANT:
+   * Video and Videominiatur are OBJECTS in your API,
+   * not arrays.
+   * =====================================================
+   */
 
   const contentImage =
     Bildre_Text?.Bild?.[0] || null;
 
   const contentVideo =
-    Bildre_Text?.Video?.[0] || null;
+    Bildre_Text?.Video || null;
 
   const videoThumbnail =
-    Bildre_Text?.Videominiatur?.[0] || null;
+    Bildre_Text?.Videominiatur || null;
+
+  /*
+   * =====================================================
+   * MEDIA TYPE
+   * =====================================================
+   */
+
+  const mediaType =
+    Bildre_Text?.Bild_oder_Video || "Bild";
+
+  /*
+   * =====================================================
+   * CHECK SECTIONS
+   * =====================================================
+   */
 
   const hasHero = Boolean(
     Titel || Kurztitel || Text
@@ -179,7 +214,11 @@ const NewsInner = () => {
 
   return (
     <main>
-      {/* ================= INNER HERO ================= */}
+
+      {/* =================================================
+          INNER HERO
+      ================================================= */}
+
       {hasHero && (
         <section className="inner_hero_section">
           <InnerBnanner
@@ -188,7 +227,9 @@ const NewsInner = () => {
             description={Text || ""}
             footer={Boolean(Button?.button_text)}
             button={Button?.button_text || ""}
-            buttonLink={Button?.button_link || "#"}
+            buttonLink={
+              Button?.button_link || "#"
+            }
             buttonTarget={
               isExternalHeroButton
                 ? "_blank"
@@ -203,39 +244,55 @@ const NewsInner = () => {
         </section>
       )}
 
-      {/* ================= IMAGE + TEXT ================= */}
+      {/* =================================================
+          IMAGE + TEXT
+      ================================================= */}
+
       {hasFirstSection && (
         <section className="image_layout_section pt_pb_3">
           <div className="container">
+
             <div className="row g-4">
+
               {Bild_Text_Abschnitt?.Kurztitel && (
                 <div className="col-12 col-md-4">
                   <div className="intro-svg mx-auto mx-md-0">
+
                     <div className="sub_title">
                       {Bild_Text_Abschnitt.Kurztitel}
                     </div>
+
                   </div>
                 </div>
               )}
 
               {Bild_Text_Abschnitt?.Text?.length > 0 && (
                 <div className="col-12 col-md-8">
+
                   <div className="intro-text mb-0">
+
                     <StrapiRichText
                       content={
                         Bild_Text_Abschnitt.Text
                       }
                     />
+
                   </div>
+
                 </div>
               )}
+
             </div>
 
             {firstSectionImages.length > 0 && (
               <div className="row g-4 mt-4">
+
                 {firstSectionImages.map(
                   (image, index) => {
-                    if (!image?.url) return null;
+
+                    if (!image?.url) {
+                      return null;
+                    }
 
                     return (
                       <div
@@ -246,9 +303,13 @@ const NewsInner = () => {
                           index
                         }
                       >
+
                         <div className="image_layout_item">
+
                           <img
-                            src={getMediaUrl(image.url)}
+                            src={getMediaUrl(
+                              image.url
+                            )}
                             alt={
                               image?.alternativeText ||
                               Titel ||
@@ -256,24 +317,40 @@ const NewsInner = () => {
                             }
                             className="w-100"
                           />
+
                         </div>
+
                       </div>
                     );
                   }
                 )}
+
               </div>
             )}
+
           </div>
         </section>
       )}
 
-      {/* ================= IMAGE / VIDEO + TEXT ================= */}
+      {/* =================================================
+          IMAGE / VIDEO + TEXT
+      ================================================= */}
+
       {hasSecondSection && (
         <section className="content_image_section my-4">
+
           <div className="container">
+
             <div className="row align-items-center g-4">
+
+              {/* =================================================
+                  CONTENT
+              ================================================= */}
+
               <div className="col-12 col-lg-6">
+
                 <div className="content_image_content">
+
                   {Bildre_Text?.Kurztitel && (
                     <div className="sub_title">
                       {Bildre_Text.Kurztitel}
@@ -286,19 +363,20 @@ const NewsInner = () => {
                     </h2>
                   )}
 
-                  {Bildre_Text?.Beschreibung?.length >
-                    0 && (
-                      <StrapiRichText
-                        content={
-                          Bildre_Text.Beschreibung
-                        }
-                      />
-                    )}
+                  {Bildre_Text?.Beschreibung?.length > 0 && (
+                    <StrapiRichText
+                      content={
+                        Bildre_Text.Beschreibung
+                      }
+                    />
+                  )}
 
                   {Bildre_Text?.Button?.length > 0 && (
                     <div className="theme_btn_wrap mt-4">
+
                       {Bildre_Text.Button.map(
                         (button, index) => {
+
                           if (!button?.button_text) {
                             return null;
                           }
@@ -327,37 +405,56 @@ const NewsInner = () => {
                                   : undefined
                               }
                             >
+
                               {button.button_text}
 
                               <img
                                 src="/images/btn-arrow.svg"
                                 alt="button arrow"
                               />
+
                             </a>
                           );
                         }
                       )}
+
                     </div>
                   )}
+
                 </div>
+
               </div>
 
+              {/* =================================================
+                  IMAGE / VIDEO
+              ================================================= */}
+
               <div className="col-12 col-lg-6">
-                {Bildre_Text?.Bild_oder_Video ===
-                  "Video" &&
+
+                {/*
+                 * If backend says Video
+                 * and Video URL exists -> SHOW VIDEO
+                 */}
+
+                {mediaType === "Video" &&
                   contentVideo?.url ? (
+
                   <div className="content_video">
+
                     <video
                       controls
+                      playsInline
+                      preload="metadata"
                       poster={
                         videoThumbnail?.url
                           ? getMediaUrl(
-                            videoThumbnail.url
-                          )
+                              videoThumbnail.url
+                            )
                           : undefined
                       }
-                      className="w-100"
+                      className="w-100 d-block"
                     >
+
                       <source
                         src={getMediaUrl(
                           contentVideo.url
@@ -370,11 +467,23 @@ const NewsInner = () => {
 
                       Your browser does not support
                       the video tag.
+
                     </video>
+
                   </div>
+
                 ) : (
+
+                  /*
+                   * If backend says Bild
+                   * -> SHOW IMAGE
+                   */
+
+                  mediaType === "Bild" &&
                   contentImage?.url && (
+
                     <div className="content_image">
+
                       <img
                         src={getMediaUrl(
                           contentImage.url
@@ -385,50 +494,76 @@ const NewsInner = () => {
                           Titel ||
                           ""
                         }
-                        className="w-100"
+                        className="w-100 d-block"
                       />
+
                     </div>
+
                   )
                 )}
+
               </div>
+
             </div>
+
           </div>
+
         </section>
       )}
 
-      {/* ================= RELATED NEWS ================= */}
+      {/* =================================================
+          RELATED NEWS
+      ================================================= */}
+
       {relatedNews.length > 0 && (
         <section className="news-page-section news_section pt_3">
+
           <NewsCard
             newsData={relatedNews}
             showHeader={true}
-            subTitle={data?.RelatedNews?.Kurztitel || ""}
-            heading={data?.RelatedNews?.Titel || ""}
+            subTitle={
+              data?.RelatedNews?.Kurztitel || ""
+            }
+            heading={
+              data?.RelatedNews?.Titel || ""
+            }
             showFooter={false}
           />
+
         </section>
       )}
 
-      {/* ================= CONTACT ================= */}
+      {/* =================================================
+          CONTACT
+      ================================================= */}
+
       {Kontaktbereich && (
         <section className="pt_pb_3 talk_section">
+
           <TalkSection
             talkData={Kontaktbereich}
           />
+
         </section>
       )}
+
     </main>
   );
 };
+
 
 /* =========================================================
    CATEGORY CLASS
 ========================================================= */
 
 const getCategoryClass = (category) => {
-  if (!category) return "";
 
-  const color = category?.Farbe?.toLowerCase();
+  if (!category) {
+    return "";
+  }
+
+  const color =
+    category?.Farbe?.toLowerCase();
 
   const colorMap = {
     purple: "purple_badge",
@@ -439,12 +574,16 @@ const getCategoryClass = (category) => {
   return colorMap[color] || "";
 };
 
+
 /* =========================================================
    STRAPI RICH TEXT
 ========================================================= */
 
 const StrapiRichText = ({ content }) => {
-  if (!content) return null;
+
+  if (!content) {
+    return null;
+  }
 
   if (typeof content === "string") {
     return (
@@ -462,94 +601,124 @@ const StrapiRichText = ({ content }) => {
 
   return (
     <div className="strapi_rich_text">
-      {content.map((block, blockIndex) => {
-        if (!block) return null;
 
-        const blockType =
-          block?.type || "paragraph";
+      {content.map(
+        (block, blockIndex) => {
 
-        const children =
-          block?.children || [];
+          if (!block) {
+            return null;
+          }
 
-        const renderedChildren =
-          children.map(
-            (child, childIndex) => {
-              if (!child) return null;
+          const blockType =
+            block?.type || "paragraph";
 
-              const text =
-                child?.text || "";
+          const children =
+            block?.children || [];
 
-              if (child?.bold) {
+          const renderedChildren =
+            children.map(
+              (child, childIndex) => {
+
+                if (!child) {
+                  return null;
+                }
+
+                const text =
+                  child?.text || "";
+
+                if (child?.bold) {
+                  return (
+                    <strong
+                      key={childIndex}
+                    >
+                      {text}
+                    </strong>
+                  );
+                }
+
+                if (child?.italic) {
+                  return (
+                    <em
+                      key={childIndex}
+                    >
+                      {text}
+                    </em>
+                  );
+                }
+
                 return (
-                  <strong key={childIndex}>
+                  <React.Fragment
+                    key={childIndex}
+                  >
                     {text}
-                  </strong>
+                  </React.Fragment>
                 );
               }
+            );
 
-              if (child?.italic) {
-                return (
-                  <em key={childIndex}>
-                    {text}
-                  </em>
-                );
-              }
+          if (blockType === "heading") {
 
-              return (
-                <React.Fragment
-                  key={childIndex}
-                >
-                  {text}
-                </React.Fragment>
-              );
-            }
-          );
+            const level = Math.min(
+              Math.max(
+                block?.level || 2,
+                1
+              ),
+              6
+            );
 
-        if (blockType === "heading") {
-          const level = Math.min(
-            Math.max(block?.level || 2, 1),
-            6
-          );
+            const HeadingTag =
+              `h${level}`;
 
-          const HeadingTag = `h${level}`;
+            return (
+              <HeadingTag
+                key={blockIndex}
+              >
+                {renderedChildren}
+              </HeadingTag>
+            );
+          }
+
+          if (blockType === "quote") {
+            return (
+              <blockquote
+                key={blockIndex}
+              >
+                {renderedChildren}
+              </blockquote>
+            );
+          }
 
           return (
-            <HeadingTag key={blockIndex}>
+            <p key={blockIndex}>
               {renderedChildren}
-            </HeadingTag>
+            </p>
           );
         }
+      )}
 
-        if (blockType === "quote") {
-          return (
-            <blockquote key={blockIndex}>
-              {renderedChildren}
-            </blockquote>
-          );
-        }
-
-        return (
-          <p key={blockIndex}>
-            {renderedChildren}
-          </p>
-        );
-      })}
     </div>
   );
 };
+
 
 /* =========================================================
    DATE FORMATTER
 ========================================================= */
 
 const formatDate = (date) => {
+
   if (!date) {
     return "";
   }
 
-  const parsedDate = new Date(date);
+  const parsedDate =
+    new Date(date);
 
-  if (Number.isNaN(parsedDate.getTime())) {
+  if (
+    Number.isNaN(
+      parsedDate.getTime()
+    )
+  ) {
     return date;
   }
 
@@ -561,9 +730,11 @@ const formatDate = (date) => {
     parsedDate.getMonth() + 1
   ).padStart(2, "0");
 
-  const year = parsedDate.getFullYear();
+  const year =
+    parsedDate.getFullYear();
 
   return `${day}.${month}.${year}`;
 };
+
 
 export default NewsInner;

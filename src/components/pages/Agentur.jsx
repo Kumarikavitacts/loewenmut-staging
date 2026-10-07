@@ -228,31 +228,42 @@ const Agentur = () => {
                                 )}
                             </div>
                         </div>
-                        <div className="col-12 col-lg-6 img-col">
-                            {aboutMediaType === "Bild" && aboutImage?.url && (
-                                <img
-                                    src={getMediaUrl(aboutImage.url)}
-                                    alt={aboutImage?.alternativeText || Bildre_Text?.Titel || ""}
-                                    className='rounded'
-                                />
-                            )}
+                       <div className="col-12 col-lg-6 img-col">
+                {aboutMediaType === "Bild" && aboutImage?.url && (
+                    <img
+                        src={getMediaUrl(aboutImage.url)}
+                        alt={
+                            aboutImage?.alternativeText ||
+                            Bildre_Text?.Titel ||
+                            ""
+                        }
+                        className="w-100 d-block rounded"
+                    />
+                )}
 
-                            {aboutMediaType === "Video" && aboutVideoUrl && (
-                                <video
-                                    className="rounded w-100"
-                                    controls
-                                    playsInline
-                                    preload="metadata"
-                                    poster={aboutVideoThumbnailUrl || undefined}
-                                >
-                                    <source
-                                        src={aboutVideoUrl}
-                                        type={aboutVideo?.mime || "video/mp4"}
-                                    />
-                                    Your browser does not support the video tag.
-                                </video>
-                            )}
-                        </div>
+                {aboutMediaType === "Video" && aboutVideoUrl && (
+                    <video
+                        className="w-100 d-block rounded"
+                        controls
+                        playsInline
+                        preload="metadata"
+                        poster={
+                            aboutVideoThumbnailUrl ||
+                            undefined
+                        }
+                    >
+                        <source
+                            src={aboutVideoUrl}
+                            type={
+                                aboutVideo?.mime ||
+                                "video/mp4"
+                            }
+                        />
+
+                        Your browser does not support the video tag.
+                    </video>
+                )}
+               </div>
                     </div>
                 </div>
             </section>

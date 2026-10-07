@@ -63,7 +63,6 @@ const RichText = ({ content = [] }) => {
           );
         }
 
-
         // ---------------------------------------------
         // Heading
         // ---------------------------------------------
@@ -85,7 +84,6 @@ const RichText = ({ content = [] }) => {
             </HeadingTag>
           );
         }
-
 
         // ---------------------------------------------
         // List
@@ -120,7 +118,6 @@ const RichText = ({ content = [] }) => {
   );
 };
 
-
 // =====================================================
 // COMPONENT
 // =====================================================
@@ -136,11 +133,9 @@ const LeistungenDetail = () => {
 
   const slug = params?.id;
 
-
   const [leistungData, setLeistungData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-
 
   // ===================================================
   // FETCH DATA
@@ -175,7 +170,6 @@ const LeistungenDetail = () => {
 
   }, [slug]);
 
-
   // ===================================================
   // LOADING
   // ===================================================
@@ -184,7 +178,6 @@ const LeistungenDetail = () => {
     return <LeistungenDetailSkeleton />;
   }
 
-
   // ===================================================
   // NOT FOUND
   // ===================================================
@@ -192,19 +185,18 @@ const LeistungenDetail = () => {
   if (error || !leistungData) {
     return (
       <StatusHeader
-      statusType="wrong"
-      title={
-        <>
-          Diese Seite konnte leider <br />
-          nicht gefunden werden
-        </>
-      }
-      buttonText="Zurück zur Startseite"
-      buttonLink="/"
-    />
+        statusType="wrong"
+        title={
+          <>
+            Diese Seite konnte leider <br />
+            nicht gefunden werden
+          </>
+        }
+        buttonText="Zurück zur Startseite"
+        buttonLink="/"
+      />
     );
   }
-
 
   // ===================================================
   // DATA
@@ -223,7 +215,6 @@ const LeistungenDetail = () => {
     Kontaktbereich,
 
   } = leistungData;
-
 
   return (
     <main>
@@ -290,7 +281,7 @@ const LeistungenDetail = () => {
 
                       <Link
                         key={button.id}
-                        href={button.button_link }
+                        href={button.button_link}
                         className="button theme_btn"
                       >
 
@@ -360,7 +351,11 @@ const LeistungenDetail = () => {
                   {card.Icon?.url && (
                     <img
                       src={getMediaUrl(card.Icon.url)}
-                      alt={card.Icon.alternativeText || card.Titel || ""}
+                      alt={
+                        card.Icon.alternativeText ||
+                        card.Titel ||
+                        ""
+                      }
                     />
                   )}
 
@@ -392,7 +387,7 @@ const LeistungenDetail = () => {
 
 
       {/* =================================================
-          SECTION 3 - IMAGE + CONTENT
+          SECTION 3 - IMAGE / VIDEO + CONTENT
       ================================================= */}
 
       {Bildre_Text && (
@@ -411,24 +406,76 @@ const LeistungenDetail = () => {
 
 
               {/* -----------------------------------------
-                  IMAGE
+                  IMAGE / VIDEO
               ----------------------------------------- */}
 
               <div className="col-12 col-lg-5 ms-auto img-col">
 
-                {Bildre_Text.Bild?.length > 0 && (
+                {/* =====================================
+                    IMAGE
+                    Show when Bild_oder_Video === "Bild"
+                ===================================== */}
 
-                  <img
-                    src={getMediaUrl(
-                      Bildre_Text.Bild[0]?.url
-                    )}
-                    alt={
-                      Bildre_Text.Bild[0]?.alternativeText ||
-                      Bildre_Text.Titel ||
-                      Titel ||
-                      ""
-                    }
-                  />
+                {Bildre_Text.Bild_oder_Video === "Bild" &&
+                  Bildre_Text.Bild?.length > 0 && (
+
+                    <img
+                      src={getMediaUrl(
+                        Bildre_Text.Bild[0]?.url
+                      )}
+                      alt={
+                        Bildre_Text.Bild[0]
+                          ?.alternativeText ||
+                        Bildre_Text.Titel ||
+                        Titel ||
+                        ""
+                      }
+                    />
+
+                )}
+
+
+                {/* =====================================
+                    VIDEO
+                    Show when Bild_oder_Video === "Video"
+                ===================================== */}
+
+                {Bildre_Text.Bild_oder_Video === "Video" &&
+                  Bildre_Text.Video?.url && (
+
+                    <video
+                      className="w-100"
+                      controls
+                      playsInline
+                      preload="metadata"
+                      poster={
+                        Bildre_Text.Videominiatur?.url
+                          ? getMediaUrl(
+                              Bildre_Text.Videominiatur.url
+                            )
+                          : undefined
+                      }
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                      }}
+                    >
+
+                      <source
+                        src={getMediaUrl(
+                          Bildre_Text.Video.url
+                        )}
+                        type={
+                          Bildre_Text.Video.mime ||
+                          "video/mp4"
+                        }
+                      />
+
+                      Your browser does not support
+                      the video tag.
+
+                    </video>
 
                 )}
 
@@ -527,12 +574,18 @@ const LeistungenDetail = () => {
           TALK
       ================================================= */}
 
-      {leistungData && leistungData?.Kontaktbereich &&
-       <section className="pt_pb_3 talk_section">
+      {leistungData &&
+        leistungData?.Kontaktbereich && (
+          <section className="pt_pb_3 talk_section">
 
-      <TalkSection talkData={leistungData?.Kontaktbereich} />
-      </section>
-      }
+            <TalkSection
+              talkData={
+                leistungData?.Kontaktbereich
+              }
+            />
+
+          </section>
+        )}
 
     </main>
   );

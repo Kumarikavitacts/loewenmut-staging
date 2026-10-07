@@ -355,12 +355,12 @@ Array.isArray(strategien) && strategien.length > 0
         <div>
 
           <p>
-            Hallo ${escapeHtml(vorname || "")},
+            Guten Tag ${escapeHtml(vorname || "")},
           </p>
 
 
           <p>
-            vielen Dank für Ihre Nachricht an Löwenmut.
+            Vielen Dank für Ihre Nachricht an Löwenmut.
             Wir haben Ihre Anfrage erfolgreich erhalten.
           </p>
 

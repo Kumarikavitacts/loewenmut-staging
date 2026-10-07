@@ -24,23 +24,23 @@ const StatusHeader = ({
 
   const statusImages = {
     yellow: {
-      correct: "/images/status/yellow-correct.png",
-      wrong: "/images/status/yellow-wrong.png",
+      correct: "/images/status/yellow-correct.svg",
+      wrong: "/images/status/yellow-wrong.svg",
     },
 
     blue: {
-      correct: "/images/status/blue-correct.png",
-      wrong: "/images/status/blue-wrong.png",
+      correct: "/images/status/blue-correct.svg",
+      wrong: "/images/status/blue-wrong.svg",
     },
 
     green: {
-      correct: "/images/status/green-correct.png",
-      wrong: "/images/status/green-wrong.png",
+      correct: "/images/status/green-correct.svg",
+      wrong: "/images/status/green-wrong.svg",
     },
 
     pink: {
-      correct: "/images/status/pink-correct.png",
-      wrong: "/images/status/pnk-wrong.png",
+      correct: "/images/status/pink-correct.svg",
+      wrong: "/images/status/pink-wrong.svg",
     },
   };
 
