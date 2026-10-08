@@ -352,7 +352,7 @@ const SupportForm = () => {
 
         {errorMessage && (
           <div className="col-12">
-            <div className="alert alert-danger">{errorMessage}</div>
+            <div className="error-message">{errorMessage}</div>
           </div>
         )}
       </div>

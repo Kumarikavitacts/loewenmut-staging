@@ -104,7 +104,7 @@ const TurnstileWidget = forwardRef(({ onVerify, onExpire }, ref) => {
 
   if (!siteKey) {
     return (
-      <div className="alert alert-danger py-2 px-3 mb-0">
+      <div className="error-message px-3 mb-0">
         CAPTCHA-Konfigurationsfehler (Site Key fehlt).
       </div>
     );
@@ -118,7 +118,7 @@ const TurnstileWidget = forwardRef(({ onVerify, onExpire }, ref) => {
       />
       <div ref={containerRef} className="cf-turnstile-container" />
       {loadError && (
-        <div className="alert alert-danger py-2 px-3 mb-0 mt-2">
+        <div className="error-message px-3 mb-0 mt-2">
           CAPTCHA konnte nicht geladen werden. Bitte Seite neu laden.
         </div>
       )}

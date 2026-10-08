@@ -342,12 +342,12 @@
         }
     }
     .ld_section_3 {
-        .img-col img {
+        .img-col img,video {
             position: absolute;
             right: 0;
             top: 0;
             height: 100%;
-            width: 38%;
+            width: 38% !important;
             object-fit: cover;
         }
     }

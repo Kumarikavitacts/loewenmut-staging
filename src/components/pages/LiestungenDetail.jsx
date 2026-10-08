@@ -339,9 +339,8 @@ const LeistungenDetail = () => {
 
               <div
                 key={card.id || index}
-                className={`service-card ${
-                  index === 0 ? "active" : ""
-                }`}
+                className={`service-card ${index === 0 ? "active" : ""
+                  }`}
               >
 
                 {/* ICON */}
@@ -415,69 +414,69 @@ const LeistungenDetail = () => {
                     IMAGE
                     Show when Bild_oder_Video === "Bild"
                 ===================================== */}
+                <div className="liestungen-img-video-wrapper">
+                  {Bildre_Text.Bild_oder_Video === "Bild" &&
+                    Bildre_Text.Bild?.length > 0 && (
 
-                {Bildre_Text.Bild_oder_Video === "Bild" &&
-                  Bildre_Text.Bild?.length > 0 && (
+                      <img
+                        src={getMediaUrl(
+                          Bildre_Text.Bild[0]?.url
+                        )}
+                        alt={
+                          Bildre_Text.Bild[0]
+                            ?.alternativeText ||
+                          Bildre_Text.Titel ||
+                          Titel ||
+                          ""
+                        }
+                      />
 
-                    <img
-                      src={getMediaUrl(
-                        Bildre_Text.Bild[0]?.url
-                      )}
-                      alt={
-                        Bildre_Text.Bild[0]
-                          ?.alternativeText ||
-                        Bildre_Text.Titel ||
-                        Titel ||
-                        ""
-                      }
-                    />
-
-                )}
+                    )}
 
 
-                {/* =====================================
+                  {/* =====================================
                     VIDEO
                     Show when Bild_oder_Video === "Video"
                 ===================================== */}
 
-                {Bildre_Text.Bild_oder_Video === "Video" &&
-                  Bildre_Text.Video?.url && (
+                  {Bildre_Text.Bild_oder_Video === "Video" &&
+                    Bildre_Text.Video?.url && (
 
-                    <video
-                      className="w-100"
-                      controls
-                      playsInline
-                      preload="metadata"
-                      poster={
-                        Bildre_Text.Videominiatur?.url
-                          ? getMediaUrl(
+                      <video
+                        className="w-100"
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        controls
+                        preload="metadata"
+                        poster={
+                          Bildre_Text.Videominiatur?.url
+                            ? getMediaUrl(
                               Bildre_Text.Videominiatur.url
                             )
-                          : undefined
-                      }
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                      }}
-                    >
-
-                      <source
-                        src={getMediaUrl(
-                          Bildre_Text.Video.url
-                        )}
-                        type={
-                          Bildre_Text.Video.mime ||
-                          "video/mp4"
+                            : undefined
                         }
-                      />
 
-                      Your browser does not support
-                      the video tag.
+                      >
 
-                    </video>
+                        <source
+                          src={getMediaUrl(
+                            Bildre_Text.Video.url
+                          )}
+                          type={
+                            Bildre_Text.Video.mime ||
+                            "video/mp4"
+                          }
+                        />
 
-                )}
+                        Your browser does not support
+                        the video tag.
+
+                      </video>
+
+                    )}
+                </div>
 
               </div>
 
