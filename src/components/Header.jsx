@@ -56,13 +56,13 @@ function Header() {
 
   return (
     <header>
-      <nav className={`navbar navbar-expand-lg ${ isSticky ? "sticky" : "" }`} >
+      <nav className={`navbar navbar-expand-lg ${isSticky ? "sticky" : ""}`} >
         <div className="container">
           {/* Logo */}
           <Link className="navbar-brand" href="/" onClick={handleNavClick} >
             <svg width="366" height="70" viewBox="0 0 366 70" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path fillRule="evenodd" clipRule="evenodd" d="M356.597 50.1735C358.481 50.197 360.315 50.7789 361.868 51.8456C363.421 52.9123 364.622 54.4157 365.32 56.1656C366.018 57.9155 366.18 59.8331 365.788 61.6755C365.395 63.518 364.464 65.2024 363.113 66.5155C361.762 67.8286 360.052 68.7113 358.2 69.0519C356.347 69.3924 354.434 69.1755 352.705 68.4285C350.976 67.6816 349.507 66.4382 348.484 64.8559C347.462 63.2736 346.932 61.4235 346.962 59.5399C346.974 58.2905 347.234 57.056 347.725 55.9075C348.217 54.759 348.932 53.7193 349.828 52.8485C350.723 51.9776 351.783 51.2929 352.945 50.8338C354.107 50.3746 355.348 50.1502 356.597 50.1735Z" fill="var(--bs-themecolor)" />
-              <path d="M27.5956 67.3711H0V0.765625H10.4681V56.9029H27.5956V67.3711Z" fill="black"/>
+              <path d="M27.5956 67.3711H0V0.765625H10.4681V56.9029H27.5956V67.3711Z" fill="black" />
               <path d="M47.5843 68.1267C43.016 68.1267 39.3369 66.8268 36.547 64.227C33.3744 61.181 31.7884 57.0262 31.7891 51.7624V16.3663C31.7891 11.1019 33.3751 6.94674 36.547 3.90078C39.3383 1.30093 43.0173 0.000674147 47.5843 2.61806e-07C52.1512 -0.000673623 55.8303 1.29958 58.6215 3.90078C61.7928 6.94674 63.3788 11.1019 63.3795 16.3663V51.7624C63.3795 57.0288 61.7935 61.1837 58.6215 64.227C55.8262 66.8282 52.1472 68.1281 47.5843 68.1267ZM47.5843 10.4671C46.1871 10.3471 44.7956 10.7542 43.6835 11.6083C42.7313 12.4979 42.2552 14.0839 42.2552 16.3663V51.7624C42.2552 54.0462 42.7313 55.6315 43.6835 56.5184C44.7953 57.3733 46.1869 57.7808 47.5843 57.6606C48.9839 57.8016 50.3834 57.3919 51.4861 56.5184C52.4362 55.6962 52.912 54.1109 52.9134 51.7624V16.3663C52.9134 14.0205 52.4376 12.4345 51.4861 11.6083C50.3831 10.7354 48.9837 10.3261 47.5843 10.4671Z" fill="black" />
               <path d="M80.5952 11.2327V27.9781H92.3936V38.4493H80.5952V56.908H97.7206V67.3751H70.125V0.765625H97.7206V11.2317H80.5952V11.2327Z" fill="black" />
               <path d="M148.335 0.765625L140.148 67.3711H134.344L125.019 34.2584L115.79 67.3711H109.985L101.797 0.765625H112.372L115.988 33.9733L122.077 11.3308H128.072L134.162 33.9733L137.778 0.765625H148.339H148.335Z" fill="black" />
@@ -95,9 +95,8 @@ function Header() {
 
           {/* Main Navigation */}
           <div
-            className={`collapse navbar-collapse ${
-              isMenuOpen ? "show" : ""
-            }`}
+            className={`collapse navbar-collapse ${isMenuOpen ? "show" : ""
+              }`}
             id="mainNavbar"
           >
             <div className="menu_container">
@@ -164,18 +163,18 @@ function Header() {
               </ul>
 
               {/* Project Button */}
-             <div className="ms-lg-3 mt-3 mt-lg-0">
-  <Link
-    href="/kontakt"
-    className="project_btn"
-    onClick={handleNavClick}
-  >
-    <span className="project_btn_roll">
-      <span className="project_btn_roll_item">Projekt starten</span>
-      <span className="project_btn_roll_item" aria-hidden="true">Projekt starten</span>
-    </span>
-  </Link>
-</div>
+              <div className="ms-lg-3 mt-3 mt-lg-0">
+                <Link
+                  href="/kontakt"
+                  className="project_btn"
+                  onClick={handleNavClick}
+                >
+                  <span className="project_btn_roll">
+                    <span className="project_btn_roll_item">Projekt starten</span>
+                    <span className="project_btn_roll_item" aria-hidden="true">Projekt starten</span>
+                  </span>
+                </Link>
+              </div>
 
             </div>
           </div>
@@ -187,9 +186,8 @@ function Header() {
 
           {/* Mobile Toggle */}
           <button
-            className={`navbar-toggler ${
-              isMenuOpen ? "active" : ""
-            }`}
+            className={`navbar-toggler ${isMenuOpen ? "active" : ""
+              }`}
             type="button"
             aria-controls="mainNavbar"
             aria-expanded={isMenuOpen}
