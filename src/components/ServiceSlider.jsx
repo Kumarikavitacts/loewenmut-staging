@@ -166,7 +166,7 @@ const ServiceSlider = ({ paragraph }) => {
 
         autoplay: true,
         autoplayHoverPause: true,
-        autoplayTimeout: 5000,
+        autoplayTimeout: 3000,
 
         smartSpeed: 400,
 
