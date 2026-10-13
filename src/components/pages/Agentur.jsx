@@ -517,7 +517,6 @@ const Agentur = () => {
                                     muted
                                     loop
                                     playsInline
-                                    controls
                                     preload="metadata"
                                     poster={
                                         aboutVideoThumbnailUrl ||

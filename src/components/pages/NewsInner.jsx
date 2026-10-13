@@ -446,7 +446,6 @@ const NewsInner = () => {
                         muted
                         loop
                         playsInline
-                        controls
                       preload="metadata"
                       poster={
                         videoThumbnail?.url

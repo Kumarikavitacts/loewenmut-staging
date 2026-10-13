@@ -448,7 +448,6 @@ const LeistungenDetail = () => {
                         muted
                         loop
                         playsInline
-                        controls
                         preload="metadata"
                         poster={
                           Bildre_Text.Videominiatur?.url

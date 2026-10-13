@@ -214,7 +214,7 @@ const Project = () => {
                       muted
                       loop
                       playsInline
-                      controls
+                      
                     preload="metadata"
                     poster={
                       videoThumbnailUrl ||

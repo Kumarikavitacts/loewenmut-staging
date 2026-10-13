@@ -92,7 +92,7 @@ const Footer = () => {
 
        
             {/* <!-- Start cookieyes banner -->  */}
-            <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/594f6c14466a211fe9f89ce3111b24d0/script.js"></script>
+            {/* <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/594f6c14466a211fe9f89ce3111b24d0/script.js"></script> */}
              {/* <!-- End cookieyes banner --> */}
  
         </>
