@@ -130,7 +130,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="de" className={`${roboto.variable} ${urbanist.variable}`} suppressHydrationWarning>
       <head>
-        
+        <Script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/594f6c14466a211fe9f89ce3111b24d0/script.js"></Script>
+
         <Script
           id="theme-script"
           strategy="beforeInteractive"
@@ -145,9 +146,8 @@ export default function RootLayout({ children }) {
         <Providers>
           <SiteChrome>{children}</SiteChrome>
         </Providers>
-        {/* <!-- Start cookieyes banner --> */}
-         <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/594f6c14466a211fe9f89ce3111b24d0/script.js"></script>
-          {/* <!-- End cookieyes banner --> */}
+
+
  
       </body>
     </html>
