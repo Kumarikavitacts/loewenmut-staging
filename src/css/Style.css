@@ -2983,7 +2983,7 @@ footer {
         img,video {
             width: 100%;
             height: auto;
-            aspect-ratio: 676 / 740;
+            aspect-ratio: 676 / 630;
             object-fit: cover;
             display: block;
             border-radius: 20px;
@@ -3000,7 +3000,7 @@ footer {
         img,video {
             width: 100%;
             height: auto;
-            aspect-ratio: 676 / 740;
+            aspect-ratio: 676 / 610;
             object-fit: cover;
             display: block;
             border-radius: 20px;
