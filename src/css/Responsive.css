@@ -733,10 +733,10 @@ header {
 span.txt-008:before {
     height: 10px;
 }
-.news_section .news_content h3 {
-    /* font-size: var(--bs-fs24); */
-    /* min-height:40px; */
-}
+/* .news_section .news_content h3 {
+    font-size: var(--bs-fs24);
+    min-height:40px;
+} */
 .map-wrapper {
     width: 100%;
     margin-left: 0;
