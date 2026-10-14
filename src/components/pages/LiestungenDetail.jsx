@@ -252,7 +252,7 @@ const LeistungenDetail = () => {
 
               <div className="anim_circle mx-auto">
 
-                <AnimatedText />
+                 <AnimatedText text={Titel} />
 
               </div>
 

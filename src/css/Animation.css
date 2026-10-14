@@ -217,3 +217,11 @@
 		transform: translateY(0) scale(1);
 	}
 }
+/* rotating ring text of <AnimatedText /> (rotate only, no translate) */
+@keyframes circleTextSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .anim_circle_text { animation: none !important; }
+}

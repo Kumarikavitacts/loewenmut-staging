@@ -1011,6 +1011,23 @@ header {
         width: 90%;
         animation: circleRotate 8s linear infinite;
     }
+    /* rotating ring text (text comes from the <AnimatedText text="..." /> prop) */
+    .anim_circle_text {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        animation: circleTextSpin 14s linear infinite;
+        transform-origin: 50% 50%;
+        text {
+            fill: #111;
+            font-size: 15px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            user-select: none;
+        }
+    }
     span {
         width: 130px;
         height: 130px;
