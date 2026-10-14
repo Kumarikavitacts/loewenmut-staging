@@ -568,9 +568,11 @@ const getCategoryClass = (category) => {
     category?.Farbe?.toLowerCase();
 
   const colorMap = {
-    purple: "purple_badge",
+    pink: "pink_badge",
     blue: "blue_badge",
-    red: "red_badge",
+    green: "green_badge",
+    yellow: "yellow_badge",
+
   };
 
   return colorMap[color] || "";

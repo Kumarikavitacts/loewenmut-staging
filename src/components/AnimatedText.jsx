@@ -14,10 +14,10 @@ const AnimatedText = () => {
   const theme = themeContext?.theme || DEFAULT_THEME;
 
   const themeImages = {
-    yellow: "/images/image-loewenmut-yellow.png",
-    blue: "/images/image-loewenmut-blue.png",
-    green: "/images/image-loewenmut-green.png",
-    pink: "/images/image-loewenmut-pink.png",
+    yellow: "/images/image-loewenmut-yellow_new.webp",
+    blue: "/images/image-loewenmut-blue_new.webp",
+    green: "/images/image-loewenmut-green_new.webp",
+    pink: "/images/image-loewenmut-pink_new.webp",
   };
 
   const talkImage =
@@ -30,13 +30,7 @@ const AnimatedText = () => {
   return (
     <>
       <span>
-        <Image
-          src={talkImage}
-          alt="talk image"
-          width={800}
-          height={800}
-          sizes="(max-width: 767px) 150px, 200px"
-        />
+                    <img src={talkImage} alt="talk image" />
       </span>
 
       <img

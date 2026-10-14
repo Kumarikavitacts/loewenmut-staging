@@ -17,10 +17,10 @@ const TalkSection = ({ talkData }) => {
   const theme = themeContext?.theme || DEFAULT_THEME;
 
   const themeImages = {
-    yellow: "/images/image-loewenmut-yellow.png",
-    blue: "/images/image-loewenmut-blue.png",
-    green: "/images/image-loewenmut-green.png",
-    pink: "/images/image-loewenmut-pink.png",
+    yellow: "/images/talk-section/image-loewenmut-Sh-yellow.webp",
+    blue: "/images/talk-section/image-loewenmut-Sh-blue.webp",
+    green: "/images/talk-section/image-loewenmut-Sh-green.webp",
+    pink: "/images/talk-section/image-loewenmut-Sh-pink.webp",
   };
 
   /*
@@ -48,22 +48,16 @@ const TalkSection = ({ talkData }) => {
 
   return (
     <div className="container">
-      <div className="row flex-lg-row-reverse align-items-center">
+      <div className="row flex-lg-row-reverse align-items-center ">
 
         {/* IMAGE */}
         <div
-          className="col-12 col-lg-4 img-col cursorPointer text-center"
+          className="col-12 col-lg-4 img-col cursorPointer text-center talk_section_image"
           data-aos="zoom-in"
           onClick={() => buttonLink && router.push(buttonLink)}
         >
-          <Image
-            src={talkImage}
-            alt={title || "Genug geredet"}
-            width={800}
-            height={800}
-            sizes="(max-width: 991px) 100vw, 33vw"
-            className="img-fluid mx-auto"
-          />
+      
+          <img src={talkImage} alt={title || "Genug geredet"} className="img-fluid mx-auto" />
         </div>
 
         {/* CONTENT */}

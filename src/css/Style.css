@@ -1022,7 +1022,7 @@ header {
             content: '';
             position: absolute;
             left: 50%;
-            top: 52%;
+            top: 50%;
             transform: translate(-50%, -50%);
             width: 60%;
             height: 60%;
@@ -1176,14 +1176,19 @@ header {
         padding: 4px 15px 1px;
         border-radius: var(--radius-50);
     }
-    .purple_badge {
-        background-color: #8D5DF6;
+    
+    .green_badge {
+        background-color: #539A14;
     }
-    .red_badge {
-        background-color: #FF6C5C;
+    .yellow_badge {
+        background-color: #F3DC01;
+        color:var(--bs-black)
     }
     .blue_badge {
-        background-color: #36D6E7;
+        background-color: #222D78;
+    }
+    .pink_badge {
+        background-color: #F158A7;
     }
     .news_content {
         padding: 20px;
@@ -1196,8 +1201,11 @@ header {
         }
         h3 {
             font-weight: 700;
-            margin-bottom: 2px;
-            min-height: 70px;
+            /* margin-bottom: 2px; */
+            /* min-height: 60px; */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         p {
             min-height: 108px;
@@ -1238,11 +1246,13 @@ header {
 
 .talk_section {
     .img-col img {
+   
         transition: .4s all;
     }
     .img-col:hover img {
         transform: translateY(-15px);
     }
+
 }
 
 footer {
@@ -1463,7 +1473,7 @@ footer {
             margin: 0;
             font-size: var(--bs-fs20);
             line-height: 1.45;
-            color: #222;
+            color: var(--bs-textdarkgrey);
         }
     }
     .work-suggestions {
@@ -1559,20 +1569,20 @@ footer {
         background: #fff;
         border: 1px solid #ececec;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.08);
-        border-radius: 17px;
+        border-radius: var(--radius-30) var(--radius-30) var(--radius-30) 0;;
         z-index: 5;
         h4 {
             margin: 0 0 5px;
             padding-right: 26px;
             font-size: 15px;
             font-weight: 700;
-            color: #111;
+            /* color: var(--bs-black); */
         }
         p {
             margin: 0;
             font-size: 12px;
             line-height: 1.35;
-            color: #333;
+            color: var(--bs-textdarkgrey);
         }
         .work-card-number {
             width: 24px;
