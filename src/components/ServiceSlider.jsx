@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { homepageApiStructure } from "@/Apis/HomePage/apis";
 import AOS from "aos";
 import { ServiceCardsSkeleton } from "@/components/Skeleton/ServicesSkeleton";
+import { bindDefaultActive } from "@/helper/owlDefaultActive";
 
 const ServiceSlider = ({ paragraph }) => {
   const sliderRef = useRef(null);
@@ -97,6 +98,7 @@ const ServiceSlider = ({ paragraph }) => {
 
     let mounted = true;
     let cleanupHeightHandler = null;
+    let unbindDefaultActive = null;
 
     const initializeSlider = async () => {
       // Make jQuery available globally
@@ -156,6 +158,10 @@ const ServiceSlider = ({ paragraph }) => {
           });
         }
       );
+
+      // First visible card is highlighted by default
+      // (must be bound BEFORE owlCarousel() is called)
+      unbindDefaultActive = bindDefaultActive(slider);
 
       // ------------------------------------
       // Initialize Owl Carousel
@@ -310,6 +316,10 @@ const ServiceSlider = ({ paragraph }) => {
         cleanupHeightHandler
       ) {
         cleanupHeightHandler();
+      }
+
+      if (unbindDefaultActive) {
+        unbindDefaultActive();
       }
 
       if (

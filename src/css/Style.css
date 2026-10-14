@@ -547,6 +547,9 @@ form {
     padding-top: 40px;
     padding-bottom: 40px;
 }
+.pb_2{
+    padding-bottom: 40px;
+}
 .pt_pb_3 {
     padding-top: 60px;
     padding-bottom: 60px;
@@ -927,7 +930,16 @@ header {
             }
         }
     }
-    .item:hover {
+    .item {
+        transition: background-color 0.3s ease;
+        .item-tags span,
+        hr {
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+    }
+    /* "is-active" is toggled by src/helper/owlDefaultActive.js:
+       first visible card by default, or the hovered card. */
+    .item.is-active {
         background: var(--bs-themecolor);
         .item-tags span {
             background: var(--bs-white);
@@ -1456,20 +1468,41 @@ footer {
     }
     .work-suggestions {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 6px;
-        margin-top: 101px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-top: 50px;
         button {
-            height: 40px;
-            padding: 5px 3px;
+            position: relative;
+            height: 52px;
+            padding: 5px 8px;
             background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 9px;
-            font-size: 14px;
+            border: 1px solid #e6e6e6;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 500;
             line-height: 1.2;
-            color: #333;
+            color: #222;
             cursor: pointer;
-            transition: 0.2s;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+        button.active {
+            border-color: var(--bs-themecolor);
+        }
+        /* small white "x" badge on the selected suggestion */
+        .work-suggestion-close {
+            width: 18px;
+            height: 18px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #fff;
+            border: 1px solid #e6e6e6;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
         }
     }
     .work-search {
@@ -1519,41 +1552,43 @@ footer {
         background: #111;
     }
     .work-info-card {
-        width: 230px;
-        min-height: 72px;
+        width: 217.5px;
+        min-height: 103px;
         position: absolute;
-        padding: 20px;
+        padding: 16px;
         background: #fff;
+        border: 1px solid #ececec;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.08);
-        border-radius: var(--radius-30) var(--radius-30) var(--radius-30) 0;
+        border-radius: 17px;
         z-index: 5;
         h4 {
-            margin: 0 0 7px;
-            font-size: 17px;
-            font-weight: 500;
+            margin: 0 0 5px;
+            padding-right: 26px;
+            font-size: 15px;
+            font-weight: 700;
             color: #111;
         }
         p {
             margin: 0;
-            font-size: 14px;
+            font-size: 12px;
             line-height: 1.35;
             color: #333;
         }
         .work-card-number {
-            width: 30px;
-            height: 30px;
+            width: 24px;
+            height: 24px;
             position: absolute;
-            top: 13px;
-            right: 13px;
+            top: 10px;
+            right: 10px;
             line-height: 1;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
             background: var(--bs-themecolor);
-            font-size: 15px;
+            font-size: 12px;
             color: var(--bs-themetext);
-            font-weight: 500;
+            font-weight: 600;
         }
     }
     .work-card-1, .work-card-3, .work-card-5 {
@@ -1564,27 +1599,98 @@ footer {
     }
     .work-card-1 {
         top: 5%;
-        transform: rotate(-9deg);
+        --rot: -9deg;
+        --float-time: 5.2s;
+        --float-delay: 0s;
     }
     .work-card-2 {
         top: 6%;
-        transform: rotate(-14deg);
+        --rot: -14deg;
+        --float-time: 6s;
+        --float-delay: 0.4s;
     }
     .work-card-3 {
         top: 37%;
-        transform: rotate(6deg);
+        --rot: 6deg;
+        --float-time: 5.6s;
+        --float-delay: 0.8s;
     }
     .work-card-4 {
         top: 38%;
-        transform: rotate(-5deg);
+        --rot: -5deg;
+        --float-time: 6.4s;
+        --float-delay: 0.2s;
     }
     .work-card-5 {
         bottom: 10%;
-        transform: rotate(-8deg);
+        --rot: -8deg;
+        --float-time: 5.8s;
+        --float-delay: 0.6s;
     }
     .work-card-6 {
         bottom: 8%;
-        transform: rotate(7deg);
+        --rot: 7deg;
+        --float-time: 6.2s;
+        --float-delay: 1s;
+    }
+
+    /* =========================
+       Card animation
+       1) pop-in when the card appears (also replays when a
+          suggestion is selected / deselected)
+       2) gentle floating loop, each card with its own timing
+    ========================= */
+    .work-info-card {
+        --wiggle: 1.5deg;
+        --float-y: -10px;
+        transform: rotate(var(--rot, 0deg));
+        transition: box-shadow 0.3s ease;
+        animation:
+            workCardIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both,
+            workCardFloat var(--float-time, 5.5s) ease-in-out
+                calc(0.7s + var(--float-delay, 0s)) infinite;
+        will-change: transform;
+    }
+    .work-info-card:hover {
+        animation-play-state: running, paused;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+    }
+    .work-card-number {
+        animation: workBadgePulse 2.4s ease-in-out infinite;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .work-info-card,
+        .work-card-number {
+            animation: none;
+        }
+    }
+}
+
+@keyframes workCardIn {
+    0% {
+        opacity: 0;
+        transform: translateY(24px) scale(0.85) rotate(var(--rot, 0deg));
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(var(--rot, 0deg));
+    }
+}
+@keyframes workCardFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(var(--rot, 0deg));
+    }
+    50% {
+        transform: translateY(var(--float-y))
+            rotate(calc(var(--rot, 0deg) + var(--wiggle)));
+    }
+}
+@keyframes workBadgePulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.12);
     }
 }
 

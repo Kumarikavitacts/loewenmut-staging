@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 import { homepageApiStructure } from "@/Apis/HomePage/apis";
 import { ServiceCardsSkeleton } from "@/components/Skeleton/ServicesSkeleton";
+import { bindDefaultActive } from "@/helper/owlDefaultActive";
 const LiestungenSlider = () => {
   const sliderRef = useRef(null);
   const router = useRouter();
@@ -105,6 +106,7 @@ const LiestungenSlider = () => {
 
     let mounted = true;
     let resizeTimer;
+    let unbindDefaultActive = null;
 
     const initializeSlider = async () => {
       window.jQuery = $;
@@ -139,6 +141,10 @@ const LiestungenSlider = () => {
 
         slider.removeClass("owl-loaded");
       }
+
+      // First visible card is highlighted by default
+      // (must be bound BEFORE owlCarousel() is called)
+      unbindDefaultActive = bindDefaultActive(slider);
 
       // =================================================
       // OWL
@@ -356,6 +362,10 @@ const LiestungenSlider = () => {
       mounted = false;
 
       clearTimeout(resizeTimer);
+
+      if (unbindDefaultActive) {
+        unbindDefaultActive();
+      }
 
       $(window).off(
         "resize.leistungenSlider"

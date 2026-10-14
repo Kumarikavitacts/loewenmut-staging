@@ -8,6 +8,25 @@ import ScrollFillText from "@/components/ResuableComponents/ScrollFillText";
 import { truncateText } from "@/helper/TruncateString";
 
 const DEFAULT_NEWS_IMAGE = "/images/news-1.png";
+// -----------------------------------------
+// FORMAT DATE
+// -----------------------------------------
+
+const formatDate = (isoDate) => {
+  if (!isoDate) return "";
+
+  const d = new Date(isoDate);
+
+  if (isNaN(d.getTime())) {
+    return isoDate;
+  }
+
+  const day = String(d.getDate()).padStart(2, "0");
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const year = d.getFullYear();
+
+  return `${day}.${month}.${year}`;
+};
 
 const NewsCard = ({
   newsData = [],
@@ -113,7 +132,7 @@ const NewsCard = ({
                     {/* Date */}
                     {news?.date && (
                       <div className="news_date">
-                        {news.date}
+                        {formatDate(news.date) || ""  }
                       </div>
                     )}
 
@@ -137,7 +156,7 @@ const NewsCard = ({
                     {/* Read More */}
                     <div className="arrow_btn">
                       <span>
-                        Weiterlesen
+                        weiterlesen
                       </span>
 
                       <svg

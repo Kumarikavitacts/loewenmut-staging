@@ -11,25 +11,6 @@ import {
   getNewsPageHeading,
 } from "@/Apis/NewsPage/api";
 
-// -----------------------------------------
-// FORMAT DATE
-// -----------------------------------------
-
-const formatDate = (isoDate) => {
-  if (!isoDate) return "";
-
-  const d = new Date(isoDate);
-
-  if (isNaN(d.getTime())) {
-    return isoDate;
-  }
-
-  const day = String(d.getDate()).padStart(2, "0");
-  const month = String(d.getMonth() + 1).padStart(2, "0");
-  const year = d.getFullYear();
-
-  return `${day}.${month}.${year}`;
-};
 
 // -----------------------------------------
 // NEWS PER LOAD
@@ -143,9 +124,7 @@ const News = () => {
 
         description: item?.Text || "",
 
-        date: formatDate(
-          item?.Publikation
-        ),
+        date: item?.Publikation,
 
         image: item?.Bild?.url || "",
 
