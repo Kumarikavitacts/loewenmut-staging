@@ -37,16 +37,16 @@
     --bs-themesvg: #222633;
     --bs-lightgrey3:#E6E6E6;
     --bs-lineheight: 1.15;
-    --bs-fs100: 120px;
-    --bs-fs80: 70px;
-    --bs-fs60: 48px;
-    --bs-fs50: 40px;
-    --bs-fs40: 35px;
-    --bs-fs35: 30px;
-    --bs-fs30: 26px;
-    --bs-fs24: 20px;
-    --bs-fs22: 18px;
-    --bs-fs20: 16px;
+    --bs-fs100: 7.5rem;
+    --bs-fs80: 4.375rem;
+    --bs-fs60: 3rem;
+    --bs-fs50: 2.5rem;
+    --bs-fs40: 2.1875rem;
+    --bs-fs35: 1.875rem;
+    --bs-fs30: 1.625rem;
+    --bs-fs24: 1.25rem;
+    --bs-fs22: 1.125rem;
+    --bs-fs20: 1rem;
 }
 html, body {
     scroll-behavior: smooth;
@@ -273,7 +273,7 @@ form {
     }
     .form-control {
         width: 100%;
-        height: 50px;
+        min-height: 50px;
         color: var(--bs-black);
         border: 0;
         border-bottom: 1px solid #D9D9D9;
@@ -305,7 +305,7 @@ form {
         position: relative;
         padding-left: 35px;
         cursor: pointer;
-        line-height: 28px;
+        line-height: 1.75rem;
         display: inline-block;
         color: var(--bs-darkgrey);
         font-size: var(--bs-fs22);
@@ -1006,6 +1006,7 @@ header {
     justify-content: center;
     overflow: hidden;
     position: relative;
+    isolation: isolate; /* fixes Safari hiding children of overflow:hidden + border-radius */
     img.cursorPointer {
         position: absolute;
         top: 50%;
@@ -1027,7 +1028,7 @@ header {
         transform-origin: 50% 50%;
         text {
             fill: #111;
-            font-size: 15px;
+            font-size: 0.9375rem;
             font-weight: 400;
             letter-spacing: 0.5px;
             text-transform: uppercase;
@@ -1043,7 +1044,6 @@ header {
         position: relative;
         z-index: 2;
         svg, img {
-            content: '';
             position: absolute;
             left: 50%;
             top: 50%;
@@ -1100,7 +1100,7 @@ header {
         position: absolute;
         z-index: 2;
         right: -20px;
-        bottom: -100px;
+        bottom: -90px;
     }
 }
 
@@ -1233,7 +1233,7 @@ header {
             text-overflow: ellipsis;
         }
         p {
-            min-height: 108px;
+            min-height: 6.75rem;
             margin-bottom: 2px;
         }
         hr {
@@ -1457,7 +1457,7 @@ footer {
         justify-content: center;
     }
     .work-phone {
-        width: 420px;
+        width: min(100%, 420px);
         /* height: 610px; */
         background: #fff;
         border: 4px solid #d1d1d1;
@@ -1468,7 +1468,7 @@ footer {
         overflow: hidden;
     }
     .work-status-bar {
-        height: 46px;
+        min-height: 46px;
         padding: 14px 18px 0;
         display: flex;
         justify-content: space-between;
@@ -1480,7 +1480,7 @@ footer {
         display: flex;
         align-items: center;
         gap: 5px;
-        font-size: 9px;
+        font-size: 0.5625rem;
         color: #333;
     }
 
@@ -1489,7 +1489,7 @@ footer {
         text-align: center;
         h2 {
             margin: 40px 0 18px;
-            font-size: 23px;
+            font-size: 1.4375rem;
             line-height: 1.08;
             font-weight: 800;
             color: #222;
@@ -1508,12 +1508,12 @@ footer {
         margin-top: 50px;
         button {
             position: relative;
-            height: 52px;
+            min-height: 52px;
             padding: 5px 8px;
             background: #fff;
             border: 1px solid #e6e6e6;
             border-radius: 12px;
-            font-size: 16px;
+            font-size: 1rem;
             font-weight: 500;
             line-height: 1.2;
             color: #222;
@@ -1542,7 +1542,7 @@ footer {
     }
     .work-search {
         width: 100%;
-        height: 50px;
+        min-height: 50px;
         margin-top: 15px;
         padding-left: 16px;
         padding-right: 7px;
@@ -1556,7 +1556,7 @@ footer {
         border: 0;
         outline: none;
         background: transparent;
-        font-size: 16px;
+        font-size: 1rem;
         color: #333;
     }
     .work-search input::placeholder {
@@ -1570,7 +1570,7 @@ footer {
         border-radius: 50%;
         background: #222;
         color: white;
-        font-size: 14px;
+        font-size: 0.875rem;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1599,13 +1599,13 @@ footer {
         h4 {
             margin: 0 0 5px;
             padding-right: 26px;
-            font-size: 15px;
+            font-size: 0.9375rem;
             font-weight: 700;
             /* color: var(--bs-black); */
         }
         p {
             margin: 0;
-            font-size: 12px;
+            font-size: 0.75rem;
             line-height: 1.35;
             color: var(--bs-textdarkgrey);
         }
@@ -1621,7 +1621,7 @@ footer {
             justify-content: center;
             border-radius: 50%;
             background: var(--bs-themecolor);
-            font-size: 12px;
+            font-size: 0.75rem;
             color: var(--bs-themetext);
             font-weight: 600;
         }
@@ -2727,7 +2727,7 @@ footer {
  
       .contact-icon-placeholder {
         color: #242424;
-        font-size: 25px;
+        font-size: 1.5625rem;
         line-height: 1;
       }
     }
@@ -2735,8 +2735,8 @@ footer {
     /* // Content */
     .contact-info-content {
       color: #383838;
-      font-size: 14px;
-      line-height: 21px;
+      font-size: 0.875rem;
+      line-height: 1.3125rem;
     }
  
     .contact-info-link {
@@ -2782,8 +2782,9 @@ footer {
     align-items: center;
     justify-content: center;
     .status-header-icon {
-        width: 300px;
-        height: 300px;
+        width: min(100%, 300px);
+        height: auto;
+        aspect-ratio: 1 / 1;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -3002,17 +3003,17 @@ footer {
     .cky-title {
         color: var(--bs-themecolor) !important;
         font-family: var(--bs-roboto) !important;
-        font-size: 20px !important;
+        font-size: 1.25rem !important;
         font-weight: 700 !important;
     }
  
     .cky-notice-des p {
-        font-size: 15px !important;
+        font-size: 0.9375rem !important;
         font-weight: 300;
         font-family: var(--bs-roboto) !important;
  
         a {
-            font-size: 15px !important;
+            font-size: 0.9375rem !important;
             color: #212121 !important;
         }
     }
@@ -3023,7 +3024,7 @@ footer {
         text-decoration: underline;
         border: 0 !important;
         padding: 0;
-        font-size: 15px !important;
+        font-size: 0.9375rem !important;
         font-weight: 500 !important;
         font-family: var(--bs-roboto) !important;
         color: var(--bs-darkgrey) !important;
@@ -3036,7 +3037,7 @@ footer {
  
     button.cky-btn.cky-btn-accept {
         border: 0 !important;
-        font-size: 15px !important;
+        font-size: 0.9375rem !important;
         font-weight: 500 !important;
         font-family: var(--bs-roboto) !important;
         background: var(--bs-themecolor) !important;
@@ -3059,7 +3060,7 @@ footer {
     background: var(--bs-themecolor) !important;
     border: 0 !important;
     border-radius: 50px !important;
-    font-size: 15px !important;
+    font-size: 0.9375rem !important;
     font-weight: 500 !important;
 
 }
@@ -3086,7 +3087,7 @@ footer {
     h3{ 
         font-weight: 400;
         font-size: var(--bs-fs40);
-        line-height: 38px;
+        line-height: 2.375rem;
         letter-spacing: 0%;
     }
     p{
@@ -3107,7 +3108,7 @@ footer {
 .field-error {
     margin-top: 6px;
     color: #e53935;
-    font-size: 14px;
+    font-size: 0.875rem;
     line-height: 1.3;
 }
 

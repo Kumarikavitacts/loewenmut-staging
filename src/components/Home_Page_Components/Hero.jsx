@@ -127,10 +127,10 @@ const Hero = ({ assets, scrollToNext }) => {
       </section>
 
       <section
-        className="pb_2 feature_section"
+        className="pb_2 feature_section d-none d-md-block"
         data-aos="fade-up"
       >
-        <div className="container">
+        <div className="container ">
 
           <hr />
 

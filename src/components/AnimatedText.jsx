@@ -49,10 +49,10 @@ const AnimatedText = ({ text }) => {
   const theme = themeContext?.theme || DEFAULT_THEME;
 
   const themeImages = {
-    yellow: "/images/image-loewenmut-yellow.png",
-    blue: "/images/image-loewenmut-blue.png",
-    green: "/images/image-loewenmut-green.png",
-    pink: "/images/image-loewenmut-pink.png",
+    yellow: "/images/image-loewenmut-yellow_new.webp",
+    blue: "/images/image-loewenmut-blue_new.webp",
+    green: "/images/image-loewenmut-green_new.webp",
+    pink: "/images/image-loewenmut-pink_new.webp",
   };
 
   const talkImage = themeImages[theme] || themeImages[DEFAULT_THEME];
@@ -97,12 +97,16 @@ const AnimatedText = ({ text }) => {
   return (
     <>
       <span>
+        {/* Small pre-optimized WebP (~17 KB), served directly: no image
+            optimizer round-trip and no lazy-loading, so the logo always
+            shows, also on iPhones / zoomed displays. */}
         <Image
           src={talkImage}
           alt="talk image"
-          width={800}
-          height={800}
-          sizes="(max-width: 767px) 150px, 200px"
+          width={640}
+          height={640}
+          unoptimized
+          loading="eager"
         />
       </span>
 

@@ -84,6 +84,13 @@ export const metadata = {
     images: ["/images/website_image.png"],
   },
 };
+// Explicit viewport so phones use their real width. Zoom is NOT disabled,
+// so users who need large text / pinch-zoom keep full accessibility.
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
 const roboto = Roboto({
   variable: "--font-roboto",
   subsets: ["latin"],

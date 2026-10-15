@@ -1,23 +1,23 @@
 @media screen and (-webkit-min-device-pixel-ratio: 0) and (max-width: 1024px) {
     form {
         .form-control {
-            font-size: 16px;
+            font-size: 1rem;
         }
     }
 }
 
 @media (min-width: 1600px) {
     :root {
-        --bs-fs100: 140px;
-        --bs-fs80: 80px;
-        --bs-fs60: 58px;
-        --bs-fs50: 50px;
-        --bs-fs40: 40px;
-        --bs-fs35: 35px;
-        --bs-fs30: 30px;
-        --bs-fs24: 24px;
-        --bs-fs22: 22px;
-        --bs-fs20: 20px;
+        --bs-fs100: 8.75rem;
+        --bs-fs80: 5rem;
+        --bs-fs60: 3.625rem;
+        --bs-fs50: 3.125rem;
+        --bs-fs40: 2.5rem;
+        --bs-fs35: 2.1875rem;
+        --bs-fs30: 1.875rem;
+        --bs-fs24: 1.5rem;
+        --bs-fs22: 1.375rem;
+        --bs-fs20: 1.25rem;
         --content_width_small: 1300px;
         --content_width_smaller: 1000px;
     }
@@ -234,7 +234,7 @@
         .work-info-card {
             width: 280px;
             .work-card-number {
-                font-size: 18px;
+                font-size: 1.125rem;
             }
             h4 {
                 font-size: var(--bs-fs22);
@@ -401,19 +401,6 @@
 }
 
 @media (max-width: 1199.98px) {
-    :root {
-        --bs-fs100: 80px;
-        --bs-fs80: 56px;
-        --bs-fs70: 48px;
-        --bs-fs60: 42px;
-        --bs-fs50: 35px;
-        --bs-fs40: 32px;
-        --bs-fs35: 27px;
-        --bs-fs30: 23px;
-        --bs-fs24: 18px;
-        --bs-fs22: 16px;
-        --bs-fs20: 15px;
-    }
     [data-aos] {
         opacity: 1 !important;
         transform: none !important;
@@ -569,7 +556,7 @@ header {
                 font-family: var(--bs-urbanist);
                 color: var(--bs-textdarkgrey);
                 line-height: 1;
-                padding: 0.5rem 0 !important;
+                /* padding: 0.5rem 0 !important; */
                 position: relative;
                 transition: .4s all;
                 &:before {
@@ -681,7 +668,7 @@ header {
                 padding: 4px 10px;
                 margin: 3px;
                 margin-left: 0;
-                font-size: 14px;
+                font-size: 0.875rem;
             }
         }
     }
@@ -756,24 +743,24 @@ span.txt-008:before {
         .work-card-number {
             width: 20px;
 	        height: 20px;
-	        font-size: 10px;
+	        font-size: 0.625rem;
 	        line-height: 1;
 	        top: 8px;
 	        right: 8px;
         }
         p {
-            font-size: 12px;
+            font-size: 0.75rem;
         }
         h4 {
-            font-size: 13px;
+            font-size: 0.8125rem;
         	padding-right: 20px;
         }
     }
     .work-suggestions {
         gap: 10px;
         button {
-            height: 46px;
-            font-size: 13px;
+            min-height: 46px;
+            font-size: 0.8125rem;
         }
     }
     .work-phone {
@@ -834,15 +821,12 @@ span.txt-008:before {
             padding: 0 15px;
         }
         .contact-info-content {
-            font-size: 13px;
+            font-size: 0.8125rem;
         }
     }
 }
 
 @media (min-width: 700px) and (max-width: 991.98px) {
-    :root {
-        --bs-fs100: 65px;
-    }
     .hero_section {
         .hero_row {
             .hro_icon_1, .hro_icon_2 {
@@ -882,9 +866,6 @@ span.txt-008:before {
 }
 
 @media (min-width: 576px) and (max-width: 699.98px) {
-    :root {
-        --bs-fs100: 55px;
-    }
     .hero_section {
         .hero_row {
             .hro_icon_1, .hro_icon_2 {
@@ -908,7 +889,7 @@ span.txt-008:before {
         .hero_tech_text {
             .htt_left {
                 width: 60%;
-                font-size: 15px;
+                font-size: 0.9375rem;
                 img {
                     width: 80px;
                 }
@@ -1077,11 +1058,11 @@ span.txt-008:before {
             .project-image-info {
                 h3 {
                     font-size: var(--bs-fs30);
-                    line-height: 30px;
+                    line-height: 1.875rem;
                 }
                 p {
                     font-size: var(--bs-fs24);
-                    line-height: 24px;
+                    line-height: 1.5rem;
                 }
                 .project-logo-svg {
                     width: 60px;
@@ -1119,8 +1100,8 @@ span.txt-008:before {
             margin-bottom: 12px;
         }
         .contact-info-content {
-            font-size: 14px;
-            line-height: 20px;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
         }
     }
     .common_info_section {
@@ -1137,18 +1118,7 @@ span.txt-008:before {
 }
 
 @media (max-width: 575px) {
- :root {
-    --bs-fs100: 38px;
-    --bs-fs80: 32px;
-    --bs-fs70: 34px;
-    --bs-fs60: 30px;
-    --bs-fs50: 28px;
-    --bs-fs40: 24px;
-    --bs-fs35: 22px;
-    --bs-fs30: 20px;
-    --bs-fs24: 16px;
-}
-.container {
+ .container {
     padding-left: 20px;
     padding-right: 20px;
 }
@@ -1196,7 +1166,7 @@ header {
         h1 {
             span {
                 position: unset;
-                font-size: 14px;
+                font-size: 0.875rem;
                 justify-content: center;
                 img {
                     /* height: 10px; */
@@ -1224,7 +1194,7 @@ header {
         .htt_left {
             width: 100%;
             margin-top: 0;
-            font-size: 14px;
+            font-size: 0.875rem;
             img {
                 width: 70px;
             }
@@ -1261,7 +1231,7 @@ header {
         &::before {
             width: 21px;
             height: 21px;
-            font-size: 12px;
+            font-size: 0.75rem;
         }
     }
     .anim_circle {
@@ -1359,13 +1329,13 @@ footer {
         .project-image-info {
             h3 {
                 font-size: var(--bs-fs22);
-                line-height: 22px;
+                line-height: 1.375rem;
                 margin-bottom: 0 !important;
             }
 
             p {
                 font-size: var(--bs-fs20);
-                line-height: 18px;
+                line-height: 1.125rem;
             }
 
             .project-logo-svg {
@@ -1387,13 +1357,6 @@ footer {
 }
 
 @media (max-width: 375px) {
-    :root {
-        --bs-fs100: 32px;
-        --bs-fs80: 30px;
-        --bs-fs70: 32px;
-        --bs-fs60: 32px;
-        --bs-fs50: 30px;
-    }
     .hero_section {
         .hero_row {
             .hro_icon_1, .hro_icon_2 {
@@ -1422,11 +1385,11 @@ footer {
             .project-image-info {
                 h3 {
                     font-size: var(--bs-fs22);
-                    line-height: 20px;
+                    line-height: 1.25rem;
                 }
                 p {
                     font-size: var(--bs-fs20);
-                    line-height: 17px;
+                    line-height: 1.0625rem;
                 }
                 .project-logo-svg {
                     width: 42px;
@@ -1444,158 +1407,24 @@ footer {
  
 @media (max-width: 352px) {
     .cky-notice .cky-title {
-        font-size: 16px;
+        font-size: 1rem;
     }
  
     .cky-notice-des,
     .cky-btn {
-        font-size: 12px;
+        font-size: 0.75rem;
     }
 }
 
-
-/* -------------------------------------------------------
-
-   Responsive typography + iOS Safari text autosizing
-
-   Added overrides: keep type sizes fluid on mobile while
-
-   retaining sensible minimum and maximum font sizes.
-
--------------------------------------------------------- */
-
-html {
-
-    -webkit-text-size-adjust: 100%;
-
-    text-size-adjust: 100%;
-
-}
- 
-/* Tablet and mobile */
-
-@media (max-width: 1199.98px) {
-
-    :root {
-
-        --bs-fs100: clamp(42px, 7.5vw, 80px);
-
-        --bs-fs80:  clamp(36px, 6vw, 56px);
-
-        --bs-fs70:  clamp(34px, 5.5vw, 48px);
-
-        --bs-fs60:  clamp(30px, 4.8vw, 42px);
-
-        --bs-fs50:  clamp(28px, 4vw, 35px);
-
-        --bs-fs40:  clamp(25px, 3.4vw, 32px);
-
-        --bs-fs35:  clamp(22px, 3vw, 27px);
-
-        --bs-fs30:  clamp(20px, 2.6vw, 23px);
-
-        --bs-fs24:  clamp(16px, 2vw, 18px);
-
-        --bs-fs22:  clamp(15px, 1.8vw, 16px);
-
-        --bs-fs20:  clamp(14px, 1.6vw, 15px);
-
-    }
-
-}
- 
-/* Phones */
-
-@media (max-width: 575px) {
-
-    :root {
-
-        --bs-fs100: clamp(34px, 9vw, 42px);
-
-        --bs-fs80:  clamp(30px, 7.5vw, 36px);
-
-        --bs-fs70:  clamp(29px, 7vw, 34px);
-
-        --bs-fs60:  clamp(27px, 6.5vw, 32px);
-
-        --bs-fs50:  clamp(25px, 6vw, 30px);
-
-        --bs-fs40:  clamp(22px, 5vw, 26px);
-
-        --bs-fs35:  clamp(20px, 4.5vw, 23px);
-
-        --bs-fs30:  clamp(18px, 4.2vw, 21px);
-
-        --bs-fs24: clamp(17px, 3.8vw, 17px);
-
-        --bs-fs22: clamp(16px, 3.6vw, 16px);
-
-        --bs-fs20: clamp(15px, 3.4vw, 15px);
- 
-
-    }
- 
-    body {
-
-        font-size: 16px;
-
-    }
- 
-    p,
-
-    li {
-
-        font-size: 16px;
-
-        line-height: 1.5;
-
-    }
- 
-    input,
-
-    select,
-
-    textarea,
-
-    .form-control {
-
-        font-size: 16px;
-
-    }
-
-}
- 
-/* Very small phones */
-
-@media (max-width: 375px) {
-
-    :root {
-
-        --bs-fs100: clamp(32px, 8.8vw, 36px);
-
-        --bs-fs80:  clamp(28px, 7.5vw, 30px);
-
-        --bs-fs70:  clamp(27px, 7vw, 29px);
-
-        --bs-fs60:  clamp(26px, 6.8vw, 28px);
-
-        --bs-fs50:  clamp(24px, 6.2vw, 27px);
-
-        --bs-fs40:  clamp(21px, 5.5vw, 24px);
-
-        --bs-fs35:  clamp(19px, 5vw, 22px);
-
-        --bs-fs30:  clamp(18px, 4.8vw, 20px);
-
-    }
-
-}
-
-/* -------------------------------------------------------
-   Responsive typography + iOS Safari text autosizing
-   Added overrides: keep type sizes fluid on mobile while
-   retaining sensible minimum and maximum font sizes.
--------------------------------------------------------- */
+/* =======================================================
+   FLUID TYPOGRAPHY + LARGE-TEXT / LARGE-DISPLAY SAFETY
+   Single source of truth for font sizes below 1200px.
+   - All sizes are in rem, so they follow the user's
+     browser / phone font-size setting.
+   - clamp() keeps sizes fluid between a min and a max.
+   - Text wraps instead of overflowing when text is large
+     or the phone's "Display size / Display Zoom" is large.
+======================================================= */
 html {
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
@@ -1604,65 +1433,166 @@ html {
 /* Tablet and mobile */
 @media (max-width: 1199.98px) {
     :root {
-        --bs-fs100: clamp(42px, 7.5vw, 80px);
-        --bs-fs80:  clamp(36px, 6vw, 56px);
-        --bs-fs70:  clamp(34px, 5.5vw, 48px);
-        --bs-fs60:  clamp(30px, 4.8vw, 42px);
-        --bs-fs50:  clamp(28px, 4vw, 35px);
-        --bs-fs40:  clamp(25px, 3.4vw, 32px);
-        --bs-fs35:  clamp(22px, 3vw, 27px);
-        --bs-fs30:  clamp(20px, 2.6vw, 23px);
-        --bs-fs24:  clamp(16px, 2vw, 18px);
-        --bs-fs22:  clamp(15px, 1.8vw, 16px);
-        --bs-fs20:  clamp(14px, 1.6vw, 15px);
+        --bs-fs100: clamp(2.625rem, 7.5vw, 5rem);
+        --bs-fs80:  clamp(2.25rem, 6vw, 3.5rem);
+        --bs-fs70:  clamp(2.125rem, 5.5vw, 3rem);
+        --bs-fs60:  clamp(1.875rem, 4.8vw, 2.625rem);
+        --bs-fs50:  clamp(1.75rem, 4vw, 2.1875rem);
+        --bs-fs40:  clamp(1.5625rem, 3.4vw, 2rem);
+        --bs-fs35:  clamp(1.375rem, 3vw, 1.6875rem);
+        --bs-fs30:  clamp(1.25rem, 2.6vw, 1.4375rem);
+        --bs-fs24:  clamp(1rem, 2vw, 1.125rem);
+        --bs-fs22:  clamp(0.9375rem, 1.8vw, 1rem);
+        --bs-fs20:  clamp(0.875rem, 1.6vw, 0.9375rem);
     }
 }
 
 /* Phones */
 @media (max-width: 575px) {
     :root {
-        --bs-fs100: clamp(34px, 9vw, 42px);
-        --bs-fs80:  clamp(30px, 7.5vw, 36px);
-        --bs-fs70:  clamp(29px, 7vw, 34px);
-        --bs-fs60:  clamp(27px, 6.5vw, 32px);
-        --bs-fs50:  clamp(25px, 6vw, 30px);
-        --bs-fs40:  clamp(22px, 5vw, 26px);
-        --bs-fs35:  clamp(20px, 4.5vw, 23px);
-        --bs-fs30:  clamp(18px, 4.2vw, 21px);
-        --bs-fs24:  clamp(15px, 3.8vw, 17px);
-        --bs-fs22:  clamp(14px, 3.6vw, 16px);
-        --bs-fs20:  clamp(14px, 3.4vw, 15px);
+        --bs-fs100: clamp(2.125rem, 9vw, 2.625rem);
+        --bs-fs80:  clamp(1.875rem, 7.5vw, 2.25rem);
+        --bs-fs70:  clamp(1.8125rem, 7vw, 2.125rem);
+        --bs-fs60:  clamp(1.6875rem, 6.5vw, 2rem);
+        --bs-fs50:  clamp(1.5625rem, 6vw, 1.875rem);
+        --bs-fs40:  clamp(1.375rem, 5vw, 1.625rem);
+        --bs-fs35:  clamp(1.25rem, 4.5vw, 1.4375rem);
+        --bs-fs30:  clamp(1.125rem, 4.2vw, 1.3125rem);
+        --bs-fs24:  clamp(0.9375rem, 3.8vw, 1.0625rem);
+        --bs-fs22:  clamp(0.875rem, 3.6vw, 1rem);
+        --bs-fs20:  clamp(0.875rem, 3.4vw, 0.9375rem);
     }
 
     body {
-        font-size: 16px;
+        font-size: 1rem;
     }
 
     p,
     li {
-        font-size: 16px;
+        font-size: 1rem;
         line-height: 1.5;
     }
 
+    /* 1rem (>=16px) also stops iOS Safari zooming into inputs */
     input,
     select,
     textarea,
     .form-control {
-        font-size: 16px;
+        font-size: 1rem;
     }
 }
 
-/* Very small phones */
+/* Very small phones, or phones set to a large Display size */
 @media (max-width: 375px) {
     :root {
-        --bs-fs100: clamp(32px, 8.8vw, 36px);
-        --bs-fs80:  clamp(28px, 7.5vw, 30px);
-        --bs-fs70:  clamp(27px, 7vw, 29px);
-        --bs-fs60:  clamp(26px, 6.8vw, 28px);
-        --bs-fs50:  clamp(24px, 6.2vw, 27px);
-        --bs-fs40:  clamp(21px, 5.5vw, 24px);
-        --bs-fs35:  clamp(19px, 5vw, 22px);
-        --bs-fs30:  clamp(18px, 4.8vw, 20px);
+        --bs-fs100: clamp(2rem, 8.8vw, 2.25rem);
+        --bs-fs80:  clamp(1.75rem, 7.5vw, 1.875rem);
+        --bs-fs70:  clamp(1.6875rem, 7vw, 1.8125rem);
+        --bs-fs60:  clamp(1.625rem, 6.8vw, 1.75rem);
+        --bs-fs50:  clamp(1.5rem, 6.2vw, 1.6875rem);
+        --bs-fs40:  clamp(1.3125rem, 5.5vw, 1.5rem);
+        --bs-fs35:  clamp(1.1875rem, 5vw, 1.375rem);
+        --bs-fs30:  clamp(1.125rem, 4.8vw, 1.25rem);
     }
 }
 
+/* Extremely narrow (large Display size / split-screen) */
+@media (max-width: 340px) {
+    :root {
+        --bs-fs100: clamp(1.75rem, 8.5vw, 2rem);
+        --bs-fs80:  clamp(1.625rem, 8vw, 1.75rem);
+        --bs-fs70:  clamp(1.5625rem, 7.5vw, 1.6875rem);
+        --bs-fs60:  clamp(1.5rem, 7.2vw, 1.625rem);
+        --bs-fs50:  clamp(1.375rem, 6.8vw, 1.5rem);
+        --bs-fs40:  clamp(1.25rem, 6vw, 1.375rem);
+    }
+}
+
+/* Never let long words push the layout sideways */
+p,
+li,
+label,
+a {
+    overflow-wrap: break-word;
+}
+
+@media (max-width: 991.98px) {
+    h1, h2, h3, h4, h5, h6 {
+        overflow-wrap: anywhere;
+        hyphens: auto;
+    }
+}
+
+/* News cards: let titles wrap instead of being cut off with "..." */
+@media (max-width: 767.98px) {
+    .news_section .news_content h3 {
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+    }
+    .news_section .news_content p {
+        min-height: 0;
+    }
+}
+
+
+/* =======================================================
+   COMPACT COOKIE BANNER for small / zoomed phones
+   iPhone "Display Zoom: Larger Text" and small Android phones
+   report only ~320px x ~570px. The CookieYes banner then
+   covered almost half of the screen and hid the page.
+   Applies to narrow screens, and to short phone screens.
+   (!important is needed: CookieYes injects its own CSS.)
+======================================================= */
+@media (max-width: 360px), (max-height: 640px) and (max-width: 480px) {
+    .cky-consent-container .cky-consent-bar {
+        padding: 10px 0 !important;
+        max-height: 58vh;
+        max-height: 58dvh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .cky-consent-bar .cky-title {
+        font-size: 1rem !important;
+        line-height: 1.25 !important;
+        margin-bottom: 6px !important;
+    }
+
+    .cky-consent-bar .cky-notice-des,
+    .cky-consent-bar .cky-notice-des p,
+    .cky-consent-bar .cky-notice-des p a {
+        font-size: 0.8125rem !important;
+        line-height: 1.4 !important;
+    }
+
+    .cky-consent-bar .cky-notice-des p {
+        margin-bottom: 0 !important;
+    }
+
+    .cky-notice-btn-wrapper {
+        margin-top: 8px !important;
+        gap: 2px !important;
+    }
+
+    .cky-notice-btn-wrapper button.cky-btn.cky-btn-accept {
+        font-size: 0.875rem !important;
+        line-height: 1.9 !important;
+        padding-top: 4px !important;
+        padding-bottom: 4px !important;
+    }
+
+    .cky-notice-btn-wrapper button.cky-btn.cky-btn-customize {
+        font-size: 0.8125rem !important;
+        padding: 2px 0 !important;
+    }
+}
+
+
+/* Phones: leave room under the project card for the round badge that
+   overhangs its bottom edge, so it no longer covers the next heading. */
+@media (max-width: 575px) {
+    .project_section .border-wrapper {
+        margin-bottom: 4rem;
+    }
+}
