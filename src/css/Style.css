@@ -1860,7 +1860,11 @@ footer {
         }
     }
 }
-
+.strapi_rich_text {
+  p{
+    font-size: var(--bs-fs30);
+  }
+}
 .service-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1901,7 +1905,7 @@ footer {
 .content_emo_section {
     .sec-content {
         p {
-            font-size: var(--bs-fs40);
+            font-size: var(--bs-fs35);
             font-weight: 400;
             /* line-height: 2.25rem; */
         }

@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useEffect, useRef } from "react";
@@ -6,371 +7,300 @@ import $ from "jquery";
 import ScrollFillText from "../ResuableComponents/ScrollFillText";
 
 const ProjectCarousel = ({
-    title,
-    description,
-    description2,
-    project = [],
-    button,
+  title,
+  description,
+  description2,
+  project = [],
+  button,
 }) => {
-    const carouselRef = useRef(null);
-    const router = useRouter();
-    const videoRef = useRef(null);
-    useEffect(() => {
-        window.$ = $;
-        window.jQuery = $;
+  const carouselRef = useRef(null);
+  const router = useRouter();
 
-        let $carousel = null;
+  useEffect(() => {
+    window.$ = $;
+    window.jQuery = $;
 
-        const handleCarouselClick = (event) => {
-            /*
-             * Find the clicked project card.
-             *
-             * This works for both:
-             * - original React cards
-             * - Owl Carousel cloned cards
-             */
-            const card = event.target.closest(
-                ".project-carousel-card-link"
-            );
+    let $carousel = null;
 
-            if (!card) return;
+    // Handle project card clicks, including Owl Carousel clones.
+    const handleCarouselClick = (event) => {
+      const card = event.target.closest(
+        ".project-carousel-card-link"
+      );
 
-            const href = card.getAttribute("data-href");
-            const target = card.getAttribute("data-target");
-            const isInternal = card.getAttribute("data-internal") === "true";
+      if (!card) return;
 
-            if (!href || href === "#") {
-                return;
-            }
+      const href = card.getAttribute("data-href");
+      const target = card.getAttribute("data-target");
+      const isInternal =
+        card.getAttribute("data-internal") === "true";
 
-            /*
-             * Prevent Owl Carousel from handling
-             * this click as a drag/click conflict.
-             */
-            event.preventDefault();
-            event.stopPropagation();
+      if (!href || href === "#") return;
 
-            if (target === "_blank") {
-                // External website (Link_zur_Website) with
-                // Linkziel === "Extern" -> always a new tab.
-                window.open(
-                    href,
-                    "_blank",
-                    "noopener,noreferrer"
-                );
-            } else if (isInternal) {
-                // Internal case page (Detailseite === "Ja" + Slug)
-                // -> client-side navigation, no full page reload.
-                router.push(href);
-            } else {
-                // External website without Linkziel === "Extern"
-                // -> same tab, but still a real site, so a full
-                // navigation is correct here.
-                window.location.href = href;
-            }
-        };
+      event.preventDefault();
+      event.stopPropagation();
 
-        import("owl.carousel/dist/owl.carousel.min.js")
-            .then(() => {
-                if (!carouselRef.current) return;
+      if (target === "_blank") {
+        window.open(href, "_blank", "noopener,noreferrer");
+      } else if (isInternal) {
+        router.push(href);
+      } else {
+        window.location.href = href;
+      }
+    };
 
-                $carousel = $(carouselRef.current);
+    // Play videos muted when hovering over a card.
+    const handleVideoMouseEnter = function () {
+      const video = this.querySelector("video");
 
-                if (
-                    typeof $carousel.owlCarousel !==
-                    "function"
-                ) {
-                    console.error(
-                        "Owl Carousel is not loaded correctly."
-                    );
-                    return;
-                }
+      if (!video) return;
 
-                /*
-                 * Delegated click handler.
-                 *
-                 * IMPORTANT:
-                 * This is attached to the carousel parent,
-                 * so it also catches clicks on Owl clones.
-                 */
-                $carousel.on(
-                    "click.projectCarousel",
-                    ".project-carousel-card-link",
-                    handleCarouselClick
-                );
+      video.muted = true;
+      video.defaultMuted = true;
+      video.playsInline = true;
 
-                $carousel.owlCarousel({
-                    loop: true,
+      const playPromise = video.play();
 
-                    autoplay: true,
-                    autoplayTimeout: 3000,
-                    autoplayHoverPause: true,
+      if (playPromise !== undefined) {
+        playPromise.catch((error) => {
+          console.warn("Project video could not play:", error);
+        });
+      }
+    };
 
-                    smartSpeed: 800,
+    // Pause and reset the video when leaving a card.
+    const handleVideoMouseLeave = function () {
+      const video = this.querySelector("video");
 
-                    mouseDrag: true,
-                    touchDrag: true,
-                    pullDrag: true,
+      if (!video) return;
 
-                    nav: false,
-                    dots: false,
-                    rewind: false,
+      video.pause();
 
-                    margin: 16,
+      try {
+        video.currentTime = 0;
+      } catch {
+        // The video may not have loaded enough to seek yet.
+      }
+    };
 
-                    responsive: {
-                        0: {
-                            items: 1.2,
-                            margin: 12,
-                        },
+    import("owl.carousel/dist/owl.carousel.min.js")
+      .then(() => {
+        if (!carouselRef.current) return;
 
-                        576: {
-                            items: 1.8,
-                            margin: 16,
-                        },
+        $carousel = $(carouselRef.current);
 
-                        768: {
-                            items: 2.3,
-                            margin: 16,
-                        },
+        if (typeof $carousel.owlCarousel !== "function") {
+          console.error("Owl Carousel is not loaded correctly.");
+          return;
+        }
 
-                        992: {
-                            items: 3.2,
-                            margin: 16,
-                        },
+        // Delegated events work for original cards and cloned cards.
+        $carousel.on(
+          "click.projectCarousel",
+          ".project-carousel-card-link",
+          handleCarouselClick
+        );
 
-                        1200: {
-                            items: 4,
-                            margin: 16,
-                        },
+        $carousel.on(
+          "mouseenter.projectCarousel",
+          ".project-carousel-card",
+          handleVideoMouseEnter
+        );
 
-                        1400: {
-                            items: 4.5,
-                            margin: 16,
-                        },
-                    },
-                });
-            })
-            .catch((error) => {
-                console.error(
-                    "Failed to load Owl Carousel:",
-                    error
-                );
-            });
+        $carousel.on(
+          "mouseleave.projectCarousel",
+          ".project-carousel-card",
+          handleVideoMouseLeave
+        );
 
-        return () => {
-            if ($carousel) {
-                /*
-                 * Remove delegated click handler
-                 */
-                $carousel.off(
-                    "click.projectCarousel",
-                    ".project-carousel-card-link",
-                    handleCarouselClick
-                );
+        $carousel.owlCarousel({
+          loop: true,
+          autoplay: true,
+          autoplayTimeout: 3000,
+          autoplayHoverPause: true,
+          smartSpeed: 800,
+          mouseDrag: true,
+          touchDrag: true,
+          pullDrag: true,
+          nav: false,
+          dots: false,
+          rewind: false,
+          margin: 16,
 
-                /*
-                 * Destroy Owl Carousel
-                 */
-                if (
-                    $carousel.hasClass("owl-loaded")
-                ) {
-                    $carousel.trigger(
-                        "destroy.owl.carousel"
-                    );
-                }
-            }
-        };
-    }, []);
+          responsive: {
+            0: {
+              items: 1.2,
+              margin: 12,
+            },
+            576: {
+              items: 1.8,
+              margin: 16,
+            },
+            768: {
+              items: 2.3,
+              margin: 16,
+            },
+            992: {
+              items: 3.2,
+              margin: 16,
+            },
+            1200: {
+              items: 4,
+              margin: 16,
+            },
+            1400: {
+              items: 4.5,
+              margin: 16,
+            },
+          },
+        });
+      })
+      .catch((error) => {
+        console.error("Failed to load Owl Carousel:", error);
+      });
 
-    return (
-        <div className="container">
+    return () => {
+      if (!$carousel) return;
 
-            {/* =========================
-                HEADING
-            ========================== */}
-            <div className="row">
-                <div className="col-12 col-lg-8 mx-auto">
-                    <div className="project-carousel-heading">
+      $carousel.off(".projectCarousel");
 
-                        <h2 className="mb-3">
-                            <ScrollFillText
-                                html={title}
-                                className="Agentur_fill_title"
-                                startColor="var(--bs-textdarkgrey)"
-                                fillColor="var(--bs-textdarkgrey)"
-                            />
-                        </h2>
+      // Pause videos before destroying the carousel.
+      $carousel.find("video").each(function () {
+        this.pause();
+      });
 
-                        {description && (
-                            <p className="text-dark mb-4 fw-regular">
-                                {description}
-                            </p>
-                        )}
+      if ($carousel.hasClass("owl-loaded")) {
+        $carousel.trigger("destroy.owl.carousel");
+      }
+    };
+  }, [router]);
 
-                    </div>
-                </div>
-            </div>
+  return (
+    <div className="container">
+      {/* HEADING */}
+      <div className="row">
+        <div className="col-12 col-lg-8 mx-auto">
+          <div className="project-carousel-heading">
+            <h2 className="mb-3">
+              <ScrollFillText
+                html={title}
+                className="Agentur_fill_title"
+                startColor="var(--bs-textdarkgrey)"
+                fillColor="var(--bs-textdarkgrey)"
+              />
+            </h2>
 
-            {/* =========================
-                CAROUSEL
-            ========================== */}
-            <div
-                ref={carouselRef}
-                className="owl-carousel project-carousel"
-            >
-                {project.map((item, index) => {
-
-                    /*
-                     * INTERNAL DETAIL PAGE
-                     */
-                    const isInternal =
-                        item?.detailseite === "Ja" &&
-                        Boolean(item?.slug);
-
-                    /*
-                     * EXTERNAL WEBSITE
-                     */
-                    const isExternal =
-                        !isInternal &&
-                        Boolean(item?.websiteLink);
-
-                    /*
-                     * Determine URL
-                     */
-                    const href = isInternal
-                        ? `/insights/${item.slug}`
-                        : item?.websiteLink || "#";
-
-                    /*
-                     * External link should open
-                     * in a new tab.
-                     */
-                    const openInNewTab =
-                        isExternal &&
-                        item?.linkziel === "Extern";
-
-                    return (
-                        <div
-                            className="project-carousel-item"
-                            key={
-                                item?.id ||
-                                item?.documentId ||
-                                index
-                            }
-                        >
-
-                            {/* =========================
-                                CLICKABLE CARD
-                            ========================== */}
-                            <a
-                                href={href}
-                                data-href={href}
-                                data-internal={isInternal}
-                                data-target={
-                                    openInNewTab
-                                        ? "_blank"
-                                        : "_self"
-                                }
-                                className="project-carousel-card-link"
-                            >
-
-                                <div
-                                    className="project-carousel-card position-relative overflow-hidden d-flex align-items-center justify-content-center"
-                                    style={{
-                                        backgroundColor:
-                                            item?.bgColor,
-                                    }}
-                                >
-
-                                    {/* =========================
-                                        IMAGE / VIDEO
-                                    ========================== */}
-                                    {item?.isVideo ? (
-                                        <video
-                                            src={item?.video}
-                                            poster={item?.poster || undefined}
-                                            muted
-                                            loop
-                                            playsInline
-                                            preload="metadata"
-                                            onMouseEnter={(e) => {
-                                                e.currentTarget.play().catch(() => { });
-                                            }}
-                                            onMouseLeave={(e) => {
-                                                e.currentTarget.pause();
-                                                e.currentTarget.currentTime = 0;
-                                            }}
-                                            className="project-carousel-image position-absolute top-0 start-0 w-100 h-100"
-                                        />
-                                    ) : (
-                                        item?.image && (
-                                            <img
-                                                src={item.image}
-                                                alt={
-                                                    item?.title ||
-                                                    ""
-                                                }
-                                                className="project-carousel-image position-absolute top-0 start-0 w-100 h-100"
-                                            />
-                                        )
-                                    )}
-
-                                    {/* =========================
-                                        CENTER LOGO
-                                    ========================== */}
-                                    {item?.logo && (
-                                        <div className="project-carousel-logo-wrapper position-relative d-flex align-items-center justify-content-center">
-
-                                            <img
-                                                src={item.logo}
-                                                alt={
-                                                    item?.title ||
-                                                    ""
-                                                }
-                                                className="project-carousel-logo img-fluid"
-                                            />
-
-                                        </div>
-                                    )}
-
-                                </div>
-
-                            </a>
-                        </div>
-                    );
-                })}
-            </div>
-
-            {/* =========================
-                DESCRIPTION
-            ========================== */}
-            <div className="row mt-4">
-                <div className="col-12 col-lg-8 mx-auto project-carousel-heading">
-
-                    {description2 && (
-                        <p className="text-dark fw-regular">
-                            {description2}
-                        </p>
-                    )}
-
-                    <a
-                        href="/insights"
-                        className="button theme_btn"
-                    >
-                        {button}
-
-                        <img
-                            src="/images/btn-arrow.svg"
-                            alt="button arrow"
-                        />
-                    </a>
-
-                </div>
-            </div>
-
+            {description && (
+              <p className="text-dark mb-4 fw-regular">
+                {description}
+              </p>
+            )}
+          </div>
         </div>
-    );
+      </div>
+
+      {/* CAROUSEL */}
+      <div
+        ref={carouselRef}
+        className="owl-carousel project-carousel"
+      >
+        {project.map((item, index) => {
+          const isInternal =
+            item?.detailseite === "Ja" && Boolean(item?.slug);
+
+          const isExternal =
+            !isInternal && Boolean(item?.websiteLink);
+
+          const href = isInternal
+            ? `/insights/${item.slug}`
+            : item?.websiteLink || "#";
+
+          const openInNewTab =
+            isExternal && item?.linkziel === "Extern";
+
+          // Support either an explicit boolean or a video URL.
+          const videoUrl = item?.video || "";
+          const isVideo = Boolean(item?.isVideo && videoUrl);
+
+          return (
+            <div
+              className="project-carousel-item"
+              key={item?.id || item?.documentId || index}
+            >
+              <a
+                href={href}
+                data-href={href}
+                data-internal={isInternal}
+                data-target={openInNewTab ? "_blank" : "_self"}
+                className="project-carousel-card-link"
+              >
+                <div
+                  className="project-carousel-card position-relative overflow-hidden d-flex align-items-center justify-content-center"
+                  style={{
+                    backgroundColor: item?.bgColor,
+                  }}
+                >
+                  {/* IMAGE / VIDEO */}
+                  {isVideo ? (
+                    <video
+                      src={videoUrl}
+                      poster={item?.poster || undefined}
+                      muted
+                      defaultMuted
+                      loop
+                      playsInline
+                      preload="auto"
+                      className="project-carousel-image position-absolute top-0 start-0 w-100 h-100"
+                      style={{
+                        objectFit: "cover",
+                        pointerEvents: "none",
+                      }}
+                    />
+                  ) : (
+                    item?.image && (
+                      <img
+                        src={item.image}
+                        alt={item?.title || ""}
+                        className="project-carousel-image position-absolute top-0 start-0 w-100 h-100"
+                        style={{ objectFit: "cover" }}
+                      />
+                    )
+                  )}
+
+                  {/* CENTER LOGO */}
+                  {item?.logo && (
+                    <div className="project-carousel-logo-wrapper position-relative d-flex align-items-center justify-content-center">
+                      <img
+                        src={item.logo}
+                        alt={item?.title || ""}
+                        className="project-carousel-logo img-fluid"
+                      />
+                    </div>
+                  )}
+                </div>
+              </a>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* DESCRIPTION */}
+      <div className="row mt-4">
+        <div className="col-12 col-lg-8 mx-auto project-carousel-heading">
+          {description2 && (
+            <p className="text-dark fw-regular">
+              {description2}
+            </p>
+          )}
+
+          <a href="/insights" className="button theme_btn">
+            {button}
+            <img src="/images/btn-arrow.svg" alt="button arrow" />
+          </a>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default ProjectCarousel;

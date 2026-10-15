@@ -57,23 +57,40 @@ function WorkSection() {
   const hasMatch = Boolean(message.trim() && matchedCard);
 
   // Click a suggestion to select it; click the active one again to deselect.
-  const handleSuggestionClick = (item) => {
-    setMessage((prev) =>
-      prev.trim().toLowerCase() === item.toLowerCase() ? "" : item
-    );
-  };
 
-  const handleInputChange = (e) => {
-    setMessage(e.target.value);
-  };
+const handleSuggestionClick = (item) => {
+  const isDeselecting =
+    message.trim().toLowerCase() === item.toLowerCase();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  setMessage(isDeselecting ? "" : item);
 
-  const handleClear = () => {
-    setMessage("");
-  };
+  // Scroll only on mobile devices
+  if (window.innerWidth <= 767 && !isDeselecting) {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const section = sectionRef.current;
+        if (!section) return;
+
+        const card = Array.from(
+          section.querySelectorAll(".work-info-card")
+        ).find(
+          (el) =>
+            el.querySelector("h4")?.textContent
+              .trim()
+              .toLowerCase() === item.trim().toLowerCase()
+        );
+
+        if (card) {
+          card.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+        }
+      });
+    });
+  }
+};
+
 
   // Play the "cards drop in" animation every time the section scrolls into
   // view, and reset it when the section leaves the screen so it can replay.
