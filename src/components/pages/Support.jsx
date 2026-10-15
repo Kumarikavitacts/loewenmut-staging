@@ -77,8 +77,8 @@ const Support = ({ data }) => {
 
                 <h2 className="mb-3">{Text?.Titel}</h2>
 
-                <p className="mb-2">{Text?.Text}</p>
-
+                <p className="mb-2 pb_2">{Text?.Text}</p>
+           
                 <SupportForm />
               </div>
             </div>

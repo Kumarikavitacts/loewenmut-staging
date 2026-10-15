@@ -58,7 +58,7 @@ body {
     color: var(--bs-textdarkgrey);
     font-size: var(--bs-fs24);
     font-weight: 300;
-    line-height: 1.65;
+    line-height: 1.31;
     overflow-x: hidden;
 }
 body.body_overflow {
@@ -547,6 +547,9 @@ form {
     padding-top: 40px;
     padding-bottom: 40px;
 }
+.pb_1{
+    padding-bottom: 20px;
+}
 .pb_2{
     padding-bottom: 40px;
 }
@@ -828,6 +831,9 @@ header {
     }
 }
 .inner_hero_section {
+    .victory-icon, .rolling-eyes {
+        position: absolute;
+    }
     .rolling-eyes {
         display: inline-block;
         svg {
@@ -1035,6 +1041,7 @@ header {
         border-radius: 50%;
         border: 1px solid #aaa;
         position: relative;
+        z-index: 2;
         svg, img {
             content: '';
             position: absolute;
@@ -1046,6 +1053,7 @@ header {
             object-fit: contain;
             /* background: var(--bs-themecolor); */
             border-radius: 50%;
+        z-index: 2;
         }
     }
 }
@@ -1880,6 +1888,7 @@ footer {
         p {
             font-size: var(--bs-fs40);
             font-weight: 400;
+            /* line-height: 2.25rem; */
         }
         h3 {
             font-weight: 400;
@@ -2475,7 +2484,7 @@ footer {
     padding-bottom: 8px;
 }
 .intro-text {
-    font-size: var(--bs-fs40);
+    font-size: var(--bs-fs35);
     font-weight: 400;
     text-align: right;
 }
@@ -2545,7 +2554,7 @@ footer {
 }
 .article_in_detail {
     p {
-        font-size: var(--bs-fs30);
+        font-size: var(--bs-fs26);
         font-weight: 400;
     }
 }

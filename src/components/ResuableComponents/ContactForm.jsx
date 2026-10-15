@@ -35,25 +35,29 @@ const ERROR_DELAY = 600;
 
 // One validator per required field. Returns "" when valid,
 // otherwise the error message shown below the input.
-const validators = {
-  vorname: (value) => (value.trim() ? "" : REQUIRED_MESSAGE),
 
-  nachname: (value) => (value.trim() ? "" : REQUIRED_MESSAGE),
+const validators = {
+  vorname: (value) =>
+    value.trim() ? "" : REQUIRED_MESSAGE,
+
+  nachname: (value) =>
+    value.trim() ? "" : REQUIRED_MESSAGE,
 
   email: (value) => {
     const trimmed = value.trim();
+
     if (!trimmed) return REQUIRED_MESSAGE;
     if (!EMAIL_REGEX.test(trimmed)) return EMAIL_ERROR_MESSAGE;
+
     return "";
   },
 
-  telefon: (value) => {
-    const trimmed = value.trim();
-    if (!trimmed) return REQUIRED_MESSAGE;
-    if (!PHONE_REGEX.test(trimmed)) return PHONE_ERROR_MESSAGE;
-    return "";
-  },
+  nachricht: (value) =>
+    value.trim() ? "" : REQUIRED_MESSAGE,
 };
+
+
+
 
 const REQUIRED_FIELDS = Object.keys(validators);
 
@@ -254,7 +258,7 @@ const ContactForm = () => {
     // error messages below each input instead
     <form ref={formRef} onSubmit={handleSubmit} noValidate>
       <div className="row">
-        <div className="col-12 form-group">
+        <div className="col-12 form-group pb_2">
           <div className="inline_radio_btns">
             {strategies.map((strategy) => (
               <div className="radio_item" key={strategy.id}>
@@ -327,7 +331,7 @@ const ContactForm = () => {
           <input
             type="tel"
             className="form-control"
-            placeholder="Telefon*"
+            placeholder="Telefon"
             name="telefon"
             value={formData.telefon}
             onChange={handleChange}
@@ -336,7 +340,6 @@ const ContactForm = () => {
             style={getInputStyle("telefon")}
             aria-invalid={errors.telefon ? "true" : "false"}
             aria-describedby={errors.telefon ? "telefon-error" : undefined}
-            required
           />
           {renderError("telefon")}
         </div>
@@ -352,16 +355,26 @@ const ContactForm = () => {
           />
         </div>
 
+
         <div className="col-sm-12 form-group">
           <textarea
             rows={5}
             className="form-control"
-            placeholder="Nachricht"
+            placeholder="Nachricht*"
             name="nachricht"
             value={formData.nachricht}
             onChange={handleChange}
+            onBlur={handleBlur}
+            style={getInputStyle("nachricht")}
+            aria-invalid={errors.nachricht ? "true" : "false"}
+            aria-describedby={
+              errors.nachricht ? "nachricht-error" : undefined
+            }
+            required
           />
+          {renderError("nachricht")}
         </div>
+
 
         <div className="col-md-6 form-group">
           <TurnstileWidget ref={turnstileRef} onVerify={setTurnstileToken} />
@@ -370,7 +383,7 @@ const ContactForm = () => {
         <div className="col-md-6 form-group">
           <div className="form_btn d-flex justify-content-md-end">
             <button type="submit" className="button theme_btn" disabled={loading}>
-              {loading ? "Senden..." : "Senden"}
+              {loading ? "senden..." : "senden"}
               <img src="/images/btn-arrow.svg" alt="button arrow" />
             </button>
           </div>

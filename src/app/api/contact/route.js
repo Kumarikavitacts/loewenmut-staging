@@ -738,7 +738,7 @@ export async function POST(request) {
      * -------------------------------------------------------
      */
 
-    if (!vorname || !nachname || !email || !telefon) {
+    if (!vorname || !nachname || !email || !nachricht ) {
       return NextResponse.json(
         {
           success: false,

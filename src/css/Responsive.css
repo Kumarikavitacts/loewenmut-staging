@@ -1128,6 +1128,12 @@ span.txt-008:before {
             gap: 2rem;
         }
     }
+    .news_section {
+        .arrow_btn svg {
+            width: 50px;
+            height: 50px;
+        }
+    }
 }
 
 @media (max-width: 575px) {
@@ -1520,11 +1526,12 @@ html {
 
         --bs-fs30:  clamp(18px, 4.2vw, 21px);
 
-        --bs-fs24:  clamp(15px, 3.8vw, 17px);
+        --bs-fs24: clamp(17px, 3.8vw, 17px);
 
-        --bs-fs22:  clamp(14px, 3.6vw, 16px);
+        --bs-fs22: clamp(16px, 3.6vw, 16px);
 
-        --bs-fs20:  clamp(14px, 3.4vw, 15px);
+        --bs-fs20: clamp(15px, 3.4vw, 15px);
+ 
 
     }
  

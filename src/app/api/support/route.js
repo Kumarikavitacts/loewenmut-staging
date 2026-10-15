@@ -565,7 +565,7 @@ async function sendSupportEmails({
             <tr>
 
               <td>
-                Supportanfrage:
+                Betreff:
               </td>
 
               <td>
@@ -578,7 +578,7 @@ async function sendSupportEmails({
             <tr>
             
               <td>
-                Nachricht:
+                Meine Supportanfrage:
               </td>
               <td>
                 ${escapeHtml(nachricht || "-")}
@@ -795,8 +795,7 @@ export async function POST(request) {
       !vorname ||
       !nachname ||
       !email ||
-      !telefon ||
-      !supportanfrage
+      !nachricht
     ) {
       return fail(
         "Bitte füllen Sie alle erforderlichen Felder aus.",

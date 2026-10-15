@@ -27,7 +27,7 @@ const InnerBnanner = ({
             {renderHtmlText(title)}
           </div>
 
-          <h1>{renderHtmlText(heading)}</h1>
+          <h1 className="text-center">{renderHtmlText(heading)}</h1>
 
           <p>{renderHtmlText(description)}</p>
 
