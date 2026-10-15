@@ -8,15 +8,142 @@ const mapContainerStyle = {
   height: "650px",
 };
 
-const center = { lat: 47.5163008, lng: 8.6445932 };
+const center = { lat: 47.50419646376239, lng: 8.763679384240772 };
 
 const grayStyles = [
-  { featureType: "administrative", elementType: "labels.text.fill", stylers: [{ color: "#686868" }] },
-  { featureType: "landscape", elementType: "all", stylers: [{ color: "#f2f2f2" }] },
-  { featureType: "poi", elementType: "all", stylers: [{ visibility: "off" }] },
-  { featureType: "road", elementType: "all", stylers: [{ saturation: -100 }, { lightness: 45 }] },
-  { featureType: "water", elementType: "all", stylers: [{ color: "#b7e4f4" }, { visibility: "on" }] }
+
+  {
+
+    "elementType": "labels",
+
+    "stylers": [{"visibility": "on"},{"saturation":-100},{"lightness":50}]
+
+  },
+
+  {
+
+    "featureType": "administrative.land_parcel",
+
+    "stylers": [
+
+      {
+
+        "visibility": "off"
+
+      }
+
+    ]
+
+  },
+
+  {
+
+    "featureType": "administrative.neighborhood",
+
+    "stylers": [
+
+      {
+
+        "visibility": "off"
+
+      }
+
+    ]
+
+  },
+
+  {
+
+    "featureType": "landscape",
+
+    "elementType": "geometry.fill",
+
+    "stylers": [
+
+      {
+
+        "color": "#fefbe3"
+
+      }
+
+    ]
+
+  },
+
+  {
+
+    "featureType": "poi.park",
+
+    "elementType": "geometry.fill",
+
+    "stylers": [
+
+      {
+
+        "color": "#f8f1a5"
+
+      }
+
+    ]
+
+  },
+
+  {
+
+    "featureType": "road",
+
+    "elementType": "geometry.fill",
+
+    "stylers": [
+
+      {
+
+        "visibility": "off"
+
+      }
+
+    ]
+
+  },
+
+  {
+
+    "featureType": "road",
+
+    "elementType": "geometry.stroke",
+
+    "stylers": [
+
+      {
+
+        "visibility": "off"
+
+      }
+
+    ]
+
+  },
+
+  {
+
+    "featureType": "water",
+
+    "elementType": "geometry.fill",
+
+    "stylers": [
+
+      {
+
+        "color": "#f0de4a"
+
+      }
+
+    ]
+
+  }
+
 ];
+ 
 
 const MapComponent = () => {
   const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "";
@@ -34,8 +161,8 @@ const MapComponent = () => {
   const locations = [
     {
       name: "Loewenmut Punkt GmbH",
-      lat: 47.5163008,
-      lng: 8.6445932,
+      lat: 47.50419646376239,
+      lng: 8.763679384240772,
       address: "Ida-Sträuli-Strasse 95 CH-8404 Winterthur",
       email: "info@loewenmut.ch",
       phone: "+41 52 224 77 88", 
@@ -123,7 +250,7 @@ const MapComponent = () => {
   return (
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
-      zoom={17}
+      zoom={15}
       center={center}
       options={{ styles: grayStyles, disableDefaultUI: true }}
       onLoad={onMapLoad}

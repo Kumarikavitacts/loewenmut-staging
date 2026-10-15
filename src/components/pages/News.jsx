@@ -18,6 +18,9 @@ import {
 
 const NEWS_PER_LOAD = 6;
 
+// Category colors that have a tab style in Style.css (green_badge, ...)
+const KNOWN_TAB_COLORS = ["green", "yellow", "blue", "pink"];
+
 const News = () => {
   const [pageData, setPageData] = useState(null);
   const [newsList, setNewsList] = useState([]);
@@ -73,10 +76,20 @@ const News = () => {
           cat?.documentId &&
           !seen.has(cat.documentId)
         ) {
-          seen.set(
-            cat.documentId,
-            cat.Titel
-          );
+          // Keep the title AND the backend color of the category
+          const color = cat?.Farbe
+            ?.toString()
+            .trim()
+            .toLowerCase();
+
+          seen.set(cat.documentId, {
+            Titel: cat.Titel,
+            // same class the news card badge uses, e.g. "green_badge"
+            // unknown colors fall back to the theme color (no class)
+            className: KNOWN_TAB_COLORS.includes(color)
+              ? `${color}_badge`
+              : "",
+          });
         }
       });
     });
@@ -91,9 +104,12 @@ const News = () => {
       },
 
       ...uniqueCategories.map(
-        ([documentId, Titel]) => ({
+        ([documentId, { Titel, className }]) => ({
           label: Titel,
           value: documentId,
+          // "Alle" has no className -> it keeps the theme color.
+          // Every category sends its own color class to FilterTabs.
+          className,
         })
       ),
     ];

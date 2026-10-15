@@ -1053,7 +1053,7 @@ header {
             object-fit: contain;
             /* background: var(--bs-themecolor); */
             border-radius: 50%;
-            z-index: 2;
+        z-index: 2;
         }
     }
 }
@@ -1860,11 +1860,33 @@ footer {
         }
     }
 }
+.filter_tabs .btn {
+    &.green_badge {
+        background-color: #539A14;
+        border-color: #539A14;
+        color: var(--bs-white);
+    }
+    &.yellow_badge {
+        background-color: #F3DC01;
+        border-color: #F3DC01;
+        color: var(--bs-black);
+    }
+    &.blue_badge {
+        background-color: #222D78;
+        border-color: #222D78;
+        color: var(--bs-white);
+    }
+    &.pink_badge {
+        background-color: #F158A7;
+        border-color: #F158A7;
+        color: var(--bs-white);
+    }
+}
 .strapi_rich_text {
   p{
     font-size: var(--bs-fs30);
-  }
-}
+    }
+    }
 .service-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
