@@ -9,7 +9,7 @@ const DEFAULT_THEME = "yellow";
 
 // Shown when no text is passed (e.g. on the home page).
 // Every item is separated by a "•" on the ring.
-const DEFAULT_TEXT = ['Digitale', 'Produkte'];
+const DEFAULT_TEXT = ["Strategie" , "Technologio" , "DesigN" ];
 
 const SEPARATOR = " • ";
 

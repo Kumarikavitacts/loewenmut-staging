@@ -159,7 +159,7 @@ const TeamSlider = ({ teams }) => {
     };
   }, [selectedMember]);
 
-  const visibleMembers = teamMembers?.slice(0, 3) || [];
+  const visibleMembers = teamMembers|| [];
 
   return (
     <>

@@ -39,7 +39,7 @@ const News = () => {
         }
         button={
           button?.button_text ||
-          "Alle News"
+          "alle News"
         }
         buttonLink={
           button?.button_link ||

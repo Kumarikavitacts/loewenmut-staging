@@ -1053,7 +1053,7 @@ header {
             object-fit: contain;
             /* background: var(--bs-themecolor); */
             border-radius: 50%;
-        z-index: 2;
+            z-index: 2;
         }
     }
 }
@@ -1100,7 +1100,7 @@ header {
         position: absolute;
         z-index: 2;
         right: -20px;
-        bottom: -90px;
+        bottom: -80px;
     }
 }
 
@@ -1271,7 +1271,7 @@ header {
 
 .talk_section {
     .img-col img {
-   
+        width:65%;
         transition: .4s all;
     }
     .img-col:hover img {
@@ -1605,9 +1605,12 @@ footer {
         }
         p {
             margin: 0;
-            font-size: 0.75rem;
-            line-height: 1.35;
+            font-size: 0.8125rem;
+            font-weight: 400; /* body is 300 (thin) - too light for small rotated text */
+            line-height: 1.4;
             color: var(--bs-textdarkgrey);
+            overflow-wrap: break-word;
+            hyphens: auto;
         }
         .work-card-number {
             width: 24px;
@@ -1671,61 +1674,73 @@ footer {
 
     /* =========================
        Card animation
-       1) pop-in when the card appears (also replays when a
-          suggestion is selected / deselected)
-       2) gentle floating loop, each card with its own timing
+       - Before the section is visible the cards wait ABOVE it
+         (hidden by the section's overflow: hidden).
+       - When the section scrolls into view, WorkSection.jsx adds
+         .is-inview and every card drops down with a soft bounce and
+         settles on its own position, one after the other.
+       - When the section leaves the screen the class is removed, so
+         the drop plays again on every visit.
+       - Nothing keeps animating afterwards, so the rotated text is
+         rendered crisp (endless float / will-change made it blurry).
     ========================= */
     .work-info-card {
-        --wiggle: 1.5deg;
-        --float-y: -10px;
-        transform: rotate(var(--rot, 0deg));
+        --drop: 520px; /* real distance is measured in WorkSection.jsx */
+        opacity: 0;
+        transform: translateY(calc(var(--drop) * -1)) rotate(var(--rot, 0deg));
         transition: box-shadow 0.3s ease;
-        animation:
-            workCardIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both,
-            workCardFloat var(--float-time, 5.5s) ease-in-out
-                calc(0.7s + var(--float-delay, 0s)) infinite;
-        will-change: transform;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+    }
+    .work-section.is-inview .work-info-card {
+        opacity: 1;
+        transform: rotate(var(--rot, 0deg));
+        animation: workCardDrop 1.15s cubic-bezier(0.34, 1.4, 0.64, 1) backwards;
+        animation-delay: calc(var(--i, 0) * 0.14s);
     }
     .work-info-card:hover {
-        animation-play-state: running, paused;
         box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
     }
-    .work-card-number {
-        animation: workBadgePulse 2.4s ease-in-out infinite;
+    .work-section.is-inview .work-card-number {
+        animation: workBadgePop 0.5s ease-out backwards;
+        animation-delay: calc(var(--i, 0) * 0.14s + 0.9s);
     }
     @media (prefers-reduced-motion: reduce) {
-        .work-info-card,
-        .work-card-number {
+        .work-info-card {
+            opacity: 1;
+            transform: rotate(var(--rot, 0deg));
+        }
+        .work-section.is-inview .work-info-card,
+        .work-section.is-inview .work-card-number {
             animation: none;
         }
     }
 }
 
-@keyframes workCardIn {
+@keyframes workCardDrop {
     0% {
         opacity: 0;
-        transform: translateY(24px) scale(0.85) rotate(var(--rot, 0deg));
+        transform: translateY(calc(var(--drop, 520px) * -1))
+            rotate(calc(var(--rot, 0deg) * -2.5));
+    }
+    8% {
+        opacity: 1;
     }
     100% {
         opacity: 1;
-        transform: translateY(0) scale(1) rotate(var(--rot, 0deg));
-    }
-}
-@keyframes workCardFloat {
-    0%, 100% {
         transform: translateY(0) rotate(var(--rot, 0deg));
     }
-    50% {
-        transform: translateY(var(--float-y))
-            rotate(calc(var(--rot, 0deg) + var(--wiggle)));
-    }
 }
-@keyframes workBadgePulse {
-    0%, 100% {
-        transform: scale(1);
+@keyframes workBadgePop {
+    0% {
+        transform: scale(0);
     }
-    50% {
-        transform: scale(1.12);
+    70% {
+        transform: scale(1.25);
+    }
+    100% {
+        transform: scale(1);
     }
 }
 

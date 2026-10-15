@@ -110,7 +110,7 @@
             width: 155px;
             height: 155px;
             svg, img {
-                width: 80%;
+                width: 60%;
                 height: 80%;
             }
         }
@@ -1261,6 +1261,14 @@ footer {
         padding-right: 0;
         margin-bottom: 30px;
 
+    }
+}
+.bg_theme_work_station {
+    .work-suggestions {
+        .work-suggestion-close{
+             width: 15px;
+            height: 15px;
+        }
     }
 }
 .filter-tabs {

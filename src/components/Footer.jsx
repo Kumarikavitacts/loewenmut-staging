@@ -72,7 +72,7 @@ const Footer = () => {
                     </div>
                     <div className='footer_copyright'>
                         <div className='copyright_flex'>
-                            <p>© 2006 - 2026 Loewenmut Punkt GambH.</p>
+                            <p>© 2006 - 2026 Loewenmut Punkt GmbH.</p>
                             <p><Link href={'/impressum'}>Impressum</Link> | <Link href={'/datenschutz'}>Datenschutzerklärung</Link></p>
                         </div>
                     </div>

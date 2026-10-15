@@ -159,7 +159,7 @@ const StatsCards = ({ counters }) => {
  
               {/* Animated Percentage */}
               <h2 className="fw-semibold fs_60 mt-4">
-                {currentValue}+
+                {currentValue}  {Number(currentValue) > 0 && "+"}
               </h2>
  
               {/* Description */}

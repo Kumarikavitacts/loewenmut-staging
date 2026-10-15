@@ -1,11 +1,27 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { getGermanyTime, getIndiaTime } from "@/helper/Timer";
 import { useSelector } from "react-redux";
 import { renderHtmlText } from "@/components/ResuableComponents/renderHtmlText";
 
+/*
+ * Measures how far each card has to fall so that it starts just above the
+ * top edge of the section and lands on its own position. The result is passed
+ * to the CSS animation as --drop.
+ */
+function measureCardDrops(section) {
+  const cardEls = Array.from(section.querySelectorAll(".work-info-card"));
+  // Cards hidden by a suggestion filter (display: none) cannot be measured.
+  if (cardEls.some((el) => el.offsetParent === null)) return;
+  cardEls.forEach((el) => {
+    el.style.setProperty("--drop", `${el.offsetTop + el.offsetHeight + 60}px`);
+  });
+}
+
 function WorkSection() {
+  const sectionRef = useRef(null);
+  const [inView, setInView] = useState(false);
   const [message, setMessage] = useState("");
   const [germanyTime, setGermanyTime] = useState(""); // ← fixed
   const [indiaTime, setIndiaTime] = useState("");
@@ -59,6 +75,44 @@ function WorkSection() {
     setMessage("");
   };
 
+  // Play the "cards drop in" animation every time the section scrolls into
+  // view, and reset it when the section leaves the screen so it can replay.
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    if (typeof IntersectionObserver === "undefined") {
+      setInView(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          measureCardDrops(section);
+          setInView(true);
+        } else {
+          setInView(false);
+        }
+      },
+      { rootMargin: "0px 0px -20% 0px", threshold: 0 }
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  // Keep the drop distances correct when the cards load or the screen resizes.
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const measure = () => measureCardDrops(section);
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [cards.length]);
+
   useEffect(() => {
     setGermanyTime(getGermanyTime());
     setIndiaTime(getIndiaTime());
@@ -71,19 +125,22 @@ function WorkSection() {
   }, []);
 
   return (
-    <div className="pt_3 bg_theme_work_station" data-aos="zoom-in">
-      <div className="work-section">
+    <div className="pt_3 bg_theme_work_station">
+      <div
+        ref={sectionRef}
+        className={`work-section${inView ? " is-inview" : ""}`}
+      >
         {/* =========================
             Floating Cards
         ========================= */}
-        {cards.map((card) => {
+        {cards.map((card, index) => {
           const isVisible = !hasMatch || matchedCard.title === card.title;
 
           return (
             <div
               key={card.id || card.number}
               className={`work-info-card ${card.className}`}
-              style={{ display: isVisible ? "" : "none" }}
+              style={{ display: isVisible ? "" : "none", "--i": index }}
             >
               <span className="work-card-number">{card.number}</span>
               <h4>{card.title}</h4>
