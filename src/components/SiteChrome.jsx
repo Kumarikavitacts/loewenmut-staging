@@ -5,7 +5,7 @@ import CursorGlow from "./CursorGlow";
 export default function SiteChrome({ children }) {
   return (
     <>
-      <CursorGlow />
+      {/* <CursorGlow /> */}
       <Header />
       {children}
       <Footer />

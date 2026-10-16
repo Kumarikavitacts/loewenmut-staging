@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { renderHtmlText } from "./ResuableComponents/renderHtmlText";
+import Breadcrumb from "./Breadcrumb";
 
 const InnerBnanner = ({
   title,
@@ -11,6 +12,7 @@ const InnerBnanner = ({
   buttonLink,
   buttonTarget,
   buttonRel,
+  breadcrumbs,
 }) => {
   const isExternal = Boolean(buttonTarget);
 
@@ -22,6 +24,10 @@ const InnerBnanner = ({
       }}
     >
       <div className="container">
+        {Array.isArray(breadcrumbs) && breadcrumbs.length > 0 && (
+          <Breadcrumb items={breadcrumbs} />
+        )}
+
         <div className="inner-banner-content text-center">
           <div className="sub_title d-block mx-auto">
             {renderHtmlText(title)}

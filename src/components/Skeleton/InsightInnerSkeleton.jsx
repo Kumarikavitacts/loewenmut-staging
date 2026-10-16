@@ -10,7 +10,7 @@ const InsightInnerSkeleton = () => {
   return (
     <main>
       <section className="inner_hero_section">
-        <InnerBannerSkeleton />
+        <InnerBannerSkeleton withBreadcrumb />
       </section>
 
       <section className="project_detail_section pt_pb_3">

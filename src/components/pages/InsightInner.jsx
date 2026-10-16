@@ -148,6 +148,10 @@ const InsightInner = () => {
             title={Kurztitel || ""}
             heading={Titel || ""}
             description={Text || ""}
+            breadcrumbs={[
+              { label: "Insights", href: "/insights" },
+              { label: Titel || Kurztitel || "" },
+            ]}
           />
         </section>
       )}

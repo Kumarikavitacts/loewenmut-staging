@@ -19,7 +19,7 @@ const LeistungenDetailSkeleton = () => {
     <div>
       {/* HERO */}
       <section className="inner_hero_section">
-        <InnerBannerSkeleton />
+        <InnerBannerSkeleton withBreadcrumb />
       </section>
 
       {/* SECTION 1 — circle + rich text */}

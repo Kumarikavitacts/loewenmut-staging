@@ -48,12 +48,16 @@ const Team = () => {
     <main>
       <section className="inner_hero_section">
         {loading ? (
-          <InnerBannerSkeleton />
+          <InnerBannerSkeleton withBreadcrumb />
         ) : (
           <InnerBnanner
             title={banner?.Kurztitel || ""}
             heading={banner?.Titel || ""}
             description={banner?.Text || ""}
+            breadcrumbs={[
+              { label: "Agentur", href: "/agentur" },
+              { label: "Team" },
+            ]}
           />
         )}
       </section>

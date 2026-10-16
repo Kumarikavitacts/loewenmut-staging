@@ -229,6 +229,10 @@ const LeistungenDetail = () => {
           title={Tag_Titel || ""}
           heading={Titel || ""}
           description={Text || ""}
+          breadcrumbs={[
+            { label: "Leistungen", href: "/leistungen" },
+            { label: Titel || "" },
+          ]}
         />
 
       </section>

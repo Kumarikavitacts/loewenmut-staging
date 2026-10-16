@@ -225,6 +225,10 @@ const NewsInner = () => {
             title={Kurztitel || ""}
             heading={Titel || ""}
             description={Text || ""}
+            breadcrumbs={[
+              { label: "News", href: "/news" },
+              { label: Titel || Kurztitel || "" },
+            ]}
             footer={Boolean(Button?.button_text)}
             button={Button?.button_text || ""}
             buttonLink={
