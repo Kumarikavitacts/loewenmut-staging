@@ -1636,3 +1636,73 @@ a {
     .cursor-glow { display: none; }
 }
 /* ===== end cursor glow ===== */
+
+
+
+@keyframes insightCursorSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+/* real mouse: hide the normal cursor on linked cards, the round one replaces it */
+@media (hover: hover) and (pointer: fine) {
+    .insight-card.has-link {
+        cursor: none;
+    }
+    /* hide the page-wide glow while the round cursor is shown */
+    body:has(.insight-card.has-link:hover) .cursor-glow {
+        opacity: 0 !important;
+    }
+}
+/* touch devices: no hover cursor, normal tap behaviour */
+@media (hover: none), (pointer: coarse) {
+    .insight-cursor { display: none; }
+}
+@media (max-width: 767.98px) {
+    .insight-cursor-disc { width: 96px; height: 96px; margin: -48px 0 0 -48px; }
+        .project-cursor-disc {
+        width: 96px;
+        height: 96px;
+        margin: -48px 0 0 -48px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .insight-cursor-ring { animation: none; }
+    .insight-cursor-disc { transition: opacity 0.2s ease; transform: none; }
+}
+
+
+@keyframes projectCursorSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+/* real mouse: hide the normal cursor on linked cards, the round one replaces it */
+@media (hover: hover) and (pointer: fine) {
+    .project-carousel-card.has-link {
+        cursor: none;
+    }
+    /* hide the page-wide glow while the round cursor is shown */
+    body:has(.project-carousel-card.has-link:hover) .cursor-glow {
+        opacity: 0 !important;
+    }
+}
+
+/* touch devices: no hover cursor, normal tap behaviour */
+@media (hover: none), (pointer: coarse) {
+    .project-cursor {
+        display: none;
+    }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+    .project-cursor-ring {
+        animation: none;
+    }
+    .project-cursor-disc {
+        transition: opacity 0.2s ease;
+        transform: none;
+    }
+}
+/* ===== end project cursor ===== */

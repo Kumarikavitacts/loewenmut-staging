@@ -1,10 +1,67 @@
-
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useId, useRef } from "react";
 import { useRouter } from "next/navigation";
 import $ from "jquery";
 import ScrollFillText from "../ResuableComponents/ScrollFillText";
+
+// ---------------------------------------------------------------------------
+// Round cursor shown while hovering a project card.
+// Change the texts here.
+// ---------------------------------------------------------------------------
+const PROJECT_CURSOR_TEXT = {
+  inner: "weiterlesen", // card opens a page of this website
+  outer: "Website besuchen", // card opens another website
+};
+
+// Ring text geometry (SVG viewBox is 200 x 200)
+const RING_RADIUS = 72;
+const RING_LENGTH = 2 * Math.PI * RING_RADIUS;
+
+const ProjectCursorRing = ({ text }) => {
+  const pathId = `project-ring-${useId().replace(/:/g, "")}`;
+
+  // "weiterlesen • weiterlesen • " (non-breaking spaces keep the gaps equal)
+  const isLongText = text.length > "weiterlesen".length;
+  const unit = `${text} \u2022 `;
+  const repeats = isLongText
+    ? 1
+    : Math.max(2, Math.round(28 / unit.length));
+
+  const ringText = unit.repeat(repeats).replace(/ /g, "\u00A0");
+
+  // longer texts get a slightly smaller font so they always fit the ring
+  const fontSize = Math.min(
+    24,
+    (0.9 * RING_LENGTH) / (ringText.length * 0.55)
+  );
+
+  return (
+    <svg
+      className="project-cursor-ring"
+      viewBox="0 0 200 200"
+      aria-hidden="true"
+    >
+      <defs>
+        <path
+          id={pathId}
+          d={`M 100,100 m -${RING_RADIUS},0 a ${RING_RADIUS},${RING_RADIUS} 0 1,1 ${
+            RING_RADIUS * 2
+          },0 a ${RING_RADIUS},${RING_RADIUS} 0 1,1 -${RING_RADIUS * 2},0`}
+        />
+      </defs>
+      <text style={{ fontSize }}>
+        <textPath
+          href={`#${pathId}`}
+          textLength={RING_LENGTH - 2}
+          lengthAdjust="spacing"
+        >
+          {ringText}
+        </textPath>
+      </text>
+    </svg>
+  );
+};
 
 const ProjectCarousel = ({
   title,
@@ -83,6 +140,20 @@ const ProjectCarousel = ({
       }
     };
 
+    // Move the round cursor with the mouse. It works on Owl clones too,
+    // because the cursor element is part of the card markup.
+    const handleCursorMove = function (event) {
+      const cursor = this.querySelector(".project-cursor");
+
+      if (!cursor) return;
+
+      const rect = this.getBoundingClientRect();
+
+      cursor.style.transform = `translate3d(${
+        event.clientX - rect.left
+      }px, ${event.clientY - rect.top}px, 0)`;
+    };
+
     import("owl.carousel/dist/owl.carousel.min.js")
       .then(() => {
         if (!carouselRef.current) return;
@@ -111,6 +182,13 @@ const ProjectCarousel = ({
           "mouseleave.projectCarousel",
           ".project-carousel-card",
           handleVideoMouseLeave
+        );
+
+        // Round cursor: start under the mouse, then follow it.
+        $carousel.on(
+          "mouseenter.projectCarousel mousemove.projectCarousel",
+          ".project-carousel-card",
+          handleCursorMove
         );
 
         $carousel.owlCarousel({
@@ -218,6 +296,21 @@ const ProjectCarousel = ({
           const openInNewTab =
             isExternal && item?.linkziel === "Extern";
 
+          // Round cursor text: "inner" = page of this website,
+          // "outer" = other website, null = no link (no cursor).
+          const link = item?.websiteLink || "";
+          let linkType = null;
+
+          if (isInternal) {
+            linkType = "inner";
+          } else if (link) {
+            linkType =
+              item?.linkziel !== "Extern" &&
+              (link.startsWith("/") || link.startsWith("#"))
+                ? "inner"
+                : "outer";
+          }
+
           // Support either an explicit boolean or a video URL.
           const videoUrl = item?.video || "";
           const isVideo = Boolean(item?.isVideo && videoUrl);
@@ -235,7 +328,9 @@ const ProjectCarousel = ({
                 className="project-carousel-card-link"
               >
                 <div
-                  className="project-carousel-card position-relative overflow-hidden d-flex align-items-center justify-content-center"
+                  className={`project-carousel-card position-relative overflow-hidden d-flex align-items-center justify-content-center${
+                    linkType ? " has-link" : ""
+                  }`}
                   style={{
                     backgroundColor: item?.bgColor,
                   }}
@@ -275,6 +370,17 @@ const ProjectCarousel = ({
                         alt={item?.title || ""}
                         className="project-carousel-logo img-fluid"
                       />
+                    </div>
+                  )}
+
+                  {/* ROUND CURSOR: follows the mouse, text depends on link type */}
+                  {linkType && (
+                    <div className="project-cursor" aria-hidden="true">
+                      <div className="project-cursor-disc">
+                        <ProjectCursorRing
+                          text={PROJECT_CURSOR_TEXT[linkType]}
+                        />
+                      </div>
                     </div>
                   )}
                 </div>
