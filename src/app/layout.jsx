@@ -44,7 +44,7 @@ export const metadata = {
     "Agentur für Grafik-, Webdesign & Programmierung in Winterthur. Unsere Referenzen werden Sie überzeugen",
 
   icons: {
-    icon: "/images/favicon.ico",
+    icon: "/images/fav-icon-loewenmut.png",
   },
 
   openGraph: {
@@ -60,7 +60,7 @@ export const metadata = {
 
     images: [
       {
-        url: "/images/website_image.png",
+        url: "/images/website_og_image.png",
         width: 1200,
         height: 630,
         alt: "Löwenmut – Webdesign, Branding und digitale Lösungen",
@@ -81,7 +81,7 @@ export const metadata = {
     description:
       "Agentur für Grafik-, Webdesign & Programmierung in Winterthur. Unsere Referenzen werden Sie überzeugen",
 
-    images: ["/images/website_image.png"],
+    images: ["/images/website_og_image.png"],
   },
 };
 // Explicit viewport so phones use their real width. Zoom is NOT disabled,

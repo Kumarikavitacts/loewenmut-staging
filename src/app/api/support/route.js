@@ -42,7 +42,7 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
  * Logo
  *
  * File:
- * public/images/website_image.png
+ * public/images/website_og_image.png
  *
  * The logo is embedded into the email using CID.
  * This avoids problems with email clients blocking
@@ -606,7 +606,7 @@ async function sendSupportEmails({
    */
 
   const logoAttachment = {
-    filename: "website_image.png",
+    filename: "website_og_image.png",
     path: LOGO_PATH,
     cid: LOGO_CID,
     contentType: "image/png",

@@ -530,7 +530,7 @@ Array.isArray(strategien) && strategien.length > 0
    */
 
   const logoAttachment = {
-    filename: "website_image.png",
+    filename: "website_og_image.png",
     path: LOGO_PATH,
     cid: LOGO_CID,
     contentType: "image/png",
