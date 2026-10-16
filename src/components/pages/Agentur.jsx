@@ -493,50 +493,50 @@ const Agentur = () => {
                         <div className="col-12 col-lg-6 img-co">
 
                             {/* IMAGE */}
-                           <div className="ag_content_image_video">
-                            {showAboutImage && (
-                                <img
-                                    src={getMediaUrl(
-                                        aboutImage.url
-                                    )}
-                                    alt={
-                                        aboutImage?.alternativeText ||
-                                        Bildre_Text?.Titel ||
-                                        ""
-                                    }
-                                    className="w-100 d-block rounded"
-                                />
-                            )}
-
-                            {/* VIDEO */}
-
-                            {showAboutVideo && (
-                                <video
-                                    className="w-100 d-block rounded"
-                                     autoPlay
-                                    muted
-                                    loop
-                                    playsInline
-                                    preload="metadata"
-                                    poster={
-                                        aboutVideoThumbnailUrl ||
-                                        undefined
-                                    }
-                                >
-                                    <source
-                                        src={aboutVideoUrl}
-                                        type={
-                                            aboutVideo?.mime ||
-                                            "video/mp4"
+                            <div className="ag_content_image_video">
+                                {showAboutImage && (
+                                    <img
+                                        src={getMediaUrl(
+                                            aboutImage.url
+                                        )}
+                                        alt={
+                                            aboutImage?.alternativeText ||
+                                            Bildre_Text?.Titel ||
+                                            ""
                                         }
+                                        className="w-100 d-block rounded"
                                     />
+                                )}
 
-                                    Your browser does not support
-                                    the video tag.
-                                </video>
-                            )}
+                                {/* VIDEO */}
 
-                         </div>
+                                {showAboutVideo && (
+                                    <video
+                                        className="w-100 d-block rounded"
+                                        autoPlay
+                                        muted
+                                        loop
+                                        playsInline
+                                        preload="metadata"
+                                        poster={
+                                            aboutVideoThumbnailUrl ||
+                                            undefined
+                                        }
+                                    >
+                                        <source
+                                            src={aboutVideoUrl}
+                                            type={
+                                                aboutVideo?.mime ||
+                                                "video/mp4"
+                                            }
+                                        />
+
+                                        Your browser does not support
+                                        the video tag.
+                                    </video>
+                                )}
+
+                            </div>
                         </div>
 
                     </div>
@@ -563,11 +563,11 @@ const Agentur = () => {
                         </h2>
 
                     </div>
-
-                    <TeamSlider
-                        teams={Team_Bereich?.teams || []}
-                    />
-
+                    <div className="mt-5 ">
+                        <TeamSlider
+                            teams={Team_Bereich?.teams || []}
+                        />
+                    </div>
                 </div>
             </section>
 

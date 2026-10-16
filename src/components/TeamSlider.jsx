@@ -107,7 +107,7 @@ const TeamSlider = ({ teams }) => {
           mouseDrag: true,
           touchDrag: true,
           pullDrag: true,
-          nav: false,
+          nav: true,
           dots: false,
           margin: 24,
           responsive: {

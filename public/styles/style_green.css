@@ -122,15 +122,6 @@ footer {
         color: var(--bs-white);
     }
 }
-.stacking-card-wrapper {
-    .stacking-card {
-        background: linear-gradient(29deg, #539a14, black, black);
-    }
-    .card-number {
-        border: 1px solid var(--bs-white);
-        color: var(--bs-white);
-    }
-}
 
 .bg_theme_work_station {
     .work-suggestions {
@@ -171,7 +162,14 @@ form {
         }
     }
 }
-
+.team-carousel {
+    .owl-nav button.owl-prev {
+        cursor: url(/images/previous-green.svg) 15 28, pointer !important;
+    }
+    .owl-nav button.owl-next {
+        cursor: url(/images/next-green.svg) 15 28, pointer !important;
+    }
+}
 @media (max-width: 767px) {
     .service-slider {
         .owl-item.active .item {

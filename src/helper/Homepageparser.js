@@ -9,8 +9,10 @@ export const Homepageparser = (apiData) => {
 
   const normalizedNews = (apiData?.News?.news || []).map((item) => {
     const image =
+      item?.Bild?.formats?.large ||
       item?.Bild?.formats?.small ||
-      item?.Bild?.formats?.thumbnail ||
+      item?.Bild?.formats?.medium||
+      item?.Bild?.formats?.thumbnail||
       item?.Bild;
 
     const category = item?.news_kategories?.[0];

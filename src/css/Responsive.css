@@ -797,11 +797,6 @@ span.txt-008:before {
 .intro-text {
     text-align: left;
 }
-.stacking-card-wrapper {
-    .stacking-content {
-        padding: 2rem;
-    }
-}
 .filter-tabs {
     justify-content: flex-start;
 }
@@ -981,51 +976,6 @@ span.txt-008:before {
             } 
         }  
     }
-    .stacking-card-wrapper {
-        padding-top: 2rem;
-        padding-bottom: 6rem;
-        perspective: 900px;
-        perspective-origin: 50% 0%;
-      }
-      
-      .stacking-card {
-        position: relative;
-        width: 100%;
-        margin: 0 auto 2vh;
-        display: block;
-        min-height: 520px;
-        border-radius: 20px;
-      
-        transform-origin: center top;
-        transform-style: preserve-3d;
-        will-change: transform;
-        backface-visibility: hidden;
-      }
-      
-      .stacking-content,
-      .stacking-image {
-        width: 100%;
-      }
-      
-      .stacking-content {
-        min-height: 270px;
-        padding: 30px 25px;
-      }
-      
-      .stacking-image {
-        height: 250px;
-        padding: 0 20px 20px;
-      }
-      
-      .stacking-image img {
-        width: 100%;
-        height: 100%;
-        display: block;
-        border-radius: 18px;
-        object-fit: cover;
-      }
-
-
     /* stacking card end css  */
     .team-modal {
         padding: 20px;
@@ -1557,6 +1507,40 @@ a {
         overflow-wrap: anywhere;
         hyphens: auto;
     }
+        .stacking-layout {
+        --stack-top: 80px;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.25rem;
+        padding-top: 1.5rem;
+        padding-bottom: 4rem;
+    }
+    .stacking-sidebar {
+        z-index: 5;
+        margin: 0 -12px;
+        padding: 10px 12px;
+        background: var(--bs-white, #fff);
+    }
+    .stacking-tabs {
+        flex-direction: row;
+        gap: 8px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+    }
+    .stacking-tabs::-webkit-scrollbar { display: none; }
+    .stacking-tab {
+        width: auto;
+        flex: 0 0 auto;
+        white-space: nowrap;
+        padding: 10px 16px;
+    }
+    .stacking-tab.active { transform: none; }
+    /* cards must pin below the sticky tab strip */
+    .stacking-card-wrapper {
+        --card-top: calc(var(--stack-top) + 64px);
+        --card-step: 12px;
+        gap: 10vh;
+    }
 }
 
 /* News cards: let titles wrap instead of being cut off with "..." */
@@ -1569,6 +1553,13 @@ a {
     .news_section .news_content p {
         min-height: 0;
     }
+     .stacking-card { flex-direction: column; }
+    .stacking-content { padding: 1.5rem 1.25rem 1rem; }
+    .stacking-image { padding: 0 1rem 1rem; }
+    .stacking-image img { min-height: 0; height: auto; aspect-ratio: 16 / 10; }
+    .stacking-content .card-number { width: 34px; height: 34px; flex-basis: 34px; margin-bottom: 10px; }
+    .stacking-content h3 { font-size: 1rem; }
+    .stacking-title { font-size: 1.75rem; }
 }
 
 
@@ -1632,3 +1623,16 @@ a {
         margin-bottom: 4rem;
     }
 }
+
+
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .stacking-tab { transition: none; }
+}
+
+/* never show on touch devices */
+@media (hover: none), (pointer: coarse) {
+    .cursor-glow { display: none; }
+}
+/* ===== end cursor glow ===== */
