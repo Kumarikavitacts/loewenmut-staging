@@ -23,7 +23,7 @@ const InnerBnanner = ({
     >
       <div className="container">
         <div className="inner-banner-content text-center">
-          <div className="sub_title justify-content-center">
+          <div className="sub_title d-block mx-auto">
             {renderHtmlText(title)}
           </div>
 

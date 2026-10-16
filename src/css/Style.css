@@ -104,7 +104,7 @@ p {
     font-weight: 400;
     letter-spacing: 14%;
     text-transform: uppercase;
-    display: flex;
+    display: flex;   
     gap: 10px;
     margin-bottom: 1rem;
     &:before {
@@ -970,6 +970,7 @@ header {
             background-color: var(--bs-themecolor) !important;
             img {
                 filter: brightness(0) invert(1);
+
             }
         }
     }
@@ -1485,7 +1486,7 @@ footer {
     }
 
     .work-phone-content {
-        padding: 4rem 15px 1rem;
+        padding: 3rem 15px 1rem;
         text-align: center;
         h2 {
             margin: 40px 0 18px;
@@ -1495,7 +1496,8 @@ footer {
             color: #222;
         }
         .work-intro {
-            margin: 0;
+            margin: auto;
+            width: 75%;
             font-size: var(--bs-fs20);
             line-height: 1.45;
             color: var(--bs-textdarkgrey);
@@ -1902,13 +1904,15 @@ footer {
         .service-icon {
             width: 70px;
             height: 70px;
-            padding: 23px;
             margin-bottom: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
             background: var(--bs-themecolor);
+            img{
+                width: 30px !important;
+            }
         }
         p {
             margin-bottom: 0;

@@ -923,7 +923,7 @@ span.txt-008:before {
     }
     .agen_emo_sec  {
     text-align: start;
-}
+     }
     .service-slider {
         .owl-item.active .item {
             background: var(--bs-themecolor);
@@ -938,7 +938,26 @@ span.txt-008:before {
       .service-card {
     height: auto !important;
     min-height: 0;
-  }
+    }
+    .accordion-item  {
+        .accordion-button{
+            font-size: var(--bs-fs22);
+            padding:10px 60px 8px 14px;
+        }
+        .accordion-button::after {
+        /* background: var(--bs-themecolor) url(/images/icon-plus-white.svg) no-repeat center; */
+        width: 25px;
+        height: 25px;
+        background-size: 15px !important;
+    }
+        .accordion-body{
+            p{
+                padding:0;
+                font-size: var(--bs-fs20);
+            }
+        }
+    }
+
   .image_layout_section {
     .image_layout_item {
      

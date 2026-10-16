@@ -108,7 +108,7 @@ export const InsightCard = ({ insight }) => {
         {/* LOGO */}
         {logoUrl && (
           <div
-            className="position-absolute top-50 start-50 translate-middle d-flex justify-content-center align-items-center w-100 px-4"
+            className="position-absolute top-50 start-50 translate-middle d-flex justify-content-center align-items-center w-100 px-md-4"
             style={{
               zIndex: 2,
             }}
