@@ -73,7 +73,7 @@ const Leistungen = () => {
             WIE FUNKTIONIERT DAS? SKELETON
         ========================================= */}
         <section className="liestungen_section pt_3">
-          <div className="container small_container">
+          <div className="container ">
             <SectionSkeleton />
           </div>
         </section>
@@ -144,7 +144,7 @@ const Leistungen = () => {
 
       {Funktioniert && (
         <section className="liestungen_section pt_3">
-          <div className="container small_container">
+          <div className="container">
             <div className="heading-content text-center">
 
               {Funktioniert.Kurztitel && (

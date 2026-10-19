@@ -1486,18 +1486,18 @@ footer {
     }
 
     .work-phone-content {
-        padding: 3rem 15px 1rem;
+        padding: 1rem 15px 1rem;
         text-align: center;
-        h2 {
-            margin: 40px 0 18px;
-            font-size: 1.4375rem;
+        h2,h3{
+            color: var(--bs-black);
+            /* margin: 40px 0 18px; */
+            font-size: var(--bs-fs35);
+            font-weight: 500;
             line-height: 1.08;
-            font-weight: 800;
-            color: #222;
         }
         .work-intro {
             margin: auto;
-            width: 75%;
+            width: 70%;
             font-size: var(--bs-fs20);
             line-height: 1.45;
             color: var(--bs-textdarkgrey);
@@ -1507,16 +1507,16 @@ footer {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
-        margin-top: 50px;
+        margin-top: 20px;
         button {
             position: relative;
-            min-height: 52px;
+            min-height: 60px;
             padding: 5px 8px;
             background: #fff;
             border: 1px solid #e6e6e6;
             border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 500;
+            font-size: var(--bs-fs24);
+            font-weight: 400;
             line-height: 1.2;
             color: #222;
             cursor: pointer;
@@ -1638,7 +1638,7 @@ footer {
         right: 6%;
     }
     .work-card-1 {
-        top: 5%;
+          top: 5%;
         --rot: -9deg;
         --float-time: 5.2s;
         --float-delay: 0s;
@@ -1750,8 +1750,8 @@ footer {
 .stacking-layout {
     --stack-top: 110px;
     display: grid;
-    grid-template-columns: 220px minmax(0, 1fr);
-    gap: 2.5rem;
+    grid-template-columns: 330px minmax(0, 1fr);
+    gap: 1.5rem;
     align-items: start;
     padding-top: 3rem;
     padding-bottom: 6rem;
@@ -1770,10 +1770,10 @@ footer {
     width: 100%;
     padding: 12px 20px;
     text-align: left;
-    font-size: 0.9375rem;
-    font-weight: 500;
+    font-size: var(--bs-fs30);
+    font-weight: 400;
     line-height: 1.2;
-    color: var(--bs-textdarkgrey);
+    color: var(--bs-textlightgrey);
     background: #fff;
     border: 1px solid var(--bs-bordergrey);
     border-radius: var(--radius-50);
@@ -1816,22 +1816,27 @@ footer {
 .stacking-content {
     flex: 1 1 50%;
     min-width: 0;
-    padding: 2rem 2.5rem;
+    padding: 1.66rem 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     color: var(--bs-textdarkgrey);
 }
 .stacking-title {
+   
     color: var(--bs-textdarkgrey);
+    font-size: var(--bs-fs50);
+    padding: 0;
+
 }
 .stacking-content hr {
     border-top-color: var(--bs-lightgrey3);
     opacity: 1;
+    margin:0.86rem 0;
 }
 .stacking-content h3 {
-    font-size: 1.125rem;
-    font-weight: 600;
+    font-size:  var(--bs-fs30);
+    font-weight: 400;
 }
 .card-number {
     width: 40px;
@@ -1858,7 +1863,7 @@ footer {
     min-height: 260px;
     display: block;
     object-fit: cover;
-    border-radius: var(--radius-20);
+    border-radius: 0 var(--radius-20) var(--radius-20) 0;
 }
 
 

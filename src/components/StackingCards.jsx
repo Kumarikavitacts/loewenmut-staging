@@ -140,7 +140,7 @@ const StackingCards = ({ cardsData = [] }) => {
               <div className="stacking-content">
                 <span className="card-number">{index + 1}</span>
 
-                <h2 className="stacking-title fs_50 fw-bold mb-0">
+                <h2 className="stacking-title mb-0">
                   {card.Titel || ""}
                 </h2>
 
