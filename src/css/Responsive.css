@@ -20,6 +20,7 @@
         --bs-fs20: 1.25rem;
         --content_width_small: 1300px;
         --content_width_smaller: 1000px;
+        --stack-top: 80px;
     }
     .map-wrapper {
     width: calc(100% + 300px);
@@ -247,9 +248,14 @@
             width: 500px;
         }
         .work-phone-content {
-            padding: 8rem 17px 2rem;
+            padding: 2rem 17px 2rem;
+        }
+        .work-section {
+            padding-top: 110px;
+        
         }
     }
+
 
     .team-modal {
         max-width: 1250px;
@@ -1304,7 +1310,13 @@ footer {
             svg{
                 width: 60px;
                 height: 60px;
-}
+             } 
+           .rolling-eyes {
+            svg {
+                    width: 24px;
+                    height: auto;
+            }
+        }
         }
     }
 }
@@ -1340,9 +1352,23 @@ footer {
     margin-top: 1rem;
     margin-left: 0;
 }
+header .navbar{
+    padding: 0;
+}
+  
+.stacking-sidebar{
+    padding-top:25px !important;
+}   
+.stacking-image img {
+
+    border-radius:  var(--radius-20) ;
+
+}
+
 }
 
 @media (max-width: 375px) {
+
     .hero_section {
         .hero_row {
             .hro_icon_1, .hro_icon_2 {
@@ -1363,9 +1389,14 @@ footer {
             }
         }
     }
+    .sub_title{
+        font-size: var(--bs-fs20);
+    }
+
 }
 
 @media (max-width: 360px) {
+   
     .project-showcase {
         .project-image-card {
             .project-image-info {
@@ -1382,6 +1413,15 @@ footer {
                 }
             }
         }
+    }
+   .hero_section .hero_row h1 span {
+        position: unset;
+        justify-content: center;
+        font-size: var(--bs-fs20);
+    }
+     p, li {
+        font-size: var(--bs-fs20) !important;
+        line-height: 1.5;
     }
 }
 
@@ -1446,7 +1486,8 @@ html {
         --bs-fs30:  clamp(1.125rem, 4.2vw, 1.3125rem);
         --bs-fs24:  clamp(0.9375rem, 3.8vw, 1.0625rem);
         --bs-fs22:  clamp(0.875rem, 3.6vw, 1rem);
-        --bs-fs20:  clamp(0.875rem, 3.4vw, 0.9375rem);
+        --bs-fs20: clamp(0.75rem, 3vw, 0.8125rem);
+        
     }
 
     body {
@@ -1458,6 +1499,7 @@ html {
         font-size: 1rem;
         line-height: 1.5;
     }
+    
 
     /* 1rem (>=16px) also stops iOS Safari zooming into inputs */
     input,
@@ -1508,7 +1550,7 @@ a {
         hyphens: auto;
     }
         .stacking-layout {
-        --stack-top: 80px;
+     
         grid-template-columns: minmax(0, 1fr);
         gap: 1.25rem;
         padding-top: 1.5rem;

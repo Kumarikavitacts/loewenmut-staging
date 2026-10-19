@@ -47,6 +47,7 @@
     --bs-fs24: 1.25rem;
     --bs-fs22: 1.125rem;
     --bs-fs20: 1rem;
+     --stack-top: 80px;
 }
 html, body {
     scroll-behavior: smooth;
@@ -1754,7 +1755,7 @@ footer {
 
 /* ===== stacking cards: sidebar + cards ===== */
 .stacking-layout {
-    --stack-top: 110px;
+
     display: grid;
     grid-template-columns: 330px minmax(0, 1fr);
     gap: 1.5rem;
@@ -1776,7 +1777,7 @@ footer {
     width: 100%;
     padding: 12px 20px;
     text-align: left;
-    font-size: var(--bs-fs30);
+    font-size: var(--bs-fs24);
     font-weight: 400;
     line-height: 1.2;
     color: var(--bs-textlightgrey);
