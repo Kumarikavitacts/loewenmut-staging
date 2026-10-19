@@ -1001,7 +1001,7 @@ span.txt-008:before {
         }
         .work-info-card {
             width: calc(50% - 0.5rem);
-	        min-height: 65px;
+	        min-height: 95px;
 	        left: unset;
 	        right: unset;
 	        top: unset;
@@ -1319,6 +1319,10 @@ footer {
         }
         }
     }
+    .bg_theme_work_station .work-info-card {
+ 
+        min-height: 110px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1393,10 +1397,14 @@ header .navbar{
         font-size: var(--bs-fs20);
     }
 
+
 }
 
 @media (max-width: 360px) {
-   
+       .bg_theme_work_station .work-info-card {
+ 
+        min-height: 120px;
+    }
     .project-showcase {
         .project-image-card {
             .project-image-info {
