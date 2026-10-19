@@ -29,7 +29,7 @@ const HeroSkeleton = () => {
         </div>
       </section>
 
-      <section className="pb_3 feature_section ">
+      <section className="pb_3 feature_section d-none d-md-block">
         <div className="container">
           <hr />
           <div className="row feature_row mt-4 mt-lg-5">
