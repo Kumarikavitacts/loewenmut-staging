@@ -23,13 +23,13 @@ const Hero = ({ assets, scrollToNext }) => {
         <div className="container position-relative">
           <div className="hero_row pb-0">
 
-            {/* <img
+            <img
               src={assets.icon1}
               alt="icons"
               className="hro_icon_1"
               data-aos="zoom-in"
-            /> */}
-            <Image
+            />
+            {/* <Image
               src={assets.icon1}
               alt=""
               width={1536}
@@ -37,14 +37,14 @@ const Hero = ({ assets, scrollToNext }) => {
               className="hro_icon_1"
               sizes="80px"
               data-aos="zoom-in"
-            />
-            {/* <img
+            /> */}
+            <img
               src={assets.icon2}
               alt="icons"
               className="hro_icon_2"
               data-aos="zoom-in"
-            /> */}
-            <Image
+            />
+            {/* <Image
               src={assets.icon2}
               alt=""
               width={1402}
@@ -52,7 +52,7 @@ const Hero = ({ assets, scrollToNext }) => {
               className="hro_icon_2"
               sizes="80px"
               data-aos="zoom-in"
-            />
+            /> */}
 
             <h1 className="text-center">
               <span>
@@ -77,37 +77,37 @@ const Hero = ({ assets, scrollToNext }) => {
             <div className="hero_tech_text">
 
               <div className="htt_left">
-                {/* <img
+                <img
                   src={assets.icon3}
                   alt="icons"
                   data-aos="zoom-in"
-                /> */}
-                <Image
+                />
+                {/* <Image
                   src={assets.icon3}
                   alt=""
                   width={1254}
                   height={1254}
                   sizes="120px"
                   data-aos="zoom-in"
-                />
+                /> */}
                 <p>{beschreibung}</p>
               </div>
 
               <div className="htt_right">
 
-                {/* <img
+                <img
                   src={assets.icon4}
                   alt="icons"
                   data-aos="zoom-in"
-                /> */}
-                <Image
+                />
+                {/* <Image
                   src={assets.icon4}
                   alt=""
                   width={1254}
                   height={1254}
                   sizes="80px"
                   data-aos="zoom-in"
-                />
+                /> */}
                 <button
                   type="button"
                   className="scroll-down-btn"
