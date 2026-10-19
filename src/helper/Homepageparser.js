@@ -1,4 +1,5 @@
 // src/helper/Homepageparser.js
+import { getNewsMedia } from "@/helper/NewsMedia";
 
 export const Homepageparser = (apiData) => {
   if (!apiData) return null;
@@ -8,12 +9,7 @@ export const Homepageparser = (apiData) => {
   // --------------------------------
 
   const normalizedNews = (apiData?.News?.news || []).map((item) => {
-    const image =
-      item?.Bild?.formats?.large ||
-      item?.Bild?.formats?.small ||
-      item?.Bild?.formats?.medium||
-      item?.Bild?.formats?.thumbnail||
-      item?.Bild;
+    const media = getNewsMedia(item);
 
     const category = item?.news_kategories?.[0];
 
@@ -32,12 +28,14 @@ export const Homepageparser = (apiData) => {
       date: item?.Publikation || "",
       slug: item?.slug || "",
 
-      image: image?.url || "",
+      // Image / Video (decided by Bild_oder_Video)
+      mediaType: media.mediaType,
+      image: media.image,
+      videoUrl: media.videoUrl,
+      videoMime: media.videoMime,
+      posterUrl: media.posterUrl,
 
-      alternativeText:
-        item?.Bild?.alternativeText ||
-        item?.Titel ||
-        "News",
+      alternativeText: media.alternativeText,
 
       // Category data from backend
       category: category?.Titel || "",

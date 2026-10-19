@@ -79,6 +79,17 @@ const NewsCard = ({
           data-aos="slide-up"
         >
           {newsData.map((news) => {
+            const isVideo =
+              news?.mediaType === "Video" && news?.videoUrl;
+
+            const videoUrl = isVideo
+              ? getMediaUrl(news.videoUrl)
+              : "";
+
+            const posterUrl = news?.posterUrl
+              ? getMediaUrl(news.posterUrl)
+              : undefined;
+
             const imageUrl = news?.image
               ? getMediaUrl(news.image)
               : DEFAULT_NEWS_IMAGE;
@@ -112,17 +123,30 @@ const NewsCard = ({
                       </span>
                     )}
 
-                    {/* Image */}
-                    {imageUrl && (
-                      <img
-                        src={imageUrl}
-                        alt={
-                          news?.alternativeText ||
-                          news?.title ||
-                          "News"
-                        }
+                    {/* Video or Image (backend: Bild_oder_Video) */}
+                    {isVideo ? (
+                      <video
                         className="w-100"
+                        src={videoUrl}
+                        poster={posterUrl}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        preload="metadata"
                       />
+                    ) : (
+                      imageUrl && (
+                        <img
+                          src={imageUrl}
+                          alt={
+                            news?.alternativeText ||
+                            news?.title ||
+                            "News"
+                          }
+                          className="w-100"
+                        />
+                      )
                     )}
 
                   </div>

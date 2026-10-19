@@ -3,6 +3,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import FilterTabs from "@/components/FilterTabs";
 import InnerBnanner from "@/components/InnerBanner";
+import { getNewsMedia } from "@/helper/NewsMedia";
 import NewsCard from "@/components/ResuableComponents/NewsCard";
 import InnerBannerSkeleton from "@/components/Skeleton/InnerBannerSkeleton";
 
@@ -142,12 +143,18 @@ const News = () => {
 
         date: item?.Publikation,
 
-        image: item?.Bild?.url || "",
-
-        alternativeText:
-          item?.Bild?.alternativeText ||
-          item?.Titel ||
-          "",
+        // Image / Video (decided by Bild_oder_Video)
+        ...(() => {
+          const media = getNewsMedia(item);
+          return {
+            mediaType: media.mediaType,
+            image: media.image,
+            videoUrl: media.videoUrl,
+            videoMime: media.videoMime,
+            posterUrl: media.posterUrl,
+            alternativeText: media.alternativeText,
+          };
+        })(),
 
         // Category title
         category:

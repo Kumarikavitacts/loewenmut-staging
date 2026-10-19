@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "next/navigation";
 
 import InnerBnanner from "@/components/InnerBanner";
+import { getNewsMedia } from "@/helper/NewsMedia";
 import NewsCard from "@/components/ResuableComponents/NewsCard";
 import TalkSection from "@/components/TalkSection";
 import StatusHeader from "@/components/ResuableComponents/StatusHeader";
@@ -87,14 +88,18 @@ const NewsInner = () => {
           description: item?.Text || "",
           date: formatDate(item?.Publikation),
 
-          image: item?.Bild?.url
-            ? getMediaUrl(item.Bild.url)
-            : "",
-
-          alternativeText:
-            item?.Bild?.alternativeText ||
-            item?.Titel ||
-            "",
+          // Image / Video (decided by Bild_oder_Video)
+          ...(() => {
+            const media = getNewsMedia(item);
+            return {
+              mediaType: media.mediaType,
+              image: media.image,
+              videoUrl: media.videoUrl,
+              videoMime: media.videoMime,
+              posterUrl: media.posterUrl,
+              alternativeText: media.alternativeText,
+            };
+          })(),
 
           category:
             firstCategory?.Titel || "",

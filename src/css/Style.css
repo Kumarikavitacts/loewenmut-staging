@@ -1185,7 +1185,8 @@ header {
         height: 250px;
         overflow: hidden;
         border-radius: var(--radius-30);
-        img {
+        img,
+        video {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -1261,7 +1262,8 @@ header {
     }
     .news_item:hover {
         .news_img {
-            img {
+            img,
+            video {
                 transform: scale(1.1);
             }
         }
