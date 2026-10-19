@@ -142,7 +142,7 @@ const handleSuggestionClick = (item) => {
   }, []);
 
   return (
-    <div className="pt_3 bg_theme_work_station">
+    <div className="pt_2 bg_theme_work_station">
       <div
         ref={sectionRef}
         className={`work-section${inView ? " is-inview" : ""}`}

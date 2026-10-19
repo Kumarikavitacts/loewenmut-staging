@@ -557,6 +557,9 @@ form {
     padding-top: 60px;
     padding-bottom: 60px;
 }
+.pt_2{
+    padding-top:30px
+}
 .pt_3 {
     padding-top: 60px;
 }
@@ -1456,6 +1459,7 @@ footer {
         display: flex;
         align-items: center;
         justify-content: center;
+        padding-top:22px
     }
     .work-phone {
         width: min(100%, 420px);
@@ -1811,7 +1815,7 @@ footer {
     background: var(--bs-lightgrey);   /* must stay opaque so the card below is hidden */
     border: 1px solid var(--bs-bordergrey);
     border-radius: var(--radius-20);
-    box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.08);
+
 }
 .stacking-content {
     flex: 1 1 50%;
@@ -1906,6 +1910,9 @@ footer {
     pointer-events: none;       /* never blocks the click on the card */
     will-change: transform;
 }
+/* .insight-cursor-ring-text{
+    font-size: var(--bs-fs26);
+} */
 .insight-cursor-disc {
     background: color-mix(in srgb, var(--bs-themecolor) 80%, transparent);
     width: 90px;
@@ -1936,6 +1943,7 @@ footer {
     fill: currentColor;
     font-weight: 700;
     user-select: none;
+    font-size: var(--bs-fs35);
 }
 
 /* ===== end insight cursor ===== */

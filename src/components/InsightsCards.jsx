@@ -31,6 +31,7 @@ const RING_RADIUS = 72;
 const RING_LENGTH = 2 * Math.PI * RING_RADIUS;
 
 
+
 const InsightCursorRing = ({ text }) => {
   const pathId = useId().replace(/:/g, "");
 
@@ -46,11 +47,6 @@ const InsightCursorRing = ({ text }) => {
     : Math.max(2, Math.round(28 / unit.length));
 
   const ringText = unit.repeat(repeats).replace(/ /g, "\u00A0");
-
-  const fontSize = Math.min(
-    24,
-    (0.9 * RING_LENGTH) / (ringText.length * 0.55)
-  );
 
   return (
     <svg
@@ -69,7 +65,7 @@ const InsightCursorRing = ({ text }) => {
         />
       </defs>
 
-      <text style={{ fontSize }}>
+      <text className="insight-cursor-ring-text">
         <textPath
           href={`#${pathId}`}
           textLength={RING_LENGTH - 2}
