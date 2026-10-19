@@ -1370,6 +1370,11 @@ header .navbar{
 }
 
 }
+@media (max-width: 460px) {
+    :root {
+        --bs-fs100: clamp(3.5rem, 9vw, 2.625rem);
+    }
+}
 
 @media (max-width: 375px) {
 
@@ -1484,7 +1489,7 @@ html {
 /* Phones */
 @media (max-width: 575px) {
     :root {
-        --bs-fs100: clamp(2.125rem, 9vw, 2.625rem);
+        --bs-fs100: clamp(34rem, 9vw, 2.625rem);
         --bs-fs80:  clamp(1.875rem, 7.5vw, 2.25rem);
         --bs-fs70:  clamp(1.8125rem, 7vw, 2.125rem);
         --bs-fs60:  clamp(1.6875rem, 6.5vw, 2rem);
@@ -1535,7 +1540,7 @@ html {
 /* Extremely narrow (large Display size / split-screen) */
 @media (max-width: 340px) {
     :root {
-        --bs-fs100: clamp(1.75rem, 8.5vw, 2rem);
+         --bs-fs100: clamp(3rem, 8.5vw, 2rem);
         --bs-fs80:  clamp(1.625rem, 8vw, 1.75rem);
         --bs-fs70:  clamp(1.5625rem, 7.5vw, 1.6875rem);
         --bs-fs60:  clamp(1.5rem, 7.2vw, 1.625rem);

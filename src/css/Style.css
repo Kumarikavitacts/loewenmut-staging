@@ -1815,7 +1815,9 @@ footer {
     display: flex;
     align-items: stretch;
     overflow: hidden;
-    background: var(--bs-lightgrey);   /* must stay opaque so the card below is hidden */
+   background-color: #fff;
+    background-image: url("/images/bg-pattern.webp");
+    background-repeat: repeat;  /* must stay opaque so the card below is hidden */
     border: 1px solid var(--bs-bordergrey);
     border-radius: var(--radius-20);
 

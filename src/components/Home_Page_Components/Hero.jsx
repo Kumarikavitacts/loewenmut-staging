@@ -63,14 +63,14 @@ const Hero = ({ assets, scrollToNext }) => {
                 className="line"
                 data-text={titel1}
               >
-                {titel1}
+                {renderHtmlText(titel1)}
               </div>
 
               <div
                 className="line line-2"
                 data-text={titel2}
               >
-                {titel2}
+                {renderHtmlText(titel2)}
               </div>
             </h1>
 
