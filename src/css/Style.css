@@ -762,7 +762,7 @@ header {
             display: inline-block;
             width: 95px;
             height: 80px;
-            background: url("/images/dot_yellow.png") no-repeat center;
+            background: url("/images/dot_yellow.webp") no-repeat center;
             background-size: contain;
             margin-bottom: -11px;
             margin-left: 10px;
@@ -3465,7 +3465,7 @@ footer {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    row-gap: 0.5rem;
+
     max-width: 100%;
     margin: 0;
     padding: 0;
@@ -3562,31 +3562,6 @@ footer {
     border-radius: 50rem;
 }
 
-@media (min-width: 992px) {
-    .breadcrumb_nav { margin-bottom: 2.25rem; }
-    .breadcrumb_home { width: 2.75rem; height: 2.75rem; }
-    .breadcrumb_pill { font-size: 0.8125rem; padding: 0.35rem 1.1rem; }
-    .breadcrumb_item_current { max-width: min(34rem, 100%); }
-}
-@media (max-width: 575.98px) {
-    .breadcrumb_nav { margin-bottom: 1.25rem; }
-    .breadcrumb_item + .breadcrumb_item::before { width: 0.875rem; }
-    .breadcrumb_home { width: 2.25rem; height: 2.25rem; }
-    .breadcrumb_pill { padding: 0.25rem 0.7rem; font-size: 0.6875rem; }
-    .breadcrumb_item_current { max-width: 100%; }
-    .breadcrumb_skeleton { gap: 0.875rem; }
-}
-/* very narrow screens / big display zoom: stack the trail in the centre
-   instead of overflowing; each pill may use the full row width */
-@media (max-width: 360px) {
-    .breadcrumb_list { flex-direction: column; row-gap: 0.4rem; }
-    .breadcrumb_item { max-width: 100%; }
-    .breadcrumb_item + .breadcrumb_item::before {
-        width: 1px;
-        height: 0.6rem;
-    }
-    .breadcrumb_item:not(:first-child) { flex-direction: column; }
-}
 
 
 /* ===== Leistungen: previous / next service ===== */

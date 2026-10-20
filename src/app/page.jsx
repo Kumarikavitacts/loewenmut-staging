@@ -2,6 +2,7 @@ import Home from "@/components/pages/Home";
 import { homepageApiStructure } from "@/Apis/HomePage/apis";
 import { createMetadata } from "@/helper/Metadata";
 
+export const dynamic = "force-dynamic";
 export async function generateMetadata() {
   try {
     const result = await homepageApiStructure.getHeader();

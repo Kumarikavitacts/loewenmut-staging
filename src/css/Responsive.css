@@ -357,6 +357,10 @@
             object-fit: cover;
         }
     }
+     .breadcrumb_nav { margin-bottom: 2.25rem; }
+    .breadcrumb_home { width: 2.75rem; height: 2.75rem; }
+    .breadcrumb_pill { font-size: 0.8125rem; padding: 0.35rem 1.1rem; }
+    .breadcrumb_item_current { max-width: min(34rem, 100%); }
 }
 
 @media (min-width: 992px) and (max-width: 1199.98px) {
@@ -1326,11 +1330,19 @@ footer {
  
         min-height: 110px;
     }
+
+    
 }
 @media (min-width: 576px){
     .hero_section h1 br {
     display: none;
   }
+   .breadcrumb_nav { margin-bottom: 1.25rem; }
+    .breadcrumb_item + .breadcrumb_item::before { width: 0.875rem; }
+    .breadcrumb_home { width: 2.25rem; height: 2.25rem; }
+    .breadcrumb_pill { padding: 0.25rem 0.7rem; font-size: 0.6875rem; }
+    .breadcrumb_item_current { max-width: 100%; }
+    .breadcrumb_skeleton { gap: 0.875rem; }
 }
 @media (max-width: 480px) {
 .project-showcase {
@@ -1442,6 +1454,13 @@ header .navbar{
      p, li {
         line-height: 1.5;
     }
+     .breadcrumb_list { flex-direction: column; }
+    .breadcrumb_item { max-width: 100%; }
+    .breadcrumb_item + .breadcrumb_item::before {
+        width: 1px;
+        height: 0.6rem;
+    }
+    .breadcrumb_item:not(:first-child) { flex-direction: column; }
 }
 
 @media (max-width: 400px) {
@@ -1505,7 +1524,7 @@ html {
         --bs-fs30: clamp(1.4rem, 4.2vw, 1.3125rem);
         --bs-fs24: clamp(1.25rem, 3.8vw, 1.0625rem);
         --bs-fs22: clamp(1.15rem, 3.6vw, 1rem);
-        --bs-fs20: clamp(1rem, 3vw, .8125rem);
+        --bs-fs20: clamp(0.7125rem, 3vw, 1rem);
         
     }
 
