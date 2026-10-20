@@ -199,7 +199,7 @@ const Insights = () => {
                   setVisibleCount((c) => c + MOBILE_PAGE_SIZE)
                 }
               >
-                Mehr
+                mehr
                 <img src="/images/btn-arrow.svg" alt="" />
               </button>
             </div>

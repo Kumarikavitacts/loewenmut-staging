@@ -1110,6 +1110,9 @@ span.txt-008:before {
     padding-left: 20px;
     padding-right: 20px;
 }
+.sub_title:before {
+    top: 50%;
+}
 header {
     a.navbar-brand {
         max-width: 140px;
@@ -1437,7 +1440,6 @@ header .navbar{
         font-size: var(--bs-fs20);
     }
      p, li {
-        font-size: var(--bs-fs20) !important;
         line-height: 1.5;
     }
 }
@@ -1494,26 +1496,24 @@ html {
 @media (max-width: 575px) {
     :root {
         --bs-fs100: clamp(4rem, 9vw, 2.625rem);
-        --bs-fs80:  clamp(1.875rem, 7.5vw, 2.25rem);
-        --bs-fs70:  clamp(1.8125rem, 7vw, 2.125rem);
-        --bs-fs60:  clamp(1.6875rem, 6.5vw, 2rem);
-        --bs-fs50:  clamp(1.5625rem, 6vw, 1.875rem);
-        --bs-fs40:  clamp(1.375rem, 5vw, 1.625rem);
-        --bs-fs35:  clamp(1.25rem, 4.5vw, 1.4375rem);
-        --bs-fs30:  clamp(1.125rem, 4.2vw, 1.3125rem);
-        --bs-fs24:  clamp(0.9375rem, 3.8vw, 1.0625rem);
-        --bs-fs22:  clamp(0.875rem, 3.6vw, 1rem);
-        --bs-fs20: clamp(0.75rem, 3vw, 0.8125rem);
+        --bs-fs80: clamp(1.875rem, 7.5vw, 2.25rem);
+        --bs-fs70: clamp(1.8125rem, 7vw, 2.125rem);
+        --bs-fs60: clamp(2rem, 6.5vw, 2rem);
+        --bs-fs50: clamp(1.75rem, 6vw, 1.875rem);
+        --bs-fs40: clamp(1.6rem, 5vw, 1.625rem);
+        --bs-fs35: clamp(1.5rem, 4.5vw, 1.4375rem);
+        --bs-fs30: clamp(1.4rem, 4.2vw, 1.3125rem);
+        --bs-fs24: clamp(1.25rem, 3.8vw, 1.0625rem);
+        --bs-fs22: clamp(1.15rem, 3.6vw, 1rem);
+        --bs-fs20: clamp(1rem, 3vw, .8125rem);
         
     }
 
     body {
-        font-size: 1rem;
+        font-size: 1.20rem;
     }
 
-    p,
-    li {
-        font-size: 1rem;
+    p, li {
         line-height: 1.5;
     }
     
@@ -1530,26 +1530,26 @@ html {
 /* Very small phones, or phones set to a large Display size */
 @media (max-width: 375px) {
     :root {
-        --bs-fs100: clamp(3.25rem, 8.8vw, 2.25rem);
-        --bs-fs80:  clamp(1.75rem, 7.5vw, 1.875rem);
+        --bs-fs100: clamp(3rem, 8.8vw, 2.25rem);
+        /*--bs-fs80:  clamp(1.75rem, 7.5vw, 1.875rem);
         --bs-fs70:  clamp(1.6875rem, 7vw, 1.8125rem);
         --bs-fs60:  clamp(1.625rem, 6.8vw, 1.75rem);
         --bs-fs50:  clamp(1.5rem, 6.2vw, 1.6875rem);
         --bs-fs40:  clamp(1.3125rem, 5.5vw, 1.5rem);
         --bs-fs35:  clamp(1.1875rem, 5vw, 1.375rem);
-        --bs-fs30:  clamp(1.125rem, 4.8vw, 1.25rem);
+        --bs-fs30:  clamp(1.125rem, 4.8vw, 1.25rem);*/
     }
 }
 
 /* Extremely narrow (large Display size / split-screen) */
 @media (max-width: 340px) {
     :root {
-         --bs-fs100: clamp(3rem, 8.5vw, 2rem);
-        --bs-fs80:  clamp(1.625rem, 8vw, 1.75rem);
+         --bs-fs100: clamp(2.75rem, 8.5vw, 2rem);
+        /*--bs-fs80:  clamp(1.625rem, 8vw, 1.75rem);
         --bs-fs70:  clamp(1.5625rem, 7.5vw, 1.6875rem);
         --bs-fs60:  clamp(1.5rem, 7.2vw, 1.625rem);
         --bs-fs50:  clamp(1.375rem, 6.8vw, 1.5rem);
-        --bs-fs40:  clamp(1.25rem, 6vw, 1.375rem);
+        --bs-fs40:  clamp(1.25rem, 6vw, 1.375rem);*/
     }
 }
 
