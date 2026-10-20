@@ -1149,7 +1149,7 @@ header {
             width: 25px;
             height: 25px;
             margin-bottom: -5px;
-            margin-left: 10px;
+            margin-left: 4px;
         }
     }
     .hero_row {
@@ -1530,7 +1530,7 @@ html {
 /* Very small phones, or phones set to a large Display size */
 @media (max-width: 375px) {
     :root {
-        --bs-fs100: clamp(2rem, 8.8vw, 2.25rem);
+        --bs-fs100: clamp(3.25rem, 8.8vw, 2.25rem);
         --bs-fs80:  clamp(1.75rem, 7.5vw, 1.875rem);
         --bs-fs70:  clamp(1.6875rem, 7vw, 1.8125rem);
         --bs-fs60:  clamp(1.625rem, 6.8vw, 1.75rem);

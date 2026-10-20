@@ -3587,3 +3587,52 @@ footer {
     }
     .breadcrumb_item:not(:first-child) { flex-direction: column; }
 }
+
+
+/* ===== Leistungen: previous / next service ===== */
+.leistung_nav_section {
+    padding: 30px 0;
+}
+.leistung_nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+.leistung_nav_link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--bs-black);
+    text-decoration: none;
+    font-size: 14px;
+    max-width: 48%;
+}
+.leistung_nav_link span {
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--color_8);
+    transition: border-color 0.3s ease;
+}
+.leistung_nav_link svg {
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+.leistung_nav_link:hover span {
+    border-color: var(--bs-black);
+}
+.leistung_nav_link.prev:hover svg {
+    transform: translateX(-4px);
+}
+.leistung_nav_link.next:hover svg {
+    transform: translateX(4px);
+}
+@media (max-width: 575.98px) {
+    .leistung_nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    .leistung_nav_link {
+        max-width: 100%;
+    }
+}

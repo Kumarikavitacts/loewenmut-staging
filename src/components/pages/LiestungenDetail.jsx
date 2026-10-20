@@ -7,7 +7,10 @@ import Link from "next/link";
 import InnerBnanner from "@/components/InnerBanner";
 import TalkSection from "@/components/TalkSection";
 import AnimatedText from "@/components/AnimatedText";
-import { getLeistungBySlug } from "@/Apis/leistungenDetailPage/api";
+import {
+  getLeistungBySlug,
+  getLeistungSiblings,
+} from "@/Apis/leistungenDetailPage/api";
 import { getMediaUrl } from "@/helper/MediaUrl";
 import LeistungenDetailSkeleton from "@/components/Skeleton/LeistungenDetailSkeleton";
 import StatusHeader from "@/components/ResuableComponents/StatusHeader";
@@ -136,6 +139,7 @@ const LeistungenDetail = () => {
   const [leistungData, setLeistungData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [siblings, setSiblings] = useState({ prev: null, next: null });
 
   // ===================================================
   // FETCH DATA
@@ -157,6 +161,10 @@ const LeistungenDetail = () => {
         }
 
         setLeistungData(data);
+
+        // previous / next service (by sortOrder)
+        const nav = await getLeistungSiblings(slug);
+        setSiblings(nav);
 
       } catch (err) {
         console.error("Leistung detail error:", err);
@@ -571,6 +579,47 @@ const LeistungenDetail = () => {
 
       )}
 
+
+
+      {/* =================================================
+          PREVIOUS / NEXT SERVICE
+      ================================================= */}
+
+      {(siblings.prev || siblings.next) && (
+        <section className="leistung_nav_section">
+          <div className="container">
+            <div className="leistung_nav">
+              {siblings.prev ? (
+                <Link
+                  href={`/leistungen/${siblings.prev.Slug}`}
+                  className="leistung_nav_link prev"
+                >
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M14 8H2M7 3L2 8l5 5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <span>hier geht`s zurück zu {siblings.prev.Titel}</span>
+                </Link>
+              ) : (
+                <span />
+              )}
+
+              {siblings.next ? (
+                <Link
+                  href={`/leistungen/${siblings.next.Slug}`}
+                  className="leistung_nav_link next"
+                >
+                  <span>hier geht`s zu {siblings.next.Titel}</span>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M2 8h12M9 3l5 5-5 5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </Link>
+              ) : (
+                <span />
+              )}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* =================================================
           TALK

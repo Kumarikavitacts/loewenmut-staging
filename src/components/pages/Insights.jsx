@@ -12,10 +12,29 @@ import InnerBannerSkeleton from "@/components/Skeleton/InnerBannerSkeleton";
 import CardGridSkeleton from "@/components/Skeleton/CardGridSkeleton";
 import StatusHeader from "@/components/ResuableComponents/StatusHeader";
 
+const MOBILE_PAGE_SIZE = 6;
+
 const Insights = () => {
   const [headingData, setHeadingData] = useState(null);
   const [insights, setInsights] = useState([]);
   const [activeTab, setActiveTab] = useState("all");
+
+  // Mobile only: show 6 insights at first, "Mehr" loads the next 6
+  const [isMobile, setIsMobile] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(MOBILE_PAGE_SIZE);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 575.98px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  // start again at 6 when the category changes
+  useEffect(() => {
+    setVisibleCount(MOBILE_PAGE_SIZE);
+  }, [activeTab]);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -87,6 +106,11 @@ const Insights = () => {
     );
   }, [insights, activeTab]);
 
+  const visibleInsights = isMobile
+    ? filteredInsights.slice(0, visibleCount)
+    : filteredInsights;
+  const hasMore = isMobile && visibleCount < filteredInsights.length;
+
   if (loading) {
     return (
       <main>
@@ -152,7 +176,7 @@ const Insights = () => {
           {/* Insight Cards */}
           <div className="row g-3">
             {filteredInsights.length > 0 ? (
-              filteredInsights.map((insight) => (
+              visibleInsights.map((insight) => (
                 <InsightCard
                   key={insight.id}
                   insight={insight}
@@ -164,6 +188,22 @@ const Insights = () => {
               </div>
             )}
           </div>
+
+          {/* Mehr button (mobile only) */}
+          {hasMore && (
+            <div className="theme_btn_wrap mt-4 d-flex justify-content-center">
+              <button
+                type="button"
+                className="button theme_btn"
+                onClick={() =>
+                  setVisibleCount((c) => c + MOBILE_PAGE_SIZE)
+                }
+              >
+                Mehr
+                <img src="/images/btn-arrow.svg" alt="" />
+              </button>
+            </div>
+          )}
 
         </div>
       </section>
