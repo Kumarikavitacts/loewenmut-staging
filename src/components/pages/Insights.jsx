@@ -31,9 +31,22 @@ const Insights = () => {
     return () => mq.removeEventListener("change", update);
   }, []);
 
+  // Touch devices: id of the tapped card (its image/video is shown)
+  const [touchActiveId, setTouchActiveId] = useState(null);
+
+  // tapping anywhere outside a card hides the image/video again
+  useEffect(() => {
+    const onOutside = (e) => {
+      if (!e.target.closest?.(".insight-card")) setTouchActiveId(null);
+    };
+    document.addEventListener("pointerdown", onOutside);
+    return () => document.removeEventListener("pointerdown", onOutside);
+  }, []);
+
   // start again at 6 when the category changes
   useEffect(() => {
     setVisibleCount(MOBILE_PAGE_SIZE);
+    setTouchActiveId(null);
   }, [activeTab]);
 
   const [loading, setLoading] = useState(true);
@@ -180,6 +193,8 @@ const Insights = () => {
                 <InsightCard
                   key={insight.id}
                   insight={insight}
+                  isTouchActive={touchActiveId === insight.id}
+                  onTouchActivate={setTouchActiveId}
                 />
               ))
             ) : (
@@ -199,7 +214,7 @@ const Insights = () => {
                   setVisibleCount((c) => c + MOBILE_PAGE_SIZE)
                 }
               >
-                mehr
+                Mehr
                 <img src="/images/btn-arrow.svg" alt="" />
               </button>
             </div>

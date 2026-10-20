@@ -3605,7 +3605,7 @@ footer {
     gap: 12px;
     color: var(--bs-black);
     text-decoration: none;
-    font-size: 14px;
+    font-size: var(--bs-fs22);
     max-width: 48%;
 }
 .leistung_nav_link span {

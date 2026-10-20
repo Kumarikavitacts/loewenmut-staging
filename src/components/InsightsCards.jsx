@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useId, useRef, useState } from "react";
+import React, { useEffect, useId, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getMediaUrl } from "@/helper/MediaUrl";
 
@@ -79,11 +79,19 @@ const InsightCursorRing = ({ text }) => {
 };
 
 
-export const InsightCard = ({ insight }) => {
+export const InsightCard = ({
+  insight,
+  isTouchActive = false, // set by the page: card was tapped on a touch device
+  onTouchActivate, // called when this card is tapped the first time
+}) => {
   const router = useRouter();
   const videoRef = useRef(null);
   const cursorRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
+  const pointerTypeRef = useRef("mouse");
+
+  // image/video is shown on mouse hover (desktop) or on tap (mobile)
+  const isActive = isHovered || isTouchActive;
 
   const linkType = getInsightLinkType(insight); // "inner" | "outer" | null
 
@@ -115,26 +123,49 @@ export const InsightCard = ({ insight }) => {
     }px, 0)`;
   };
 
-  const handleMouseEnter = (e) => {
+  // mouse only: real hover (touch devices have no hover)
+  const handlePointerEnter = (e) => {
+    pointerTypeRef.current = e.pointerType;
+    if (e.pointerType !== "mouse") return;
+
     setIsHovered(true);
     moveCursor(e); // start exactly under the mouse
-
-    if (isVideo && videoRef.current) {
-      videoRef.current.currentTime = 0;
-      videoRef.current.play().catch(() => {});
-    }
   };
 
-  const handleMouseLeave = () => {
+  const handlePointerMove = (e) => {
+    if (e.pointerType === "mouse" && linkType) moveCursor(e);
+  };
+
+  const handlePointerLeave = (e) => {
+    if (e.pointerType !== "mouse") return;
     setIsHovered(false);
-
-    if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-    }
   };
+
+  const handlePointerDown = (e) => {
+    pointerTypeRef.current = e.pointerType;
+  };
+
+  // play the video while active, reset it when not active
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isActive) {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+      video.currentTime = 0;
+    }
+  }, [isActive]);
 
   const handleCardClick = () => {
+    // Touch devices: first tap shows the image/video, second tap opens the link
+    if (pointerTypeRef.current !== "mouse" && !isTouchActive) {
+      onTouchActivate?.(insight.id);
+      return;
+    }
+
     if (insight?.Detailseite === "Ja" && insight?.Slug) {
       router.push(`/insights/${insight.Slug}`);
       return;
@@ -157,11 +188,12 @@ export const InsightCard = ({ insight }) => {
         }`}
         style={{
           aspectRatio: "375 / 345",
-          backgroundColor: isHovered ? "transparent" : backgroundColor,
+          backgroundColor: isActive ? "transparent" : backgroundColor,
         }}
-        onMouseEnter={handleMouseEnter}
-        onMouseMove={linkType ? moveCursor : undefined}
-        onMouseLeave={handleMouseLeave}
+        onPointerEnter={handlePointerEnter}
+        onPointerMove={handlePointerMove}
+        onPointerLeave={handlePointerLeave}
+        onPointerDown={handlePointerDown}
         onClick={handleCardClick}
       >
         {/* IMAGE */}
@@ -172,7 +204,7 @@ export const InsightCard = ({ insight }) => {
             className="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
             loading="lazy"
             style={{
-              opacity: isHovered ? 1 : 0,
+              opacity: isActive ? 1 : 0,
               transition: "opacity 0.4s ease",
             }}
           />
@@ -189,7 +221,7 @@ export const InsightCard = ({ insight }) => {
             preload="metadata"
             className="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
             style={{
-              opacity: isHovered ? 1 : 0,
+              opacity: isActive ? 1 : 0,
               transition: "opacity 0.4s ease",
             }}
           />
