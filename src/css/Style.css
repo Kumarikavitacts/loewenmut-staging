@@ -1204,7 +1204,7 @@ header {
         font-size: var(--bs-fs20);
         font-family: var(--bs-roboto);
         font-weight: 400;
-        padding: 4px 15px 1px;
+        padding: 4px 15px 3px;
         border-radius: var(--radius-50);
     }
     
@@ -1504,7 +1504,7 @@ footer {
         }
         .work-intro {
             margin: auto;
-            width: 70%;
+            width: 80%;
             font-size: var(--bs-fs20);
             line-height: 1.45;
             color: var(--bs-textdarkgrey);
@@ -1534,8 +1534,8 @@ footer {
         }
         /* small white "x" badge on the selected suggestion */
         .work-suggestion-close {
-            width: 18px;
-            height: 18px;
+            width: 22px;
+            height: 22px;
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
@@ -1547,6 +1547,10 @@ footer {
             background: #fff;
             border: 1px solid #e6e6e6;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+            svg {
+                width: 60%;
+                height: 60%;
+            }
         }
     }
     .work-search {
