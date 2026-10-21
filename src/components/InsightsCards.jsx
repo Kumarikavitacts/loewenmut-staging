@@ -91,7 +91,11 @@ export const InsightCard = ({
   const router = useRouter();
   const videoRef = useRef(null);
   const cursorRef = useRef(null);
+  const cardRef = useRef(null);
+  const imageRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
+  // media fades in only once it is really loaded (no pop-in on slow mobile data)
+  const [mediaReady, setMediaReady] = useState(false);
   const pointerTypeRef = useRef("mouse");
 
   // image/video is shown on mouse hover (desktop) or on tap (mobile)
@@ -115,6 +119,8 @@ export const InsightCard = ({
 
   const isVideo = insight?.Bild_oder_Video === "Video" && videoUrl;
   const isImage = insight?.Bild_oder_Video === "Bild" && imageUrl;
+
+  const showMedia = isActive && mediaReady;
 
   // move the round cursor with the mouse (no re-render, direct transform)
   const moveCursor = (e) => {
@@ -148,6 +154,32 @@ export const InsightCard = ({
   const handlePointerDown = (e) => {
     pointerTypeRef.current = e.pointerType;
   };
+
+  // image may already be loaded (cache) before React attached onLoad
+  useEffect(() => {
+    if (imageRef.current?.complete && imageRef.current.naturalWidth > 0) {
+      setMediaReady(true);
+    }
+    if (videoRef.current && videoRef.current.readyState >= 2) {
+      setMediaReady(true);
+    }
+  }, [imageUrl, videoUrl]);
+
+  // Touch: when the tapped card scrolls out of view, hide it again
+  // (stops the video from playing off-screen)
+  useEffect(() => {
+    if (!isTouchActive || !cardRef.current) return;
+    if (typeof IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) onTouchActivate?.(null);
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(cardRef.current);
+    return () => observer.disconnect();
+  }, [isTouchActive, onTouchActivate]);
 
   // play the video while active; on leave wait for the fade-out to finish
   // before pausing/resetting, otherwise the frame jumps while fading
@@ -196,9 +228,13 @@ export const InsightCard = ({
         className={`insight-card position-relative overflow-hidden rounded-4${
           linkType ? " has-link" : ""
         }`}
+        ref={cardRef}
         style={{
           aspectRatio: "375 / 345",
           backgroundColor, // always stay visible; media fades in on top of it
+          isolation: "isolate", // keeps rounded corners clean on iOS while scaling
+          touchAction: "manipulation", // no double-tap zoom on the 2nd tap
+          WebkitTapHighlightColor: "transparent",
         }}
         onPointerEnter={handlePointerEnter}
         onPointerMove={handlePointerMove}
@@ -209,13 +245,15 @@ export const InsightCard = ({
         {/* IMAGE */}
         {isImage && (
           <img
+            ref={imageRef}
+            onLoad={() => setMediaReady(true)}
             src={imageUrl}
             alt={insight?.Bild?.alternativeText || insight?.Titel || ""}
             className="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
             loading="lazy"
             style={{
-              opacity: isActive ? 1 : 0,
-              transform: isActive ? "scale(1)" : "scale(1.06)",
+              opacity: showMedia ? 1 : 0,
+              transform: showMedia ? "scale(1)" : "scale(1.06)",
               transition: MEDIA_TRANSITION,
               willChange: "opacity, transform",
             }}
@@ -230,11 +268,12 @@ export const InsightCard = ({
             muted
             loop
             playsInline
-            preload="metadata"
+            preload={isActive ? "auto" : "metadata"}
+            onLoadedData={() => setMediaReady(true)}
             className="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
             style={{
-              opacity: isActive ? 1 : 0,
-              transform: isActive ? "scale(1)" : "scale(1.06)",
+              opacity: showMedia ? 1 : 0,
+              transform: showMedia ? "scale(1)" : "scale(1.06)",
               transition: MEDIA_TRANSITION,
               willChange: "opacity, transform",
             }}

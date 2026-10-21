@@ -1,6 +1,10 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+
+// useLayoutEffect on the client (runs before paint), useEffect on the server
+const useIsoLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
 import { getGermanyTime, getIndiaTime } from "@/helper/Timer";
 import { useSelector } from "react-redux";
 import { renderHtmlText } from "@/components/ResuableComponents/renderHtmlText";
@@ -19,12 +23,36 @@ function measureCardDrops(section) {
   });
 }
 
+/*
+ * Mobile: after a suggestion is chosen the other cards disappear and the
+ * section becomes shorter. Scroll so the top of the section (the card above
+ * the phone) is visible below the fixed header, but never past the bottom of
+ * the section, so the page can't run on into the next section (Insights).
+ * Runs before paint, so there is no flash of the next section.
+ */
+function scrollToWorkSection(section) {
+  const box = section.parentElement || section; // yellow box incl. padding
+  const headerH = document.querySelector("header")?.offsetHeight || 0;
+  const vh = window.innerHeight;
+  const y = window.scrollY;
+  const rect = box.getBoundingClientRect();
+
+  const boxTop = rect.top + y;
+  const boxBottom = rect.bottom + y;
+
+  const top = Math.max(0, Math.min(boxTop - headerH - 8, boxBottom - vh));
+
+  // "instant" overrides the global scroll-behavior: smooth
+  window.scrollTo({ top, behavior: "instant" });
+}
+
 function WorkSection() {
   const sectionRef = useRef(null);
   const [inView, setInView] = useState(false);
   const [message, setMessage] = useState("");
   const [germanyTime, setGermanyTime] = useState(""); // ← fixed
   const [indiaTime, setIndiaTime] = useState("");
+  const pendingScrollRef = useRef(null);
 
   const WorkData = useSelector((state) => state.home.data?.workMobile);
 
@@ -57,40 +85,23 @@ function WorkSection() {
   const hasMatch = Boolean(message.trim() && matchedCard);
 
   // Click a suggestion to select it; click the active one again to deselect.
+  const handleSuggestionClick = (item) => {
+    const isDeselecting =
+      message.trim().toLowerCase() === item.toLowerCase();
+    const isMobile = window.innerWidth <= 767;
 
-const handleSuggestionClick = (item) => {
-  const isDeselecting =
-    message.trim().toLowerCase() === item.toLowerCase();
+    pendingScrollRef.current = isMobile && !isDeselecting ? item : null;
 
-  setMessage(isDeselecting ? "" : item);
+    setMessage(isDeselecting ? "" : item);
+  };
 
-  // Scroll only on mobile devices
-  if (window.innerWidth <= 767 && !isDeselecting) {
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const section = sectionRef.current;
-        if (!section) return;
-
-        const card = Array.from(
-          section.querySelectorAll(".work-info-card")
-        ).find(
-          (el) =>
-            el.querySelector("h4")?.textContent
-              .trim()
-              .toLowerCase() === item.trim().toLowerCase()
-        );
-
-        if (card) {
-          card.scrollIntoView({
-            behavior: "smooth",
-            block: "center",
-          });
-        }
-      });
-    });
-  }
-};
-
+  // Runs right after React rendered the filtered cards, before the browser
+  // paints, so the target position is based on the final layout.
+  useIsoLayoutEffect(() => {
+    if (!pendingScrollRef.current) return;
+    pendingScrollRef.current = null;
+    if (sectionRef.current) scrollToWorkSection(sectionRef.current);
+  }, [message]);
 
   // Play the "cards drop in" animation every time the section scrolls into
   // view, and reset it when the section leaves the screen so it can replay.
