@@ -85,8 +85,8 @@ const InsightCursorRing = ({ text }) => {
 
 export const InsightCard = ({
   insight,
-  isTouchActive = false, // set by the page: card was tapped on a touch device
-  onTouchActivate, // called when this card is tapped the first time
+  isTouchActive = false, // set by the page: this card was touched last
+  onTouchActivate, // called as soon as the card is touched
 }) => {
   const router = useRouter();
   const videoRef = useRef(null);
@@ -97,8 +97,11 @@ export const InsightCard = ({
   // media fades in only once it is really loaded (no pop-in on slow mobile data)
   const [mediaReady, setMediaReady] = useState(false);
   const pointerTypeRef = useRef("mouse");
+  const wasActiveRef = useRef(false);
 
   // image/video is shown on mouse hover (desktop) or on tap (mobile)
+  // Mouse: real hover. Touch: the card touched last stays active (the page
+  // clears it when the user touches somewhere else).
   const isActive = isHovered || isTouchActive;
 
   const linkType = getInsightLinkType(insight); // "inner" | "outer" | null
@@ -153,6 +156,13 @@ export const InsightCard = ({
 
   const handlePointerDown = (e) => {
     pointerTypeRef.current = e.pointerType;
+    if (e.pointerType === "mouse") return;
+
+    // remember if the card was already showing its media BEFORE this touch
+    wasActiveRef.current = isTouchActive;
+
+    // show the effect the moment the finger touches the card
+    onTouchActivate?.(insight.id);
   };
 
   // image may already be loaded (cache) before React attached onLoad
@@ -164,22 +174,6 @@ export const InsightCard = ({
       setMediaReady(true);
     }
   }, [imageUrl, videoUrl]);
-
-  // Touch: when the tapped card scrolls out of view, hide it again
-  // (stops the video from playing off-screen)
-  useEffect(() => {
-    if (!isTouchActive || !cardRef.current) return;
-    if (typeof IntersectionObserver === "undefined") return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) onTouchActivate?.(null);
-      },
-      { threshold: 0.15 }
-    );
-    observer.observe(cardRef.current);
-    return () => observer.disconnect();
-  }, [isTouchActive, onTouchActivate]);
 
   // play the video while active; on leave wait for the fade-out to finish
   // before pausing/resetting, otherwise the frame jumps while fading
@@ -202,11 +196,9 @@ export const InsightCard = ({
   }, [isActive]);
 
   const handleCardClick = () => {
-    // Touch devices: first tap shows the image/video, second tap opens the link
-    if (pointerTypeRef.current !== "mouse" && !isTouchActive) {
-      onTouchActivate?.(insight.id);
-      return;
-    }
+    // Touch: the first touch only shows the effect (already done on touch
+    // start); touching a card that is already active opens it.
+    if (pointerTypeRef.current !== "mouse" && !wasActiveRef.current) return;
 
     if (insight?.Detailseite === "Ja" && insight?.Slug) {
       router.push(`/insights/${insight.Slug}`);
