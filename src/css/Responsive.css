@@ -1114,9 +1114,6 @@ span.txt-008:before {
     padding-left: 20px;
     padding-right: 20px;
 }
-.sub_title:before {
-    top: 50%;
-}
 header {
     a.navbar-brand {
         max-width: 140px;
@@ -1389,11 +1386,6 @@ header .navbar{
 }
 
 }
-@media (max-width: 460px) {
-    :root {
-        --bs-fs100: clamp(3.5rem, 9vw, 2.625rem);
-    }
-}
 
 @media (max-width: 375px) {
 
@@ -1529,7 +1521,7 @@ html {
     }
 
     body {
-        font-size: 1.20rem;
+        font-size: 1.10rem;
     }
 
     p, li {
@@ -1546,10 +1538,16 @@ html {
     }
 }
 
+@media (max-width: 480px) {
+    :root {
+        --bs-fs100: clamp(3.25rem, 8.8vw, 2.45rem);
+    }
+}
+
 /* Very small phones, or phones set to a large Display size */
 @media (max-width: 375px) {
     :root {
-        --bs-fs100: clamp(3rem, 8.8vw, 2.25rem);
+        --bs-fs100: clamp(3rem, 8.5vw, 2.25rem);
         /*--bs-fs80:  clamp(1.75rem, 7.5vw, 1.875rem);
         --bs-fs70:  clamp(1.6875rem, 7vw, 1.8125rem);
         --bs-fs60:  clamp(1.625rem, 6.8vw, 1.75rem);
@@ -1559,6 +1557,7 @@ html {
         --bs-fs30:  clamp(1.125rem, 4.8vw, 1.25rem);*/
     }
 }
+
 
 /* Extremely narrow (large Display size / split-screen) */
 @media (max-width: 340px) {
@@ -1640,15 +1639,6 @@ a {
     .stacking-title { font-size: 1.75rem; }
 }
 
-
-/* =======================================================
-   COMPACT COOKIE BANNER for small / zoomed phones
-   iPhone "Display Zoom: Larger Text" and small Android phones
-   report only ~320px x ~570px. The CookieYes banner then
-   covered almost half of the screen and hid the page.
-   Applies to narrow screens, and to short phone screens.
-   (!important is needed: CookieYes injects its own CSS.)
-======================================================= */
 @media (max-width: 360px), (max-height: 640px) and (max-width: 480px) {
     .cky-consent-container .cky-consent-bar {
         padding: 10px 0 !important;
@@ -1693,28 +1683,19 @@ a {
     }
 }
 
-
-/* Phones: leave room under the project card for the round badge that
-   overhangs its bottom edge, so it no longer covers the next heading. */
 @media (max-width: 575px) {
     .project_section .border-wrapper {
         margin-bottom: 4rem;
     }
 }
 
-
-
-/* respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
     .stacking-tab { transition: none; }
 }
 
-/* never show on touch devices */
 @media (hover: none), (pointer: coarse) {
     .cursor-glow { display: none; }
 }
-/* ===== end cursor glow ===== */
-
 
 
 @keyframes insightCursorSpin {
