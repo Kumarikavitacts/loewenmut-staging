@@ -2812,13 +2812,17 @@ footer {
             position: relative;
         }
 
+        /* card colour stays visible; image/video fades in on top of it */
         .project-carousel-image {
             object-fit: cover;
             opacity: 0;
             visibility: hidden;
+            transform: scale(1.06);
             transition:
-                opacity 0.45s ease,
-                visibility 0.45s ease;
+                opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                visibility 0.6s linear;
+            will-change: opacity, transform;
             z-index: 1;
             pointer-events: none;
         }
@@ -2827,6 +2831,7 @@ footer {
             .project-carousel-image {
                 opacity: 1;
                 visibility: visible;
+                transform: scale(1);
             }
         }
 
@@ -3587,7 +3592,7 @@ footer {
 }
 .leistung_nav_link span {
     padding-bottom: 4px;
-    border-bottom: 2px solid var(--color_8);
+    border-bottom: 1px solid var(--color_8);
     transition: border-color 0.3s ease;
 }
 .leistung_nav_link svg {
@@ -3602,16 +3607,6 @@ footer {
 }
 .leistung_nav_link.next:hover svg {
     transform: translateX(4px);
-}
-@media (max-width: 575.98px) {
-    .leistung_nav {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
-    }
-    .leistung_nav_link {
-        max-width: 100%;
-    }
 }
 
 
