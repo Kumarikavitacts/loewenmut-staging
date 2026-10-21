@@ -3587,7 +3587,7 @@ footer {
 }
 .leistung_nav_link span {
     padding-bottom: 4px;
-    border-bottom: 1px solid var(--color_8);
+    border-bottom: 2px solid var(--color_8);
     transition: border-color 0.3s ease;
 }
 .leistung_nav_link svg {
