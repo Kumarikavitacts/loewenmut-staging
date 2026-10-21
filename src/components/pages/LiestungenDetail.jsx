@@ -326,7 +326,7 @@ const LeistungenDetail = () => {
           SECTION 2 - TAG CARDS
       ================================================= */}
 
-      <section className="ld_section_2 pt_pb_3">
+      <section className="ld_section_2 pb_3">
 
         <div className="container">
 

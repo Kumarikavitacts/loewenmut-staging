@@ -20,7 +20,7 @@
         --bs-fs20: 1.25rem;
         --content_width_small: 1300px;
         --content_width_smaller: 1000px;
-        --stack-top: 80px;
+        --stack-top: 130px;
     }
     .map-wrapper {
     width: calc(100% + 300px);
@@ -291,6 +291,12 @@
     .status-header-section {
         min-height: calc(100vh - 100px);
     }
+    .support_banner {
+        h1 svg {
+            width: 100px;
+            height: 100px;
+        }
+    }
     .project_section {
         .anim_circle {
             right: -60px;
@@ -357,9 +363,10 @@
             object-fit: cover;
         }
     }
+    
      .breadcrumb_nav { margin-bottom: 2.25rem; }
     .breadcrumb_home { width: 2.75rem; height: 2.75rem; }
-    .breadcrumb_pill { font-size: 0.8125rem; padding: 0.35rem 1.1rem; }
+    .breadcrumb_pill { padding: 0.35rem 1.1rem 0.25rem; }
     .breadcrumb_item_current { max-width: min(34rem, 100%); }
 }
 
@@ -401,6 +408,12 @@
                     width: 60px;
                 }
             }
+        }
+    }
+    .support_banner {
+        h1 svg {
+            width: 80px;
+            height: 70px;
         }
     }
     .bg_theme_work_station {
@@ -658,6 +671,12 @@ header {
 .inner_hero_section {
     h1 br, p br {
         display: none;
+    }
+}
+.support_banner {
+    .inner-banner-content h1 svg {
+        width: 60px;
+        height: 60px;
     }
 }
 .feature_section {
@@ -1134,7 +1153,7 @@ header {
         }
     }
 }
-  .image_layout_section {
+.image_layout_section {
     .image_layout_item {
          overflow: hidden;
          height:100%;
@@ -1205,6 +1224,15 @@ header {
                 left: 55%;
             }
         }
+    }
+}
+.support_banner {
+    .inner-banner-content h1 {
+        padding: 0 1rem
+    }
+    .inner-banner-content h1 svg {
+        width: 47px;
+        height: 47px;
     }
 }
 .feature_section {
@@ -1337,7 +1365,6 @@ footer {
    .breadcrumb_nav { margin-bottom: 1.25rem; }
     .breadcrumb_item + .breadcrumb_item::before { width: 0.875rem; }
     .breadcrumb_home { width: 2.25rem; height: 2.25rem; }
-    .breadcrumb_pill { padding: 0.25rem 0.7rem; font-size: 0.6875rem; }
     .breadcrumb_item_current { max-width: 100%; }
     .breadcrumb_skeleton { gap: 0.875rem; }
 }
@@ -1472,15 +1499,7 @@ header .navbar{
     }
 }
 
-/* =======================================================
-   FLUID TYPOGRAPHY + LARGE-TEXT / LARGE-DISPLAY SAFETY
-   Single source of truth for font sizes below 1200px.
-   - All sizes are in rem, so they follow the user's
-     browser / phone font-size setting.
-   - clamp() keeps sizes fluid between a min and a max.
-   - Text wraps instead of overflowing when text is large
-     or the phone's "Display size / Display Zoom" is large.
-======================================================= */
+
 html {
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;

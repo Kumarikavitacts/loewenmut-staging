@@ -54,7 +54,7 @@ const Support = ({ data }) => {
   return (
     <main>
       {/* ================= INNER HERO ================= */}
-      <section className="inner_hero_section">
+      <section className="inner_hero_section support_banner">
         <InnerBnanner
           title={Bannerbereich?.Kurztitel || ""}
           heading={
