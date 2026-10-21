@@ -26,6 +26,10 @@ export const getInsightLinkType = (insight) => {
   return "outer";
 };
 
+// Smooth fade (colour -> image/video) with a very slight zoom-out
+const MEDIA_TRANSITION =
+  "opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1)";
+
 // Ring text geometry (SVG viewBox is 200 x 200)
 const RING_RADIUS = 72;
 const RING_LENGTH = 2 * Math.PI * RING_RADIUS;
@@ -145,7 +149,8 @@ export const InsightCard = ({
     pointerTypeRef.current = e.pointerType;
   };
 
-  // play the video while active, reset it when not active
+  // play the video while active; on leave wait for the fade-out to finish
+  // before pausing/resetting, otherwise the frame jumps while fading
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -153,10 +158,15 @@ export const InsightCard = ({
     if (isActive) {
       video.currentTime = 0;
       video.play().catch(() => {});
-    } else {
+      return;
+    }
+
+    const timer = setTimeout(() => {
       video.pause();
       video.currentTime = 0;
-    }
+    }, 650);
+
+    return () => clearTimeout(timer);
   }, [isActive]);
 
   const handleCardClick = () => {
@@ -188,7 +198,7 @@ export const InsightCard = ({
         }`}
         style={{
           aspectRatio: "375 / 345",
-          backgroundColor: isActive ? "transparent" : backgroundColor,
+          backgroundColor, // always stay visible; media fades in on top of it
         }}
         onPointerEnter={handlePointerEnter}
         onPointerMove={handlePointerMove}
@@ -205,7 +215,9 @@ export const InsightCard = ({
             loading="lazy"
             style={{
               opacity: isActive ? 1 : 0,
-              transition: "opacity 0.4s ease",
+              transform: isActive ? "scale(1)" : "scale(1.06)",
+              transition: MEDIA_TRANSITION,
+              willChange: "opacity, transform",
             }}
           />
         )}
@@ -222,7 +234,9 @@ export const InsightCard = ({
             className="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
             style={{
               opacity: isActive ? 1 : 0,
-              transition: "opacity 0.4s ease",
+              transform: isActive ? "scale(1)" : "scale(1.06)",
+              transition: MEDIA_TRANSITION,
+              willChange: "opacity, transform",
             }}
           />
         )}

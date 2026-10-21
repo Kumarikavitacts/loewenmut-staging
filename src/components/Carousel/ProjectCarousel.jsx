@@ -14,6 +14,9 @@ const PROJECT_CURSOR_TEXT = {
   outer: "Website besuchen", // card opens another website
 };
 
+// Must be a bit longer than the fade-out in Style.css (.project-carousel-image)
+const VIDEO_RESET_DELAY = 650;
+
 // Ring text geometry (SVG viewBox is 200 x 200)
 const RING_RADIUS = 72;
 const RING_LENGTH = 2 * Math.PI * RING_RADIUS;
@@ -112,6 +115,9 @@ const ProjectCarousel = ({
 
       if (!video) return;
 
+      // Cancel a pending reset from a previous mouseleave (fade-out still running)
+      clearTimeout(video._resetTimer);
+
       video.muted = true;
       video.defaultMuted = true;
       video.playsInline = true;
@@ -125,19 +131,24 @@ const ProjectCarousel = ({
       }
     };
 
-    // Pause and reset the video when leaving a card.
+    // Leaving a card: let the image/video fade out first, then pause and reset.
+    // (Resetting immediately makes the frame jump while it is still visible.)
     const handleVideoMouseLeave = function () {
       const video = this.querySelector("video");
 
       if (!video) return;
 
-      video.pause();
+      clearTimeout(video._resetTimer);
 
-      try {
-        video.currentTime = 0;
-      } catch {
-        // The video may not have loaded enough to seek yet.
-      }
+      video._resetTimer = setTimeout(() => {
+        video.pause();
+
+        try {
+          video.currentTime = 0;
+        } catch {
+          // The video may not have loaded enough to seek yet.
+        }
+      }, VIDEO_RESET_DELAY);
     };
 
     // Move the round cursor with the mouse. It works on Owl clones too,
@@ -244,6 +255,7 @@ const ProjectCarousel = ({
 
       // Pause videos before destroying the carousel.
       $carousel.find("video").each(function () {
+        clearTimeout(this._resetTimer);
         this.pause();
       });
 
