@@ -2762,7 +2762,8 @@ footer {
     aspect-ratio: 1600 / 657;
     border-radius: var(--radius-30);
     overflow: hidden;
-    img {
+    img,
+    video {
         width: 100%;
         height: 100%;
         object-fit: cover;

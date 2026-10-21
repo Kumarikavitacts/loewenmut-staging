@@ -127,12 +127,16 @@ const InsightInner = () => {
   const hasBildbereichHeading = Boolean(
     Bildbereich?.Kurztitel || Bildbereich?.Titel
   );
-  const hasBildbereichImage = Boolean(Bildbereich?.Bild?.url);
+  const isBildbereichVideo =
+    Bildbereich?.Bild_oder_Video === "Video" && Boolean(Bildbereich?.Video?.url);
+  const hasBildbereichImage =
+    !isBildbereichVideo && Boolean(Bildbereich?.Bild?.url);
+  const hasBildbereichMedia = isBildbereichVideo || hasBildbereichImage;
   const hasBildbereichText1 = Boolean(Bildbereich?.Text_1);
   const hasBildbereichText2 = Boolean(Bildbereich?.Text_2);
   const hasBildbereichTextRow = hasBildbereichText1 || hasBildbereichText2;
   const hasBildbereichSection =
-    hasBildbereichHeading || hasBildbereichImage || hasBildbereichTextRow;
+    hasBildbereichHeading || hasBildbereichMedia || hasBildbereichTextRow;
 
   const hasProjekte = Boolean(
     (Projekte?.Titel || Projekte?.Text_1 || Projekte?.Text_2) &&
@@ -285,6 +289,25 @@ const InsightInner = () => {
                     />
                 </h2>
                 )}
+              </div>
+            )}
+
+            {isBildbereichVideo && (
+              <div className="overflow-hidden project-detail-image mb-4">
+                <video
+                  className="w-100 d-block"
+                  src={getMediaUrl(Bildbereich.Video.url)}
+                  poster={
+                    Bildbereich?.Videominiatur?.url
+                      ? getMediaUrl(Bildbereich.Videominiatur.url)
+                      : undefined
+                  }
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                />
               </div>
             )}
 
