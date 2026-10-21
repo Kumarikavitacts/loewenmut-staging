@@ -807,6 +807,9 @@ span.txt-008:before {
     .sub_title {
         justify-content: center;
     }
+    h2 {
+        text-align: center;
+    }
     .anim_circle {
         margin: auto;
     }
@@ -975,9 +978,9 @@ span.txt-008:before {
         background-size: 15px !important;
     }
         .accordion-body{
-            p{
+            padding: 0 15px 20px;
+            p {
                 padding:0;
-                font-size: var(--bs-fs20);
             }
         }
     }
@@ -1320,12 +1323,8 @@ footer {
     }
 }
 .hom_content_image_video {
-      
-
         img,video {
-           
             aspect-ratio: 676 / 520;
-        
         }
     }
 .news_section .news_content h3 {
@@ -1355,7 +1354,12 @@ footer {
  
         min-height: 110px;
     }
-
+.team-carousel {
+    .team-last-card a {
+        padding: 2rem;
+        font-size: 2.25rem;
+    }
+}
     
 }
 @media (min-width: 576px){
@@ -1407,11 +1411,15 @@ header .navbar{
     padding-top:25px !important;
 }   
 .stacking-image img {
-
     border-radius:  var(--radius-20) ;
-
 }
-
+.breadcrumb_list { flex-direction: column; }
+.breadcrumb_item { max-width: 100%; }
+.breadcrumb_item + .breadcrumb_item::before {
+    width: 1px;
+    height: 0.6rem;
+}
+.breadcrumb_item:not(:first-child) { flex-direction: column; }
 }
 
 @media (max-width: 375px) {
@@ -1425,7 +1433,7 @@ header .navbar{
     }
     .team-carousel {
         .team-last-card a {
-            padding: 2rem;
+            padding: 1.5rem;
         }
     }
     .project-carousel-section {
@@ -1473,13 +1481,6 @@ header .navbar{
      p, li {
         line-height: 1.5;
     }
-     .breadcrumb_list { flex-direction: column; }
-    .breadcrumb_item { max-width: 100%; }
-    .breadcrumb_item + .breadcrumb_item::before {
-        width: 1px;
-        height: 0.6rem;
-    }
-    .breadcrumb_item:not(:first-child) { flex-direction: column; }
 }
 
 @media (max-width: 400px) {
@@ -1535,8 +1536,7 @@ html {
         --bs-fs30: clamp(1.4rem, 4.2vw, 1.3125rem);
         --bs-fs24: clamp(1.25rem, 3.8vw, 1.0625rem);
         --bs-fs22: clamp(1.15rem, 3.6vw, 1rem);
-        --bs-fs20: clamp(0.7125rem, 3vw, 1rem);
-        
+        --bs-fs20: clamp(.95rem, 3vw, 1rem);
     }
 
     body {
@@ -1547,7 +1547,9 @@ html {
         line-height: 1.5;
     }
     
-
+.inner_hero_section .inner-banner, .hero_section, .status-header-section {
+    padding-top: 120px !important;
+}
     /* 1rem (>=16px) also stops iOS Safari zooming into inputs */
     input,
     select,

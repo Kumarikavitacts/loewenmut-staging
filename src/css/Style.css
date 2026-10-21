@@ -2034,7 +2034,7 @@ footer {
             border-radius: 50%;
             background: var(--bs-themecolor);
             img{
-                width: 30px !important;
+                width: 38px !important;
             }
         }
         p {
@@ -2612,7 +2612,6 @@ footer {
     .accordion-button:not(.collapsed)::after {
         transform: none;
         background: var(--bs-themecolor) url("/images/icon-minus.svg") no-repeat center;
-        background-size: 22px !important;
     }
 }
 
