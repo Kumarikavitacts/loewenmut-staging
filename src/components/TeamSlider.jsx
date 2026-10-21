@@ -3,7 +3,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
-import $ from "jquery";
 
 import { teamMembers as staticTeamMembers } from "@/helper/TeamUtil";
 import { getMediaUrl } from "@/helper/MediaUrl";
@@ -56,7 +55,7 @@ const RichParagraphs = ({ content = [] }) => {
   );
 };
 
-const TeamSlider = ({ teams }) => {
+const TeamSlider = ({ teams, header = null }) => {
   const [selectedMember, setSelectedMember] = useState(null);
 
   const teamMembers =
@@ -74,72 +73,93 @@ const TeamSlider = ({ teams }) => {
         }))
       : staticTeamMembers;
 
-  const carouselRef = useRef(null);
-  const owlInstance = useRef(null);
+  // ---------------------------------------------------------------------
+  // Scroll-driven horizontal slider (like the "vertical scroll, horizontal
+  // slide" idea): the tall wrapper scrolls normally, the sticky part stays
+  // pinned, and the vertical scroll progress moves the cards sideways.
+  // Works in both directions; when the last card is reached (or the first one
+  // when scrolling back up) the page simply continues to scroll.
+  // ---------------------------------------------------------------------
+  const outerRef = useRef(null);
+  const stickyRef = useRef(null);
+  const viewportRef = useRef(null);
+  const trackRef = useRef(null);
+  const progressRef = useRef(null);
+
+  useEffect(() => {
+    const outer = outerRef.current;
+    const sticky = stickyRef.current;
+    const viewport = viewportRef.current;
+    const track = trackRef.current;
+    if (!outer || !sticky || !viewport || !track) return;
+
+    let maxShift = 0;
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      const stickyTop = parseFloat(getComputedStyle(sticky).top) || 0;
+      const range = outer.offsetHeight - sticky.offsetHeight; // = maxShift
+      const scrolled = stickyTop - outer.getBoundingClientRect().top;
+      const progress =
+        range > 0 ? Math.min(1, Math.max(0, scrolled / range)) : 0;
+
+      track.style.transform = `translate3d(${-progress * maxShift}px,0,0)`;
+      if (progressRef.current) {
+        progressRef.current.style.transform = `scaleX(${progress})`;
+      }
+    };
+
+    const requestUpdate = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+
+    const measure = () => {
+      // keep the pinned area right below the fixed header
+      const headerH = document.querySelector("header")?.offsetHeight || 0;
+      outer.style.setProperty("--team-sticky-top", `${headerH}px`);
+
+      // Card width: 3 cards per view (desktop), 2 (tablet), 1 (phone).
+      // Calculated here (in px) so it never depends on CSS container units.
+      const winW = window.innerWidth;
+      const perView = winW >= 992 ? 3 : winW >= 576 ? 2 : 1;
+      const gap = winW >= 992 ? 24 : winW >= 576 ? 16 : 12;
+      const itemW = Math.floor(
+        (viewport.clientWidth - gap * (perView - 1)) / perView
+      );
+      track.style.setProperty("--team-gap", `${gap}px`);
+      track.style.setProperty("--team-item-w", `${itemW}px`);
+
+      // how far the cards have to travel sideways
+      maxShift = Math.max(0, track.offsetWidth - viewport.clientWidth);
+
+      // 1px of vertical scroll = 1px of sideways movement
+      outer.style.height = `${sticky.offsetHeight + maxShift}px`;
+      requestUpdate();
+    };
+
+    measure();
+
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", measure);
+
+    let resizeObserver;
+    if (typeof ResizeObserver !== "undefined") {
+      resizeObserver = new ResizeObserver(measure);
+      resizeObserver.observe(track);
+      resizeObserver.observe(viewport);
+    }
+
+    return () => {
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", measure);
+      resizeObserver?.disconnect();
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, [teamMembers.length]);
 
   const openModal = (member) => setSelectedMember(member);
   const closeModal = () => setSelectedMember(null);
-
-  // Owl Carousel init (unchanged)
-  useEffect(() => {
-    window.$ = $;
-    window.jQuery = $;
-
-    let mounted = true;
-
-    import("owl.carousel/dist/owl.carousel.min.js")
-      .then(() => {
-        if (!mounted || !carouselRef.current) return;
-
-        const $carousel = $(carouselRef.current);
-
-        if ($carousel.hasClass("owl-loaded")) return;
-
-        if (typeof $carousel.owlCarousel !== "function") {
-          console.error("Owl Carousel is not loaded correctly.");
-          return;
-        }
-
-        $carousel.owlCarousel({
-          loop: false,
-          autoplay: false,
-          smartSpeed: 800,
-          mouseDrag: true,
-          touchDrag: true,
-          pullDrag: true,
-          nav: true,
-          dots: false,
-          margin: 24,
-          responsive: {
-            0: { items: 1, margin: 12 },
-            576: { items: 2, margin: 16 },
-            992: { items: 3, margin: 24 },
-          },
-        });
-
-        owlInstance.current = $carousel;
-      })
-      .catch((error) => {
-        console.error("Failed to load Owl Carousel:", error);
-      });
-
-    return () => {
-      mounted = false;
-
-      const $carousel = owlInstance.current;
-      if (!$carousel || !$carousel.length) return;
-
-      try {
-        if ($carousel.hasClass("owl-loaded")) {
-          $carousel.trigger("destroy.owl.carousel");
-        }
-      } catch (error) {
-        console.warn("Owl Carousel cleanup warning:", error);
-      }
-
-      owlInstance.current = null;
-    };
-  }, []);
 
   // Close on Escape + lock page scroll while popup is open
   useEffect(() => {
@@ -163,7 +183,12 @@ const TeamSlider = ({ teams }) => {
 
   return (
     <>
-      <div ref={carouselRef} className="owl-carousel owl-theme team-carousel">
+      <div ref={outerRef} className="team-hscroll">
+        <div ref={stickyRef} className="team-hscroll-sticky">
+          {header}
+
+          <div ref={viewportRef} className="team-carousel">
+            <div ref={trackRef} className="team-hscroll-track">
         {/* Team Members */}
         {visibleMembers.map((member, index) => (
           <div className="team-carousel-item" key={`${member.name}-${index}`}>
@@ -207,6 +232,13 @@ const TeamSlider = ({ teams }) => {
               />
             </Link>
           </div>
+        </div>
+            </div>
+          </div>
+
+          {/* <div className="team-hscroll-progress" aria-hidden="true">
+            <span ref={progressRef} />
+          </div> */}
         </div>
       </div>
 

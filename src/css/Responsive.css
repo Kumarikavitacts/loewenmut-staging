@@ -353,6 +353,10 @@
             display: none;
         }
     }
+    .team-hscroll .team-carousel { --team-gap: 16px; }
+    .team-hscroll-track > .team-carousel-item {
+        flex-basis: calc((100cqw - var(--team-gap)) / 2);
+    }
     .ld_section_3 {
         .img-col img,video {
             position: absolute;
@@ -1382,6 +1386,11 @@ footer {
     .breadcrumb_home { width: 2.25rem; height: 2.25rem; }
     .breadcrumb_item_current { max-width: 100%; }
     .breadcrumb_skeleton { gap: 0.875rem; }
+
+        .team-hscroll .team-carousel { --team-gap: 12px; }
+    .team-hscroll-track > .team-carousel-item {
+        flex-basis: 100cqw;
+    }
 }
 @media (max-width: 480px) {
 .project-showcase {

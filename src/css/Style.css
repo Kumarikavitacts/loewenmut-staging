@@ -3615,3 +3615,56 @@ footer {
         margin-top: -5px;
     }
 }
+
+/* ===== Team slider: scroll-driven (vertical scroll -> horizontal slide) ===== */
+.team-hscroll {
+    position: relative;
+    /* real height is set in TeamSlider.jsx: pinned height + sideways distance */
+    min-height: 100vh;
+}
+.team-hscroll-sticky {
+    --team-top: var(--team-sticky-top, 0px);
+    position: sticky;
+    top: var(--team-top);
+    min-height: calc(100vh - var(--team-top));
+    min-height: calc(100svh - var(--team-top));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem 0;
+}
+.team-hscroll .team-carousel {
+    width: 100%;
+}
+.team-hscroll-track {
+    display: flex;
+    gap: var(--team-gap, 24px);
+    width: max-content;
+    will-change: transform;
+}
+/* card width (--team-item-w) is set in px by TeamSlider.jsx:
+   3 cards per view on desktop, 2 on tablet, 1 on phone */
+.team-hscroll-track > .team-carousel-item {
+    flex: 0 0 var(--team-item-w, 360px);
+    width: var(--team-item-w, 360px);
+    max-width: var(--team-item-w, 360px);
+    min-width: 0;
+    overflow-wrap: break-word;
+}
+/* .team-hscroll-progress {
+    height: 3px;
+    margin-top: 1.5rem;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+.team-hscroll-progress span {
+    display: block;
+    height: 100%;
+    background: var(--bs-themecolor);
+    transform-origin: left center;
+    transform: scaleX(0);
+} */
+@media (prefers-reduced-motion: reduce) {
+    .team-hscroll-track { will-change: auto; }
+}

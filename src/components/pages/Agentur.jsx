@@ -547,27 +547,26 @@ const Agentur = () => {
                 TEAM
             ================================================= */}
 
-            <section className="agentur_team_section pt_3 overflow-hidden">
+            {/* overflow-hidden must NOT be used here: it would break the
+                sticky (pinned) scroll-driven team slider */}
+            <section className="agentur_team_section pt_3">
                 <div className="container">
+                    <TeamSlider
+                        teams={Team_Bereich?.teams || []}
+                        header={
+                            <div className="sec-heading mb-4">
+                                <div className="sub_title">
+                                    {Team_Bereich?.Kurztitel || ""}
+                                </div>
 
-                    <div className="sec-heading mb-4">
-
-                        <div className="sub_title">
-                            {Team_Bereich?.Kurztitel || ""}
-                        </div>
-
-                        <h2>
-                            {renderHtmlText(
-                                Team_Bereich?.Titel
-                            )}
-                        </h2>
-
-                    </div>
-                    <div className="mt-5 ">
-                        <TeamSlider
-                            teams={Team_Bereich?.teams || []}
-                        />
-                    </div>
+                                <h2>
+                                    {renderHtmlText(
+                                        Team_Bereich?.Titel
+                                    )}
+                                </h2>
+                            </div>
+                        }
+                    />
                 </div>
             </section>
 
