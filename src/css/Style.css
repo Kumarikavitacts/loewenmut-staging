@@ -3668,3 +3668,46 @@ footer {
 @media (prefers-reduced-motion: reduce) {
     .team-hscroll-track { will-change: auto; }
 }
+/* Team card artwork is still by default. Play decorative animations only
+   while a card is hovered/focused; popup artwork keeps its normal animation. */
+.team-card .animated-shape,
+.team-card .team-framee,
+.team-card .team-framee *,
+.team-card .team-framee svg,
+.team-card .team-framee svg * {
+    animation-play-state: paused !important;
+}
+
+.team-card:hover .animated-shape,
+.team-card:hover .team-framee,
+.team-card:hover .team-framee *,
+.team-card:hover .team-framee svg,
+.team-card:hover .team-framee svg *,
+.team-card:focus-within .animated-shape,
+.team-card:focus-within .team-framee,
+.team-card:focus-within .team-framee *,
+.team-card:focus-within .team-framee svg,
+.team-card:focus-within .team-framee svg * {
+    animation-play-state: running !important;
+}
+
+/* The detail popup should animate immediately when opened, independent of
+   whether the pointer is still over the card that opened it. */
+.team-modal-image .animated-shape,
+.team-modal-image .team-framee,
+.team-modal-image .team-framee *,
+.team-modal-image .team-framee svg,
+.team-modal-image .team-framee svg * {
+    animation-play-state: running !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .team-card .animated-shape,
+    .team-card .team-framee,
+    .team-card .team-framee *,
+    .team-modal-image .animated-shape,
+    .team-modal-image .team-framee,
+    .team-modal-image .team-framee * {
+        animation: none !important;
+    }
+}
