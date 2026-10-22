@@ -361,7 +361,7 @@ const InsightInner = () => {
 
       {/* ================= EXTERNAL COMMUNICATION SLIDER ================= */}
       {hasExternalCommunication && (
-        <section className="pt_pb_3 external_communication_section">
+        <section className="pt_3 external_communication_section">
           <div className="container">
             <MediaShowcaseSlider slides={externalSlides} />
           </div>
