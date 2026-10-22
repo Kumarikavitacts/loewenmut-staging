@@ -8,7 +8,7 @@
 
 @media (min-width: 1600px) {
     :root {
-        --bs-fs100: 8.75rem;
+        /* --bs-fs100: 8.75rem;
         --bs-fs80: 5rem;
         --bs-fs60: 3.625rem;
         --bs-fs50: 3.125rem;
@@ -17,7 +17,7 @@
         --bs-fs30: 1.875rem;
         --bs-fs24: 1.5rem;
         --bs-fs22: 1.375rem;
-        --bs-fs20: 1.25rem;
+        --bs-fs20: 1.25rem; */
         --content_width_small: 1300px;
         --content_width_smaller: 1000px;
         --stack-top: 130px;
@@ -1538,11 +1538,6 @@ header .navbar{
     }
 }
 
-
-html {
-    -webkit-text-size-adjust: 100%;
-    text-size-adjust: 100%;
-}
 
 /* Tablet and mobile */
 @media (max-width: 1199.98px) {
