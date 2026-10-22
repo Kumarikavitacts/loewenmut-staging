@@ -162,6 +162,9 @@ form {
         }
     }
 }
+.ext_btn_next img{
+    filter: brightness(0) invert(1);
+}
 .team-carousel {
     .owl-nav button.owl-prev {
         cursor: url(/images/previous-green.svg) 15 28, pointer !important;

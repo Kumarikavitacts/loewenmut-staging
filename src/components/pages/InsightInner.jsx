@@ -13,6 +13,8 @@ import { getReferenzBySlug, getInsightPageCategory } from "@/Apis/insightPage/ap
 import { getMediaUrl } from "@/helper/MediaUrl";
 import { mapReferenzForCarousel } from "@/helper/Utils";
 import ScrollFillText from "@/components/ResuableComponents/ScrollFillText";
+import MediaShowcaseSlider from "@/components/Carousel/MediaShowcaseSlider";
+import { normalizeMediaSlides } from "@/helper/MediaSlides";
 
 // Flattens a Strapi block-editor "list" field (Inhaltsabschnitt.Inhalt[].Text)
 // into a plain string array, since ProjectInfoCard expects items: string[]
@@ -108,6 +110,7 @@ const InsightInner = () => {
     Inhaltsabschnitt,
     Bildbereich,
     Projekte,
+    Projektinformationen,
   } = data;
 
   const infoCards = Inhaltsabschnitt?.Inhalt || [];
@@ -137,6 +140,14 @@ const InsightInner = () => {
   const hasBildbereichTextRow = hasBildbereichText1 || hasBildbereichText2;
   const hasBildbereichSection =
     hasBildbereichHeading || hasBildbereichMedia || hasBildbereichTextRow;
+
+  // ===================================================
+  // EXTERNAL COMMUNICATION SLIDER  (API field: Projektinformationen)
+  // Each entry = one slide (own text + button + video OR image).
+  // Entries without any video/image are skipped.
+  // ===================================================
+  const externalSlides = normalizeMediaSlides(Projektinformationen);
+  const hasExternalCommunication = externalSlides.length > 0;
 
   const hasProjekte = Boolean(
     (Projekte?.Titel || Projekte?.Text_1 || Projekte?.Text_2) &&
@@ -344,6 +355,15 @@ const InsightInner = () => {
                 )}
               </div>
             )}
+          </div>
+        </section>
+      )}
+
+      {/* ================= EXTERNAL COMMUNICATION SLIDER ================= */}
+      {hasExternalCommunication && (
+        <section className="pt_pb_3 external_communication_section">
+          <div className="container">
+            <MediaShowcaseSlider slides={externalSlides} />
           </div>
         </section>
       )}
