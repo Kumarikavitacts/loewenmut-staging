@@ -3910,6 +3910,8 @@ footer {
             font-weight: 400;
             color: var(--bs-textlightgrey);
             transition: color .3s ease;
+            margin-left: auto;
+            padding-right: 10px;
         }
         .ext_thumb_frame {
             position: relative;
