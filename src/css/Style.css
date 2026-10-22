@@ -2709,7 +2709,7 @@ footer {
     padding-bottom: 8px;
 }
 .intro-text {
-    font-size: var(--bs-fs30);
+    font-size: 1.65rem;
     font-weight: 300;
     text-align: right;
 }
@@ -3733,7 +3733,7 @@ footer {
     .ext_comm_content {
         
         .ext_comm_title {
-            font-size: clamp(1.35rem, 5vw, 2rem);
+            font-size: clamp(1.35rem, 5vw, 2.5rem);
             line-height: 1.2;
             font-weight: 800;
             margin-bottom: 1.25rem;
