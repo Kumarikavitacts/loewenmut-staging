@@ -1447,6 +1447,14 @@ header .navbar{
     height: 0.6rem;
 }
 .breadcrumb_item:not(:first-child) { flex-direction: column; }
+
+    .button {
+        padding: 15px;
+        font-size: .85rem;
+    }
+    .theme_btn, .dark_btn, .border_btn, .text_btn {
+        padding-right: 45px;
+    }
 }
 
 @media (max-width: 425px) {
@@ -1673,9 +1681,6 @@ a {
         .ext_slider_stage {
             aspect-ratio: 4 / 3;
         }
-        .ext_comm_content .ext_comm_title {
-            font-size: var(--bs-fs35);
-        }
         .ext_thumbs_wrap {
             margin-top: 24px;
         }
@@ -1771,11 +1776,10 @@ footer {
             border-radius: var(--radius-20, 20px);
         }
         .ext_comm_content .ext_comm_title {
-            font-size: var(--bs-fs30);
             margin-bottom: 1rem;
         }
         .ext_comm_content .ext_comm_text {
-            font-size: .9375rem;
+            font-size: 1rem;
         }
         .ext_slider_controls {
             margin-top: 16px;

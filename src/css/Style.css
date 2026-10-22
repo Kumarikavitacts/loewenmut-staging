@@ -3733,8 +3733,9 @@ footer {
     .ext_comm_content {
         
         .ext_comm_title {
-            font-size: var(--bs-fs40);
-            line-height: var(--bs-lineheight);
+            font-size: clamp(1.35rem, 5vw, 2rem);
+            line-height: 1.2;
+            font-weight: 800;
             margin-bottom: 1.25rem;
         }
         .ext_comm_content_inner {
@@ -3748,13 +3749,7 @@ footer {
 
         }
         .ext_comm_text {
-            font-size: var(--bs-fs20);
-            font-weight: 400;
-            line-height: 1.55;
             margin-bottom: 1rem;
-            &:last-of-type {
-                margin-bottom: 0;
-            }
         }
     }
 
