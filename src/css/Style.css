@@ -623,6 +623,7 @@ header {
         transition: .4s;
         position: fixed;
         border-bottom: 1px solid rgba(228, 228, 228, 0);
+        font-family: var(--bs-archivo);
     }
     .navbar.sticky {
         background: var(--bs-white);
