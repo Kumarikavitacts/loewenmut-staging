@@ -12,7 +12,7 @@ export const apiEndpoints = {
 
   getReferenzenDocumentsIdEndpoint: `api/referenzens?fields[0]=documentId&fields[1]=Slug`,
   getReferenzenInnerBySlugEndpoint: (documentId) =>
-    `api/referenzens/${documentId}?populate[0]=Inhaltsabschnitt.Bild&populate[1]=Inhaltsabschnitt.Logo&populate[2]=Inhaltsabschnitt.Inhalt.Icon&populate[3]=Bildbereich.Bild&populate[4]=Bildbereich.Video&populate[5]=Bildbereich.Videominiatur&populate[6]=Projekte&populate[7]=Metadaten`,
+    `api/referenzens/${documentId}?populate[0]=Inhaltsabschnitt.Bild&populate[1]=Inhaltsabschnitt.Logo&populate[2]=Inhaltsabschnitt.Inhalt.Icon&populate[3]=Bildbereich.Bild&populate[4]=Bildbereich.Video&populate[5]=Bildbereich.Videominiatur&populate[6]=Projekte&populate[7]=Metadaten&populate[8]=Projektinformationen.Bild&populate[9]=Projektinformationen.Video&populate[10]=Projektinformationen.Videominiatur`,
   agenturSeiteEndpoint: `api/agentur-seite?populate[Bildre_Text][populate][Bild]=true&populate[Bildre_Text][populate][Video]=true&populate[Bildre_Text][populate][Button]=true&populate[Bildre_Text][populate][Videominiatur]=true&populate[Team_Bereich][populate][teams][populate]=*&populate[Thekenbereich][populate]=*&populate[Projekte][populate]=*&populate[Kontaktbereich]=true&populate[Metadaten]=true&populate[Bannerbereich]=true`,
   teamSeiteEndpoint: `api/team-seite?populate=*`,
   teamsEndpoint: `api/teams?populate=*`,

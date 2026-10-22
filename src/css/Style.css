@@ -3711,3 +3711,264 @@ footer {
         animation: none !important;
     }
 }
+
+
+/* ==========================================================================
+   EXTERNAL COMMUNICATION SLIDER  (Insight detail page)
+   Component: components/Carousel/MediaShowcaseSlider.jsx
+   ========================================================================== */
+.ext_comm_slider {
+    .row > * {
+        min-width: 0;
+    }
+    .ext_comm_content {
+        
+        .ext_comm_title {
+            font-size: var(--bs-fs40);
+            line-height: var(--bs-lineheight);
+            margin-bottom: 1.25rem;
+        }
+        .ext_comm_content_inner {
+            animation: extContentFade .5s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            .theme_btn_wrap{
+                margin-bottom: 4.335rem;
+            }
+
+        }
+        .ext_comm_text {
+            font-size: var(--bs-fs20);
+            font-weight: 400;
+            line-height: 1.55;
+            margin-bottom: 1rem;
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    /* ---------- main stage ---------- */
+    .ext_slider_stage {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        border-radius: var(--radius-30);
+        overflow: hidden;
+        background: var(--bs-lightgrey3);
+        touch-action: pan-y;
+        outline: none;
+        &:focus-visible {
+            outline: 2px solid var(--bs-themecolor);
+            outline-offset: 4px;
+        }
+    }
+    .ext_slide {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .6s ease, visibility 0s linear .6s;
+        &.is-active {
+            opacity: 1;
+            visibility: visible;
+            z-index: 1;
+            transition: opacity .6s ease, visibility 0s;
+        }
+    }
+    .ext_slide_media {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        user-select: none;
+    }
+
+    /* ---------- counter + arrows ---------- */
+    .ext_slider_controls {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+    .ext_slider_counter {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: var(--bs-fs20);
+        .ext_counter_current {
+            font-weight: 600;
+            color: var(--bs-textdarkgrey);
+
+        }
+        .ext_counter_total {
+            font-weight: 400;
+            color: var(--bs-textlightgrey);
+        }
+    }
+    .ext_slider_buttons {
+        display: flex;
+        gap: 10px;
+        button {
+            width: 50px;
+            height: 50px;
+            padding: 0;
+            border: 0;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform .3s ease;
+            &:hover {
+                transform: scale(1.08);
+            }
+            &:focus-visible {
+                outline: 2px solid var(--bs-textdarkgrey);
+                outline-offset: 3px;
+            }
+            img {
+                width: 22px;
+                height: auto;
+            }
+        }
+        .ext_btn_prev {
+             background-color: #F4F4F4 !important;
+            img {
+                filter: brightness(1) invert(0);
+            }
+        }
+        .ext_btn_next {
+            background-color: var(--bs-themecolor);
+          
+        }
+    }
+
+    /* ---------- thumbnail strip ----------
+       - thumbnails have a fixed size (set in px by MediaShowcaseSlider.jsx)
+       - 9 per row on desktop; more than fit -> strip turns into a slider */
+    .ext_thumbs_wrap {
+        --ext-gap: 12px;
+        margin-top: 30px;
+        min-width: 0;
+    }
+    .ext_thumbs {
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        gap: var(--ext-gap);
+        padding: 8px 4px 6px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        overscroll-behavior-x: contain;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* slider mode: strip bleeds to both screen edges (like the team slider),
+           the first/last thumbnail still line up with the container */
+        &.is-slider {
+            margin-inline: calc(50% - 50vw);
+            padding-inline: calc(50vw - 50%);
+            .ext_thumb {
+                cursor: grab;
+            }
+        }
+        &.is-dragging {
+            user-select: none;
+            .ext_thumb {
+                cursor: grabbing;
+            }
+        }
+    }
+    .ext_thumb {
+        flex: 0 0 var(--ext-thumb-w, 110px);
+        width: var(--ext-thumb-w, 110px);
+        min-width: 0;
+        padding: 0;
+        border: 0;
+        background: none;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        text-align: left;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+
+        .ext_thumb_no {
+            font-size: .875rem;
+            line-height: 1;
+            font-weight: 400;
+            color: var(--bs-textlightgrey);
+            transition: color .3s ease;
+        }
+        .ext_thumb_frame {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 112px;
+            padding: 0.35rem;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            transition: border-color .3s ease;
+        }
+        img,
+        video {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+            border-radius: 10px;
+            background: var(--bs-lightgrey3);
+        }
+        &:hover .ext_thumb_no {
+            color: var(--bs-textdarkgrey);
+        }
+        &:focus-visible {
+            outline: 2px solid var(--bs-textdarkgrey);
+            outline-offset: 2px;
+            border-radius: 12px;
+        }
+        &.is-active {
+            .ext_thumb_no {
+                color: var(--bs-textdarkgrey);
+            }
+            .ext_thumb_frame {
+                border: 2px dotted var(--bs-themecolor);
+            }
+        }
+        /* small play badge on video thumbnails */
+        &.is-video .ext_thumb_frame::after {
+            content: "";
+            position: absolute;
+            right: 12px;
+            bottom: 12px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--bs-darkgrey);
+            opacity: .85;
+        }
+        &.is-video .ext_thumb_frame::before {
+            content: "";
+            position: absolute;
+            right: 17px;
+            bottom: 16px;
+            z-index: 1;
+            border-style: solid;
+            border-width: 5px 0 5px 8px;
+            border-color: transparent transparent transparent #fff;
+        }
+    }
+}
+
+/* the thumbnail slider bleeds to the screen edges -> never create a horizontal page scroll */
+.external_communication_section {
+    overflow-x: hidden;
+    overflow-x: clip;
+}

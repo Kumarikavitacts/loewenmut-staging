@@ -39,6 +39,10 @@
         filter: brightness(0) invert(1);
     }
 }
+
+.ext_btn_next img{
+    filter: brightness(0) invert(1);
+}
 header {
     .theme_toggle_btn svg path {
         fill: var(--bs-white) !important;
@@ -170,6 +174,7 @@ form {
         cursor: url(/images/next-blue.svg) 15 28, pointer !important;
     }
 }
+
 @media (max-width: 767px) {
     .service-slider {
         .owl-item.active .item {
