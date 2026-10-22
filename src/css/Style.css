@@ -2761,6 +2761,7 @@ footer {
                 width: 20px;
                 height: 20px;
                 background-size: 10px;
+                top: 5px;
             }
         }
     }
