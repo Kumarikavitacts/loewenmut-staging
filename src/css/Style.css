@@ -2030,12 +2030,6 @@ footer {
         color: var(--bs-white);
     }
 }
-.strapi_rich_text {
-  p{
-    font-size: var(--bs-fs30);
-    font-weight: 300;
-    }
-    }
 .service-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -2709,8 +2703,6 @@ footer {
     padding-bottom: 8px;
 }
 .intro-text {
-    font-size: 1.65rem;
-    font-weight: 300;
     text-align: right;
 }
 .theme-text {
