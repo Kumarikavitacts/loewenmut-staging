@@ -1,4 +1,4 @@
-import { Roboto, Urbanist } from "next/font/google";
+import { Archivo, Roboto, Urbanist } from "next/font/google";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -18,25 +18,22 @@ import Providers from "@/components/Providers";
 import SiteChrome from "@/components/SiteChrome";
 import BootstrapInit from "@/components/BootstrapInit";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL;
 const IS_PRODUCTION =
   !!SITE_URL && !SITE_URL.includes("staging");
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
-  // SEO FIX: renders <meta name="robots" content="noindex, nofollow">
-  // on every page when not on the production domain.
   robots: IS_PRODUCTION
     ? {
-      index: true,
-      follow: true,
-    }
+        index: true,
+        follow: true,
+      }
     : {
-      index: false,
-      follow: false,
-    },
- 
+        index: false,
+        follow: false,
+      },
+
   title:
     "Webdesign | Branding: Löwenmut. Die Webagentur in Winterthur Zürich",
 
@@ -55,7 +52,6 @@ export const metadata = {
       "Agentur für Grafik-, Webdesign & Programmierung in Winterthur. Unsere Referenzen werden Sie überzeugen",
 
     url: SITE_URL,
-
     siteName: "Löwenmut",
 
     images: [
@@ -64,7 +60,6 @@ export const metadata = {
         width: 1200,
         height: 630,
         alt: "Löwenmut – Webdesign, Branding und digitale Lösungen",
-
       },
     ],
 
@@ -84,13 +79,32 @@ export const metadata = {
     images: ["/images/website_og_image.png"],
   },
 };
-// Explicit viewport so phones use their real width. Zoom is NOT disabled,
-// so users who need large text / pinch-zoom keep full accessibility.
+
+// Preserve accessible viewport settings.
 export const viewport = {
   width: "device-width",
   initialScale: 1,
 };
 
+// Archivo: primary site font.
+const archivo = Archivo({
+  variable: "--font-archivo",
+  subsets: ["latin"],
+  weight: [
+    "100",
+    "200",
+    "300",
+    "400",
+    "500",
+    "600",
+    "700",
+    "800",
+    "900",
+  ],
+  display: "swap",
+});
+
+// Preserve existing font variables for components that use them.
 const roboto = Roboto({
   variable: "--font-roboto",
   subsets: ["latin"],
@@ -102,6 +116,7 @@ const urbanist = Urbanist({
   subsets: ["latin"],
   display: "swap",
 });
+
 const themeScript = `
 (function () {
   try {
@@ -135,9 +150,17 @@ const themeScript = `
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="de" className={`${roboto.variable} ${urbanist.variable}`} suppressHydrationWarning>
+    <html
+      lang="de"
+      className={`${archivo.variable} ${roboto.variable} ${urbanist.variable}`}
+      suppressHydrationWarning
+    >
       <head>
-        <Script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/594f6c14466a211fe9f89ce3111b24d0/script.js"></Script>
+        <Script
+          id="cookieyes"
+          type="text/javascript"
+          src="https://cdn-cookieyes.com/client_data/594f6c14466a211fe9f89ce3111b24d0/script.js"
+        />
 
         <Script
           id="theme-script"
@@ -150,12 +173,10 @@ export default function RootLayout({ children }) {
 
       <body>
         <BootstrapInit />
+
         <Providers>
           <SiteChrome>{children}</SiteChrome>
         </Providers>
-
-
- 
       </body>
     </html>
   );

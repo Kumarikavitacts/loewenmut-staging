@@ -24,7 +24,6 @@ const SMTP_PASSWORD = process.env.SMTP_PASSWORD;
 const SMTP_FROM = process.env.SMTP_FROM || SMTP_USER;
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
-
 /**
  * ---------------------------------------------------------
  * Logo
@@ -225,78 +224,77 @@ function getLogoHtml() {
  * ---------------------------------------------------------
  */
 
-function getCompanyDetailsHtml(kontaktInfo) {
-  const companyTelefon = kontaktInfo?.telefon || "";
-  const companyAdresse = kontaktInfo?.adresse || "";
-  const companyEmail = kontaktInfo?.email || "";
+
+function getCompanyDetailsHtml() {
+  const companyName =
+    process.env.COMPANY_NAME || "Loewenmut Punkt GmbH";
+
+  const companyAddress = process.env.COMPANY_ADDRESS || "";
+  const companyTelefon = process.env.COMPANY_PHONE || "";
+  const companyEmail = process.env.ADMIN_CONTACT_MAIL || "";
 
   const companyTelefonHref = companyTelefon.replace(/\s+/g, "");
 
-  if (!companyTelefon && !companyAdresse && !companyEmail) {
-    return "";
-  }
-
   return `
     <div>
+      <p>${escapeHtml(companyName)}</p>
 
-      <p>
-        Freundliche Grüsse
-      </p>
+      ${
+        companyAddress
+          ? `<p>${escapeHtml(companyAddress)}</p>`
+          : ""
+      }
 
-      ${companyAdresse
-      ? `
-            <p>
-              ${formatAddressHtml(companyAdresse)}
-            </p>
-          `
-      : ""
-    }
-   ${companyTelefon
-      ? `
-            <p>
-              <span>
-                Tel:
-              </span>
-
-              <a
-                href="tel:${escapeHtml(companyTelefonHref)}"
-                >
+      ${
+        companyTelefon
+          ? `<p>
+              <span>Tel: </span>
+              <a href="tel:${escapeHtml(companyTelefonHref)}">
                 ${escapeHtml(companyTelefon)}
               </a>
-            </p>
-          `
-      : ""
-    }
-      ${companyEmail
-      ? `
-            <p>
-              <a
-                href="mailto:${escapeHtml(companyEmail)}"
-               >
+              ${
+                process.env.ADMIN_MOBILE
+                  ? ` | M: <a href="tel:${escapeHtml(
+                      process.env.ADMIN_MOBILE.replace(/\s+/g, "")
+                    )}">${escapeHtml(process.env.ADMIN_MOBILE)}</a>`
+                  : ""
+              }
+            </p>`
+          : ""
+      }
+
+      ${
+        companyEmail
+          ? `<p>
+              <a href="mailto:${escapeHtml(companyEmail)}">
                 ${escapeHtml(companyEmail)}
               </a>
-            </p>
-          `
-      : ""
-    }
-     <p>
-        <a
-          href="${escapeHtml(
-    SITE_URL 
-  )}"
-          target="_blank"
-          rel="noopener noreferrer"
-          >
-          ${escapeHtml(
-    SITE_URL 
-  )}
-        </a>
-      </p>
-   
+            </p>`
+          : ""
+      }
 
+      ${
+        SITE_URL
+          ? `<p>
+              <a href="${escapeHtml(SITE_URL)}" target="_blank"
+                 rel="noopener noreferrer">
+                ${"www.loewenmut.ch"}
+              </a>
+            </p>`
+          : ""
+      }
+      
+      <small style="color: gray;">
+        Diese Nachricht ist ausschliesslich für den oder die angeführten Empfänger bestimmt und kann vertrauliche oder rechtlich geschützte Informationen beinhalten. Drittpersonen, welche nicht Adressaten sind oder deren Adresse versehentlich aufgeführt ist, werden gebeten, uns per Antwortmail zu informieren und das Mail samt allfälligen Anhängen ohne weitere Verwendung zu löschen. Die Nachrichtenübermittlung per E-Mail kann unsicher und fehlerbehaftet sein. Sie kann überdies von Dritten abgefangen oder überwacht werden.
+      </small>
+      <br/>
+      <small style="color :gray;">
+      This message is for the addressee only and may contain confidential or privileged information. If you are not the intended recipient, you are kindly requested to inform us by return mail and to delete this mail together with any annexes without using it further. E-mail communications may be unsecure or contain errors. They may be intercepted or monitored by third parties.
+      </small>
     </div>
   `;
 }
+
 
 /**
  * ---------------------------------------------------------
@@ -376,14 +374,25 @@ Array.isArray(strategien) && strategien.length > 0
           </p>
 
 
-          <!-- Company details -->
-
-          ${getCompanyDetailsHtml(kontaktInfo)}
-
-
+          
+          <p>
+            Freundliche Grüsse
+          </p>
+          <strong>
+            Timo Fuhlbrügge
+          </strong>
+          <p>
+            Managing Partner I Head of Marketing & Development
+          </p>
           <!-- Clickable logo -->
 
           ${getLogoHtml()}
+
+          <!-- Company details -->
+          ${getCompanyDetailsHtml(kontaktInfo)}
+
+
+        
 
         </div>
 

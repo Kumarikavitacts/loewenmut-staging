@@ -1,7 +1,5 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap'); */
 
-@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap');
-
 * {
     padding: 0;
     margin: 0;
@@ -27,9 +25,9 @@
     --content_width_smaller: 830px;
     --content_padding_large: 125px;
     --content_padding_small: 75px;
-    --bs-urbanist: "Urbanist";
-    --bs-roboto: "Roboto";
-    --bs-archivo: "Archivo", sans-serif;
+    --bs-urbanist: var(--font-urbanist), sans-serif;
+    --bs-roboto: var(--font-roboto), sans-serif;
+    --bs-archivo: var(--font-archivo), sans-serif;
     --bs-black: #000000;
     --bs-darkgrey: #222633;
     --bs-lightgrey: #FBFBFB;
