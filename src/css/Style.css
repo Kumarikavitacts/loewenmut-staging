@@ -27,6 +27,7 @@
     --content_padding_small: 75px;
     --bs-urbanist: "Urbanist";
     --bs-roboto: "Roboto";
+    --bs-archivo: "Archivo", Arial, sans-serif;
     --bs-black: #000000;
     --bs-darkgrey: #222633;
     --bs-lightgrey: #FBFBFB;
@@ -36,7 +37,7 @@
     --bs-textlightgrey: #999999;
     --bs-themesvg: #222633;
     --bs-lightgrey3:#E6E6E6;
-    --bs-lineheight: 1.15;
+    /* --bs-lineheight: 1.15;
     --bs-fs100: 7.5rem;
     --bs-fs80: 4.375rem;
     --bs-fs60: 3rem;
@@ -46,20 +47,21 @@
     --bs-fs30: 1.625rem;
     --bs-fs24: 1.25rem;
     --bs-fs22: 1.125rem;
-    --bs-fs20: 1rem;
+    --bs-fs20: 1rem; */
     --stack-top: 110px;
 }
 html, body {
     scroll-behavior: smooth;
     scroll-padding-top: 100px;
     scroll-margin-top: 100px;
+    margin: 0;
+    font-family: var(--bs-archivo);
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.6;
 }
 body {
-    font-family: var(--bs-roboto);
     color: var(--bs-textdarkgrey);
-    font-size: var(--bs-fs24);
-    font-weight: 300;
-    line-height: 1.31;
     overflow-x: hidden;
 }
 body.body_overflow {
@@ -76,7 +78,7 @@ main {
 .grey_bg {
     background-color: var(--bs-lightgrey);
 }
-h1 {
+/* h1 {
     font-family: var(--bs-roboto);
     font-size: var(--bs-fs80);
     font-weight: 600;
@@ -85,23 +87,47 @@ h2 {
     font-family: var(--bs-roboto);
     font-size: var(--bs-fs60);
     font-weight: 400;
-    /* color: var(--bs-textdarkgrey);
-    span {
-        color: var(--bs-textlightgrey);
-    } */
 }
 h3 {
     font-size: var(--bs-fs30);
     font-family: var(--bs-roboto);
     font-weight: 600;
+} */
+ h1, h2, h3 {
+    color: inherit;
+    letter-spacing: -.01em;
+}
+h1 {
+    margin: 0;
+    font-size: clamp(3.2rem, 8vw, 6.5rem);
+    line-height: 1.25;
+    font-weight: 900;
+}
+h2 {
+    margin: 0 0 22px;
+    font-size: clamp(2.2rem, 4.4vw, 3.9rem);
+    line-height: 1.25;
+    font-weight: 900;
+}
+h3 {
+    margin: 0 0 8px;
+    font-size: 1.4rem;
+    line-height: 1.2;
+    font-weight: 800;
+}
+h4 {
+    margin: 0 0 8px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.2;
 }
 p {
     font-size: inherit;
     color: inherit;
 }
 .sub_title {
-    font-size: var(--bs-fs24);
-    font-family: var(--bs-roboto);
+    font-size: 1.06rem;
+    /* font-family: var(--bs-roboto); */
     font-weight: 400;
     letter-spacing: 14%;
     text-transform: uppercase;
@@ -120,7 +146,7 @@ p {
         flex-shrink: 0;
     }
 }
-.fs_60 {
+/* .fs_60 {
     font-size: var(--bs-fs60);
 }
 .fs_50 {
@@ -128,7 +154,7 @@ p {
 }
 .fs_40 {
     font-size: var(--bs-fs40);
-}
+} */
 a {
     text-decoration: none;
     color: inherit;
@@ -268,8 +294,8 @@ form {
         margin-bottom: 1.25rem;
     }
     label {
-        font-size: var(--bs-fs20);
-        font-family: var(--bs-stolzlregular);
+        font-size: 1.06rem;
+        font-weight: 500;
         margin-bottom: 5px;
     }
     .form-control {
@@ -279,7 +305,7 @@ form {
         border: 0;
         border-bottom: 1px solid #D9D9D9;
         border-radius: 0;
-        font-size: var(--bs-fs24);
+        font-size: 1.06rem;
         padding: 10px 0;
         outline: none !important;
         box-shadow: none !important;
@@ -309,7 +335,7 @@ form {
         line-height: 1.75rem;
         display: inline-block;
         color: var(--bs-darkgrey);
-        font-size: var(--bs-fs22);
+        font-size: 1.06rem;
         font-weight: 400;
         text-transform: uppercase;
     }
@@ -363,9 +389,9 @@ form {
     width: auto;
     max-width: 100%;
     display: inline-block;
-    font-size: var(--bs-fs26);
-    font-family: var(--bs-roboto);
-    font-weight: 400;
+    font-size: 1.06rem;
+    font-weight: 800;
+    line-height: 1.3;
     border-radius: 50px;
     padding: 15px 25px;
     line-height: normal;
@@ -392,15 +418,15 @@ form {
     }
 }
 .project_btn{
-     position: relative;
+    position: relative;
     padding: 10px;
     background-color: var(--bs-themecolor);
-     width: auto;
+    width: auto;
     max-width: 100%;
     display: inline-block;
-    font-size: var(--bs-fs26);
-    font-family: var(--bs-roboto);
-    font-weight: 400;
+    font-size: 1.06rem;
+    /* font-family: var(--bs-roboto); */
+    font-weight: 600;
     border-radius: 50px;
     padding: 15px 25px;
     line-height: normal;
@@ -698,9 +724,9 @@ header {
         } 
     }
     h1 {
-        font-size: var(--bs-fs100);
+        /* font-size: var(--bs-fs100);
         font-weight: 600;
-        line-height: 1.1;
+        line-height: 1.1; */
         overflow: hidden;
         position: relative;
         width: max-content;
@@ -709,8 +735,7 @@ header {
         margin: 0 auto;
         z-index: 1;
         span {
-            font-size: var(--bs-fs20);
-            
+            font-size: 1.06rem;
             color: #878C91;
             font-weight: 400;
             position: absolute;
@@ -718,6 +743,7 @@ header {
             top: 0;
             text-transform: uppercase;
             z-index: 1;
+            display: inline-block;
             span {
                 position: relative !important;
                 padding: 0 30px;
@@ -856,6 +882,12 @@ header {
         max-width: 700px;
         margin: 0 auto;
     }
+    h1 {
+        margin: 0 0 22px;
+        font-size: clamp(2.2rem, 4.4vw, 3.9rem);
+        line-height: 1.25;
+        font-weight: 900;
+    }
 }
 .inner_hero_section.news_banner {
     .inner-banner-content {
@@ -883,8 +915,8 @@ header {
         
             }
             h3 {
-                font-size: var(--bs-fs30);
-                font-weight: 600;
+                /* font-size: var(--bs-fs30);
+                font-weight: 600; */
                 margin-bottom: 0;
             }
             p {
@@ -921,20 +953,20 @@ header {
             margin-bottom: 10px;
         }
         .item-count {
-            font-size: var(--bs-fs30);
-            font-weight: 400;
+            font-size: 1.06rem;
+            font-weight: 500;
         }
         h3 {
-            font-size: var(--bs-fs40);
-            font-weight: 400;
+            /* font-size: var(--bs-fs40);
+            font-weight: 400; */
         }
         p {
-            font-size: var(--bs-fs26);
-            font-weight: 400;
+            /* font-size: var(--bs-fs26);
+            font-weight: 400; */
         }
         .item-tags {
-            font-size: var(--bs-fs20);
-            font-weight: 400;
+            font-size: 1rem;
+            font-weight: 500;
             span {
                 display: inline-block;
                 padding: 6px 13px;
@@ -1084,8 +1116,8 @@ header {
     ul li {
         position: relative;
         padding-left: 40px;
-        font-size: var(--bs-fs24);
-        line-height: 1.5;
+        /* font-size: var(--bs-fs24); */
+        /* line-height: 1.5; */
         list-style: none;
         &::before {
             content: "";
@@ -1151,7 +1183,7 @@ header {
         transition: .4s ease;
 
         h3 {
-            font-weight: 500;
+            font-weight: 600;
             margin-bottom: 0;
         }
         p {
@@ -1228,11 +1260,11 @@ header {
     }
     .news_content {
         padding: 20px;
-        font-size: var(--bs-fs22);
+        /* font-size: var(--bs-fs22); */
         .news_date {
-            font-size: var(--bs-fs20);
-            font-family: var(--bs-roboto);
-            font-weight: 300;
+            font-size: 1.06rem;
+            /* font-family: var(--bs-roboto); */
+            font-weight: 500;
             margin-bottom: 8px;
         }
         h3 {
@@ -1255,9 +1287,8 @@ header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        font-size: var(--bs-fs22);
-        font-family: var(--bs-roboto);
-        font-weight: 500;
+        font-size: 1.25rem;
+        font-weight: 600;
         text-decoration: underline;
         svg {
             width: 65px;
@@ -1293,8 +1324,8 @@ header {
 }
 
 footer {
-    font-size: var(--bs-fs24);
-    font-family: var(--bs-roboto);
+    font-size: 1.06rem;
+    /* font-family: var(--bs-roboto); */
     font-weight: 400;
     .ftr_col {
         margin-bottom: 1rem;
@@ -1366,9 +1397,9 @@ footer {
         margin: auto;
     }
     h3 {
-        font-family: var(--bs-roboto);
+        /* font-family: var(--bs-roboto);
         font-size: var(--bs-fs30);
-        font-weight: 500;
+        font-weight: 500; */
         color: #000000;
         position: relative;
         padding-bottom: 10px;
@@ -1441,7 +1472,7 @@ footer {
     .copyright_flex {
         display: flex;
         justify-content: space-between;
-        font-size: var(--bs-fs20);
+        font-size: 1.06rem;
         p {
             margin-bottom: 0;
         }
@@ -1503,14 +1534,14 @@ footer {
         h2,h3{
             color: var(--bs-black);
             /* margin: 40px 0 18px; */
-            font-size: var(--bs-fs35);
-            font-weight: 500;
-            line-height: 1.08;
+            /* font-size: var(--bs-fs35); */
+            /* font-weight: 500; */
+            /* line-height: 1.08; */
         }
         .work-intro {
             margin: auto;
             width: 80%;
-            font-size: var(--bs-fs20);
+            /* font-size: var(--bs-fs20); */
             line-height: 1.45;
             color: var(--bs-textdarkgrey);
         }
@@ -1527,8 +1558,8 @@ footer {
             background: #fff;
             border: 1px solid #e6e6e6;
             border-radius: 12px;
-            font-size: var(--bs-fs24);
-            font-weight: 400;
+            font-size: 1.06rem;
+            font-weight: 600;
             line-height: 1.2;
             color: #222;
             cursor: pointer;
@@ -1617,8 +1648,8 @@ footer {
         h4 {
             margin: 0 0 5px;
             padding-right: 26px;
-            font-size: 0.9375rem;
-            font-weight: 700;
+            font-size: 1.06rem;
+            font-weight: 800;
             /* color: var(--bs-black); */
         }
         p {
@@ -1786,8 +1817,8 @@ footer {
     width: 100%;
     padding: 12px 20px;
     text-align: left;
-    font-size: var(--bs-fs24);
-    font-weight: 400;
+    font-size: 1.06rem;
+    font-weight: 800;
     line-height: 1.2;
     color: var(--bs-textlightgrey);
     background: #fff;
@@ -1841,20 +1872,13 @@ footer {
     color: var(--bs-textdarkgrey);
 }
 .stacking-title {
-   
     color: var(--bs-textdarkgrey);
-    font-size: var(--bs-fs50);
     padding: 0;
-
 }
 .stacking-content hr {
     border-top-color: var(--bs-lightgrey3);
     opacity: 1;
     margin:0.86rem 0;
-}
-.stacking-content h3 {
-    font-size:  var(--bs-fs30);
-    font-weight: 400;
 }
 .card-number {
     width: 40px;
@@ -1868,7 +1892,7 @@ footer {
     border-radius: 50%;
     font-weight: 700;
     color: var(--bs-themecolor);
-    font-size: var(--bs-fs24);
+    /* font-size: var(--bs-fs24); */
 }
 .stacking-image {
     flex: 1 1 50%;
@@ -1973,8 +1997,8 @@ footer {
 
 .filter_tabs {
     .btn {
-        font-size: var(--bs-fs24);
-        font-weight: 400;
+        font-size: 1.125rem;
+        font-weight: 500;
         color: var(--bs-darkgrey);
         padding: .65rem 1.25rem;
         &.active {
@@ -2051,20 +2075,6 @@ footer {
     }
 }
 
-.content_emo_section {
-    .sec-content {
-        p {
-            font-size: var(--bs-fs30);
-            font-weight: 300;
-            /* line-height: 2.25rem; */
-        }
-        h3 {
-            font-weight: 400;
-            /* letter-spacing: 10%; */
-            /* margin: 2rem 0; */
-        }
-    }
-}
 .team-framee {
     z-index: 1;
     pointer-events: none;
@@ -2502,9 +2512,9 @@ footer {
         color: var(--bs-white);
         display: inline-flex;
         justify-content: flex-end;
-        padding: 4rem;
-        font-size: var(--bs-fs50);
-        font-weight: 600;
+        padding: 2rem;
+        font-size: clamp(1.5rem, 3vw, 2.75rem);
+        font-weight: 800;
         flex-direction: column;
         line-height: 1;
 
@@ -3520,8 +3530,7 @@ footer {
     padding: 0.3rem 0.9rem;
     border: 1px solid var(--bs-themecolor);
     border-radius: 50rem;
-    font-family: var(--bs-urbanist);
-    font-size: var(--bs-fs20);
+    font-size: 1.06rem;
     font-weight: 500;
     line-height: 1.3;
     text-decoration: none;

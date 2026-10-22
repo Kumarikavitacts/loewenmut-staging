@@ -140,16 +140,16 @@ const StackingCards = ({ cardsData = [] }) => {
               <div className="stacking-content">
                 <span className="card-number">{index + 1}</span>
 
-                <h2 className="stacking-title mb-0">
+                <h3 className="stacking-title mb-0">
                   {card.Titel || ""}
-                </h2>
+                </h3>
 
                 <hr />
 
                 {card.Inhalt?.map((block, blockIndex) => {
                   if (block.type === "heading") {
                     return (
-                      <h3 key={blockIndex}>{renderChildren(block.children)}</h3>
+                      <h4 key={blockIndex}>{renderChildren(block.children)}</h4>
                     );
                   }
                   if (block.type === "paragraph") {
