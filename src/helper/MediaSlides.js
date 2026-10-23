@@ -3,7 +3,7 @@ import { getMediaUrl } from "@/helper/MediaUrl";
 // Picks the first available size of a Strapi media file (falls back to the original)
 const pickUrl = (file, formats = []) => {
   for (const name of formats) {
-    const url = file?.formats?.[name]?.url;
+    const url = file?.url;
     if (url) return url;
   }
   return file?.url || "";

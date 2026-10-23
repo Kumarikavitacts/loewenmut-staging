@@ -31,6 +31,7 @@ const DRAG_THRESHOLD = 5;
 // ---------------------------------------------------------------------------
 const SlideMedia = ({ slide, active }) => {
   const videoRef = useRef(null);
+  console.log("sliders ",slide)
 
   useEffect(() => {
     const video = videoRef.current;
