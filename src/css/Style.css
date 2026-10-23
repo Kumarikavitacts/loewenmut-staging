@@ -1237,7 +1237,7 @@ header {
         left: 20px;
         border: 1px solid var(--bs-white);
         color: var(--bs-white);
-        font-size: var(--bs-fs20);
+        font-size: 1.1rem;
         font-family: var(--bs-roboto);
         font-weight: 400;
         padding: 4px 15px 3px;
@@ -1516,7 +1516,7 @@ footer {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        font-size: var(--bs-fs20);
+        font-size: 1.05rem;
         font-weight: 700;
     }
     .work-status-icons {
@@ -1952,8 +1952,8 @@ footer {
 } */
 .insight-cursor-disc {
     background: color-mix(in srgb, var(--bs-themecolor) 80%, transparent);
-    width: 90px;
-    height:  90px;
+    width: 100px;
+    height:  100px;
     color: var(--bs-themetext);
     opacity: 0;
     border-radius: 50%;
@@ -1981,7 +1981,7 @@ footer {
     fill: currentColor;
     font-weight: 700;
     user-select: none;
-    font-size: var(--bs-fs35);
+    font-size: 2rem;
     letter-spacing: 5%;
 }
 
@@ -2093,7 +2093,6 @@ footer {
     }
     .team-role {
         font-weight: 400;
-        font-size: var(--bs-fs22);
         letter-spacing: 12%;
     }
     .team-arrow {
@@ -2422,7 +2421,7 @@ footer {
 		padding: 7px 12px;
         font-weight: 400;
 		border-radius: 5px;
-		font-size: var(--bs-fs20);
+		font-size: 1rem;
 		line-height: 1.2;
 		color: #fff;
 		border: 2px solid rgb(255 255 255);
@@ -2463,7 +2462,7 @@ footer {
     display: flex;
     align-items: center;
     gap: 9px;
-    font-size: var(--bs-fs26);
+    font-size: 1rem;
     font-weight: 400;
     margin-bottom: 1rem;
     text-transform: uppercase;
@@ -2496,7 +2495,7 @@ footer {
         overflow: unset !important;
     }
     .team-info {
-        font-size: var(--bs-fs20);
+        font-size: 1.15rem;
     }
     .team-last-card a {
         width: 100%;
@@ -2587,7 +2586,7 @@ footer {
     .accordion-button {
         padding: 12px 25px;
         padding-right: 60px;
-        font-size: var(--bs-fs30);
+        font-size: 2rem;
         font-weight: 500;
         box-shadow: none !important;
         display: block;
@@ -2669,11 +2668,6 @@ footer {
     height: auto;
     object-fit: contain;
 }
-.tabs-font-family {
-    font-family: var(--bs-roboto);
-    font-size: var(--bs-fs30);
-    flex-shrink: 0;
-}
 
 .filter-tabs-wrapper {
     
@@ -2741,7 +2735,7 @@ footer {
             padding: 1.65rem;
             border-radius: var(--radius-30);
             font-weight: 400;
-            font-size: var(--bs-fs20);
+            font-size: 1.15rem;
             .project-icon {
                 width: 50px;
                 height: 50px;
@@ -2772,7 +2766,7 @@ footer {
 }
 .article_in_detail {
     p {
-        font-size: var(--bs-fs26);
+        font-size: 1.15rem;
         font-weight: 400;
     }
 }
@@ -3363,17 +3357,6 @@ footer {
             height: 100%;
         }
     }
-    h3{ 
-        font-weight: 400;
-        font-size: var(--bs-fs40);
-        line-height: 2.375rem;
-        letter-spacing: 0%;
-    }
-    p{
-        font-weight: 400;
-        font-size: var(--bs-fs22);
-        letter-spacing: 0%;
-    }
 }
 
 .error-message{
@@ -3588,7 +3571,7 @@ footer {
     gap: 12px;
     color: var(--bs-black);
     text-decoration: none;
-    font-size: var(--bs-fs22);
+    font-size: 1.15rem;
     max-width: 48%;
 }
 .leistung_nav_link span {
@@ -3731,7 +3714,7 @@ footer {
             margin-bottom: 1.25rem;
         }
         .ext_comm_content_inner {
-            animation: extContentFade .5s ease;
+           animation: extContentFade 1.2s ease-out both;
             height: 100%;
             display: flex;
             flex-direction: column;
@@ -3792,7 +3775,7 @@ footer {
         display: flex;
         align-items: center;
         gap: 4px;
-        font-size: var(--bs-fs20);
+        font-size: 1.15rem;
         .ext_counter_current {
             font-weight: 600;
             color: var(--bs-textdarkgrey);

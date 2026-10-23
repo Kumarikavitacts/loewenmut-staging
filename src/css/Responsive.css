@@ -591,6 +591,7 @@ header {
                 max-width: 100%;
                 display: inline-block;
                 font-weight: 500;
+                font-size: 1rem;
                 /* font-size: var(--bs-fs50); 
                 font-family: var(--bs-urbanist);*/
                 color: var(--bs-textdarkgrey);
@@ -1898,15 +1899,15 @@ footer {
         }
     }
 }
-
 @keyframes extContentFade {
     from {
         opacity: 0;
-        transform: translateY(8px);
+        transform: translateY(-8px);
     }
+
     to {
         opacity: 1;
-        transform: none;
+        transform: translateY(0);
     }
 }
 @media (prefers-reduced-motion: reduce) {
