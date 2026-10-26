@@ -1279,7 +1279,7 @@ header {
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 3;
             overflow: hidden;
-            min-height: 6.75rem;
+            min-height: 115px;
             margin-bottom: 2px;
         }
         hr {
