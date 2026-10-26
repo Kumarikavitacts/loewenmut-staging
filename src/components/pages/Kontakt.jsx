@@ -116,7 +116,7 @@ const Kontakt = () => {
       </section>
 
       {/* ================= CONTACT CONTENT ================= */}
-      <section className="kontakt_section pt_pb_3">
+      <section className="kontakt_section pt_pb_2">
         <div className="container">
           <div className="row flex-lg-row-reverse">
             

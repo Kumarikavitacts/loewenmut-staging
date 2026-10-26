@@ -166,7 +166,7 @@ const Datenschutz = () => {
           PRIVACY ACCORDION
       ========================= */}
 
-      <section className="impressum_section pt_pb_3">
+      <section className="impressum_section pt_pb_2">
         <div className="container">
           {!loading && privacySections.length > 0 && (
             <PrivacyAccordion

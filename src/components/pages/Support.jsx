@@ -68,7 +68,7 @@ const Support = ({ data }) => {
       </section>
 
       {/* ================= SUPPORT CONTENT ================= */}
-      <section className="kontakt_section pt_pb_3">
+      <section className="kontakt_section pt_pb_2">
         <div className="container">
           <div className="row flex-lg-row-reverse">
             <div className="col-lg-6 form-col">

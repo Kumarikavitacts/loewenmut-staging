@@ -85,7 +85,7 @@ const Impressum = () => {
           email={Email}
         />
       </section>
-      <section className="impressum_section pt_pb_3">
+      <section className="impressum_section pt_pb_2">
   <div className="container">
     {Inhalt?.map((item, index) => {
       const text = item?.Text

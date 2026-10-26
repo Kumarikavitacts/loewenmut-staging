@@ -627,7 +627,7 @@ const LeistungenDetail = () => {
 
       {leistungData &&
         leistungData?.Kontaktbereich && (
-          <section className="pt_pb_3 talk_section">
+          <section className="pt_pb_2 talk_section">
 
             <TalkSection
               talkData={

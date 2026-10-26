@@ -2,7 +2,7 @@ const SupportTools = ({ items = [] }) => {
   if (!items.length) return null;
 
   return (
-    <section className="support_tools_section pt_pb_3">
+    <section className="support_tools_section pt_pb_2">
       <div className="container">
         <div className="row g-4">
           {items.map((item, index) => (

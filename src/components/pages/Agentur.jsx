@@ -549,7 +549,7 @@ const Agentur = () => {
 
             {/* overflow-hidden must NOT be used here: it would break the
                 sticky (pinned) scroll-driven team slider */}
-            <section className="agentur_team_section pt_3">
+            <section className="agentur_team_section pt_2">
                 <div className="container">
                     <TeamSlider
                         teams={Team_Bereich?.teams || []}
@@ -574,7 +574,7 @@ const Agentur = () => {
                 STATS
             ================================================= */}
 
-            <section className="project_stats_section pt_pb_3">
+            <section className="project_stats_section pt_pb_2">
                 <div className="container">
 
                     <div className="sec-heading mb-4">
@@ -608,7 +608,7 @@ const Agentur = () => {
             ================================================= */}
 
             <section
-                className="pt_pb_3 project-carousel-section overflow-hidden"
+                className="pt_pb_2 project-carousel-section overflow-hidden"
                 style={{
                     backgroundImage:
                         "url('/images/bg-pattern.webp')",
@@ -638,7 +638,7 @@ const Agentur = () => {
             ================================================= */}
 
             {talkData && (
-                <section className="pt_pb_3 talk_section">
+                <section className="pt_pb_2 talk_section">
                     <TalkSection
                         talkData={talkData}
                     />

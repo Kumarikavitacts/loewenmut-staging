@@ -4,7 +4,7 @@ import React from "react";
 
 const TalkSkeleton = () => {
   return (
-    <section className="pt_pb_3 talk_section skeleton-fade-in">
+    <section className="pt_pb_2 talk_section skeleton-fade-in">
       <div className="container">
         <div className="row flex-lg-row-reverse align-items-center">
           <div className="col-12 col-lg-6">

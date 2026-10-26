@@ -1275,6 +1275,10 @@ header {
             text-overflow: ellipsis;
         }
         p {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
             min-height: 6.75rem;
             margin-bottom: 2px;
         }

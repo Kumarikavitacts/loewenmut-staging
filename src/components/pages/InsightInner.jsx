@@ -370,7 +370,7 @@ const InsightInner = () => {
 
       {/* ================= PROJECT CAROUSEL ================= */}
       {hasProjekte && (
-        <section className="pt_pb_3 project-carousel-section overflow-hidden">
+        <section className="pt_pb_2 project-carousel-section overflow-hidden">
           <ProjectCarousel
             title={Projekte?.Titel || ""}
             description={Projekte?.Text_1 || ""}

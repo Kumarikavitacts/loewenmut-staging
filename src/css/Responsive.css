@@ -76,6 +76,13 @@
         font-size: 1.25rem;
     }   
 }
+
+.service-slider {
+    .item {
+        .item-tags {
+            span{
+                padding: 7px 20px;
+}}}}
 .field-error{
     font-size: 1.25rem;
 }
@@ -1791,13 +1798,9 @@ a {
 
 /* News cards: let titles wrap instead of being cut off with "..." */
 @media (max-width: 767.98px) {
-    .news_section .news_content h3 {
-        white-space: normal;
-        overflow: visible;
-        text-overflow: clip;
-    }
+ 
     .news_section .news_content p {
-        min-height: 0;
+        min-height: 6.3rem;
     }
     .stacking-card { flex-direction: column; }
     .stacking-content { padding: 1.5rem 1.25rem 1rem; }
