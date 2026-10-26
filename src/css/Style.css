@@ -56,7 +56,7 @@ html body {
     scroll-margin-top: 100px;
     margin: 0;
     font-family: var(--bs-archivo);
-    font-size: 1.125rem;
+    font-size: 1.35rem;
     font-weight: 400;
     line-height: 1.6;
     color: var(--bs-textdarkgrey);
@@ -1996,7 +1996,7 @@ footer {
 
 .filter_tabs {
     .btn {
-        font-size: 1.125rem;
+        font-size: 1.35rem;
         font-weight: 500;
         color: var(--bs-darkgrey);
         padding: .65rem 1.25rem;
