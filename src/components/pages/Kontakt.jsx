@@ -139,7 +139,7 @@ const Kontakt = () => {
                 <MapComponent />
               </div>
 
-              <div className="fw-regular mt-4">
+              <div className="fw-regular mt-4 map-text">
                 {Inhalt?.Text || ""}
               </div>
             </div>

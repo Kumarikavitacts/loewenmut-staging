@@ -1271,6 +1271,9 @@ span.txt-008:before {
 }
 
 @media (max-width: 575px) {
+    h2{
+        font-size: 2rem;
+    }
  .container {
     padding-left: 20px;
     padding-right: 20px;
@@ -1322,7 +1325,7 @@ header {
         h1 {
             span {
                 position: unset;
-                /* font-size: 0.875rem; */
+                font-size: 0.975rem;
                 justify-content: center;
                 img {
                     /* height: 10px; */
@@ -1350,7 +1353,7 @@ header {
         .htt_left {
             width: 100%;
             margin-top: 0;
-            /* font-size: 1.10rem; */
+            font-size: 0.975rem;
             img {
                 width: 70px;
             }
@@ -1393,6 +1396,7 @@ header {
     }
     ul li {
         padding-left: 32px;
+        font-size: 0.975rem;
         &::before {
             width: 21px;
             height: 21px;
@@ -1463,12 +1467,15 @@ header {
     margin-bottom: 4px;
         min-height:auto;
 }
-.news_section .news_content p
- {
-    margin-bottom: 8px;
-    min-height:auto;
-}
-  .inner-banner-content{
+    .news_section{
+         .news_content {
+            p{
+            margin-bottom: 8px;
+            min-height:auto;
+            font-size: 0.975rem;
+        }
+    }}
+    .inner-banner-content{
         h1 {
             svg{
                 width: 60px;
@@ -1486,18 +1493,101 @@ header {
  
         min-height: 110px;
     }
-.team-carousel {
-    .team-last-card a {
-        padding: 2rem;
-        /* font-size: 2.25rem; */
+    .team-carousel {
+        .team-last-card a {
+            padding: 2rem;
+            /* font-size: 2.25rem; */
+        }
     }
-}
    footer .copyright_flex {
         /* font-size: 1rem;  */
         p {
             text-align: center;
         }
     } 
+    .ftr_logo_col{
+        p{
+            font-size: 0.975rem;
+        }
+    }
+    .sub_title{
+        font-size:0.975rem
+    }
+    .sec-content{
+        h3{
+            font-size:1.25rem
+        }
+        p{
+            font-size:0.975rem
+        }
+    }
+    .insight_content{
+        p{
+            font-size:0.975rem;
+        }
+    }
+    .bg_theme_work_station {
+        .work-phone-content{
+            .work-intro {
+                width: 100%;
+            }
+        }
+         .work-suggestions{
+            button{
+                font-size: 0.8125rem;
+                padding: 1px 2px;
+            }
+         }
+        .work-info-card {
+            min-height: 145px;
+            h4 {
+                font-size: 0.8125rem;
+            }
+            p {
+                font-size: 0.75rem;
+            }
+        }
+    }
+    .service-slider {
+        .item {
+            .item-tags {
+                span {
+                    margin: 0px 2px 4px 0;
+                    padding: 4px 9px;
+                    font-size: 0.975rem;
+                }
+            }
+        }
+    }
+    .strapi_rich_text{  
+        p{
+            font-size:0.975rem;
+        }
+    }
+    .inner_hero_section {
+        .victory-icon{
+            position:unset;
+        } 
+    }
+    .map-text{
+        font-size:0.975rem;
+    }
+    .imprsm_block {
+        p{
+            font-size:0.975rem;
+        }
+    }
+    .accordion-item{ 
+        .accordion-button{
+            font-size:1.25rem;
+        }
+         .accordion-body {
+            p{
+                font-size:0.975rem;
+            }
+         }
+    }
+
 }
 @media (min-width: 576px){
     .hero_section h1 br {
@@ -1610,7 +1700,7 @@ header .navbar{
 @media (max-width: 360px) {
        .bg_theme_work_station .work-info-card {
  
-        min-height: 120px;
+        min-height: 140px;
     }
     .project-showcase {
         .project-image-card {
