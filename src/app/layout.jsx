@@ -1,4 +1,4 @@
-import { Archivo, Roboto, Urbanist } from "next/font/google";
+import { Encode_Sans_Expanded, Roboto, Urbanist } from "next/font/google";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -19,11 +19,11 @@ import SiteChrome from "@/components/SiteChrome";
 import BootstrapInit from "@/components/BootstrapInit";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL;
-const IS_PRODUCTION =
-  !!SITE_URL && !SITE_URL.includes("staging");
+const IS_PRODUCTION = !!SITE_URL && !SITE_URL.includes("staging");
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
+
   robots: IS_PRODUCTION
     ? {
         index: true,
@@ -86,9 +86,9 @@ export const viewport = {
   initialScale: 1,
 };
 
-// Archivo: primary site font.
-const archivo = Archivo({
-  variable: "--font-archivo",
+// Encode Sans Expanded: Primary font for the entire website.
+const encodeSansExpanded = Encode_Sans_Expanded({
+  variable: "--font-encode-sans-expanded",
   subsets: ["latin"],
   weight: [
     "100",
@@ -152,7 +152,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="de"
-      className={`${archivo.variable} ${roboto.variable} ${urbanist.variable}`}
+      className={`${encodeSansExpanded.variable} ${roboto.variable} ${urbanist.variable}`}
       suppressHydrationWarning
     >
       <head>
