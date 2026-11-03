@@ -1274,6 +1274,13 @@ span.txt-008:before {
     h2{
         font-size: 2rem;
     }
+     .hero_section {
+            h1 {
+                span {
+                    display:none
+                }
+            }
+    }
  .container {
     padding-left: 20px;
     padding-right: 20px;
