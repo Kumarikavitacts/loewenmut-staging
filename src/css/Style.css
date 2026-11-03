@@ -389,7 +389,7 @@ form {
     max-width: 100%;
     display: inline-block;
     font-size: 1.06rem;
-    font-weight: 800;
+    font-weight: 600;
     line-height: 1.3;
     border-radius: 50px;
     padding: 15px 25px;
@@ -1123,7 +1123,7 @@ header {
             content: "";
             position: absolute;
             left: 0;
-            top: 2px;
+            top: 2.5px;
             width: 25px;
             height: 25px;
             display: flex;
@@ -1280,7 +1280,7 @@ header {
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 3;
             overflow: hidden;
-            min-height: 115px;
+            min-height: 110px;
             margin-bottom: 2px;
         }
         hr {
@@ -1315,7 +1315,11 @@ header {
         }
     }
 }
-
+.strapi_rich_text{
+    p{
+        font-weight: 500;
+    }
+}
 .talk_section {
     .img-col img {
         width:65%;
@@ -2774,7 +2778,7 @@ footer {
 .article_in_detail {
     p {
         font-size: 1.15rem;
-        font-weight: 400;
+        font-weight: 500;
     }
 }
 .project-carousel-section {
@@ -2938,7 +2942,7 @@ footer {
 
 
         p {
-            font-weight: 300;
+            font-weight: 400;
             &:last-child {
                 margin-bottom: 0;
             }
@@ -3718,7 +3722,7 @@ footer {
         .ext_comm_title {
             font-size: clamp(1.35rem, 5vw, 2.5rem);
             line-height: 1.2;
-            font-weight: 800;
+            font-weight: 700;
             margin-bottom: 1.25rem;
         }
         .ext_comm_content_inner {
