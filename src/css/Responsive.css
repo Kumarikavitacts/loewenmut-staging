@@ -704,8 +704,8 @@ header {
                 width: auto;
                 max-width: 100%;
                 display: inline-block;
-                font-weight: 500;
-                font-size: 1rem;
+                font-weight: 600;
+                font-size: 2rem;
                 /* font-size: var(--bs-fs50); 
                 font-family: var(--bs-urbanist);*/
                 color: var(--bs-textdarkgrey);
@@ -1300,6 +1300,8 @@ header {
                 text-align:right;
             }
             .nav-link{
+                font-size: 2rem;
+                font-weight: 600;
                 padding: 0;
             }
         }
